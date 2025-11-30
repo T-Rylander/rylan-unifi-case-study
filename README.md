@@ -49,6 +49,9 @@ graph TB
     ADDS -.Auth/DNS.-> RPi
 ```
 
+    ### Full Diagram Source
+    See `docs/architecture-v5.mmd` and render with Mermaid Live or VS Code extensions.
+
 ## 🎯 Key Features
 
 - **Zero-Trust Network Isolation**: Policy Table v5 with <15 rules (vs 200+ firewall rules)
@@ -152,6 +155,10 @@ docker run -d \
 
 # Verify health
 curl http://10.0.10.60:8000/health
+
+### osTicket Webhook → Triage
+- Install `03-ai-helpdesk/osticket-webhook.php` into osTicket plugins directory.
+- Configure API URL `http://10.0.10.60:8000/triage` and API key in `shared/inventory.yaml`.
 ```
 
 ## 🔒 Security Architecture
@@ -206,6 +213,11 @@ python 02-declarative-config/apply.py --validate-only
 curl -X POST http://10.0.10.60:8000/triage \
   -H "Content-Type: application/json" \
   -d '{"ticket_id": "12345", "body": "Password reset request"}'
+```
+
+### Unit tests
+```bash
+pytest -q
 ```
 
 ## 📚 Documentation
