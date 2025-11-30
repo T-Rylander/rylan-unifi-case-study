@@ -11,7 +11,7 @@ import json
 import sys
 import argparse
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 import yaml
 from pydantic import BaseModel, Field, ValidationError
@@ -26,26 +26,57 @@ from shared.unifi_client import UniFiClient
 BASE_DIR = Path(__file__).parent
 
 
-class VLANConfig(BaseModel):
-    id: int = Field(..., ge=1, le=4094)
+class VLAN(BaseModel):
+    id: int
     name: str
     subnet: str
     gateway: str
     dhcp_enabled: bool = True
-    dhcp_start: str | None = None
-    dhcp_end: str | None = None
-    dns_servers: List[str] | None = None
+    dhcp_start: Optional[str] = None
+    dhcp_end: Optional[str] = None
+    dns_servers: List[str] = Field(default_factory=lambda: ["1.1.1.1", "1.0.0.1"])
+    purpose: Optional[str] = None
+    devices: Optional[List[str]] = None
+
+
+class VLANContainer(BaseModel):
+    """Nested VLAN structure with metadata"""
+    id: int
+    vlans: List[VLAN]
+
+
+class VLANRoot(BaseModel):
+    """Root structure matching your YAML"""
+    vlans: List[VLAN | VLANContainer]
 
 
 class VLANState(BaseModel):
-    vlans: List[VLANConfig]
+    """Top-level state wrapper"""
+    vlans: List[VLAN]
+
+    @classmethod
+    def from_yaml_structure(cls, data: dict) -> "VLANState":
+        """Parse your nested YAML structure into flat VLAN list"""
+        all_vlans: List[Dict[str, Any]] = []
+
+        for item in data.get("vlans", []):
+            if "vlans" in item:
+                # Nested container (id: 10 with sub-vlans)
+                all_vlans.extend(item["vlans"])
+            else:
+                # Direct VLAN (id: 1 Management)
+                all_vlans.append(item)
+
+        # Validate each VLAN via VLAN model
+        validated = [VLAN(**v) for v in all_vlans]
+        return cls(vlans=validated)
 
 
 def load_state(path: Path) -> VLANState:
     with path.open('r', encoding='utf-8') as f:
         data = yaml.safe_load(f) or {}
     try:
-        return VLANState(**data)
+        return VLANState.from_yaml_structure(data)
     except ValidationError as e:
         print("❌ VLAN YAML validation failed:")
         print(e)
@@ -70,7 +101,7 @@ def current_to_model(networks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return out
 
 
-def build_payload(vlan: VLANConfig) -> Dict[str, Any]:
+def build_payload(vlan: VLAN) -> Dict[str, Any]:
     return {
         "name": vlan.name,
         "purpose": "corporate" if vlan.id != 90 else "guest",
@@ -96,8 +127,8 @@ def reconcile(desired: VLANState, client: UniFiClient, dry_run: bool) -> None:
 
     id_map = {n.get('vlan'): n for n in networks if n.get('vlan') is not None}
 
-    to_create: List[VLANConfig] = []
-    to_update: List[VLANConfig] = []
+    to_create: List[VLAN] = []
+    to_update: List[VLAN] = []
     for vlan in desired.vlans:
         existing = id_map.get(vlan.id)
         if not existing:
