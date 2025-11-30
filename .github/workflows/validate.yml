@@ -34,22 +34,36 @@ jobs:
           python -m venv .venv
           . .venv/bin/activate
           pip install --upgrade pip
-          pip install -e .[dev]
+          pip install -e .
 
       - name: Run Python tests
         run: |
           . .venv/bin/activate
           pytest -q
 
-      - name: Validate network isolation (dry-run apply + isolation test)
+      - name: Validate policy table rule count
         run: |
           . .venv/bin/activate
-          python 02-declarative-config/apply.py --dry-run || exit 1
-          bash 03-validation-ops/validate-isolation.sh || exit 1
+          RULE_COUNT=$(python -c "import yaml; data=yaml.safe_load(open('02-declarative-config/policy-table.yaml')); print(len(data['rules']))")
+          if [ "$RULE_COUNT" -gt 15 ]; then
+            echo "❌ Policy table has $RULE_COUNT rules (max 15 for USG-3P offload)"
+            exit 1
+          fi
+          echo "✅ Policy table: $RULE_COUNT rules (USG-3P offload safe)"
+
+      - name: Validate declarative config (dry-run)
+        run: |
+          . .venv/bin/activate
+          python 02-declarative-config/apply.py --dry-run
+
+      - name: Validate network isolation
+        run: |
+          . .venv/bin/activate
+          bash 03-validation-ops/validate-isolation.sh
 
       - name: Success banner
         if: success()
         run: |
-          echo "Rylan v5.0 validation passed"
-          echo "AI triage, VLANs, zero-trust policy, QoS, and isolation all verified"
-          echo "This repo is now junior-at-3-AM deployable"
+          echo "✅ Rylan v5.0 validation passed"
+          echo "✅ AI triage, VLANs, zero-trust policy, QoS, and isolation all verified"
+          echo "✅ This repo is now junior-at-3-AM deployable"
