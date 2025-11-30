@@ -184,57 +184,13 @@ All ticket data passes through Presidio before Ollama:
 
 ### VLANs
 
-| VLAN | Name | Subnet | Purpose | Ingress Policy |
-|------|------|--------|---------|----------------|
-| 1 | Management | 10.0.1.0/24 | USG/Switch admin | Full access |
-| 10 | Servers | 10.0.10.0/24 | AD/AI/InfluxDB | Controlled ingress |
-| 30 | Trusted Devices | 10.0.30.0/24 | osTicket/Workstations | Server + Internet |
-| 40 | VoIP | 10.0.40.0/24 | IP Phones | Internet + DSCP 46 |
-| 90 | Guest/IoT | 10.0.90.0/24 | Untrusted devices | Internet only |
-
-## 📊 Performance Metrics
-
-- **Inter-VLAN latency**: <0.5ms (hardware offload)
-- **Policy rule lookup**: Hardware-accelerated
-- **AI triage latency**: ~2.3s (Llama 3.3 70B, RX 6700 XT)
-- **Auto-close accuracy**: 96.4% (confidence ≥0.93)
-- **Ticket volume**: ~45/day → ~12/day requiring human review
-
-## 🧪 Testing
-
-```bash
-# Run CI validation locally
-python -m pytest tests/ -v
-
-# Validate policy rule count
-python 02-declarative-config/apply.py --validate-only
-
-# Test AI triage endpoint
-curl -X POST http://10.0.10.60:8000/triage \
-  -H "Content-Type: application/json" \
-  -d '{"ticket_id": "12345", "body": "Password reset request"}'
-```
-
-### Unit tests
-```bash
-pytest -q
-```
-
-## 📚 Documentation
-
-- `ROADMAP.md` - Architecture Decision Records (ADRs), version history
-- `docs/architecture-v5.mmd` - Detailed Mermaid diagram
-- `02-declarative-config/policy-table-rylan-v5.json` - Inline rule comments
-- `03-ai-helpdesk/triage-engine/main.py` - API documentation
-
-## 🛠️ Hardware Inventory
-
-| Device | IP | VLAN | Role | Specs |
-|--------|----|----|------|-------|
-| USG-3P | 10.0.1.1 | 1 | Router/Firewall | UniFi 8.5.93, offload ON |
-| Samba AD DC | 10.0.10.10 | 10 | Domain Controller | i5, 16GB, no HT, AD/DNS/NFS |
-| AI Workstation | 10.0.10.60 | 10 | ML Inference | 2-3× RX 6700 XT, Ollama/Qdrant |
-| Raspberry Pi 5 | 10.0.30.40 | 30 | Helpdesk | 8GB, osTicket, MariaDB |
+| VLAN | Name            | Subnet         | Gateway     | Purpose                  |
+|------|-----------------|----------------|-------------|--------------------------|
+| 1    | Management      | 10.0.1.0/27    | 10.0.1.1    | UniFi devices + controller |
+| 10   | servers         | 10.0.10.0/26   | 10.0.10.1   | Infrastructure           |
+| 30   | trusted-devices | 10.0.30.0/24   | 10.0.30.1   | Workstations + osTicket  |
+| 40   | voip            | 10.0.40.0/27   | 10.0.40.1   | VoIP only                |
+| 90   | guest-iot       | 10.0.90.0/25   | 10.0.90.1   | Guest + IoT              |
 
 ## 🤝 Contributing
 
@@ -259,3 +215,4 @@ MIT License - see LICENSE file for details
 **Production Status**: ✅ Stable (v5.0)  
 **Last Updated**: December 2025  
 **Maintained by**: hellodeolu-era systems architecture team
+
