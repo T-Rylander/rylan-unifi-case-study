@@ -2,8 +2,8 @@ import pytest
 from unittest.mock import patch
 from fastapi.testclient import TestClient
 
-# Absolute import – works on Windows + Linux
-from _03_ai_helpdesk.triage_engine.main import app
+# Valid Python package name import
+from rylan_ai_helpdesk.triage_engine.main import app
 
 client = TestClient(app)
 
