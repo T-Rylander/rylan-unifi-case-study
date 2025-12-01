@@ -47,8 +47,9 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install -r requirements.txt
-          pip install pyyaml
+         pip install --upgrade pip
+         pip install -e .
+         pip install pyyaml pytest
 
       - name: Validate policy table rule count ≤15 (USG-3P offload safe)
         run: |
