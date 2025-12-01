@@ -39,7 +39,7 @@ jobs:
           . .venv/bin/activate
           pip install --upgrade pip
           pip install -e .
-          pip install pyyaml
+          pip install pyyaml  # Required for yaml.safe_load in policy validation
 
       - name: Run Python tests
         run: |
@@ -50,10 +50,10 @@ jobs:
         run: |
           . .venv/bin/activate
           if [ ! -f "02-declarative-config/policy-table.yaml" ]; then
-            echo "❌ FAIL: 02-declarative-config/policy-table.yaml missing (core zero-trust rules required)"
+            echo "❌ FAIL: policy-table.yaml missing (core zero-trust rules required)"
             exit 1
           fi
-          RULE_COUNT=$(python -c "import yaml,sys; data=yaml.safe_load(open('02-declarative-config/policy-table.yaml')); print(len(data.get('rules', [])))")
+          RULE_COUNT=$(python -c "import yaml; data=yaml.safe_load(open('02-declarative-config/policy-table.yaml')); print(len(data['rules']))")
           if [ "$RULE_COUNT" -gt 15 ]; then
             echo "❌ FAIL: Policy table has $RULE_COUNT rules (max 15 for USG-3P offload)"
             exit 1
@@ -77,6 +77,6 @@ jobs:
       - name: Success banner
         if: success()
         run: |
-          echo "Rylan v5.0 validation passed"
-          echo "AI triage, zero-trust policy table (7 rules), QoS, and full inter-VLAN isolation verified"
-          echo "This commit is junior-at-3-AM deployable to the live USG-3P"
+          echo "✅ Rylan v5.0 validation passed"
+          echo "✅ AI triage, zero-trust policy table (7 rules), QoS, and full inter-VLAN isolation verified"
+          echo "✅ This commit is junior-at-3-AM deployable to the live USG-3P"
