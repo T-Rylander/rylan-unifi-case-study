@@ -1,4 +1,4 @@
-﻿---
+---
 rules:
   - description: "Management Ã¢€ €™ Everywhere (controller + SSH)"
     source:
@@ -48,11 +48,18 @@ rules:
     destination:
       type: "local"
     action: "drop"
-  - description: "trusted-devices Ã¢€ €™ rylan-dc (PXE + Domain Services)"
+  - description: "trusted-devices → rylan-dc (PXE + Domain Services)"
     source:
       network: "trusted-devices"
     destination:
       address: "10.0.30.10"
-      ports: ["53", "67", "68", "69", "88", "389", "636", "4011"]
+      ports:
+        - "53"
+        - "67"
+        - "68"
+        - "69"
+        - "88"
+        - "389"
+        - "636"
+        - "4011"
     action: "accept"
-
