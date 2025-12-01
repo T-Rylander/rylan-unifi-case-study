@@ -1,6 +1,7 @@
 ﻿# Rylan UniFi Case Study - Repository Structure
 
 ## Generated: 2025-11-30 19:05:59
+
 Folder PATH listing for volume NVMe_Storage_02
 Volume serial number is 2C6D-EA6F
 F:.
@@ -13,73 +14,73 @@ F:.
 |   requirements-unifi.txt
 |   requirements.txt
 |   ROADMAP.md
-|   
+|
 +---.github
 |   \---workflows
 |           ci-validate.yaml
 |           validate.yml
-|           
+|
 +---.pytest_cache
 |   |   .gitignore
 |   |   CACHEDIR.TAG
 |   |   README.md
-|   |   
+|   |
 |   \---v
 |       \---cache
 |               lastfailed
 |               nodeids
 |               stepwise
-|               
+|
 +---.venv
 |   |   pyvenv.cfg
-|   |   
+|   |
 |   +---Include
 |   +---Lib
 |   |   \---site-packages
 |   |       |   distutils-precedence.pth
 |   |       |   typing_extensions.py
 |   |       |   __editable__.rylan_unifi_case_study-0.1.0.pth
-|   |       |   
+|   |       |
 |   |       +---annotated_types
 |   |       |   |   py.typed
 |   |       |   |   test_cases.py
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           test_cases.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---annotated_types-0.7.0.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---certifi
 |   |       |   |   cacert.pem
 |   |       |   |   core.py
 |   |       |   |   py.typed
 |   |       |   |   __init__.py
 |   |       |   |   __main__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           core.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
 |   |       |           __main__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---certifi-2025.11.12.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   top_level.txt
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---charset_normalizer
 |   |       |   |   api.py
 |   |       |   |   cd.py
@@ -94,15 +95,15 @@ F:.
 |   |       |   |   version.py
 |   |       |   |   __init__.py
 |   |       |   |   __main__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   +---cli
 |   |       |   |   |   __init__.py
 |   |       |   |   |   __main__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           __init__.cpython-312.pyc
 |   |       |   |           __main__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           api.cpython-312.pyc
 |   |       |           cd.cpython-312.pyc
@@ -114,7 +115,7 @@ F:.
 |   |       |           version.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
 |   |       |           __main__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---charset_normalizer-3.4.4.dist-info
 |   |       |   |   entry_points.txt
 |   |       |   |   INSTALLER
@@ -122,10 +123,10 @@ F:.
 |   |       |   |   RECORD
 |   |       |   |   top_level.txt
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---deepdiff
 |   |       |   |   anyset.py
 |   |       |   |   base.py
@@ -142,7 +143,7 @@ F:.
 |   |       |   |   search.py
 |   |       |   |   serialization.py
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           anyset.cpython-312.pyc
 |   |       |           base.cpython-312.pyc
@@ -159,7 +160,7 @@ F:.
 |   |       |           search.cpython-312.pyc
 |   |       |           serialization.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---deepdiff-6.7.1.dist-info
 |   |       |       AUTHORS.md
 |   |       |       entry_points.txt
@@ -170,7 +171,7 @@ F:.
 |   |       |       top_level.txt
 |   |       |       WHEEL
 |   |       |       zip-safe
-|   |       |       
+|   |       |
 |   |       +---idna
 |   |       |   |   codec.py
 |   |       |   |   compat.py
@@ -181,7 +182,7 @@ F:.
 |   |       |   |   py.typed
 |   |       |   |   uts46data.py
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           codec.cpython-312.pyc
 |   |       |           compat.cpython-312.pyc
@@ -191,35 +192,35 @@ F:.
 |   |       |           package_data.cpython-312.pyc
 |   |       |           uts46data.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---idna-3.11.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE.md
-|   |       |           
+|   |       |
 |   |       +---ordered_set
 |   |       |   |   py.typed
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---ordered_set-4.1.0.dist-info
 |   |       |       INSTALLER
 |   |       |       METADATA
 |   |       |       RECORD
 |   |       |       WHEEL
-|   |       |       
+|   |       |
 |   |       +---pip
 |   |       |   |   py.typed
 |   |       |   |   __init__.py
 |   |       |   |   __main__.py
 |   |       |   |   __pip-runner__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   +---_internal
 |   |       |   |   |   build_env.py
 |   |       |   |   |   cache.py
@@ -230,7 +231,7 @@ F:.
 |   |       |   |   |   self_outdated_check.py
 |   |       |   |   |   wheel_builder.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---cli
 |   |       |   |   |   |   autocompletion.py
 |   |       |   |   |   |   base_command.py
@@ -245,7 +246,7 @@ F:.
 |   |       |   |   |   |   spinners.py
 |   |       |   |   |   |   status_codes.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           autocompletion.cpython-312.pyc
 |   |       |   |   |           base_command.cpython-312.pyc
@@ -260,7 +261,7 @@ F:.
 |   |       |   |   |           spinners.cpython-312.pyc
 |   |       |   |   |           status_codes.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---commands
 |   |       |   |   |   |   cache.py
 |   |       |   |   |   |   check.py
@@ -281,7 +282,7 @@ F:.
 |   |       |   |   |   |   uninstall.py
 |   |       |   |   |   |   wheel.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           cache.cpython-312.pyc
 |   |       |   |   |           check.cpython-312.pyc
@@ -302,69 +303,69 @@ F:.
 |   |       |   |   |           uninstall.cpython-312.pyc
 |   |       |   |   |           wheel.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---distributions
 |   |       |   |   |   |   base.py
 |   |       |   |   |   |   installed.py
 |   |       |   |   |   |   sdist.py
 |   |       |   |   |   |   wheel.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           base.cpython-312.pyc
 |   |       |   |   |           installed.cpython-312.pyc
 |   |       |   |   |           sdist.cpython-312.pyc
 |   |       |   |   |           wheel.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---index
 |   |       |   |   |   |   collector.py
 |   |       |   |   |   |   package_finder.py
 |   |       |   |   |   |   sources.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           collector.cpython-312.pyc
 |   |       |   |   |           package_finder.cpython-312.pyc
 |   |       |   |   |           sources.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---locations
 |   |       |   |   |   |   base.py
 |   |       |   |   |   |   _distutils.py
-|   |       |   |   |   |   _sysconfig.py
+|   |       |   |   |   |_sysconfig.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           base.cpython-312.pyc
 |   |       |   |   |           _distutils.cpython-312.pyc
-|   |       |   |   |           _sysconfig.cpython-312.pyc
+|   |       |   |   |_sysconfig.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---metadata
 |   |       |   |   |   |   base.py
 |   |       |   |   |   |   pkg_resources.py
-|   |       |   |   |   |   _json.py
+|   |       |   |   |   |_json.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---importlib
 |   |       |   |   |   |   |   _compat.py
-|   |       |   |   |   |   |   _dists.py
+|   |       |   |   |   |   |_dists.py
 |   |       |   |   |   |   |   _envs.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
-|   |       |   |   |   |           _compat.cpython-312.pyc
+|   |       |   |   |   |_compat.cpython-312.pyc
 |   |       |   |   |   |           _dists.cpython-312.pyc
-|   |       |   |   |   |           _envs.cpython-312.pyc
+|   |       |   |   |   |_envs.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           base.cpython-312.pyc
 |   |       |   |   |           pkg_resources.cpython-312.pyc
-|   |       |   |   |           _json.cpython-312.pyc
+|   |       |   |   |_json.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---models
 |   |       |   |   |   |   candidate.py
 |   |       |   |   |   |   direct_url.py
@@ -379,7 +380,7 @@ F:.
 |   |       |   |   |   |   target_python.py
 |   |       |   |   |   |   wheel.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           candidate.cpython-312.pyc
 |   |       |   |   |           direct_url.cpython-312.pyc
@@ -394,7 +395,7 @@ F:.
 |   |       |   |   |           target_python.cpython-312.pyc
 |   |       |   |   |           wheel.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---network
 |   |       |   |   |   |   auth.py
 |   |       |   |   |   |   cache.py
@@ -404,7 +405,7 @@ F:.
 |   |       |   |   |   |   utils.py
 |   |       |   |   |   |   xmlrpc.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           auth.cpython-312.pyc
 |   |       |   |   |           cache.cpython-312.pyc
@@ -414,13 +415,13 @@ F:.
 |   |       |   |   |           utils.cpython-312.pyc
 |   |       |   |   |           xmlrpc.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---operations
 |   |       |   |   |   |   check.py
 |   |       |   |   |   |   freeze.py
 |   |       |   |   |   |   prepare.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---build
 |   |       |   |   |   |   |   build_tracker.py
 |   |       |   |   |   |   |   metadata.py
@@ -428,7 +429,7 @@ F:.
 |   |       |   |   |   |   |   wheel.py
 |   |       |   |   |   |   |   wheel_editable.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           build_tracker.cpython-312.pyc
 |   |       |   |   |   |           metadata.cpython-312.pyc
@@ -436,21 +437,21 @@ F:.
 |   |       |   |   |   |           wheel.cpython-312.pyc
 |   |       |   |   |   |           wheel_editable.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---install
 |   |       |   |   |   |   |   wheel.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           wheel.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           check.cpython-312.pyc
 |   |       |   |   |           freeze.cpython-312.pyc
 |   |       |   |   |           prepare.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---req
 |   |       |   |   |   |   constructors.py
 |   |       |   |   |   |   req_dependency_group.py
@@ -459,7 +460,7 @@ F:.
 |   |       |   |   |   |   req_set.py
 |   |       |   |   |   |   req_uninstall.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           constructors.cpython-312.pyc
 |   |       |   |   |           req_dependency_group.cpython-312.pyc
@@ -468,19 +469,19 @@ F:.
 |   |       |   |   |           req_set.cpython-312.pyc
 |   |       |   |   |           req_uninstall.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---resolution
 |   |       |   |   |   |   base.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---legacy
 |   |       |   |   |   |   |   resolver.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           resolver.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---resolvelib
 |   |       |   |   |   |   |   base.py
 |   |       |   |   |   |   |   candidates.py
@@ -491,7 +492,7 @@ F:.
 |   |       |   |   |   |   |   requirements.py
 |   |       |   |   |   |   |   resolver.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           base.cpython-312.pyc
 |   |       |   |   |   |           candidates.cpython-312.pyc
@@ -502,11 +503,11 @@ F:.
 |   |       |   |   |   |           requirements.cpython-312.pyc
 |   |       |   |   |   |           resolver.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           base.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---utils
 |   |       |   |   |   |   appdirs.py
 |   |       |   |   |   |   compat.py
@@ -530,10 +531,10 @@ F:.
 |   |       |   |   |   |   urls.py
 |   |       |   |   |   |   virtualenv.py
 |   |       |   |   |   |   wheel.py
-|   |       |   |   |   |   _jaraco_text.py
-|   |       |   |   |   |   _log.py
+|   |       |   |   |   |_jaraco_text.py
+|   |       |   |   |   |_log.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           appdirs.cpython-312.pyc
 |   |       |   |   |           compat.cpython-312.pyc
@@ -557,10 +558,10 @@ F:.
 |   |       |   |   |           urls.cpython-312.pyc
 |   |       |   |   |           virtualenv.cpython-312.pyc
 |   |       |   |   |           wheel.cpython-312.pyc
-|   |       |   |   |           _jaraco_text.cpython-312.pyc
-|   |       |   |   |           _log.cpython-312.pyc
+|   |       |   |   |_jaraco_text.cpython-312.pyc
+|   |       |   |   |_log.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---vcs
 |   |       |   |   |   |   bazaar.py
 |   |       |   |   |   |   git.py
@@ -568,7 +569,7 @@ F:.
 |   |       |   |   |   |   subversion.py
 |   |       |   |   |   |   versioncontrol.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           bazaar.cpython-312.pyc
 |   |       |   |   |           git.cpython-312.pyc
@@ -576,7 +577,7 @@ F:.
 |   |       |   |   |           subversion.cpython-312.pyc
 |   |       |   |   |           versioncontrol.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           build_env.cpython-312.pyc
 |   |       |   |           cache.cpython-312.pyc
@@ -587,12 +588,12 @@ F:.
 |   |       |   |           self_outdated_check.cpython-312.pyc
 |   |       |   |           wheel_builder.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---_vendor
 |   |       |   |   |   README.rst
 |   |       |   |   |   vendor.txt
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---cachecontrol
 |   |       |   |   |   |   adapter.py
 |   |       |   |   |   |   cache.py
@@ -603,19 +604,19 @@ F:.
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   serialize.py
 |   |       |   |   |   |   wrapper.py
-|   |       |   |   |   |   _cmd.py
+|   |       |   |   |   |_cmd.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---caches
 |   |       |   |   |   |   |   file_cache.py
 |   |       |   |   |   |   |   redis_cache.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           file_cache.cpython-312.pyc
 |   |       |   |   |   |           redis_cache.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           adapter.cpython-312.pyc
 |   |       |   |   |           cache.cpython-312.pyc
@@ -626,7 +627,7 @@ F:.
 |   |       |   |   |           wrapper.cpython-312.pyc
 |   |       |   |   |           _cmd.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---certifi
 |   |       |   |   |   |   cacert.pem
 |   |       |   |   |   |   core.py
@@ -634,30 +635,30 @@ F:.
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __main__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           core.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---dependency_groups
 |   |       |   |   |   |   LICENSE.txt
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   _implementation.py
-|   |       |   |   |   |   _lint_dependency_groups.py
+|   |       |   |   |   |_lint_dependency_groups.py
 |   |       |   |   |   |   _pip_wrapper.py
 |   |       |   |   |   |   _toml_compat.py
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __main__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           _implementation.cpython-312.pyc
-|   |       |   |   |           _lint_dependency_groups.cpython-312.pyc
+|   |       |   |   |_lint_dependency_groups.cpython-312.pyc
 |   |       |   |   |           _pip_wrapper.cpython-312.pyc
 |   |       |   |   |           _toml_compat.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---distlib
 |   |       |   |   |   |   compat.py
 |   |       |   |   |   |   LICENSE.txt
@@ -671,26 +672,26 @@ F:.
 |   |       |   |   |   |   w64-arm.exe
 |   |       |   |   |   |   w64.exe
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           compat.cpython-312.pyc
 |   |       |   |   |           resources.cpython-312.pyc
 |   |       |   |   |           scripts.cpython-312.pyc
 |   |       |   |   |           util.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---distro
 |   |       |   |   |   |   distro.py
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __main__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           distro.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---idna
 |   |       |   |   |   |   codec.py
 |   |       |   |   |   |   compat.py
@@ -702,7 +703,7 @@ F:.
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   uts46data.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           codec.cpython-312.pyc
 |   |       |   |   |           compat.cpython-312.pyc
@@ -712,20 +713,20 @@ F:.
 |   |       |   |   |           package_data.cpython-312.pyc
 |   |       |   |   |           uts46data.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---msgpack
 |   |       |   |   |   |   COPYING
 |   |       |   |   |   |   exceptions.py
 |   |       |   |   |   |   ext.py
 |   |       |   |   |   |   fallback.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           exceptions.cpython-312.pyc
 |   |       |   |   |           ext.cpython-312.pyc
 |   |       |   |   |           fallback.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---packaging
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   LICENSE.APACHE
@@ -739,21 +740,21 @@ F:.
 |   |       |   |   |   |   utils.py
 |   |       |   |   |   |   version.py
 |   |       |   |   |   |   _elffile.py
-|   |       |   |   |   |   _manylinux.py
+|   |       |   |   |   |_manylinux.py
 |   |       |   |   |   |   _musllinux.py
-|   |       |   |   |   |   _parser.py
+|   |       |   |   |   |_parser.py
 |   |       |   |   |   |   _structures.py
-|   |       |   |   |   |   _tokenizer.py
+|   |       |   |   |   |_tokenizer.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---licenses
 |   |       |   |   |   |   |   _spdx.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
-|   |       |   |   |   |           _spdx.cpython-312.pyc
+|   |       |   |   |   |_spdx.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           markers.cpython-312.pyc
 |   |       |   |   |           metadata.cpython-312.pyc
@@ -763,20 +764,20 @@ F:.
 |   |       |   |   |           utils.cpython-312.pyc
 |   |       |   |   |           version.cpython-312.pyc
 |   |       |   |   |           _elffile.cpython-312.pyc
-|   |       |   |   |           _manylinux.cpython-312.pyc
+|   |       |   |   |_manylinux.cpython-312.pyc
 |   |       |   |   |           _musllinux.cpython-312.pyc
-|   |       |   |   |           _parser.cpython-312.pyc
+|   |       |   |   |_parser.cpython-312.pyc
 |   |       |   |   |           _structures.cpython-312.pyc
-|   |       |   |   |           _tokenizer.cpython-312.pyc
+|   |       |   |   |_tokenizer.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---pkg_resources
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---platformdirs
 |   |       |   |   |   |   android.py
 |   |       |   |   |   |   api.py
@@ -788,7 +789,7 @@ F:.
 |   |       |   |   |   |   windows.py
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __main__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           android.cpython-312.pyc
 |   |       |   |   |           api.cpython-312.pyc
@@ -798,7 +799,7 @@ F:.
 |   |       |   |   |           windows.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---pygments
 |   |       |   |   |   |   console.py
 |   |       |   |   |   |   filter.py
@@ -816,39 +817,39 @@ F:.
 |   |       |   |   |   |   util.py
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __main__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---filters
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---formatters
-|   |       |   |   |   |   |   _mapping.py
+|   |       |   |   |   |   |_mapping.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           _mapping.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---lexers
 |   |       |   |   |   |   |   python.py
-|   |       |   |   |   |   |   _mapping.py
+|   |       |   |   |   |   |_mapping.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           python.cpython-312.pyc
 |   |       |   |   |   |           _mapping.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---styles
-|   |       |   |   |   |   |   _mapping.py
+|   |       |   |   |   |   |_mapping.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           _mapping.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           console.cpython-312.pyc
 |   |       |   |   |           filter.cpython-312.pyc
@@ -865,25 +866,25 @@ F:.
 |   |       |   |   |           util.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---pyproject_hooks
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   _impl.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---_in_process
-|   |       |   |   |   |   |   _in_process.py
+|   |       |   |   |   |   |_in_process.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
-|   |       |   |   |   |           _in_process.cpython-312.pyc
+|   |       |   |   |   |_in_process.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
-|   |       |   |   |           _impl.cpython-312.pyc
+|   |       |   |   |_impl.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---requests
 |   |       |   |   |   |   adapters.py
 |   |       |   |   |   |   api.py
@@ -901,10 +902,10 @@ F:.
 |   |       |   |   |   |   status_codes.py
 |   |       |   |   |   |   structures.py
 |   |       |   |   |   |   utils.py
-|   |       |   |   |   |   _internal_utils.py
+|   |       |   |   |   |_internal_utils.py
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __version__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           adapters.cpython-312.pyc
 |   |       |   |   |           api.cpython-312.pyc
@@ -924,7 +925,7 @@ F:.
 |   |       |   |   |           _internal_utils.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __version__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---resolvelib
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   providers.py
@@ -932,27 +933,27 @@ F:.
 |   |       |   |   |   |   reporters.py
 |   |       |   |   |   |   structs.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---resolvers
 |   |       |   |   |   |   |   abstract.py
 |   |       |   |   |   |   |   criterion.py
 |   |       |   |   |   |   |   exceptions.py
 |   |       |   |   |   |   |   resolution.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           abstract.cpython-312.pyc
 |   |       |   |   |   |           criterion.cpython-312.pyc
 |   |       |   |   |   |           exceptions.cpython-312.pyc
 |   |       |   |   |   |           resolution.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           providers.cpython-312.pyc
 |   |       |   |   |           reporters.cpython-312.pyc
 |   |       |   |   |           structs.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---rich
 |   |       |   |   |   |   abc.py
 |   |       |   |   |   |   align.py
@@ -1016,24 +1017,24 @@ F:.
 |   |       |   |   |   |   _emoji_replace.py
 |   |       |   |   |   |   _export_format.py
 |   |       |   |   |   |   _extension.py
-|   |       |   |   |   |   _fileno.py
+|   |       |   |   |   |_fileno.py
 |   |       |   |   |   |   _inspect.py
-|   |       |   |   |   |   _log_render.py
-|   |       |   |   |   |   _loop.py
+|   |       |   |   |   |_log_render.py
+|   |       |   |   |   |_loop.py
 |   |       |   |   |   |   _null_file.py
 |   |       |   |   |   |   _palettes.py
-|   |       |   |   |   |   _pick.py
+|   |       |   |   |   |_pick.py
 |   |       |   |   |   |   _ratio.py
-|   |       |   |   |   |   _spinners.py
+|   |       |   |   |   |_spinners.py
 |   |       |   |   |   |   _stack.py
-|   |       |   |   |   |   _timer.py
+|   |       |   |   |   |_timer.py
 |   |       |   |   |   |   _win32_console.py
 |   |       |   |   |   |   _windows.py
-|   |       |   |   |   |   _windows_renderer.py
-|   |       |   |   |   |   _wrap.py
+|   |       |   |   |   |_windows_renderer.py
+|   |       |   |   |   |_wrap.py
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __main__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           abc.cpython-312.pyc
 |   |       |   |   |           align.cpython-312.pyc
@@ -1095,66 +1096,66 @@ F:.
 |   |       |   |   |           _emoji_replace.cpython-312.pyc
 |   |       |   |   |           _export_format.cpython-312.pyc
 |   |       |   |   |           _extension.cpython-312.pyc
-|   |       |   |   |           _fileno.cpython-312.pyc
+|   |       |   |   |_fileno.cpython-312.pyc
 |   |       |   |   |           _inspect.cpython-312.pyc
-|   |       |   |   |           _log_render.cpython-312.pyc
-|   |       |   |   |           _loop.cpython-312.pyc
+|   |       |   |   |_log_render.cpython-312.pyc
+|   |       |   |   |_loop.cpython-312.pyc
 |   |       |   |   |           _null_file.cpython-312.pyc
 |   |       |   |   |           _palettes.cpython-312.pyc
-|   |       |   |   |           _pick.cpython-312.pyc
+|   |       |   |   |_pick.cpython-312.pyc
 |   |       |   |   |           _ratio.cpython-312.pyc
-|   |       |   |   |           _spinners.cpython-312.pyc
+|   |       |   |   |_spinners.cpython-312.pyc
 |   |       |   |   |           _stack.cpython-312.pyc
-|   |       |   |   |           _timer.cpython-312.pyc
+|   |       |   |   |_timer.cpython-312.pyc
 |   |       |   |   |           _win32_console.cpython-312.pyc
 |   |       |   |   |           _windows.cpython-312.pyc
-|   |       |   |   |           _windows_renderer.cpython-312.pyc
-|   |       |   |   |           _wrap.cpython-312.pyc
+|   |       |   |   |_windows_renderer.cpython-312.pyc
+|   |       |   |   |_wrap.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---tomli
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   _parser.py
-|   |       |   |   |   |   _re.py
+|   |       |   |   |   |_re.py
 |   |       |   |   |   |   _types.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
-|   |       |   |   |           _parser.cpython-312.pyc
+|   |       |   |   |_parser.cpython-312.pyc
 |   |       |   |   |           _re.cpython-312.pyc
-|   |       |   |   |           _types.cpython-312.pyc
+|   |       |   |   |_types.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---tomli_w
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   py.typed
-|   |       |   |   |   |   _writer.py
+|   |       |   |   |   |_writer.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           _writer.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---truststore
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   py.typed
-|   |       |   |   |   |   _api.py
+|   |       |   |   |   |_api.py
 |   |       |   |   |   |   _macos.py
-|   |       |   |   |   |   _openssl.py
+|   |       |   |   |   |_openssl.py
 |   |       |   |   |   |   _ssl_constants.py
 |   |       |   |   |   |   _windows.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
-|   |       |   |   |           _api.cpython-312.pyc
+|   |       |   |   |_api.cpython-312.pyc
 |   |       |   |   |           _macos.cpython-312.pyc
-|   |       |   |   |           _openssl.cpython-312.pyc
+|   |       |   |   |_openssl.cpython-312.pyc
 |   |       |   |   |           _ssl_constants.cpython-312.pyc
 |   |       |   |   |           _windows.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---urllib3
 |   |       |   |   |   |   connection.py
 |   |       |   |   |   |   connectionpool.py
@@ -1165,29 +1166,29 @@ F:.
 |   |       |   |   |   |   poolmanager.py
 |   |       |   |   |   |   request.py
 |   |       |   |   |   |   response.py
-|   |       |   |   |   |   _collections.py
+|   |       |   |   |   |_collections.py
 |   |       |   |   |   |   _version.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---contrib
 |   |       |   |   |   |   |   appengine.py
 |   |       |   |   |   |   |   ntlmpool.py
 |   |       |   |   |   |   |   pyopenssl.py
 |   |       |   |   |   |   |   securetransport.py
 |   |       |   |   |   |   |   socks.py
-|   |       |   |   |   |   |   _appengine_environ.py
+|   |       |   |   |   |   |_appengine_environ.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   +---_securetransport
 |   |       |   |   |   |   |   |   bindings.py
 |   |       |   |   |   |   |   |   low_level.py
 |   |       |   |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   |   
+|   |       |   |   |   |   |   |
 |   |       |   |   |   |   |   \---__pycache__
 |   |       |   |   |   |   |           bindings.cpython-312.pyc
 |   |       |   |   |   |   |           low_level.cpython-312.pyc
 |   |       |   |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |   |           
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           appengine.cpython-312.pyc
 |   |       |   |   |   |           ntlmpool.cpython-312.pyc
@@ -1196,25 +1197,25 @@ F:.
 |   |       |   |   |   |           socks.cpython-312.pyc
 |   |       |   |   |   |           _appengine_environ.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---packages
 |   |       |   |   |   |   |   six.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   +---backports
 |   |       |   |   |   |   |   |   makefile.py
 |   |       |   |   |   |   |   |   weakref_finalize.py
 |   |       |   |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   |   
+|   |       |   |   |   |   |   |
 |   |       |   |   |   |   |   \---__pycache__
 |   |       |   |   |   |   |           makefile.cpython-312.pyc
 |   |       |   |   |   |   |           weakref_finalize.cpython-312.pyc
 |   |       |   |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |   |           
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           six.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---util
 |   |       |   |   |   |   |   connection.py
 |   |       |   |   |   |   |   proxy.py
@@ -1229,7 +1230,7 @@ F:.
 |   |       |   |   |   |   |   url.py
 |   |       |   |   |   |   |   wait.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           connection.cpython-312.pyc
 |   |       |   |   |   |           proxy.cpython-312.pyc
@@ -1244,7 +1245,7 @@ F:.
 |   |       |   |   |   |           url.cpython-312.pyc
 |   |       |   |   |   |           wait.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           connection.cpython-312.pyc
 |   |       |   |   |           connectionpool.cpython-312.pyc
@@ -1254,18 +1255,18 @@ F:.
 |   |       |   |   |           poolmanager.cpython-312.pyc
 |   |       |   |   |           request.cpython-312.pyc
 |   |       |   |   |           response.cpython-312.pyc
-|   |       |   |   |           _collections.cpython-312.pyc
+|   |       |   |   |_collections.cpython-312.pyc
 |   |       |   |   |           _version.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           __init__.cpython-312.pyc
 |   |       |           __main__.cpython-312.pyc
 |   |       |           __pip-runner__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---pip-25.3.dist-info
 |   |       |   |   entry_points.txt
 |   |       |   |   INSTALLER
@@ -1273,78 +1274,78 @@ F:.
 |   |       |   |   RECORD
 |   |       |   |   REQUESTED
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |       |   AUTHORS.txt
 |   |       |       |   LICENSE.txt
-|   |       |       |   
+|   |       |       |
 |   |       |       \---src
 |   |       |           \---pip
 |   |       |               \---_vendor
 |   |       |                   +---cachecontrol
 |   |       |                   |       LICENSE.txt
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---certifi
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---dependency_groups
 |   |       |                   |       LICENSE.txt
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---distlib
 |   |       |                   |       LICENSE.txt
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---distro
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---idna
 |   |       |                   |       LICENSE.md
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---msgpack
 |   |       |                   |       COPYING
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---packaging
 |   |       |                   |       LICENSE
 |   |       |                   |       LICENSE.APACHE
 |   |       |                   |       LICENSE.BSD
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---pkg_resources
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---platformdirs
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---pygments
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---pyproject_hooks
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---requests
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---resolvelib
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---rich
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---tomli
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---tomli_w
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   +---truststore
 |   |       |                   |       LICENSE
-|   |       |                   |       
+|   |       |                   |
 |   |       |                   \---urllib3
 |   |       |                           LICENSE.txt
-|   |       |                           
+|   |       |
 |   |       +---pkg_resources
 |   |       |   |   api_tests.txt
 |   |       |   |   py.typed
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   +---tests
 |   |       |   |   |   test_find_distributions.py
 |   |       |   |   |   test_integration_zope_interface.py
@@ -1353,18 +1354,18 @@ F:.
 |   |       |   |   |   test_resources.py
 |   |       |   |   |   test_working_set.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---data
 |   |       |   |   |   +---my-test-package-source
 |   |       |   |   |   |   |   setup.cfg
 |   |       |   |   |   |   |   setup.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           setup.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---my-test-package-zip
 |   |       |   |   |   |       my-test-package.zip
-|   |       |   |   |   |       
+|   |       |   |   |   |
 |   |       |   |   |   +---my-test-package_unpacked-egg
 |   |       |   |   |   |   \---my_test_package-1.0-py3.7.egg
 |   |       |   |   |   |       \---EGG-INFO
@@ -1373,10 +1374,10 @@ F:.
 |   |       |   |   |   |               SOURCES.txt
 |   |       |   |   |   |               top_level.txt
 |   |       |   |   |   |               zip-safe
-|   |       |   |   |   |               
+|   |       |   |   |   |
 |   |       |   |   |   \---my-test-package_zipped-egg
 |   |       |   |   |           my_test_package-1.0-py3.7.egg
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           test_find_distributions.cpython-312.pyc
 |   |       |   |           test_integration_zope_interface.cpython-312.pyc
@@ -1385,10 +1386,10 @@ F:.
 |   |       |   |           test_resources.cpython-312.pyc
 |   |       |   |           test_working_set.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---pydantic
 |   |       |   |   aliases.py
 |   |       |   |   alias_generators.py
@@ -1426,7 +1427,7 @@ F:.
 |   |       |   |   warnings.py
 |   |       |   |   _migration.py
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   +---deprecated
 |   |       |   |   |   class_validators.py
 |   |       |   |   |   config.py
@@ -1436,7 +1437,7 @@ F:.
 |   |       |   |   |   parse.py
 |   |       |   |   |   tools.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           class_validators.cpython-312.pyc
 |   |       |   |           config.cpython-312.pyc
@@ -1446,29 +1447,29 @@ F:.
 |   |       |   |           parse.cpython-312.pyc
 |   |       |   |           tools.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---experimental
 |   |       |   |   |   arguments_schema.py
 |   |       |   |   |   missing_sentinel.py
 |   |       |   |   |   pipeline.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           arguments_schema.cpython-312.pyc
 |   |       |   |           missing_sentinel.cpython-312.pyc
 |   |       |   |           pipeline.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---plugin
-|   |       |   |   |   _loader.py
+|   |       |   |   |_loader.py
 |   |       |   |   |   _schema_validator.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           _loader.cpython-312.pyc
-|   |       |   |           _schema_validator.cpython-312.pyc
+|   |       |   |_schema_validator.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---v1
 |   |       |   |   |   annotated_types.py
 |   |       |   |   |   class_validators.py
@@ -1497,7 +1498,7 @@ F:.
 |   |       |   |   |   version.py
 |   |       |   |   |   _hypothesis_plugin.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           annotated_types.cpython-312.pyc
 |   |       |   |           class_validators.cpython-312.pyc
@@ -1523,71 +1524,71 @@ F:.
 |   |       |   |           utils.cpython-312.pyc
 |   |       |   |           validators.cpython-312.pyc
 |   |       |   |           version.cpython-312.pyc
-|   |       |   |           _hypothesis_plugin.cpython-312.pyc
+|   |       |   |_hypothesis_plugin.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---_internal
 |   |       |   |   |   _config.py
-|   |       |   |   |   _core_metadata.py
-|   |       |   |   |   _core_utils.py
-|   |       |   |   |   _dataclasses.py
+|   |       |   |   |_core_metadata.py
+|   |       |   |   |_core_utils.py
+|   |       |   |   |_dataclasses.py
 |   |       |   |   |   _decorators.py
-|   |       |   |   |   _decorators_v1.py
-|   |       |   |   |   _discriminated_union.py
-|   |       |   |   |   _docs_extraction.py
-|   |       |   |   |   _fields.py
+|   |       |   |   |_decorators_v1.py
+|   |       |   |   |_discriminated_union.py
+|   |       |   |   |_docs_extraction.py
+|   |       |   |   |_fields.py
 |   |       |   |   |   _forward_ref.py
 |   |       |   |   |   _generate_schema.py
 |   |       |   |   |   _generics.py
-|   |       |   |   |   _git.py
+|   |       |   |   |_git.py
 |   |       |   |   |   _import_utils.py
 |   |       |   |   |   _internal_dataclass.py
 |   |       |   |   |   _known_annotated_metadata.py
-|   |       |   |   |   _mock_val_ser.py
+|   |       |   |   |_mock_val_ser.py
 |   |       |   |   |   _model_construction.py
 |   |       |   |   |   _namespace_utils.py
 |   |       |   |   |   _repr.py
-|   |       |   |   |   _schema_gather.py
-|   |       |   |   |   _schema_generation_shared.py
+|   |       |   |   |_schema_gather.py
+|   |       |   |   |_schema_generation_shared.py
 |   |       |   |   |   _serializers.py
-|   |       |   |   |   _signature.py
+|   |       |   |   |_signature.py
 |   |       |   |   |   _typing_extra.py
 |   |       |   |   |   _utils.py
-|   |       |   |   |   _validate_call.py
-|   |       |   |   |   _validators.py
+|   |       |   |   |_validate_call.py
+|   |       |   |   |_validators.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           _config.cpython-312.pyc
-|   |       |   |           _core_metadata.cpython-312.pyc
-|   |       |   |           _core_utils.cpython-312.pyc
-|   |       |   |           _dataclasses.cpython-312.pyc
+|   |       |   |_core_metadata.cpython-312.pyc
+|   |       |   |_core_utils.cpython-312.pyc
+|   |       |   |_dataclasses.cpython-312.pyc
 |   |       |   |           _decorators.cpython-312.pyc
-|   |       |   |           _decorators_v1.cpython-312.pyc
-|   |       |   |           _discriminated_union.cpython-312.pyc
-|   |       |   |           _docs_extraction.cpython-312.pyc
-|   |       |   |           _fields.cpython-312.pyc
+|   |       |   |_decorators_v1.cpython-312.pyc
+|   |       |   |_discriminated_union.cpython-312.pyc
+|   |       |   |_docs_extraction.cpython-312.pyc
+|   |       |   |_fields.cpython-312.pyc
 |   |       |   |           _forward_ref.cpython-312.pyc
 |   |       |   |           _generate_schema.cpython-312.pyc
 |   |       |   |           _generics.cpython-312.pyc
-|   |       |   |           _git.cpython-312.pyc
+|   |       |   |_git.cpython-312.pyc
 |   |       |   |           _import_utils.cpython-312.pyc
 |   |       |   |           _internal_dataclass.cpython-312.pyc
 |   |       |   |           _known_annotated_metadata.cpython-312.pyc
-|   |       |   |           _mock_val_ser.cpython-312.pyc
+|   |       |   |_mock_val_ser.cpython-312.pyc
 |   |       |   |           _model_construction.cpython-312.pyc
 |   |       |   |           _namespace_utils.cpython-312.pyc
 |   |       |   |           _repr.cpython-312.pyc
-|   |       |   |           _schema_gather.cpython-312.pyc
-|   |       |   |           _schema_generation_shared.cpython-312.pyc
+|   |       |   |_schema_gather.cpython-312.pyc
+|   |       |   |_schema_generation_shared.cpython-312.pyc
 |   |       |   |           _serializers.cpython-312.pyc
-|   |       |   |           _signature.cpython-312.pyc
+|   |       |   |_signature.cpython-312.pyc
 |   |       |   |           _typing_extra.cpython-312.pyc
 |   |       |   |           _utils.cpython-312.pyc
-|   |       |   |           _validate_call.cpython-312.pyc
-|   |       |   |           _validators.cpython-312.pyc
+|   |       |   |_validate_call.cpython-312.pyc
+|   |       |   |_validators.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           aliases.cpython-312.pyc
 |   |       |           alias_generators.cpython-312.pyc
@@ -1622,48 +1623,48 @@ F:.
 |   |       |           validators.cpython-312.pyc
 |   |       |           version.cpython-312.pyc
 |   |       |           warnings.cpython-312.pyc
-|   |       |           _migration.cpython-312.pyc
+|   |       |_migration.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---pydantic-2.12.5.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---pydantic_core
 |   |       |   |   core_schema.py
 |   |       |   |   py.typed
 |   |       |   |   _pydantic_core.cp312-win_amd64.pyd
-|   |       |   |   _pydantic_core.pyi
+|   |       |   |_pydantic_core.pyi
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           core_schema.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---pydantic_core-2.41.5.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---pyyaml-6.0.3.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   top_level.txt
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---requests
 |   |       |   |   adapters.py
 |   |       |   |   api.py
@@ -1680,10 +1681,10 @@ F:.
 |   |       |   |   status_codes.py
 |   |       |   |   structures.py
 |   |       |   |   utils.py
-|   |       |   |   _internal_utils.py
+|   |       |   |_internal_utils.py
 |   |       |   |   __init__.py
 |   |       |   |   __version__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           adapters.cpython-312.pyc
 |   |       |           api.cpython-312.pyc
@@ -1703,17 +1704,17 @@ F:.
 |   |       |           _internal_utils.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
 |   |       |           __version__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---requests-2.32.5.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   top_level.txt
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---rylan_unifi_case_study-0.1.0.dist-info
 |   |       |   |   direct_url.json
 |   |       |   |   INSTALLER
@@ -1722,10 +1723,10 @@ F:.
 |   |       |   |   REQUESTED
 |   |       |   |   top_level.txt
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---setuptools
 |   |       |   |   archive_util.py
 |   |       |   |   build_meta.py
@@ -1759,18 +1760,18 @@ F:.
 |   |       |   |   windows_support.py
 |   |       |   |   _core_metadata.py
 |   |       |   |   _discovery.py
-|   |       |   |   _entry_points.py
-|   |       |   |   _imp.py
+|   |       |   |_entry_points.py
+|   |       |   |_imp.py
 |   |       |   |   _importlib.py
-|   |       |   |   _itertools.py
+|   |       |   |_itertools.py
 |   |       |   |   _normalization.py
-|   |       |   |   _path.py
+|   |       |   |_path.py
 |   |       |   |   _reqs.py
-|   |       |   |   _scripts.py
+|   |       |   |_scripts.py
 |   |       |   |   _shutil.py
-|   |       |   |   _static.py
+|   |       |   |_static.py
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   +---command
 |   |       |   |   |   alias.py
 |   |       |   |   |   bdist_egg.py
@@ -1797,7 +1798,7 @@ F:.
 |   |       |   |   |   test.py
 |   |       |   |   |   _requirestxt.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           alias.cpython-312.pyc
 |   |       |   |           bdist_egg.cpython-312.pyc
@@ -1821,23 +1822,23 @@ F:.
 |   |       |   |           sdist.cpython-312.pyc
 |   |       |   |           setopt.cpython-312.pyc
 |   |       |   |           test.cpython-312.pyc
-|   |       |   |           _requirestxt.cpython-312.pyc
+|   |       |   |_requirestxt.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---compat
 |   |       |   |   |   py310.py
 |   |       |   |   |   py311.py
 |   |       |   |   |   py312.py
 |   |       |   |   |   py39.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           py310.cpython-312.pyc
 |   |       |   |           py311.cpython-312.pyc
 |   |       |   |           py312.cpython-312.pyc
 |   |       |   |           py39.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---config
 |   |       |   |   |   distutils.schema.json
 |   |       |   |   |   expand.py
@@ -1847,7 +1848,7 @@ F:.
 |   |       |   |   |   setuptools.schema.json
 |   |       |   |   |   _apply_pyprojecttoml.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---_validate_pyproject
 |   |       |   |   |   |   error_reporting.py
 |   |       |   |   |   |   extra_validations.py
@@ -1856,7 +1857,7 @@ F:.
 |   |       |   |   |   |   formats.py
 |   |       |   |   |   |   NOTICE
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           error_reporting.cpython-312.pyc
 |   |       |   |   |           extra_validations.cpython-312.pyc
@@ -1864,14 +1865,14 @@ F:.
 |   |       |   |   |           fastjsonschema_validations.cpython-312.pyc
 |   |       |   |   |           formats.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           expand.cpython-312.pyc
 |   |       |   |           pyprojecttoml.cpython-312.pyc
 |   |       |   |           setupcfg.cpython-312.pyc
 |   |       |   |           _apply_pyprojecttoml.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---tests
 |   |       |   |   |   contexts.py
 |   |       |   |   |   environment.py
@@ -1918,15 +1919,15 @@ F:.
 |   |       |   |   |   text.py
 |   |       |   |   |   textwrap.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---compat
 |   |       |   |   |   |   py39.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           py39.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---config
 |   |       |   |   |   |   setupcfg_examples.txt
 |   |       |   |   |   |   test_apply_pyprojecttoml.py
@@ -1935,15 +1936,15 @@ F:.
 |   |       |   |   |   |   test_pyprojecttoml_dynamic_deps.py
 |   |       |   |   |   |   test_setupcfg.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---downloads
 |   |       |   |   |   |   |   preload.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           preload.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           test_apply_pyprojecttoml.cpython-312.pyc
 |   |       |   |   |           test_expand.cpython-312.pyc
@@ -1951,27 +1952,27 @@ F:.
 |   |       |   |   |           test_pyprojecttoml_dynamic_deps.cpython-312.pyc
 |   |       |   |   |           test_setupcfg.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---indexes
 |   |       |   |   |   \---test_links_priority
 |   |       |   |   |       |   external.html
-|   |       |   |   |       |   
+|   |       |   |   |       |
 |   |       |   |   |       \---simple
 |   |       |   |   |           \---foobar
 |   |       |   |   |                   index.html
-|   |       |   |   |                   
+|   |       |   |   |
 |   |       |   |   +---integration
 |   |       |   |   |   |   helpers.py
 |   |       |   |   |   |   test_pbr.py
 |   |       |   |   |   |   test_pip_install_sdist.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           helpers.cpython-312.pyc
 |   |       |   |   |           test_pbr.cpython-312.pyc
 |   |       |   |   |           test_pip_install_sdist.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           contexts.cpython-312.pyc
 |   |       |   |           environment.cpython-312.pyc
@@ -2018,7 +2019,7 @@ F:.
 |   |       |   |           text.cpython-312.pyc
 |   |       |   |           textwrap.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---_distutils
 |   |       |   |   |   archive_util.py
 |   |       |   |   |   ccompiler.py
@@ -2044,11 +2045,11 @@ F:.
 |   |       |   |   |   versionpredicate.py
 |   |       |   |   |   zosccompiler.py
 |   |       |   |   |   _log.py
-|   |       |   |   |   _macos_compat.py
-|   |       |   |   |   _modified.py
+|   |       |   |   |_macos_compat.py
+|   |       |   |   |_modified.py
 |   |       |   |   |   _msvccompiler.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---command
 |   |       |   |   |   |   bdist.py
 |   |       |   |   |   |   bdist_dumb.py
@@ -2068,9 +2069,9 @@ F:.
 |   |       |   |   |   |   install_lib.py
 |   |       |   |   |   |   install_scripts.py
 |   |       |   |   |   |   sdist.py
-|   |       |   |   |   |   _framework_compat.py
+|   |       |   |   |   |_framework_compat.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           bdist.cpython-312.pyc
 |   |       |   |   |           bdist_dumb.cpython-312.pyc
@@ -2090,19 +2091,19 @@ F:.
 |   |       |   |   |           install_lib.cpython-312.pyc
 |   |       |   |   |           install_scripts.cpython-312.pyc
 |   |       |   |   |           sdist.cpython-312.pyc
-|   |       |   |   |           _framework_compat.cpython-312.pyc
+|   |       |   |   |_framework_compat.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---compat
 |   |       |   |   |   |   numpy.py
 |   |       |   |   |   |   py39.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           numpy.cpython-312.pyc
 |   |       |   |   |           py39.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---compilers
 |   |       |   |   |   \---C
 |   |       |   |   |       |   base.py
@@ -2111,21 +2112,21 @@ F:.
 |   |       |   |   |       |   msvc.py
 |   |       |   |   |       |   unix.py
 |   |       |   |   |       |   zos.py
-|   |       |   |   |       |   
+|   |       |   |   |       |
 |   |       |   |   |       +---tests
 |   |       |   |   |       |   |   test_base.py
 |   |       |   |   |       |   |   test_cygwin.py
 |   |       |   |   |       |   |   test_mingw.py
 |   |       |   |   |       |   |   test_msvc.py
 |   |       |   |   |       |   |   test_unix.py
-|   |       |   |   |       |   |   
+|   |       |   |   |       |   |
 |   |       |   |   |       |   \---__pycache__
 |   |       |   |   |       |           test_base.cpython-312.pyc
 |   |       |   |   |       |           test_cygwin.cpython-312.pyc
 |   |       |   |   |       |           test_mingw.cpython-312.pyc
 |   |       |   |   |       |           test_msvc.cpython-312.pyc
 |   |       |   |   |       |           test_unix.cpython-312.pyc
-|   |       |   |   |       |           
+|   |       |   |   |       |
 |   |       |   |   |       \---__pycache__
 |   |       |   |   |               base.cpython-312.pyc
 |   |       |   |   |               cygwin.cpython-312.pyc
@@ -2133,7 +2134,7 @@ F:.
 |   |       |   |   |               msvc.cpython-312.pyc
 |   |       |   |   |               unix.cpython-312.pyc
 |   |       |   |   |               zos.cpython-312.pyc
-|   |       |   |   |               
+|   |       |   |   |
 |   |       |   |   +---tests
 |   |       |   |   |   |   support.py
 |   |       |   |   |   |   test_archive_util.py
@@ -2171,15 +2172,15 @@ F:.
 |   |       |   |   |   |   test_versionpredicate.py
 |   |       |   |   |   |   unix_compat.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---compat
 |   |       |   |   |   |   |   py39.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           py39.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           support.cpython-312.pyc
 |   |       |   |   |           test_archive_util.cpython-312.pyc
@@ -2217,7 +2218,7 @@ F:.
 |   |       |   |   |           test_versionpredicate.cpython-312.pyc
 |   |       |   |   |           unix_compat.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           archive_util.cpython-312.pyc
 |   |       |   |           ccompiler.cpython-312.pyc
@@ -2242,15 +2243,15 @@ F:.
 |   |       |   |           version.cpython-312.pyc
 |   |       |   |           versionpredicate.cpython-312.pyc
 |   |       |   |           zosccompiler.cpython-312.pyc
-|   |       |   |           _log.cpython-312.pyc
+|   |       |   |_log.cpython-312.pyc
 |   |       |   |           _macos_compat.cpython-312.pyc
 |   |       |   |           _modified.cpython-312.pyc
-|   |       |   |           _msvccompiler.cpython-312.pyc
+|   |       |   |_msvccompiler.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---_vendor
 |   |       |   |   |   typing_extensions.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---autocommand
 |   |       |   |   |   |   autoasync.py
 |   |       |   |   |   |   autocommand.py
@@ -2258,7 +2259,7 @@ F:.
 |   |       |   |   |   |   autoparse.py
 |   |       |   |   |   |   errors.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           autoasync.cpython-312.pyc
 |   |       |   |   |           autocommand.cpython-312.pyc
@@ -2266,7 +2267,7 @@ F:.
 |   |       |   |   |           autoparse.cpython-312.pyc
 |   |       |   |   |           errors.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---autocommand-2.2.2.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2274,29 +2275,29 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---backports
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---tarfile
 |   |       |   |   |   |   |   __init__.py
 |   |       |   |   |   |   |   __main__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   +---compat
 |   |       |   |   |   |   |   |   py38.py
 |   |       |   |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   |   
+|   |       |   |   |   |   |   |
 |   |       |   |   |   |   |   \---__pycache__
 |   |       |   |   |   |   |           py38.cpython-312.pyc
 |   |       |   |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |   |           
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---backports.tarfile-1.2.0.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2305,40 +2306,40 @@ F:.
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---importlib_metadata
 |   |       |   |   |   |   diagnose.py
 |   |       |   |   |   |   py.typed
-|   |       |   |   |   |   _adapters.py
+|   |       |   |   |   |_adapters.py
 |   |       |   |   |   |   _collections.py
-|   |       |   |   |   |   _compat.py
+|   |       |   |   |   |_compat.py
 |   |       |   |   |   |   _functools.py
-|   |       |   |   |   |   _itertools.py
+|   |       |   |   |   |_itertools.py
 |   |       |   |   |   |   _meta.py
-|   |       |   |   |   |   _text.py
+|   |       |   |   |   |_text.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---compat
 |   |       |   |   |   |   |   py311.py
 |   |       |   |   |   |   |   py39.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           py311.cpython-312.pyc
 |   |       |   |   |   |           py39.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           diagnose.cpython-312.pyc
 |   |       |   |   |           _adapters.cpython-312.pyc
-|   |       |   |   |           _collections.cpython-312.pyc
+|   |       |   |   |_collections.cpython-312.pyc
 |   |       |   |   |           _compat.cpython-312.pyc
-|   |       |   |   |           _functools.cpython-312.pyc
+|   |       |   |   |_functools.cpython-312.pyc
 |   |       |   |   |           _itertools.cpython-312.pyc
-|   |       |   |   |           _meta.cpython-312.pyc
+|   |       |   |   |_meta.cpython-312.pyc
 |   |       |   |   |           _text.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---importlib_metadata-8.0.0.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2347,22 +2348,22 @@ F:.
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---inflect
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---compat
 |   |       |   |   |   |   |   py38.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           py38.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---inflect-7.3.1.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2370,25 +2371,25 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---jaraco
 |   |       |   |   |   |   context.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---collections
 |   |       |   |   |   |   |   py.typed
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---functools
 |   |       |   |   |   |   |   py.typed
 |   |       |   |   |   |   |   __init__.py
 |   |       |   |   |   |   |   __init__.pyi
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---text
 |   |       |   |   |   |   |   layouts.py
 |   |       |   |   |   |   |   Lorem ipsum.txt
@@ -2397,7 +2398,7 @@ F:.
 |   |       |   |   |   |   |   to-dvorak.py
 |   |       |   |   |   |   |   to-qwerty.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           layouts.cpython-312.pyc
 |   |       |   |   |   |           show-newlines.cpython-312.pyc
@@ -2405,10 +2406,10 @@ F:.
 |   |       |   |   |   |           to-dvorak.cpython-312.pyc
 |   |       |   |   |   |           to-qwerty.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           context.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---jaraco.collections-5.1.0.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2417,7 +2418,7 @@ F:.
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---jaraco.context-5.3.0.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2425,7 +2426,7 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---jaraco.functools-4.0.1.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2433,7 +2434,7 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---jaraco.text-3.12.1.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2442,7 +2443,7 @@ F:.
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---more_itertools
 |   |       |   |   |   |   more.py
 |   |       |   |   |   |   more.pyi
@@ -2451,12 +2452,12 @@ F:.
 |   |       |   |   |   |   recipes.pyi
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __init__.pyi
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           more.cpython-312.pyc
 |   |       |   |   |           recipes.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---more_itertools-10.3.0.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2464,7 +2465,7 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---packaging
 |   |       |   |   |   |   markers.py
 |   |       |   |   |   |   metadata.py
@@ -2475,21 +2476,21 @@ F:.
 |   |       |   |   |   |   utils.py
 |   |       |   |   |   |   version.py
 |   |       |   |   |   |   _elffile.py
-|   |       |   |   |   |   _manylinux.py
+|   |       |   |   |   |_manylinux.py
 |   |       |   |   |   |   _musllinux.py
-|   |       |   |   |   |   _parser.py
+|   |       |   |   |   |_parser.py
 |   |       |   |   |   |   _structures.py
-|   |       |   |   |   |   _tokenizer.py
+|   |       |   |   |   |_tokenizer.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---licenses
 |   |       |   |   |   |   |   _spdx.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
-|   |       |   |   |   |           _spdx.cpython-312.pyc
+|   |       |   |   |   |_spdx.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           markers.cpython-312.pyc
 |   |       |   |   |           metadata.cpython-312.pyc
@@ -2499,13 +2500,13 @@ F:.
 |   |       |   |   |           utils.cpython-312.pyc
 |   |       |   |   |           version.cpython-312.pyc
 |   |       |   |   |           _elffile.cpython-312.pyc
-|   |       |   |   |           _manylinux.cpython-312.pyc
+|   |       |   |   |_manylinux.cpython-312.pyc
 |   |       |   |   |           _musllinux.cpython-312.pyc
-|   |       |   |   |           _parser.cpython-312.pyc
+|   |       |   |   |_parser.cpython-312.pyc
 |   |       |   |   |           _structures.cpython-312.pyc
-|   |       |   |   |           _tokenizer.cpython-312.pyc
+|   |       |   |   |_tokenizer.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---packaging-24.2.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2515,7 +2516,7 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---platformdirs
 |   |       |   |   |   |   android.py
 |   |       |   |   |   |   api.py
@@ -2526,7 +2527,7 @@ F:.
 |   |       |   |   |   |   windows.py
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __main__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           android.cpython-312.pyc
 |   |       |   |   |           api.cpython-312.pyc
@@ -2536,30 +2537,30 @@ F:.
 |   |       |   |   |           windows.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---platformdirs-4.2.2.dist-info
 |   |       |   |   |   |   INSTALLER
 |   |       |   |   |   |   METADATA
 |   |       |   |   |   |   RECORD
 |   |       |   |   |   |   REQUESTED
 |   |       |   |   |   |   WHEEL
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---licenses
 |   |       |   |   |           LICENSE
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---tomli
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   _parser.py
-|   |       |   |   |   |   _re.py
+|   |       |   |   |   |_re.py
 |   |       |   |   |   |   _types.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
-|   |       |   |   |           _parser.cpython-312.pyc
+|   |       |   |   |_parser.cpython-312.pyc
 |   |       |   |   |           _re.cpython-312.pyc
-|   |       |   |   |           _types.cpython-312.pyc
+|   |       |   |   |_types.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---tomli-2.0.1.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2567,38 +2568,38 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---typeguard
 |   |       |   |   |   |   py.typed
 |   |       |   |   |   |   _checkers.py
-|   |       |   |   |   |   _config.py
+|   |       |   |   |   |_config.py
 |   |       |   |   |   |   _decorators.py
-|   |       |   |   |   |   _exceptions.py
+|   |       |   |   |   |_exceptions.py
 |   |       |   |   |   |   _functions.py
-|   |       |   |   |   |   _importhook.py
+|   |       |   |   |   |_importhook.py
 |   |       |   |   |   |   _memo.py
-|   |       |   |   |   |   _pytest_plugin.py
-|   |       |   |   |   |   _suppression.py
+|   |       |   |   |   |_pytest_plugin.py
+|   |       |   |   |   |_suppression.py
 |   |       |   |   |   |   _transformer.py
-|   |       |   |   |   |   _union_transformer.py
-|   |       |   |   |   |   _utils.py
+|   |       |   |   |   |_union_transformer.py
+|   |       |   |   |   |_utils.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           _checkers.cpython-312.pyc
-|   |       |   |   |           _config.cpython-312.pyc
+|   |       |   |   |_config.cpython-312.pyc
 |   |       |   |   |           _decorators.cpython-312.pyc
-|   |       |   |   |           _exceptions.cpython-312.pyc
+|   |       |   |   |_exceptions.cpython-312.pyc
 |   |       |   |   |           _functions.cpython-312.pyc
-|   |       |   |   |           _importhook.cpython-312.pyc
+|   |       |   |   |_importhook.cpython-312.pyc
 |   |       |   |   |           _memo.cpython-312.pyc
-|   |       |   |   |           _pytest_plugin.cpython-312.pyc
-|   |       |   |   |           _suppression.cpython-312.pyc
+|   |       |   |   |_pytest_plugin.cpython-312.pyc
+|   |       |   |   |_suppression.cpython-312.pyc
 |   |       |   |   |           _transformer.cpython-312.pyc
-|   |       |   |   |           _union_transformer.cpython-312.pyc
-|   |       |   |   |           _utils.cpython-312.pyc
+|   |       |   |   |_union_transformer.cpython-312.pyc
+|   |       |   |   |_utils.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---typeguard-4.3.0.dist-info
 |   |       |   |   |       entry_points.txt
 |   |       |   |   |       INSTALLER
@@ -2607,43 +2608,43 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---typing_extensions-4.12.2.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
 |   |       |   |   |       METADATA
 |   |       |   |   |       RECORD
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---wheel
 |   |       |   |   |   |   bdist_wheel.py
 |   |       |   |   |   |   macosx_libfile.py
 |   |       |   |   |   |   metadata.py
 |   |       |   |   |   |   util.py
 |   |       |   |   |   |   wheelfile.py
-|   |       |   |   |   |   _bdist_wheel.py
-|   |       |   |   |   |   _setuptools_logging.py
+|   |       |   |   |   |_bdist_wheel.py
+|   |       |   |   |   |_setuptools_logging.py
 |   |       |   |   |   |   __init__.py
 |   |       |   |   |   |   __main__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---cli
 |   |       |   |   |   |   |   convert.py
 |   |       |   |   |   |   |   pack.py
 |   |       |   |   |   |   |   tags.py
 |   |       |   |   |   |   |   unpack.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           convert.cpython-312.pyc
 |   |       |   |   |   |           pack.cpython-312.pyc
 |   |       |   |   |   |           tags.cpython-312.pyc
 |   |       |   |   |   |           unpack.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   +---vendored
 |   |       |   |   |   |   |   vendor.txt
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   +---packaging
 |   |       |   |   |   |   |   |   LICENSE
 |   |       |   |   |   |   |   |   LICENSE.APACHE
@@ -2654,14 +2655,14 @@ F:.
 |   |       |   |   |   |   |   |   tags.py
 |   |       |   |   |   |   |   |   utils.py
 |   |       |   |   |   |   |   |   version.py
-|   |       |   |   |   |   |   |   _elffile.py
+|   |       |   |   |   |   |   |_elffile.py
 |   |       |   |   |   |   |   |   _manylinux.py
-|   |       |   |   |   |   |   |   _musllinux.py
+|   |       |   |   |   |   |   |_musllinux.py
 |   |       |   |   |   |   |   |   _parser.py
-|   |       |   |   |   |   |   |   _structures.py
+|   |       |   |   |   |   |   |_structures.py
 |   |       |   |   |   |   |   |   _tokenizer.py
 |   |       |   |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   |   
+|   |       |   |   |   |   |   |
 |   |       |   |   |   |   |   \---__pycache__
 |   |       |   |   |   |   |           markers.cpython-312.pyc
 |   |       |   |   |   |   |           requirements.cpython-312.pyc
@@ -2669,28 +2670,28 @@ F:.
 |   |       |   |   |   |   |           tags.cpython-312.pyc
 |   |       |   |   |   |   |           utils.cpython-312.pyc
 |   |       |   |   |   |   |           version.cpython-312.pyc
-|   |       |   |   |   |   |           _elffile.cpython-312.pyc
+|   |       |   |   |   |   |_elffile.cpython-312.pyc
 |   |       |   |   |   |   |           _manylinux.cpython-312.pyc
-|   |       |   |   |   |   |           _musllinux.cpython-312.pyc
+|   |       |   |   |   |   |_musllinux.cpython-312.pyc
 |   |       |   |   |   |   |           _parser.cpython-312.pyc
-|   |       |   |   |   |   |           _structures.cpython-312.pyc
+|   |       |   |   |   |   |_structures.cpython-312.pyc
 |   |       |   |   |   |   |           _tokenizer.cpython-312.pyc
 |   |       |   |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |   |           
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           bdist_wheel.cpython-312.pyc
 |   |       |   |   |           macosx_libfile.cpython-312.pyc
 |   |       |   |   |           metadata.cpython-312.pyc
 |   |       |   |   |           util.cpython-312.pyc
 |   |       |   |   |           wheelfile.cpython-312.pyc
-|   |       |   |   |           _bdist_wheel.cpython-312.pyc
-|   |       |   |   |           _setuptools_logging.cpython-312.pyc
+|   |       |   |   |_bdist_wheel.cpython-312.pyc
+|   |       |   |   |_setuptools_logging.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
 |   |       |   |   |           __main__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---wheel-0.45.1.dist-info
 |   |       |   |   |       entry_points.txt
 |   |       |   |   |       INSTALLER
@@ -2699,23 +2700,23 @@ F:.
 |   |       |   |   |       RECORD
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   +---zipp
 |   |       |   |   |   |   glob.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   +---compat
 |   |       |   |   |   |   |   py310.py
 |   |       |   |   |   |   |   __init__.py
-|   |       |   |   |   |   |   
+|   |       |   |   |   |   |
 |   |       |   |   |   |   \---__pycache__
 |   |       |   |   |   |           py310.cpython-312.pyc
 |   |       |   |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |   |           
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           glob.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   +---zipp-3.19.2.dist-info
 |   |       |   |   |       INSTALLER
 |   |       |   |   |       LICENSE
@@ -2724,10 +2725,10 @@ F:.
 |   |       |   |   |       REQUESTED
 |   |       |   |   |       top_level.txt
 |   |       |   |   |       WHEEL
-|   |       |   |   |       
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           typing_extensions.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           archive_util.cpython-312.pyc
 |   |       |           build_meta.cpython-312.pyc
@@ -2751,18 +2752,18 @@ F:.
 |   |       |           windows_support.cpython-312.pyc
 |   |       |           _core_metadata.cpython-312.pyc
 |   |       |           _discovery.cpython-312.pyc
-|   |       |           _entry_points.cpython-312.pyc
-|   |       |           _imp.cpython-312.pyc
+|   |       |_entry_points.cpython-312.pyc
+|   |       |_imp.cpython-312.pyc
 |   |       |           _importlib.cpython-312.pyc
-|   |       |           _itertools.cpython-312.pyc
+|   |       |_itertools.cpython-312.pyc
 |   |       |           _normalization.cpython-312.pyc
-|   |       |           _path.cpython-312.pyc
+|   |       |_path.cpython-312.pyc
 |   |       |           _reqs.cpython-312.pyc
-|   |       |           _scripts.cpython-312.pyc
+|   |       |_scripts.cpython-312.pyc
 |   |       |           _shutil.cpython-312.pyc
-|   |       |           _static.cpython-312.pyc
+|   |       |_static.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---setuptools-80.9.0.dist-info
 |   |       |   |   entry_points.txt
 |   |       |   |   INSTALLER
@@ -2771,40 +2772,40 @@ F:.
 |   |       |   |   REQUESTED
 |   |       |   |   top_level.txt
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---typing_extensions-4.15.0.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---typing_inspection
 |   |       |   |   introspection.py
 |   |       |   |   py.typed
 |   |       |   |   typing_objects.py
 |   |       |   |   typing_objects.pyi
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           introspection.cpython-312.pyc
 |   |       |           typing_objects.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---typing_inspection-0.4.2.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE
-|   |       |           
+|   |       |
 |   |       +---urllib3
 |   |       |   |   connection.py
 |   |       |   |   connectionpool.py
@@ -2819,12 +2820,12 @@ F:.
 |   |       |   |   _request_methods.py
 |   |       |   |   _version.py
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   +---contrib
 |   |       |   |   |   pyopenssl.py
 |   |       |   |   |   socks.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---emscripten
 |   |       |   |   |   |   connection.py
 |   |       |   |   |   |   emscripten_fetch_worker.js
@@ -2832,29 +2833,29 @@ F:.
 |   |       |   |   |   |   request.py
 |   |       |   |   |   |   response.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           connection.cpython-312.pyc
 |   |       |   |   |           fetch.cpython-312.pyc
 |   |       |   |   |           request.cpython-312.pyc
 |   |       |   |   |           response.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           pyopenssl.cpython-312.pyc
 |   |       |   |           socks.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---http2
 |   |       |   |   |   connection.py
 |   |       |   |   |   probe.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           connection.cpython-312.pyc
 |   |       |   |           probe.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---util
 |   |       |   |   |   connection.py
 |   |       |   |   |   proxy.py
@@ -2869,7 +2870,7 @@ F:.
 |   |       |   |   |   util.py
 |   |       |   |   |   wait.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           connection.cpython-312.pyc
 |   |       |   |           proxy.cpython-312.pyc
@@ -2884,7 +2885,7 @@ F:.
 |   |       |   |           util.cpython-312.pyc
 |   |       |   |           wait.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           connection.cpython-312.pyc
 |   |       |           connectionpool.cpython-312.pyc
@@ -2893,50 +2894,50 @@ F:.
 |   |       |           filepost.cpython-312.pyc
 |   |       |           poolmanager.cpython-312.pyc
 |   |       |           response.cpython-312.pyc
-|   |       |           _base_connection.cpython-312.pyc
-|   |       |           _collections.cpython-312.pyc
+|   |       |_base_connection.cpython-312.pyc
+|   |       |_collections.cpython-312.pyc
 |   |       |           _request_methods.cpython-312.pyc
 |   |       |           _version.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---urllib3-2.5.0.dist-info
 |   |       |   |   INSTALLER
 |   |       |   |   METADATA
 |   |       |   |   RECORD
 |   |       |   |   WHEEL
-|   |       |   |   
+|   |       |   |
 |   |       |   \---licenses
 |   |       |           LICENSE.txt
-|   |       |           
+|   |       |
 |   |       +---wheel
 |   |       |   |   bdist_wheel.py
 |   |       |   |   macosx_libfile.py
 |   |       |   |   metadata.py
 |   |       |   |   util.py
 |   |       |   |   wheelfile.py
-|   |       |   |   _bdist_wheel.py
-|   |       |   |   _setuptools_logging.py
+|   |       |   |_bdist_wheel.py
+|   |       |   |_setuptools_logging.py
 |   |       |   |   __init__.py
 |   |       |   |   __main__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   +---cli
 |   |       |   |   |   convert.py
 |   |       |   |   |   pack.py
 |   |       |   |   |   tags.py
 |   |       |   |   |   unpack.py
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           convert.cpython-312.pyc
 |   |       |   |           pack.cpython-312.pyc
 |   |       |   |           tags.cpython-312.pyc
 |   |       |   |           unpack.cpython-312.pyc
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   +---vendored
 |   |       |   |   |   vendor.txt
 |   |       |   |   |   __init__.py
-|   |       |   |   |   
+|   |       |   |   |
 |   |       |   |   +---packaging
 |   |       |   |   |   |   LICENSE
 |   |       |   |   |   |   LICENSE.APACHE
@@ -2947,14 +2948,14 @@ F:.
 |   |       |   |   |   |   tags.py
 |   |       |   |   |   |   utils.py
 |   |       |   |   |   |   version.py
-|   |       |   |   |   |   _elffile.py
+|   |       |   |   |   |_elffile.py
 |   |       |   |   |   |   _manylinux.py
-|   |       |   |   |   |   _musllinux.py
+|   |       |   |   |   |_musllinux.py
 |   |       |   |   |   |   _parser.py
-|   |       |   |   |   |   _structures.py
+|   |       |   |   |   |_structures.py
 |   |       |   |   |   |   _tokenizer.py
 |   |       |   |   |   |   __init__.py
-|   |       |   |   |   |   
+|   |       |   |   |   |
 |   |       |   |   |   \---__pycache__
 |   |       |   |   |           markers.cpython-312.pyc
 |   |       |   |   |           requirements.cpython-312.pyc
@@ -2962,28 +2963,28 @@ F:.
 |   |       |   |   |           tags.cpython-312.pyc
 |   |       |   |   |           utils.cpython-312.pyc
 |   |       |   |   |           version.cpython-312.pyc
-|   |       |   |   |           _elffile.cpython-312.pyc
+|   |       |   |   |_elffile.cpython-312.pyc
 |   |       |   |   |           _manylinux.cpython-312.pyc
-|   |       |   |   |           _musllinux.cpython-312.pyc
+|   |       |   |   |_musllinux.cpython-312.pyc
 |   |       |   |   |           _parser.cpython-312.pyc
-|   |       |   |   |           _structures.cpython-312.pyc
+|   |       |   |   |_structures.cpython-312.pyc
 |   |       |   |   |           _tokenizer.cpython-312.pyc
 |   |       |   |   |           __init__.cpython-312.pyc
-|   |       |   |   |           
+|   |       |   |   |
 |   |       |   |   \---__pycache__
 |   |       |   |           __init__.cpython-312.pyc
-|   |       |   |           
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           bdist_wheel.cpython-312.pyc
 |   |       |           macosx_libfile.cpython-312.pyc
 |   |       |           metadata.cpython-312.pyc
 |   |       |           util.cpython-312.pyc
 |   |       |           wheelfile.cpython-312.pyc
-|   |       |           _bdist_wheel.cpython-312.pyc
-|   |       |           _setuptools_logging.cpython-312.pyc
+|   |       |_bdist_wheel.cpython-312.pyc
+|   |       |_setuptools_logging.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
 |   |       |           __main__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---wheel-0.45.1.dist-info
 |   |       |       entry_points.txt
 |   |       |       INSTALLER
@@ -2992,7 +2993,7 @@ F:.
 |   |       |       RECORD
 |   |       |       REQUESTED
 |   |       |       WHEEL
-|   |       |       
+|   |       |
 |   |       +---yaml
 |   |       |   |   composer.py
 |   |       |   |   constructor.py
@@ -3012,7 +3013,7 @@ F:.
 |   |       |   |   tokens.py
 |   |       |   |   _yaml.cp312-win_amd64.pyd
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           composer.cpython-312.pyc
 |   |       |           constructor.cpython-312.pyc
@@ -3031,24 +3032,24 @@ F:.
 |   |       |           serializer.cpython-312.pyc
 |   |       |           tokens.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---_distutils_hack
 |   |       |   |   override.py
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           override.cpython-312.pyc
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       +---_yaml
 |   |       |   |   __init__.py
-|   |       |   |   
+|   |       |   |
 |   |       |   \---__pycache__
 |   |       |           __init__.cpython-312.pyc
-|   |       |           
+|   |       |
 |   |       \---__pycache__
 |   |               typing_extensions.cpython-312.pyc
-|   |               
+|   |
 |   \---Scripts
 |           activate
 |           activate.bat
@@ -3062,27 +3063,27 @@ F:.
 |           python.exe
 |           pythonw.exe
 |           wheel.exe
-|           
+|
 +---01-bootstrap
 |       adopt-devices.py
 |       install-unifi-controller.sh
 |       install-unifi.ps1
 |       install-unifi.sh
 |       vlan-stubs.json
-|       
+|
 +---02-declarative-config
 |       apply.py
 |       config.gateway.json
 |       policy-table.yaml
 |       qos-smartqueue.yaml
 |       vlans.yaml
-|       
+|
 +---03-validation-ops
 |       backup-cron.sh
 |       check-critical-services.sh
 |       phone-reg-test.py
 |       validate-isolation.sh
-|       
+|
 +---docs
 |       adr-001-policy-over-fw.md
 |       architecture-v5.mmd
@@ -3090,48 +3091,47 @@ F:.
 |       guide.md
 |       migration-runbook.md
 |       troubleshooting.md
-|       
+|
 +---rylan_ai_helpdesk
 |   |   osticket-webhook.php
 |   |   __init__.py
-|   |   
+|   |
 |   +---triage_engine
 |   |   |   main.py
 |   |   |   __init__.py
-|   |   |   
+|   |   |
 |   |   \---__pycache__
 |   |           main.cpython-312.pyc
 |   |           __init__.cpython-312.pyc
-|   |           
+|   |
 |   \---__pycache__
 |           __init__.cpython-312.pyc
-|           
+|
 +---scripts
 |       ignite.sh
 |       tag-release.ps1
-|       
+|
 +---shared
 |   |   auth.py
 |   |   inventory.yaml
 |   |   unifi_client.py
-|   |   
+|   |
 |   \---__pycache__
 |           auth.cpython-312.pyc
 |           unifi_client.cpython-312.pyc
-|           
+|
 \---tests
     |   main.py
     |   test_bootstrap.py
     |   test_triage.py
     |   __init__.py
-    |   
+    |
     \---__pycache__
             test_triage.cpython-312-pytest-7.4.4.pyc
             __init__.cpython-312.pyc
-            
-
 
 ## File Count Summary
+
 - Total Files: 57
 - Python Files: 12
 - YAML Files: 6

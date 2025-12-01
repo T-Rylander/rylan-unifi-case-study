@@ -1,19 +1,19 @@
-# ROADMAP – rylan-unifi-case-study
+# ROADMAP ??? rylan-unifi-case-study
 
 **Architecture Decision Records (ADRs) and Version History**
 
-## Current Version: 5.0 (December 2025) 🔒 LOCKED
+## Current Version: 5.0 (December 2025) ???? LOCKED
 
 Production-stable deployment with zero-trust policy table, AI triage engine, and hardware-accelerated routing.
 
 ---
 
-## 📋 Architecture Decision Records (ADRs)
+## ???? Architecture Decision Records (ADRs)
 
-### ADR-001: Policy Table over Firewall Rules ⭐ CRITICAL
+### ADR-001: Policy Table over Firewall Rules ??? CRITICAL
 
-**Date**: 2025-11-15  
-**Status**: ✅ ACCEPTED (v5.0)  
+**Date**: 2025-11-15
+**Status**: ??? ACCEPTED (v5.0)
 **Decider**: hellodeolu-era systems architecture
 
 #### Context
@@ -33,11 +33,11 @@ Previous deployment (v4.x) used 200+ firewall rules with performance degradation
 | Criteria | Firewall Rules | Policy Table |
 |----------|----------------|--------------|
 | Rule count | 200+ (combinatorial explosion) | 14 (explicit allow + implicit deny) |
-| Hardware offload | ❌ Broken (NAT hairpin conflicts) | ✅ Preserved (5 Gbps throughput) |
-| Order dependency | ⚠️ Critical (top-to-bottom) | ✅ None (match-any) |
-| Version control | ❌ UI-only export | ✅ Native JSON (Git-friendly) |
-| Audit trail | ⚠️ Manual screenshots | ✅ `git log` shows exact diffs |
-| Rollback | ❌ Manual restore | ✅ `git revert` + `apply.py` |
+| Hardware offload | ??? Broken (NAT hairpin conflicts) | ??? Preserved (5 Gbps throughput) |
+| Order dependency | ?????? Critical (top-to-bottom) | ??? None (match-any) |
+| Version control | ??? UI-only export | ??? Native JSON (Git-friendly) |
+| Audit trail | ?????? Manual screenshots | ??? `git log` shows exact diffs |
+| Rollback | ??? Manual restore | ??? `git revert` + `apply.py` |
 | Performance | 200 ms latency spike | <0.5 ms (hardware ASIC) |
 
 #### Implementation
@@ -48,13 +48,13 @@ Previous deployment (v4.x) used 200+ firewall rules with performance degradation
 
 #### Consequences
 
-✅ **Positive**:
-- Inter-VLAN latency reduced from 200 ms → 0.4 ms
+??? **Positive**:
+- Inter-VLAN latency reduced from 200 ms ??? 0.4 ms
 - Configuration changes now Git-trackable (full diff history)
 - Hardware offload preserved (confirmed via `mca-dump`)
 - Zero-trust model enforced (explicit allow + implicit deny all)
 
-⚠️ **Negative**:
+?????? **Negative**:
 - Requires UniFi 8.5.93+ (EOL legacy controllers)
 - JSON editing (no UI fallback)
 - Team training required (policy route paradigm)
@@ -75,14 +75,14 @@ jq '.policy_table | length' policy-table-rylan-v5.json
 
 ### ADR-002: AI Auto-Close Threshold (93%)
 
-**Date**: 2025-12-01  
-**Status**: ✅ ACCEPTED (v5.0)
+**Date**: 2025-12-01
+**Status**: ??? ACCEPTED (v5.0)
 
 #### Context
 
-Llama 3.3 70B classification outputs confidence scores 0.0–1.0. Need threshold balancing:
-- **Too low** (e.g., 0.70): False positives → legitimate tickets closed
-- **Too high** (e.g., 0.98): Minimal automation → human workload unchanged
+Llama 3.3 70B classification outputs confidence scores 0.0???1.0. Need threshold balancing:
+- **Too low** (e.g., 0.70): False positives ??? legitimate tickets closed
+- **Too high** (e.g., 0.98): Minimal automation ??? human workload unchanged
 
 #### Decision
 
@@ -94,15 +94,15 @@ Empirical testing over 500 historical tickets:
 
 | Threshold | Auto-Close Rate | False Positive Rate | Human Review Required |
 |-----------|-----------------|---------------------|----------------------|
-| 0.70 | 78% | 12% ❌ | 22% |
-| 0.85 | 64% | 3.2% ⚠️ | 36% |
-| **0.93** | **73%** | **0.8%** ✅ | **27%** |
+| 0.70 | 78% | 12% ??? | 22% |
+| 0.85 | 64% | 3.2% ?????? | 36% |
+| **0.93** | **73%** | **0.8%** ??? | **27%** |
 | 0.98 | 51% | 0.1% | 49% |
 
 At 0.93:
-- 73% of tickets auto-close (45/day → 12/day human review)
+- 73% of tickets auto-close (45/day ??? 12/day human review)
 - 0.8% false positive rate (acceptable with manual override)
-- Confidence ≥0.93 correlates with 96.4% accuracy
+- Confidence ???0.93 correlates with 96.4% accuracy
 
 #### Implementation
 
@@ -118,11 +118,11 @@ else:
 
 #### Consequences
 
-✅ **Positive**:
+??? **Positive**:
 - 27 tickets/day freed from human review (60% reduction)
 - Average resolution time: 2.3s (vs 4.2 hours human)
 
-⚠️ **Trade-offs**:
+?????? **Trade-offs**:
 - 0.8% false positive risk (mitigated by reopen mechanism)
 - Requires monthly recalibration (model drift)
 
@@ -130,8 +130,8 @@ else:
 
 ### ADR-003: Presidio PII Redaction
 
-**Date**: 2025-11-20  
-**Status**: ✅ ACCEPTED (v5.0)
+**Date**: 2025-11-20
+**Status**: ??? ACCEPTED (v5.0)
 
 #### Context
 
@@ -145,14 +145,14 @@ osTicket data contains PII (SSN, credit cards, phone numbers). Ollama has no bui
 
 | Solution | Pros | Cons |
 |----------|------|------|
-| No filtering | Simple | ❌ PII leakage to Ollama logs |
-| Regex scrubbing | Fast | ❌ False negatives (formats vary) |
-| **Presidio** | ✅ 98% recall, entity recognition | Slight latency (+150 ms) |
+| No filtering | Simple | ??? PII leakage to Ollama logs |
+| Regex scrubbing | Fast | ??? False negatives (formats vary) |
+| **Presidio** | ??? 98% recall, entity recognition | Slight latency (+150 ms) |
 
 Presidio redaction examples:
-- `4532-1234-5678-9010` → `REDACTED_CC`
-- `555-123-4567` → `REDACTED_PHONE`
-- `john@example.com` → `REDACTED_EMAIL`
+- `4532-1234-5678-9010` ??? `REDACTED_CC`
+- `555-123-4567` ??? `REDACTED_PHONE`
+- `john@example.com` ??? `REDACTED_EMAIL`
 
 #### Implementation
 
@@ -169,15 +169,15 @@ redacted = anonymizer.anonymize(text=ticket_body, analyzer_results=results)
 
 #### Consequences
 
-✅ **Compliance**: No PII in Ollama model cache  
-⚠️ **Latency**: +150 ms per ticket (acceptable)
+??? **Compliance**: No PII in Ollama model cache
+?????? **Latency**: +150 ms per ticket (acceptable)
 
 ---
 
 ### ADR-004: VoIP DSCP Marking (EF/46)
 
-**Date**: 2025-11-18  
-**Status**: ✅ ACCEPTED (v5.0)
+**Date**: 2025-11-18
+**Status**: ??? ACCEPTED (v5.0)
 
 #### Context
 
@@ -222,13 +222,13 @@ tcpdump -i eth1 -nn 'vlan 40 and udp port 5060' | grep 'tos 0xb8'
 
 ### ADR-005: No Proxmox (Bare Metal Only)
 
-**Date**: 2025-11-10  
-**Status**: ✅ ACCEPTED (v5.0)
+**Date**: 2025-11-10
+**Status**: ??? ACCEPTED (v5.0)
 
 #### Context
 
 Previous architecture used Proxmox for VM orchestration. Introduced:
-- Nested networking complexity (bridge → VLAN → VM)
+- Nested networking complexity (bridge ??? VLAN ??? VM)
 - Performance overhead (~15% CPU tax)
 - Additional failure domain
 
@@ -246,15 +246,15 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 
 #### Consequences
 
-✅ **Performance**: Direct hardware access (no virtualization tax)  
-✅ **Simplicity**: One network layer (no VM bridges)  
-⚠️ **Flexibility**: No live migration (acceptable for static workloads)
+??? **Performance**: Direct hardware access (no virtualization tax)
+??? **Simplicity**: One network layer (no VM bridges)
+?????? **Flexibility**: No live migration (acceptable for static workloads)
 
 ---
 
-## 🗓️ Version History
+## ??????? Version History
 
-### v5.0 (December 2025) – Current 🔒
+### v5.0 (December 2025) ??? Current ????
 
 **Theme**: Zero-Trust Production Hardening
 
@@ -272,12 +272,12 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 
 **Metrics**:
 - Inter-VLAN latency: 0.4 ms
-- Ticket auto-close: 73% (45/day → 12/day human)
+- Ticket auto-close: 73% (45/day ??? 12/day human)
 - Offload throughput: 5 Gbps
 
 ---
 
-### v4.x (Q3 2025) – Deprecated
+### v4.x (Q3 2025) ??? Deprecated
 
 **Theme**: Firewall Rule Approach
 
@@ -286,12 +286,12 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 - Hardware offload broken (200 ms latency)
 - No Git tracking (UI-only config)
 
-**Sunset Date**: 2025-11-30  
+**Sunset Date**: 2025-11-30
 **Migration**: See `docs/v4-to-v5-migration.md`
 
 ---
 
-### v3.x (Q1 2025) – EOL
+### v3.x (Q1 2025) ??? EOL
 
 **Theme**: Proxmox + VM Architecture
 
@@ -304,7 +304,7 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 
 ---
 
-## 🔮 Future Considerations (Not v5.0)
+## ???? Future Considerations (Not v5.0)
 
 ### Under Evaluation
 
@@ -314,26 +314,26 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 
 ### Explicitly Rejected
 
-- ❌ **Kubernetes**: Overkill for 4-node network (complexity >> benefit)
-- ❌ **Cloud LLM APIs** (OpenAI, Anthropic): PII data residency concerns
-- ❌ **Return to firewall rules**: Proven inferior (see ADR-001)
+- ??? **Kubernetes**: Overkill for 4-node network (complexity >> benefit)
+- ??? **Cloud LLM APIs** (OpenAI, Anthropic): PII data residency concerns
+- ??? **Return to firewall rules**: Proven inferior (see ADR-001)
 
 ---
 
-## 📊 Key Metrics (v5.0 Production)
+## ???? Key Metrics (v5.0 Production)
 
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
-| Inter-VLAN latency | <1 ms | 0.4 ms | ✅ |
-| Policy rule count | <15 | 14 | ✅ |
-| AI auto-close rate | >70% | 73% | ✅ |
-| False positive rate | <2% | 0.8% | ✅ |
-| Hardware offload | Enabled | Enabled | ✅ |
-| CI validation time | <2 min | 1m 23s | ✅ |
+| Inter-VLAN latency | <1 ms | 0.4 ms | ??? |
+| Policy rule count | <15 | 14 | ??? |
+| AI auto-close rate | >70% | 73% | ??? |
+| False positive rate | <2% | 0.8% | ??? |
+| Hardware offload | Enabled | Enabled | ??? |
+| CI validation time | <2 min | 1m 23s | ??? |
 
 ---
 
-## 🔐 Change Control
+## ???? Change Control
 
 All v5.0 ADRs are **LOCKED** for production stability. Changes require:
 
@@ -345,5 +345,5 @@ All v5.0 ADRs are **LOCKED** for production stability. Changes require:
 
 ---
 
-**Last Updated**: December 2025  
+**Last Updated**: December 2025
 **Next Review**: March 2026 (quarterly cadence)

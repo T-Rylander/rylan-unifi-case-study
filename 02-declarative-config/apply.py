@@ -7,7 +7,6 @@ v5.0 locked — eternal green edition.
 from __future__ import annotations
 
 import json
-import os
 import sys
 import argparse
 from pathlib import Path
@@ -30,6 +29,7 @@ from shared.unifi_client import UniFiClient
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).parent.parent  # repo root
+
 
 # --------------------------------------------------------------------------- #
 # Pydantic models (match your vlans.yaml structure)
@@ -63,9 +63,9 @@ class VLANState(BaseModel):
     def from_yaml_structure(cls, data: dict) -> "VLANState":
         all_vlans: List[Dict[str, Any]] = []
         for item in data.get("vlans", []):
-            if "vlans" in item:               # nested container (id: 10 with sub-vlans)
+            if "vlans" in item:  # nested container (id: 10 with sub-vlans)
                 all_vlans.extend(item["vlans"])
-            else:                              # direct VLAN (id: 1 Management)
+            else:  # direct VLAN (id: 1 Management)
                 all_vlans.append(item)
         validated = [VLAN(**v) for v in all_vlans]
         return cls(vlans=validated)
@@ -143,11 +143,7 @@ def reconcile(
 
     desired_dict = [v.model_dump() for v in desired.vlans]
 
-    diff = (
-        DeepDiff(current_model, desired_dict, ignore_order=True)
-        if DeepDiff
-        else {}
-    )
+    diff = DeepDiff(current_model, desired_dict, ignore_order=True) if DeepDiff else {}
 
     id_map = {n.get("vlan"): n for n in networks if n.get("vlan") is not None}
     to_create = []
@@ -174,7 +170,7 @@ def reconcile(
     logger.info(f"  Update: {[v.id for v in to_update] or '[]'}")
     if diff:
         logger.info("  Diff summary:")
-        logger.info(json.dumps(diff.to_dict(), indent=2))
+        logger.info(json.dumps(dict(diff), indent=2))
     else:
         logger.info("  No structural changes")
 
@@ -231,7 +227,7 @@ def apply_policy_table(client: Optional[UniFiClient], dry_run: bool) -> int:
     diff = DeepDiff(current, desired, ignore_order=True) if DeepDiff else {}
     logger.info("Policy Table Plan:")
     if diff:
-        logger.info(json.dumps(diff.to_dict(), indent=2))
+        logger.info(json.dumps(dict(diff), indent=2))
     else:
         logger.info("  No changes")
 
@@ -240,7 +236,8 @@ def apply_policy_table(client: Optional[UniFiClient], dry_run: bool) -> int:
         return 0
 
     try:
-        client.update_policy_table(desired)
+        # THIS IS THE FIX — send just the list, not the wrapper dict
+        client.update_policy_table(rules)
         logger.info("Policy table applied")
         return 0
     except Exception as e:
@@ -262,11 +259,12 @@ def main() -> None:
 
     client = None
     if not args.dry_run:
-        creds = UniFiClient.from_env_or_inventory()
-        if not creds:
-            logger.error("Authentication failed: Missing UniFi credentials (env or inventory.yaml)")
+        client = UniFiClient.from_env_or_inventory()
+        if not client:
+            logger.error(
+                "Authentication failed: Missing UniFi credentials (env or inventory.yaml)"
+            )
             sys.exit(1)
-        client = creds
 
     # VLAN reconciliation
     vlan_rc = reconcile(desired, client, args.dry_run)

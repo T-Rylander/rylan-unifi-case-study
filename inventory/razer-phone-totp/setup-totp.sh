@@ -2,7 +2,7 @@
 set -euo pipefail
 echo "=== Razer Phone 2 → Eternal TOTP Beacon ==="
 echo "Unlock → Developer Options → USB debugging ON → Enter"
-read
+read -r -p
 adb install -r aegis-authenticator-3.1.apk
 adb shell pm grant com.beemdevelopment.aegis android.permission.CAMERA
 echo "Open Aegis → + → Scan QR for UniFi SSO and Samba AD"

@@ -3,6 +3,7 @@
 Intended to query a SIP endpoint or PBX REST API to confirm phones are
 registered. Adjust implementation to real FreePBX / Asterisk interface.
 """
+
 from __future__ import annotations
 
 import os

@@ -1,10 +1,13 @@
-# rylan-unifi-case-study  
-**Production-Grade UniFi Network + AI-Augmented Helpdesk – v5.0 Stable**  
-*December 2025 – Locked & Running in Production*  
+﻿# rylan-unifi-case-study
+
+**Production-Grade UniFi Network + AI-Augmented Helpdesk – v5.0 Stable**
+*December 2025 – Locked & Running in Production*
 
 [![CI Validation](https://github.com/T-Rylander/rylan-unifi-case-study/workflows/CI%20Validate/badge.svg)](https://github.com/T-Rylander/rylan-unifi-case-study/actions?branch=enlightenment-blueprint)
 
 ## 🏗️ Architecture Overview (v5.0)
+
+<!-- markdownlint-disable MD013 -->
 
 ```mermaid
 graph TB
@@ -12,21 +15,21 @@ graph TB
         WAN[Cable Modem]
     end
     subgraph "Management VLAN 1"
-        USG[USG-3P<br>10.0.1.1<br>UniFi 8.5.93]
+        USG[USG-3P<br />10.0.1.1<br />UniFi 8.5.93]
         Switch[UniFi Switch Lite 8 PoE]
     end
     subgraph "Servers VLAN 10"
-        ADDS[Samba AD/DC + DNS + NFS<br>rylan-dc<br>10.0.10.10]
-        AIWork[AI Workstation<br>10.0.10.60<br>Ollama • Qdrant • Triage]
+        ADDS[Samba AD/DC + DNS + NFS<br />rylan-dc<br />10.0.10.10]
+        AIWork[AI Workstation<br />10.0.10.60<br />Ollama • Qdrant • Triage]
     end
     subgraph "Trusted Devices VLAN 30"
-        RPi[Raspberry Pi 5<br>osTicket + MariaDB<br>10.0.30.40]
+        RPi[Raspberry Pi 5<br />osTicket + MariaDB<br />10.0.30.40]
     end
     subgraph "VoIP VLAN 40"
-        Phone[Grandstream Phones<br>EF/DSCP 46]
+        Phone[Grandstream Phones<br />EF/DSCP 46]
     end
     subgraph "Guest/IoT VLAN 90"
-        Guest[Guests + Smart Devices<br>Internet-Only]
+        Guest[Guests + Smart Devices<br />Internet-Only]
     end
 
     WAN --> USG
@@ -42,11 +45,13 @@ graph TB
     ADDS -.AD/DNS/NFS.-> AIWork
     ADDS -.AD/DNS.-> RPi
 ```
+<!-- markdownlint-enable MD013 -->
 
 Full source: `docs/architecture-v5.mmd`
 
 ## 🎯 Production VLAN Table (December 2025)
 
+<!-- markdownlint-disable MD013 -->
 | VLAN | Name            | Subnet         | Gateway      | Purpose                     | Example IPs / Services                  |
 |------|-----------------|----------------|--------------|-----------------------------|-----------------------------------------|
 | 1    | Management      | 10.0.1.0/27    | 10.0.1.1     | UniFi devices + controller  | USG, APs, Controller (10.0.1.20)        |
@@ -54,27 +59,29 @@ Full source: `docs/architecture-v5.mmd`
 | 30   | trusted-devices | 10.0.30.0/24   | 10.0.30.1    | Workstations + osTicket     | osTicket Pi5 (10.0.30.40)               |
 | 40   | voip            | 10.0.40.0/27   | 10.0.40.1    | VoIP only                   | FreePBX macvlan (10.0.40.30)            |
 | 90   | guest-iot       | 10.0.90.0/25   | 10.0.90.1    | Guest + IoT                 | Guests, printers, bulbs                 |
+<!-- markdownlint-enable MD013 -->
 
 ## 🔒 Zero-Trust Implementation (USG-3P Compatible)
 
-- Network Isolation toggle = ON (drops everything inter-VLAN in hardware)  
+- Network Isolation toggle = ON (drops everything inter-VLAN in hardware)
 - Explicit allow rules in **Policy Table** → **8 rules total** (still <15 → hardware offload preserved)
 
 Current policy table lives in `02-declarative-config/policy-table-rylan-v5.json`
 
 ## rylan-dc – The Eternal Multi-Role Server (No Extra Hardware)
-
+<!-- markdownlint-disable MD013 -->
 | Role                            | IP            | VLAN | Interface / Notes                          |
 |---------------------------------|---------------|------|--------------------------------------------|
 | Samba AD/DC + DNS + NFS + Influx| 10.0.10.10    | 10   | Primary eno1                               |
 | Lightweight PXE / proxyDHCP     | **10.0.30.10**| 30   | Sub-interface eno1 (no VLAN tag needed)    |
 | UniFi Controller (legacy)       | 10.0.1.20     | 1    | Docker macvlan (inform on 8081)            |
 
-→ PXE for laptops/thin-clients on VLAN 30 works with **one extra allow rule** (#8) and zero VLAN changes.
+→ PXE for laptops/thin-clients on VLAN 30 works with **one extra allow rule** (#8) and zero VLAN changes.`n<!-- markdownlint-enable MD013 -->`n
+<!-- markdownlint-enable MD013 -->
 
 ## 📁 Repository Structure
 
-```
+```text
 rylan-unifi-case-study/
 ├── 01-bootstrap/                  # Controller install + device adoption
 ├── 02-declarative-config/         # Git-controlled VLANs, Policy Table, QoS
@@ -138,9 +145,8 @@ python 03-validation-ops/phone-reg-test.py
 | Component              | Status | Notes                                   |
 |------------------------|--------|-----------------------------------------|
 | Zero-Trust Policy Table| ✅     | 8 rules, hardware offload intact        |
-| AI Ticket Triage       | ✅     | 93 %+ confidence auto-close             |
+| AI Ticket Triage       | ✅     | 93%+ confidence auto-close             |
 | PII Redaction          | ✅     | Presidio before Ollama                 |
 | Lightweight PXE (VLAN30)| ✅     | dnsmasq on 10.0.30.10 sub-interface     |
 | Declarative Config     | 🟡     | VLANs automated, Policy/QoS still GUI   |
 | CI/CD                  | ✅     | Rule count + dry-run checks             |
-
