@@ -28,9 +28,8 @@ jobs:
         run: |
           sudo systemctl start docker
           sudo usermod -aG docker $USER
-          # newgrp spawns a subshell so the group change takes effect immediately
           newgrp docker << EOF
-          echo "Docker socket now accessible for $USER"
+          echo "Docker socket now accessible for \$USER"
           docker version
           EOF
 
