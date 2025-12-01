@@ -1,4 +1,4 @@
-# rylan-unifi-case-study — Eternal Green v5.1 🟢
+# rylan-unifi-case-study — Eternal Green v5.1
 
 **One physical server. Zero extra hardware. Full AD, PXE boot, UniFi Controller, zero-trust — forever.**
 
@@ -71,4 +71,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Contact
 Maintainer: T. Rylander
 Project Link: https://github.com/T-Rylander/rylan-unifi-case-study
-ETERNAL GREEN v5.1 — Locked, loaded, and never going back. 🟢
+ETERNAL GREEN v5.1 — Locked, loaded, and never going back.
+
