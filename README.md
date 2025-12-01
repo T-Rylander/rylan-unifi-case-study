@@ -301,3 +301,5 @@ python 03-validation-ops/phone-reg-test.py
 BACKUP_DEST=/var/backups/rylan bash 03-validation-ops/backup-cron.sh
 ```
 
+#   C I   c a c h e   r e f r e s h  
+ 
