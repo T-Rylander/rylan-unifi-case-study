@@ -1,16 +1,16 @@
-# ROADMAP ??? rylan-unifi-case-study
+# ROADMAP — rylan-unifi-case-study
 
 **Architecture Decision Records (ADRs) and Version History**
 
-## Current Version: 5.0 (December 2025) ???? LOCKED
+## Current Version: v5.2.1 (December 2025) — LOCKED
 
 Production-stable deployment with zero-trust policy table, AI triage engine, and hardware-accelerated routing.
 
 ---
 
-## ???? Architecture Decision Records (ADRs)
+## Architecture Decision Records (ADRs)
 
-### ADR-001: Policy Table over Firewall Rules ??? CRITICAL
+### ADR-001: Policy Table over Firewall Rules — CRITICAL
 
 **Date**: 2025-11-15
 **Status**: ??? ACCEPTED (v5.0)
@@ -32,29 +32,29 @@ Previous deployment (v4.x) used 200+ firewall rules with performance degradation
 
 | Criteria | Firewall Rules | Policy Table |
 |----------|----------------|--------------|
-| Rule count | 200+ (combinatorial explosion) | 14 (explicit allow + implicit deny) |
-| Hardware offload | ??? Broken (NAT hairpin conflicts) | ??? Preserved (5 Gbps throughput) |
-| Order dependency | ?????? Critical (top-to-bottom) | ??? None (match-any) |
-| Version control | ??? UI-only export | ??? Native JSON (Git-friendly) |
-| Audit trail | ?????? Manual screenshots | ??? `git log` shows exact diffs |
-| Rollback | ??? Manual restore | ??? `git revert` + `apply.py` |
+| Rule count | 200+ (combinatorial explosion) | 10 (explicit allow + implicit deny) |
+| Hardware offload | Broken (NAT hairpin conflicts) | Preserved (5 Gbps throughput) |
+| Order dependency | Critical (top-to-bottom) | None (match-any) |
+| Version control | UI-only export | Native JSON (Git-friendly) |
+| Audit trail | Manual screenshots | `git log` shows exact diffs |
+| Rollback | Manual restore | `git revert` + `apply.py` |
 | Performance | 200 ms latency spike | <0.5 ms (hardware ASIC) |
 
 #### Implementation
 
-- `02-declarative-config/policy-table-rylan-v5.json`: 14 rules with inline comments
-- `02-declarative-config/apply.py`: Idempotent applicator with <15 rule validation
-- `.github/workflows/ci-validate.yaml`: CI check fails if >14 rules
+- `02-declarative-config/policy-table.yaml`: 10 rules (Phase 2 locked)
+- `02-declarative-config/apply.py`: Idempotent applicator with ≤15 rule validation
+- `.github/workflows/ci-validate.yaml`: CI enforces exactly 10 rules
 
 #### Consequences
 
-??? **Positive**:
+Positive:
 - Inter-VLAN latency reduced from 200 ms ??? 0.4 ms
 - Configuration changes now Git-trackable (full diff history)
 - Hardware offload preserved (confirmed via `mca-dump`)
 - Zero-trust model enforced (explicit allow + implicit deny all)
 
-?????? **Negative**:
+Negative:
 - Requires UniFi 8.5.93+ (EOL legacy controllers)
 - JSON editing (no UI fallback)
 - Team training required (policy route paradigm)
@@ -80,7 +80,7 @@ jq '.policy_table | length' policy-table-rylan-v5.json
 
 #### Context
 
-Llama 3.3 70B classification outputs confidence scores 0.0???1.0. Need threshold balancing:
+Llama 3.3 70B classification outputs confidence scores 0.0–1.0. Need threshold balancing:
 - **Too low** (e.g., 0.70): False positives ??? legitimate tickets closed
 - **Too high** (e.g., 0.98): Minimal automation ??? human workload unchanged
 
@@ -95,7 +95,7 @@ Empirical testing over 500 historical tickets:
 | Threshold | Auto-Close Rate | False Positive Rate | Human Review Required |
 |-----------|-----------------|---------------------|----------------------|
 | 0.70 | 78% | 12% ??? | 22% |
-| 0.85 | 64% | 3.2% ?????? | 36% |
+| 0.85 | 64% | 3.2% | 36% |
 | **0.93** | **73%** | **0.8%** ??? | **27%** |
 | 0.98 | 51% | 0.1% | 49% |
 
@@ -169,8 +169,8 @@ redacted = anonymizer.anonymize(text=ticket_body, analyzer_results=results)
 
 #### Consequences
 
-??? **Compliance**: No PII in Ollama model cache
-?????? **Latency**: +150 ms per ticket (acceptable)
+Compliance: No PII in Ollama model cache
+Latency: +150 ms per ticket (acceptable)
 
 ---
 
@@ -252,14 +252,38 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 
 ---
 
-## ??????? Version History
+## Version History
 
-### v5.0 (December 2025) ??? Current ????
+### v5.2.1 (December 2025) — Current
 
-**Theme**: Zero-Trust Production Hardening
+Theme: Phase 2 — Security Hardening (FreeRADIUS + PEAP-MSCHAPv2 + Self-Signed CA)
+
+Changes:
+- FreeRADIUS config (PEAP-MSCHAPv2 + LDAP backend) under `01-bootstrap/freeradius`
+- UniFi RADIUS profile at `unifi/radius-profile.json`
+- Rogue DHCP webhook (FastAPI + slowapi rate limit) at `03-ai-helpdesk/webhooks/unifi-rogue-handler.py`
+- CRLDistributionPoints finalized in internal CA script `01-bootstrap/certbot-cron/generate-internal-ca.sh`
+- ADRs added: `004-peap-mschapv2-over-eap-tls.md`, `005-self-signed-ca-for-internal.md`
+- CI hardened: yamllint pre-check + stable FreeRADIUS validation (`freeradius/freeradius-server:3-alpine`)
+
+Infrastructure:
+- USG-3P: UniFi 8.5.93 (offload preserved)
+- VLANs: 1 (mgmt), 10 (servers), 30 (trusted), 40 (VoIP), 90 (guest/IoT)
+
+Validation:
+- Policy table: exactly 10 rules (printer + RADIUS)
+- CI: green; “Phase 2 locked, USG-3P offload safe”
+
+Tag: `v5.2.1`
+
+---
+
+### v5.0 (November 2025) — Previous
+
+Theme: Zero-Trust Production Hardening
 
 **Changes**:
-- Policy Table v5 (14 rules, <15 enforced by CI)
+- Policy Table v5 (initial rollout)
 - AI triage engine with Llama 3.3 70B (93% threshold)
 - Presidio PII redaction
 - Full CI/CD pipeline (`ci-validate.yaml`)
@@ -304,7 +328,7 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 
 ---
 
-## ???? Future Considerations (Not v5.0)
+## Future Considerations
 
 ### Under Evaluation
 
@@ -314,22 +338,22 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 
 ### Explicitly Rejected
 
-- ??? **Kubernetes**: Overkill for 4-node network (complexity >> benefit)
-- ??? **Cloud LLM APIs** (OpenAI, Anthropic): PII data residency concerns
-- ??? **Return to firewall rules**: Proven inferior (see ADR-001)
+- Kubernetes: Overkill for 4-node network (complexity >> benefit)
+- Cloud LLM APIs (OpenAI, Anthropic): PII data residency concerns
+- Return to firewall rules: Proven inferior (see ADR-001)
 
 ---
 
-## ???? Key Metrics (v5.0 Production)
+## Key Metrics (v5 Production)
 
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
-| Inter-VLAN latency | <1 ms | 0.4 ms | ??? |
-| Policy rule count | <15 | 14 | ??? |
-| AI auto-close rate | >70% | 73% | ??? |
-| False positive rate | <2% | 0.8% | ??? |
-| Hardware offload | Enabled | Enabled | ??? |
-| CI validation time | <2 min | 1m 23s | ??? |
+| Inter-VLAN latency | <1 ms | 0.4 ms | OK |
+| Policy rule count | =10 (locked) | 10 | OK |
+| AI auto-close rate | >70% | 73% | OK |
+| False positive rate | <2% | 0.8% | OK |
+| Hardware offload | Enabled | Enabled | OK |
+| CI validation time | <2 min | 1m 23s | OK |
 
 ---
 
@@ -345,5 +369,5 @@ All v5.0 ADRs are **LOCKED** for production stability. Changes require:
 
 ---
 
-**Last Updated**: December 2025
+**Last Updated**: December 2025 (v5.2.1)
 **Next Review**: March 2026 (quarterly cadence)
