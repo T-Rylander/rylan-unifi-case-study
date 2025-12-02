@@ -1,0 +1,3 @@
+server inner-tunnel {
+	copy_request_to_tunnel = yes
+}

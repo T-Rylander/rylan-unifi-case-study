@@ -1,0 +1,14 @@
+eap {
+	default_eap_type = peap
+	ignore_unknown_eap_types = no
+	cisco_accounting_username_bug = no
+
+	peap {
+		default_eap_type = mschapv2
+		copy_request_to_tunnel = yes
+		use_tunneled_reply = yes
+	}
+
+	mschapv2 {
+	}
+}

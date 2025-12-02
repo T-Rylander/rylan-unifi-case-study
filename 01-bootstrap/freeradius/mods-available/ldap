@@ -1,0 +1,17 @@
+ldap {
+	server = "10.0.10.10"
+	identity = "cn=Administrator,cn=Users,dc=rylan,dc=internal"
+	password = "${VAULT_SAMBA_ADMIN}"
+	base_dn = "dc=rylan,dc=internal"
+	filter = "(sAMAccountName=%{Stripped-User-Name:-%{User-Name}})"
+	start_tls = no
+	port = 389
+	edir = no
+	chase_referrals = yes
+	rebind = yes
+	timeout = 10
+	timelimit = 10
+	net_timeout = 1
+	ldap_debug = 0
+	allow_subtree_search = yes
+}
