@@ -35,16 +35,17 @@ jobs:
             echo "❌ FAIL: policy-table.yaml missing (core zero-trust rules required)"
             exit 1
           fi
-          RULE_COUNT=$(python -c "import yaml; data=yaml.safe_load(open('02-declarative-config/policy-table.yaml')); print(len(data['rules']))")
-          if [ "$RULE_COUNT" -ne 8 ]; then
-            echo "❌ FAIL: Policy table has $RULE_COUNT rules (expected exactly 8 for v5.1 eternal green)"
-            exit 1
+          count=$(python -c "import yaml; data=yaml.safe_load(open('02-declarative-config/policy-table.yaml')); print(len(data['rules']))")
+          [ $count -eq 10 ] || { echo "Expected exactly 10 rules after Phase 1, got $count"; exit 1; }
+          [ $count -le 15 ] || { echo "❌ FAIL: Policy table exceeds USG-3P offload limit (max 15 rules)"; exit 1; }
+          echo "✅ Policy table: $count rules (Phase 1, USG-3P offload safe)"
+          # Phase 2 complete – 10 rules locked (printer + RADIUS)
+
+      - name: Validate FreeRADIUS config syntax (if present)
+        run: |
+          if [ -d "01-bootstrap/freeradius" ]; then
+            docker run --rm -v "$PWD/01-bootstrap/freeradius:/etc/freeradius" freeradius/freeradius-server:latest freeradius -XC || exit 1
           fi
-          if [ "$RULE_COUNT" -gt 15 ]; then
-            echo "❌ FAIL: Policy table exceeds USG-3P offload limit (max 15 rules)"
-            exit 1
-          fi
-          echo "✅ Policy table: $RULE_COUNT rules (v5.1 locked, USG-3P offload safe)"
 
       - name: Run Python tests
         run: pytest -v -c /dev/null
