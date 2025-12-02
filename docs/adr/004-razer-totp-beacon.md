@@ -1,4 +1,4 @@
-# ADR 004: Razer Phone 2 → Physical TOTP Beacon (2025)
+# ADR-004: Razer Phone 2 → Physical TOTP Beacon (2025)
 
 ## Status
 Accepted — the only surviving feature.
