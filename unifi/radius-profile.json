@@ -1,0 +1,10 @@
+{
+  "name": "RYLAN-RADIUS",
+  "auth_server": "10.0.10.11",
+  "acct_server": "10.0.10.11",
+  "auth_port": 1812,
+  "acct_port": 1813,
+  "shared_secret": "${VAULT_FREERADIUS_SECRET}",
+  "accounting_enabled": true,
+  "tunnel_type": "none"
+}
