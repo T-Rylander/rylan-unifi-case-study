@@ -1,3 +1,4 @@
+'''---
 smart_queue:
   wan_interface: eth0
   enabled: true

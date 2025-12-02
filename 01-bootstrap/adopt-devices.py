@@ -10,6 +10,7 @@ Usage:
   python adopt-devices.py --site default --dry-run
   python adopt-devices.py --site default
 """
+
 import argparse
 import os
 import sys
@@ -17,19 +18,28 @@ import time
 from typing import List
 import requests
 
-requests.packages.urllib3.disable_warnings()  # self-signed certs
+import urllib3  # type: ignore
+
+urllib3.disable_warnings()  # self-signed certs
 
 SESSION = requests.Session()
+
 
 def fail(msg: str):
     print(f"❌ {msg}")
     sys.exit(1)
 
+
 def login(url: str, username: str, password: str):
-    resp = SESSION.post(f"{url}/api/login", json={"username": username, "password": password}, verify=False)
+    resp = SESSION.post(
+        f"{url}/api/login",
+        json={"username": username, "password": password},
+        verify=False,
+    )
     if resp.status_code != 200:
         fail(f"Login failed ({resp.status_code})")
     print("✅ Authenticated")
+
 
 def list_devices(url: str, site: str) -> List[dict]:
     endpoint = f"{url}/proxy/network/api/s/{site}/stat/device"
@@ -38,13 +48,17 @@ def list_devices(url: str, site: str) -> List[dict]:
         fail(f"Device list failed ({resp.status_code})")
     return resp.json().get("data", [])
 
+
 def adopt(url: str, site: str, mac: str):
     payload = {"cmd": "adopt", "mac": mac}
-    resp = SESSION.post(f"{url}/proxy/network/api/s/{site}/cmd/devmgr", json=payload, verify=False)
+    resp = SESSION.post(
+        f"{url}/proxy/network/api/s/{site}/cmd/devmgr", json=payload, verify=False
+    )
     if resp.status_code == 200:
         print(f"  🚀 Adopt command sent for {mac}")
     else:
         print(f"  ❌ Failed to adopt {mac}: {resp.status_code} {resp.text}")
+
 
 def main():
     parser = argparse.ArgumentParser(description="Adopt all pending UniFi devices")
@@ -70,7 +84,9 @@ def main():
     print(f"Found {len(devices)} devices; {len(pending)} pending adoption")
     for d in devices:
         status = "ADOPTED" if d.get("state") == 1 else "PENDING"
-        print(f"  {status:7} {d.get('model','?'):12} {d.get('mac')} {d.get('ip','-')} {d.get('name','(unnamed)')}")
+        print(
+            f"  {status:7} {d.get('model','?'):12} {d.get('mac')} {d.get('ip','-')} {d.get('name','(unnamed)')}"
+        )
 
     if args.dry_run:
         print("Dry-run complete; no adoption performed.")
@@ -81,6 +97,7 @@ def main():
         time.sleep(2)
 
     print("Pass complete. Re-run with --dry-run to verify final state.")
+
 
 if __name__ == "__main__":
     main()

@@ -1,10 +1,10 @@
-# rylan-unifi-case-study  
-**Production-Grade UniFi Network + AI-Augmented Helpdesk – v5.1 Eternal Multi-Role**  
-*December 2025 – Eternal Green Merged & Locked*  
+# rylan-unifi-case-study
+**Production-Grade UniFi Network + AI-Augmented Helpdesk – v5.1 Eternal Multi-Role**
+*December 2025 – Eternal Green Merged & Locked*
 
 [![CI Validation](https://github.com/T-Rylander/rylan-unifi-case-study/workflows/CI%20Validate/badge.svg)](https://github.com/T-Rylander/rylan-unifi-case-study/actions)
 
-**One physical server. Zero extra hardware. Full AD, PXE boot, UniFi Controller, zero-trust — forever.**  
+**One physical server. Zero extra hardware. Full AD, PXE boot, UniFi Controller, zero-trust — forever.**
 A fully GitOps-driven, production-grade, single-server network stack that runs Samba AD/DC, lightweight PXE, and UniFi Controller on the same box — with zero-trust isolation, USG-3P hardware offload safe, and junior-at-3-AM deployable.
 
 **ETERNAL GREEN v5.1 achieved December 2025** — merged, verified, immortal.
@@ -55,25 +55,25 @@ Full source: `docs/architecture-v5.mmd`
 
 ## About
 
-This repository is the **canonical, version-controlled source of truth** for the entire Rylan Labs internal network.  
-It implements a complete zero-trust L3-isolated network on a single USG-3P + USW-Lite-8-PoE + one physical server (`rylan-dc`) that simultaneously runs:  
-- Samba Active Directory Domain Controller (DNS, Kerberos, LDAP, NFS)  
-- UniFi Network Controller (Docker + macvlan)  
-- Lightweight proxy-DHCP + PXE boot server for trusted laptops (VLAN 30)  
-- Full inter-VLAN isolation with only 8 explicit allow rules (USG-3P offload safe forever)  
+This repository is the **canonical, version-controlled source of truth** for the entire Rylan Labs internal network.
+It implements a complete zero-trust L3-isolated network on a single USG-3P + USW-Lite-8-PoE + one physical server (`rylan-dc`) that simultaneously runs:
+- Samba Active Directory Domain Controller (DNS, Kerberos, LDAP, NFS)
+- UniFi Network Controller (Docker + macvlan)
+- Lightweight proxy-DHCP + PXE boot server for trusted laptops (VLAN 30)
+- Full inter-VLAN isolation with only 8 explicit allow rules (USG-3P offload safe forever)
 
 Everything is declarative, reproducible, and documented to survive firmware upgrades, junior engineers at 3 AM, and the heat death of the universe.
 
 ## 🎯 Key Features & v5.1 What’s New – Eternal rylan-dc (No Extra Hardware)
 
-- **Zero-Trust Network Isolation**: Policy Table v5 with 8 rules (<15 → vs 200+ firewall rules)  
-- **Hardware Offload Preserved**: All inter-VLAN routing hardware-accelerated  
-- **AI Ticket Triage**: Llama 3.3 70B with 93%+ confidence auto-close  
-- **PII Redaction**: Presidio scrubbing before Ollama ingestion  
-- **Declarative Everything**: Git-controlled VLANs, policy rules, QoS  
-- **CI/CD Validation**: Automated rule count checks, dry-run applies  
+- **Zero-Trust Network Isolation**: Policy Table v5 with 8 rules (<15 → vs 200+ firewall rules)
+- **Hardware Offload Preserved**: All inter-VLAN routing hardware-accelerated
+- **AI Ticket Triage**: Llama 3.3 70B with 93%+ confidence auto-close
+- **PII Redaction**: Presidio scrubbing before Ollama ingestion
+- **Declarative Everything**: Git-controlled VLANs, policy rules, QoS
+- **CI/CD Validation**: Automated rule count checks, dry-run applies
 
-**v5.1 Eternal Multi-Role**:  
+**v5.1 Eternal Multi-Role**:
 
 | Role                            | IP            | VLAN | Interface       | Notes                                  |
 |---------------------------------|---------------|------|-----------------|----------------------------------------|
@@ -83,37 +83,37 @@ Everything is declarative, reproducible, and documented to survive firmware upgr
 
 → Laptops on VLAN 30 now PXE boot → auto-join domain. Zero VLAN changes. One extra allow rule (#8). Policy table still **8 rules total** → USG-3P hardware offload preserved forever.
 
-Single-server multi-role — Samba AD, PXE, UniFi Controller on one box  
-Zero DHCP conflicts — dnsmasq runs in proxy-DHCP mode only  
-True zero-trust — Network Isolation + only 8 explicit allow rules  
-USG-3P hardware offload safe forever (≤15 rules)  
-VLAN sub-interface — enp4s0 gives PXE its own IP (10.0.30.10) without extra NICs  
-Full GitOps — every firewall rule, VLAN, and config is code  
-ETERNAL GREEN — CI passes, lint clean, Unicode-free, ready for 2030  
+Single-server multi-role — Samba AD, PXE, UniFi Controller on one box
+Zero DHCP conflicts — dnsmasq runs in proxy-DHCP mode only
+True zero-trust — Network Isolation + only 8 explicit allow rules
+USG-3P hardware offload safe forever (≤15 rules)
+VLAN sub-interface — enp4s0 gives PXE its own IP (10.0.30.10) without extra NICs
+Full GitOps — every firewall rule, VLAN, and config is code
+ETERNAL GREEN — CI passes, lint clean, Unicode-free, ready for 2030
 
 ## 🔒 Security Architecture
 
-### Network Isolation (Policy Table v5)  
-**Why Policy Table over Firewall Rules?**  
-- **8 rules vs 200+**: Dramatic simplification  
-- **Hardware offload preserved**: USG-3P processes at line rate  
-- **Predictable behavior**: Single decision point per flow  
-- **Version controlled**: JSON diff shows exact changes  
-- **Audit friendly**: Complete policy visibility in one file  
+### Network Isolation (Policy Table v5)
+**Why Policy Table over Firewall Rules?**
+- **8 rules vs 200+**: Dramatic simplification
+- **Hardware offload preserved**: USG-3P processes at line rate
+- **Predictable behavior**: Single decision point per flow
+- **Version controlled**: JSON diff shows exact changes
+- **Audit friendly**: Complete policy visibility in one file
 
-**Zero-Trust Status (Locked at 8 Rules)**:  
-- Network Isolation = ON  
-- Policy Table = 8 rules (<15 → full hardware acceleration)  
-- Latest file: `02-declarative-config/policy-table-rylan-v5.json` (JSON source of truth)  
+**Zero-Trust Status (Locked at 8 Rules)**:
+- Network Isolation = ON
+- Policy Table = 8 rules (<15 → full hardware acceleration)
+- Latest file: `02-declarative-config/policy-table-rylan-v5.json` (JSON source of truth)
 
 See `ROADMAP.md` for full ADR.
 
-### PII Protection  
-All ticket data passes through Presidio before Ollama:  
-- Credit cards: REDACTED_CC  
-- SSN: REDACTED_SSN  
-- Emails: REDACTED_EMAIL  
-- Phone numbers: REDACTED_PHONE  
+### PII Protection
+All ticket data passes through Presidio before Ollama:
+- Credit cards: REDACTED_CC
+- SSN: REDACTED_SSN
+- Emails: REDACTED_EMAIL
+- Phone numbers: REDACTED_PHONE
 
 ## 📊 Production VLAN Table (December 2025)
 
@@ -153,7 +153,7 @@ rylan-unifi-case-study/
 
 ## 🚀 Quick Start & Installation
 
-### ⚡ Quick Ignite (Post-Bootstrap)  
+### ⚡ Quick Ignite (Post-Bootstrap)
 **One-command deployment sequence:**
 
 ```bash
@@ -169,35 +169,35 @@ pip install -e .
 bash scripts/ignite.sh
 ```
 
-**Ignite phases:**  
-1. **Bootstrap**: UniFi controller installation (Ubuntu 24.04)  
-2. **Declarative Config**: Dry-run → Apply VLANs/policies/QoS  
-3. **Validation**: Isolation checks + service health  
+**Ignite phases:**
+1. **Bootstrap**: UniFi controller installation (Ubuntu 24.04)
+2. **Declarative Config**: Dry-run → Apply VLANs/policies/QoS
+3. **Validation**: Isolation checks + service health
 
-**Status:**  
-- AI Helpdesk: ✅ 100% (triage engine operational)  
-- Packaging: ✅ 100% (editable install + deps)  
-- IaC: 🟡 Partial (manual policy/QoS GUI apply fallback)  
+**Status:**
+- AI Helpdesk: ✅ 100% (triage engine operational)
+- Packaging: ✅ 100% (editable install + deps)
+- IaC: 🟡 Partial (manual policy/QoS GUI apply fallback)
 
-### Prerequisites  
-**All Platforms:**  
-- Python 3.11+  
-- Git  
-- Network access to UniFi Controller (local admin, no 2FA)  
+### Prerequisites
+**All Platforms:**
+- Python 3.11+
+- Git
+- Network access to UniFi Controller (local admin, no 2FA)
 
-**Windows (PowerShell):**  
+**Windows (PowerShell):**
 ```powershell
 python -m pip install -r requirements.txt
 .\01-bootstrap\install-unifi.ps1 -ControllerIP "10.0.1.1"
-```  
+```
 
-**Linux/macOS (Bash):**  
+**Linux/macOS (Bash):**
 ```bash
 pip3 install -r requirements.txt
 bash 01-bootstrap/install-unifi.sh
 ```
 
-### Deploy Network Configuration  
+### Deploy Network Configuration
 ```bash
 # Dry-run validation (always run first)
 python 02-declarative-config/apply.py --dry-run
@@ -210,20 +210,20 @@ python 02-declarative-config/apply.py --vlans-only
 python 02-declarative-config/apply.py --policy-only
 ```
 
-**Usage Notes:**  
-Ensure switch port to rylan-dc is trunk (Native VLAN 10 + tagged VLAN 30)  
-→ See `docs/runbooks/switch-port-rylan-dc.md`  
+**Usage Notes:**
+Ensure switch port to rylan-dc is trunk (Native VLAN 10 + tagged VLAN 30)
+→ See `docs/runbooks/switch-port-rylan-dc.md`
 
-Deploy netplan + PXE service  
-→ One-click script coming soon™ (or follow runbook)  
+Deploy netplan + PXE service
+→ One-click script coming soon™ (or follow runbook)
 
-Boot any laptop on VLAN 30 → PXE → iPXE menu → domain join works automatically  
-UniFi devices remain adopted (inform now on port 8081)  
+Boot any laptop on VLAN 30 → PXE → iPXE menu → domain join works automatically
+UniFi devices remain adopted (inform now on port 8081)
 
-All configuration lives under `bootstrap/` and `02-declarative-config/`.  
+All configuration lives under `bootstrap/` and `02-declarative-config/`.
 Apply via the provided runbooks — no manual GUI clicks required.
 
-### Enable Eternal PXE on rylan-dc (one-time)  
+### Enable Eternal PXE on rylan-dc (one-time)
 ```bash
 # Sub-interface (enp4s0)
 sudo cp bootstrap/netplan-rylan-dc.yaml /etc/netplan/99-rylan-dc.yaml
@@ -236,7 +236,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now pxe-light.service
 ```
 
-### Deploy AI Triage Engine (10.0.10.60)  
+### Deploy AI Triage Engine (10.0.10.60)
 ```bash
 cd 03-ai-helpdesk/triage-engine
 docker build -t triage:v5.1 .
@@ -250,8 +250,8 @@ docker run -d --name triage -p 8000:8000 \
 curl http://10.0.10.60:8000/health
 ```
 
-**osTicket Webhook → Triage:**  
-- Install `03-ai-helpdesk/osticket-webhook.php` into osTicket plugins directory.  
+**osTicket Webhook → Triage:**
+- Install `03-ai-helpdesk/osticket-webhook.php` into osTicket plugins directory.
 - Configure API URL `http://10.0.10.60:8000/triage` and API key in `shared/inventory.yaml`.
 
 ## 🔧 Validation & Ops
@@ -273,7 +273,7 @@ python 03-validation-ops/phone-reg-test.py
 BACKUP_DEST=/var/backups/rylan bash 03-validation-ops/backup-cron.sh
 ```
 
-## 🚀 Ignite Sequence (Manual Orchestration)  
+## 🚀 Ignite Sequence (Manual Orchestration)
 ```bash
 # 1. Bootstrap (if fresh host)
 bash 01-bootstrap/install-unifi-controller.sh
@@ -297,21 +297,21 @@ BACKUP_DEST=/var/backups/rylan bash 03-validation-ops/backup-cron.sh
 
 ## 📌 Current Real Status vs Roadmap – December 2025
 
-**Implemented (Git-controlled):**  
-- Bootstrap: controller install, device adoption, VLAN stubs  
-- Declarative VLANs: `vlans.yaml` reconciled via new `apply.py`  
-- Zero-Trust Definitions: `policy-table-rylan-v5.json` (manual GUI apply)  
-- QoS Smart Queue Spec: `config.gateway.json` (manual GUI apply)  
-- AI Helpdesk: triage engine + webhook, unit tests  
-- Shared Utilities: `shared/auth.py`, `shared/unifi_client.py`  
-- Ops Tooling: isolation + SIP health + backup scripts  
-- Docs: ADR, migration runbook, DR drill, operations guide, troubleshooting  
+**Implemented (Git-controlled):**
+- Bootstrap: controller install, device adoption, VLAN stubs
+- Declarative VLANs: `vlans.yaml` reconciled via new `apply.py`
+- Zero-Trust Definitions: `policy-table-rylan-v5.json` (manual GUI apply)
+- QoS Smart Queue Spec: `config.gateway.json` (manual GUI apply)
+- AI Helpdesk: triage engine + webhook, unit tests
+- Shared Utilities: `shared/auth.py`, `shared/unifi_client.py`
+- Ops Tooling: isolation + SIP health + backup scripts
+- Docs: ADR, migration runbook, DR drill, operations guide, troubleshooting
 
-**Pending / Manual Steps:**  
-- Policy route API automation (future endpoint research)  
-- Smart Queue DSCP EF application (controller UI)  
-- CI workflow for validation-ops (`validate-isolation.sh`, `phone-reg-test.py`)  
-- Periodic backup verification in pipeline  
+**Pending / Manual Steps:**
+- Policy route API automation (future endpoint research)
+- Smart Queue DSCP EF application (controller UI)
+- CI workflow for validation-ops (`validate-isolation.sh`, `phone-reg-test.py`)
+- Periodic backup verification in pipeline
 
 | Component                  | Status | Notes                                      |
 |----------------------------|--------|--------------------------------------------|
@@ -321,35 +321,35 @@ BACKUP_DEST=/var/backups/rylan bash 03-validation-ops/backup-cron.sh
 | CI/CD                      | 100% green | Rule counter, dry-run, Docker smoke        |
 | IaC Coverage               | 90%    | Policy/QoS still manual GUI (next target)  |
 
-**Production Status**: ✅ Stable (v5.1)  
-**Last Updated**: December 2025  
+**Production Status**: ✅ Stable (v5.1)
+**Last Updated**: December 2025
 
-## 🤝 Contributing  
-This is a production system. Changes require:  
-1. ADR in `ROADMAP.md`  
-2. Passing CI (`ci-validate.yaml`)  
-3. Dry-run validation in staging  
-4. Change window approval  
+## 🤝 Contributing
+This is a production system. Changes require:
+1. ADR in `ROADMAP.md`
+2. Passing CI (`ci-validate.yaml`)
+3. Dry-run validation in staging
+4. Change window approval
 
-Contributions are welcome and will be eternally green!  
-- Fork the repository  
-- Create a feature branch (git checkout -b feature/amazing-thing)  
-- Commit your changes (git commit -m 'feat: amazing thing')  
-- Push and open a Pull Request  
+Contributions are welcome and will be eternally green!
+- Fork the repository
+- Create a feature branch (git checkout -b feature/amazing-thing)
+- Commit your changes (git commit -m 'feat: amazing thing')
+- Push and open a Pull Request
 All YAML will be linted. All rules must stay ≤15. Eternal green is non-negotiable.
 
-## 📄 License  
+## 📄 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 Acknowledgments  
-- **UniFi Policy Table**: Credit to Ubiquiti for superior architecture over stateful firewall rules  
-- **Ollama**: Best-in-class local LLM deployment  
-- **Presidio**: Microsoft's PII detection engine  
+## 🙏 Acknowledgments
+- **UniFi Policy Table**: Credit to Ubiquiti for superior architecture over stateful firewall rules
+- **Ollama**: Best-in-class local LLM deployment
+- **Presidio**: Microsoft's PII detection engine
 
-## Contact  
-Maintainer: T. Rylander  
-Project Link: https://github.com/T-Rylander/rylan-unifi-case-study  
+## Contact
+Maintainer: T. Rylander
+Project Link: https://github.com/T-Rylander/rylan-unifi-case-study
 
-**Maintained by**: hellodeolu-era systems architecture team  
+**Maintained by**: hellodeolu-era systems architecture team
 
 ETERNAL GREEN v5.1 — Locked, loaded, and never going back. 🟢

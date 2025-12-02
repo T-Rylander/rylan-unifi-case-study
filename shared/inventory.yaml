@@ -1,7 +1,4 @@
-hosts:
-  osticket_pi5: 10.0.30.40  # VLAN 30
-  ai_workstation: 10.0.10.60  # VLAN 10
-  samba_dc: 10.0.10.10  # VLAN 10
-  unifi_controller: 10.0.1.20  # VLAN 1
-  freepbx: 10.0.40.30  # VLAN 40
-  influxdb: 10.0.10.50  # VLAN 10
+# Inventory for rylan-unifi-case-study
+unifi_user: "admin"
+unifi_pass: "secret123"
+osticket_key: "your-osticket-api-key-here"

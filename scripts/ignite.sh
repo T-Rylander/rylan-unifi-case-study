@@ -8,7 +8,7 @@ echo "==============================================="
 echo "[1/4] Dry-run reconciliation"
 python "$(dirname "$0")/../02-declarative-config/apply.py" --dry-run
 
-read -p "Apply changes? [y/N] " RESP
+read -r -p "Apply changes? [y/N] " RESP
 if [[ "${RESP:-N}" =~ ^[Yy]$ ]]; then
   echo "[2/4] Applying changes"
   python "$(dirname "$0")/../02-declarative-config/apply.py" --apply

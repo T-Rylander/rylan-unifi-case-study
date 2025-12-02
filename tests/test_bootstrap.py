@@ -2,6 +2,7 @@
 
 Validates presence of critical bootstrap artifacts and basic script invariants.
 """
+
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
