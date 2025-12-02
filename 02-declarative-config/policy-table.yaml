@@ -56,10 +56,11 @@ rules:
     action: "drop"
 
 
-  - description: "trusted-devices → guest-iot (printer access only)"
+
+  - description: "All networks → RADIUS (802.1X auth)"
     source:
-      network: "trusted-devices"
+      type: "any"
     destination:
-      network: "guest-iot"
-      ports: ["9100", "515", "631"]
+      address: "10.0.10.11"
+      ports: ["1812", "1813"]
     action: "accept"
