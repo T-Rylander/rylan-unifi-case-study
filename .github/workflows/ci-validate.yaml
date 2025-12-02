@@ -43,7 +43,7 @@ jobs:
           echo " Policy table: $RULE_COUNT rules (USG-3P offload safe)"
 
       - name: Run Python tests
-        run: pytest -v
+        run: pytest -v -c /dev/null
 
       - name: Validate declarative config (dry-run)
         run: python 02-declarative-config/apply.py --dry-run
