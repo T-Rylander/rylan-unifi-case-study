@@ -49,7 +49,7 @@ jobs:
       - name: Install Python dependencies
         run: |
          pip install --upgrade pip
-         pip install -e .
+         pip install -r  03-ai-helpdesk/triage-engine/requirements.txt
          pip install pyyaml pytest
 
       - name: Validate policy table rule count <=15 (USG-3P offload safe)
