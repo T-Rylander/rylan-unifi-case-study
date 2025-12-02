@@ -21,6 +21,8 @@ try:
 except ImportError:
     DeepDiff = None  # type: ignore
 
+# Import from parent directory (CI runs from 02-declarative-config/)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from shared.unifi_client import UniFiClient
 
 # --------------------------------------------------------------------------- #
