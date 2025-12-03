@@ -1,13 +1,13 @@
 # rylan-unifi-case-study
-**Production-Grade UniFi Network + AI-Augmented Helpdesk – v5.1 Eternal Multi-Role**
-*December 2025 – Eternal Green Merged & Locked*
+**Production-Grade UniFi Network + AI-Augmented Helpdesk – v∞.1.1-resilient**
+*December 2025 – Fortress Reproducibility + 15-Min RTO Guaranteed*
 
 [![CI Validation](https://github.com/T-Rylander/rylan-unifi-case-study/workflows/CI%20Validate/badge.svg)](https://github.com/T-Rylander/rylan-unifi-case-study/actions)
 
 **One physical server. Zero extra hardware. Full AD, PXE boot, UniFi Controller, zero-trust — forever.**
 A fully GitOps-driven, production-grade, single-server network stack that runs Samba AD/DC, lightweight PXE, and UniFi Controller on the same box — with zero-trust isolation, USG-3P hardware offload safe, and junior-at-3-AM deployable.
 
-**ETERNAL GREEN v5.1 achieved December 2025** — merged, verified, immortal.
+**ETERNAL RESILIENCE v∞.1.1 achieved** — fortress resurrection in 15 minutes. One command: `./eternal-resurrect.sh`
 
 ## 🏗️ Architecture Overview (v5.1)
 
