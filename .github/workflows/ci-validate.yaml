@@ -107,3 +107,16 @@ jobs:
           test -f guardian/audit-eternal.py || (echo "guardian glue missing" && exit 1)
           test -f tests/test_triage_engine.py || (echo "triage tests missing" && exit 1)
           echo "ETERNAL FORTRESS: FULLY RESILIENT"
+
+  remote-repro-final:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Remote Repro Smoke Test
+        run: |
+          git clone . /tmp/fortress-test
+          cd /tmp/fortress-test && git checkout release/v∞.1.1-resilient
+          [[ -f guardian/audit-eternal.py ]] || exit 1
+          [[ -f eternal-resurrect.sh ]] || exit 1
+          [[ -f tests/test_triage_engine.py ]] || exit 1
+          cd /tmp && rm -rf fortress-test

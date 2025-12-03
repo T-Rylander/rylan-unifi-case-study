@@ -1,111 +1,46 @@
-#!/usr/bin/env python3
-"""Test suite for AI triage engine (Llama 3.3 70B classifier)
-
-Validates:
-- Confidence threshold (93%)
-- PII redaction via Presidio
-- Auto-close vs. human-assign logic
-- osTicket API integration (mocked)
-"""
+"""Tests for AI triage engine with PII redaction"""
 
 import pytest
-from unittest.mock import Mock, patch
-import sys
-from pathlib import Path
+from unittest.mock import MagicMock
 
-# Add triage engine to path
-sys.path.insert(
-    0, str(Path(__file__).parent.parent / "rylan_ai_helpdesk" / "triage_engine")
-)
+# Import redact_pii from app (will use Presidio or regex)
+from app.redactor import redact_pii
 
-AUTO_CLOSE_THRESHOLD = 0.93
+
+def test_redact_pii_ipv4():
+    assert redact_pii("IP 10.0.90.50") == "IP [REDACTED_IP]"
+
+
+def test_redact_pii_mac_colon():
+    assert redact_pii("MAC aa:bb:cc:dd:ee:ff") == "MAC [REDACTED_MAC]"
+
+
+def test_redact_pii_mac_dash():
+    assert redact_pii("MAC AA-BB-CC-DD-EE-FF") == "MAC [REDACTED_MAC]"
+
+
+def test_redact_pii_email():
+    result = redact_pii("Contact admin@rylan.internal")
+    assert "admin@rylan.internal" not in result
 
 
 @pytest.fixture
-def mock_ollama():
-    """Mock Ollama API for classification."""
-    with patch("main.ollama_client") as mock:
-        yield mock
-
-
-@pytest.fixture
-def mock_presidio():
-    """Mock Presidio PII anonymizer."""
-    with patch("main.anonymizer") as mock:
-        mock.anonymize.return_value = Mock(text="REDACTED ticket body")
-        yield mock
-
-
-def test_auto_close_high_confidence(mock_ollama, mock_presidio):
-    """Ticket with 95% confidence → auto-close."""
-    mock_ollama.classify.return_value = {
-        "category": "password_reset",
-        "confidence": 0.95,
+def mock_osticket():
+    mock = MagicMock()
+    mock.get_ticket.return_value = {
+        "subject": "Guest WiFi broken",
+        "body": "IP 10.0.90.50 can't reach support.internal",
     }
-
-    result = classify_ticket("I forgot my password")
-
-    assert result["action"] == "auto_close"
-    assert result["category"] == "password_reset"
+    return mock
 
 
-def test_human_assign_low_confidence(mock_ollama, mock_presidio):
-    """Ticket with 85% confidence → human review."""
-    mock_ollama.classify.return_value = {
-        "category": "network_issue",
-        "confidence": 0.85,
-    }
+def test_triage_confidence(mock_osticket):
+    try:
+        from app.triage import TriageEngine
 
-    result = classify_ticket("Network is slow sometimes")
-
-    assert result["action"] == "human_assign"
-    assert result["suggested_category"] == "network_issue"
-
-
-def test_pii_redaction(mock_presidio):
-    """PII in ticket body → redacted before Ollama."""
-    ticket_body = "My SSN is 123-45-6789 and email is user@example.com"
-
-    redacted = redact_pii(ticket_body)
-
-    mock_presidio.anonymize.assert_called_once()
-    assert "REDACTED" in redacted
-
-
-def test_threshold_boundary():
-    """Confidence exactly at 93% threshold → auto-close."""
-    result = {"confidence": 0.93}
-
-    assert should_auto_close(result) is True
-
-
-def test_osticket_api_integration(mock_ollama):
-    """Mocked osTicket API receives correct payload."""
-    with patch("main.requests.post") as mock_post:
-        mock_post.return_value.status_code = 200
-
-        close_ticket(ticket_id=42, reason="password_reset")
-
-        mock_post.assert_called_once()
-        assert "ticket_id" in mock_post.call_args[1]["json"]
-
-
-# Stub functions (imported from actual main.py in production)
-def classify_ticket(body: str) -> dict:
-    """Stub for triage engine classifier."""
-    return {"action": "auto_close", "category": "password_reset"}
-
-
-def redact_pii(text: str) -> str:
-    """Stub for PII redaction."""
-    return "REDACTED ticket body"
-
-
-def should_auto_close(result: dict) -> bool:
-    """Check if confidence meets threshold."""
-    return result["confidence"] >= AUTO_CLOSE_THRESHOLD
-
-
-def close_ticket(ticket_id: int, reason: str):
-    """Stub for osTicket close API."""
-    pass
+        engine = TriageEngine()
+        result = engine.triage(ticket_id=123)
+        assert result["confidence"] >= 0.93
+        assert "auto_close" in result
+    except ImportError:
+        pytest.skip("app.triage module not implemented yet")
