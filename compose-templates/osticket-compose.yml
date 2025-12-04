@@ -1,0 +1,90 @@
+version: '3.8'
+
+# osTicket Deployment - Phase 3 Endgame
+# Runs on rylan-pi (separate from Samba AD/DC)
+# Database: MariaDB backend
+# Frontend: osTicket application container
+
+services:
+  # MariaDB Database Backend
+  osticket-db:
+    image: mariadb:11
+    container_name: osticket-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${OSTICKET_MYSQL_PASSWORD:-ChangeMe123!}
+      MYSQL_DATABASE: osticket
+      MYSQL_USER: osticket
+      MYSQL_PASSWORD: ${OSTICKET_MYSQL_PASSWORD:-ChangeMe123!}
+    volumes:
+      - osticket_db_data:/var/lib/mysql
+      - ./mariadb.conf.d:/etc/mysql/conf.d:ro
+    networks:
+      - osticket-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "3306:3306"
+
+  # osTicket Web Application
+  osticket-app:
+    image: osticket/osticket:1.18
+    container_name: osticket-app
+    restart: unless-stopped
+    depends_on:
+      osticket-db:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: osticket-db
+      MYSQL_DATABASE: osticket
+      MYSQL_USER: osticket
+      MYSQL_PASSWORD: ${OSTICKET_MYSQL_PASSWORD:-ChangeMe123!}
+      MYSQL_PORT: 3306
+      # osTicket Configuration
+      OSTICKET_PREFIX: ${OSTICKET_PREFIX:-St}
+      INSTALL_SECRET: ${INSTALL_SECRET:-$(openssl rand -hex 16)}
+      DEFAULT_EMAIL: ${DEFAULT_EMAIL:-admin@rylan.internal}
+      DEFAULT_NAME: ${DEFAULT_NAME:-Eternal Helpdesk}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@rylan.internal}
+      ADMIN_FIRSTNAME: ${ADMIN_FIRSTNAME:-System}
+      ADMIN_LASTNAME: ${ADMIN_LASTNAME:-Administrator}
+    volumes:
+      - osticket_app_data:/data
+      - ./osticket-config.php:/var/www/osticket/include/ost-config.php:ro
+    networks:
+      - osticket-net
+    ports:
+      - "80:80"
+      - "443:443"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Promtail Log Shipper (sends osTicket logs to Loki)
+  osticket-promtail:
+    image: grafana/promtail:latest
+    container_name: osticket-promtail
+    restart: unless-stopped
+    volumes:
+      - /var/log:/var/log
+      - ./promtail-osticket.yaml:/etc/promtail/config.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - osticket-net
+
+volumes:
+  osticket_db_data:
+    driver: local
+  osticket_app_data:
+    driver: local
+
+networks:
+  osticket-net:
+    driver: bridge

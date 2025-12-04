@@ -1,0 +1,59 @@
+# Promtail Configuration - rylan-dc (Samba AD/DC + FreeRADIUS)
+# Forwards logs to Loki from Samba, FreeRADIUS, and system
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions-dc.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # Samba AD/DC logs
+  - job_name: samba
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: samba
+          hostname: rylan-dc
+          __path__: /var/log/samba/*.log
+
+  # FreeRADIUS logs
+  - job_name: freeradius
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: freeradius
+          hostname: rylan-dc
+          __path__: /var/log/freeradius/*.log
+
+  # System logs
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: system
+          hostname: rylan-dc
+          __path__: /var/log/syslog
+
+  # Docker logs (containers on rylan-dc)
+  - job_name: docker
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: docker
+          hostname: rylan-dc
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        target_label: 'container'
+      - source_labels: ['__meta_docker_container_log_stream']
+        target_label: 'stream'

@@ -1,0 +1,68 @@
+# Promtail Configuration — FreePBX Logging
+# Forwards FreePBX/Asterisk logs to Loki
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions-freepbx.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # Asterisk Main Log
+  - job_name: asterisk
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: asterisk
+          hostname: rylan-dc
+          service: freepbx
+          __path__: /var/log/asterisk/full
+
+  # Asterisk Security Log (failed auth attempts)
+  - job_name: asterisk-security
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: asterisk-security
+          hostname: rylan-dc
+          service: freepbx
+          __path__: /var/log/asterisk/security
+
+  # Asterisk Messages Log (errors/warnings)
+  - job_name: asterisk-messages
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: asterisk-messages
+          hostname: rylan-dc
+          service: freepbx
+          __path__: /var/log/asterisk/messages
+
+  # FreePBX Application Logs
+  - job_name: freepbx-app
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: freepbx-app
+          hostname: rylan-dc
+          service: freepbx
+          __path__: /var/log/freepbx/freeepbx.log
+
+  # System Logs
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: system
+          hostname: rylan-dc
+          service: freepbx
+          __path__: /var/log/syslog

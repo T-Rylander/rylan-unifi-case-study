@@ -83,7 +83,7 @@ rules:
     source:
       network: "servers"
     destination:
-      address: "10.0.10.12"
+      address: "10.0.10.11"
       ports: ["53"]
     action: "accept"
     comment: "Pi-hole on separate host (not on AD/DC) for zero DNS conflict. Samba AD forwards non-AD queries upstream."

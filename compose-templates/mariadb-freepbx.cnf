@@ -1,0 +1,31 @@
+# FreePBX MariaDB Configuration
+# Optimized for Asterisk PBX workload
+
+[mysqld]
+# Character set
+character_set_server = utf8mb4
+collation_server = utf8mb4_unicode_ci
+
+# Performance tuning for Asterisk
+max_connections = 100
+max_allowed_packet = 16M
+tmp_table_size = 32M
+max_heap_table_size = 32M
+
+# InnoDB (default storage engine)
+innodb_buffer_pool_size = 256M
+innodb_log_file_size = 100M
+innodb_flush_log_at_trx_commit = 2
+
+# Replication (if used for backup)
+log_bin = mysql-bin
+binlog_format = ROW
+server_id = 1
+
+# Slow query logging (debug)
+slow_query_log = 0
+long_query_time = 2
+
+# Connection pooling
+interactive_timeout = 28800
+wait_timeout = 28800
