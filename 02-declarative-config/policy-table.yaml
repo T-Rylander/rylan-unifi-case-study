@@ -78,3 +78,12 @@ rules:
       address: "10.0.10.11"
       ports: ["1812", "1813"]
     action: "accept"
+
+  - description: "VLAN 10 → Pi-hole Upstream DNS (Phase 3 Endgame Arch)"
+    source:
+      network: "servers"
+    destination:
+      address: "10.0.10.12"
+      ports: ["53"]
+    action: "accept"
+    comment: "Pi-hole on separate host (not on AD/DC) for zero DNS conflict. Samba AD forwards non-AD queries upstream."
