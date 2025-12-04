@@ -4,6 +4,58 @@
 
 set -euo pipefail
 
+# Detect primary ethernet NIC (hardware-agnostic)
+echo "🔍 Detecting primary ethernet NIC..."
+PRIMARY_NIC=$(ip -o link show | awk -F': ' '
+  $2 ~ /^en[op]/ || $2 ~ /^eth/ {
+    if ($2 !~ /vlan|docker|br-|veth/) {
+      print $2
+      exit
+    }
+  }
+')
+
+if [ -z "$PRIMARY_NIC" ]; then
+  echo "❌ ERROR: No ethernet NIC found (expected en*, eth*)"
+  echo "   Available interfaces:"
+  ip -o link show | awk -F': ' '{print "     - " $2}'
+  exit 1
+fi
+
+echo "✅ Primary NIC detected: $PRIMARY_NIC"
+
+# Validate netplan config exists
+if [ ! -f bootstrap/netplan-rylan-dc.yaml ]; then
+  echo "❌ ERROR: bootstrap/netplan-rylan-dc.yaml not found"
+  exit 1
+fi
+
+# Apply netplan configuration
+echo "🌐 Applying netplan configuration..."
+sudo cp bootstrap/netplan-rylan-dc.yaml /etc/netplan/99-rylan-dc.yaml
+sudo chmod 600 /etc/netplan/99-rylan-dc.yaml
+sudo netplan apply --debug
+
+# Verify IP assignment
+echo "⏳ Waiting for network configuration to apply..."
+sleep 2
+
+if ! ip addr show | grep -q "10.0.10.10"; then
+  echo "⚠️  WARNING: Primary IP 10.0.10.10 not assigned"
+  echo "   Attempting netplan apply with debug..."
+  sudo netplan apply --debug
+  exit 1
+fi
+
+if ! ip addr show | grep -q "10.0.30.10"; then
+  echo "⚠️  WARNING: VLAN 30 IP 10.0.30.10 not assigned (PXE may be unavailable)"
+else
+  echo "✅ VLAN 30 IP 10.0.30.10 assigned successfully"
+fi
+
+echo "✅ Netplan configuration applied successfully"
+echo ""
+
 echo "=== Eternal Resurrection Initiated (Consciousness Level 1.4) ==="
 
 # Load hardware modular config
