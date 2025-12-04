@@ -1,0 +1,69 @@
+# Promtail Configuration - rylan-ai (Ollama + GPU + NFS)
+# Forwards logs to Loki from Ollama, ROCm GPU, and system
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions-ai.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # Ollama logs
+  - job_name: ollama
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: ollama
+          hostname: rylan-ai
+          __path__: /var/log/ollama/*.log
+
+  # ROCm GPU logs (AMD RX 6700 XT)
+  - job_name: rocm
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: rocm
+          hostname: rylan-ai
+          __path__: /var/log/rocm/*.log
+
+  # System logs
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: system
+          hostname: rylan-ai
+          __path__: /var/log/syslog
+
+  # Kernel logs (GPU driver)
+  - job_name: kernel
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: kernel
+          hostname: rylan-ai
+          __path__: /var/log/kern.log
+
+  # Docker logs (Loki, Promtail containers)
+  - job_name: docker
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: docker
+          hostname: rylan-ai
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        target_label: 'container'
+      - source_labels: ['__meta_docker_container_log_stream']
+        target_label: 'stream'

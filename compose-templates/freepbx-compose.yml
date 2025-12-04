@@ -1,0 +1,138 @@
+version: '3.8'
+
+# FreePBX 17 Deployment — Phase 3 Endgame (VoIP on VLAN 40 via Docker Macvlan)
+# Runs on rylan-dc with dedicated VLAN 40 interface
+# IP: 10.0.40.30
+# Network: Macvlan bridge (isolated from host)
+
+services:
+  # MariaDB Database Backend for FreePBX
+  freepbx-db:
+    image: mariadb:11
+    container_name: freepbx-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${FREEPBX_MYSQL_PASSWORD:-ChangeMe123!}
+      MYSQL_DATABASE: asterisk
+      MYSQL_USER: asterisk
+      MYSQL_PASSWORD: ${FREEPBX_MYSQL_PASSWORD:-ChangeMe123!}
+    volumes:
+      - freepbx_db_data:/var/lib/mysql
+      - ./mariadb-freepbx.cnf:/etc/mysql/conf.d/freepbx.cnf:ro
+    networks:
+      - freepbx-backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    # Note: MariaDB on backend network (not exposed to VLAN 40)
+    expose:
+      - "3306"
+
+  # FreePBX Application Container (VLAN 40 macvlan)
+  freepbx:
+    image: tiredofit/freepbx:17
+    container_name: freepbx
+    restart: unless-stopped
+    depends_on:
+      freepbx-db:
+        condition: service_healthy
+    environment:
+      # Database Connection
+      DB_HOST: freepbx-db
+      DB_NAME: asterisk
+      DB_USER: asterisk
+      DB_PASSWORD: ${FREEPBX_MYSQL_PASSWORD:-ChangeMe123!}
+      DB_PORT: 3306
+
+      # Asterisk Configuration
+      ASTERISK_DB_DRIVER: MySQL
+      ASTERISK_DB_HOSTNAME: freepbx-db
+      ASTERISK_DB_USER: asterisk
+      ASTERISK_DB_PASSWORD: ${FREEPBX_MYSQL_PASSWORD:-ChangeMe123!}
+      ASTERISK_DB_NAME: asterisk
+
+      # FreePBX Setup
+      FREEPBX_DBENGINE: mysql
+      FREEPBX_DBNAME: asterisk
+      FREEPBX_DBUSER: asterisk
+      FREEPBX_DBPASS: ${FREEPBX_MYSQL_PASSWORD:-ChangeMe123!}
+
+      # RTP Configuration (Audio Streams)
+      RTP_START: 10000
+      RTP_FINISH: 20000
+
+      # Timezone
+      TZ: UTC
+    volumes:
+      - freepbx_app_data:/data
+      - freepbx_var_data:/var
+      - ./freepbx-extensions.conf:/data/etc/asterisk/extensions_custom.conf:ro
+    networks:
+      vlan40:
+        ipv4_address: 10.0.40.30
+      freepbx-backend:
+    ports:
+      # Web UI (HTTP/HTTPS)
+      - "80:80"
+      - "443:443"
+      # SIP (UDP)
+      - "5060:5060/udp"
+      - "5061:5061/udp"
+      # RTP Audio (UDP range)
+      - "10000-20000:10000-20000/udp"
+      # IAX2 (UDP)
+      - "4569:4569/udp"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    cap_add:
+      # Required for Asterisk audio processing
+      - SYS_ADMIN
+      - SYS_RESOURCE
+
+  # Promtail Log Shipper (sends FreePBX logs to Loki)
+  freepbx-promtail:
+    image: grafana/promtail:latest
+    container_name: freepbx-promtail
+    restart: unless-stopped
+    volumes:
+      - /var/log/freepbx:/var/log/freepbx:ro
+      - ./promtail-freepbx.yaml:/etc/promtail/config.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - freepbx-backend
+
+volumes:
+  freepbx_db_data:
+    driver: local
+  freepbx_app_data:
+    driver: local
+  freepbx_var_data:
+    driver: local
+
+networks:
+  # Macvlan network for VLAN 40 (VoIP)
+  # Must be created on host first:
+  #   docker network create -d macvlan \
+  #     --subnet=10.0.40.0/24 \
+  #     --gateway=10.0.40.1 \
+  #     -o parent=enp4s0.40 \
+  #     vlan40
+  vlan40:
+    external: true
+    driver: macvlan
+    driver_opts:
+      parent: enp4s0.40
+    ipam:
+      config:
+        - subnet: 10.0.40.0/24
+          gateway: 10.0.40.1
+
+  # Backend network for FreePBX + MariaDB (no external exposure)
+  freepbx-backend:
+    driver: bridge

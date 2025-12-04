@@ -1,0 +1,123 @@
+version: '3.8'
+
+# Loki Logging Stack - Phase 3 Endgame
+# Centralized log aggregation from all hosts (rylan-dc, rylan-pi, rylan-ai)
+# Runs on rylan-ai with persistent NFS storage
+# Components: Loki (log ingestion), Promtail (log collection), Grafana (visualization)
+
+services:
+  # Loki Log Database
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    restart: unless-stopped
+    environment:
+      # Multi-tenant disabled for eternal fortress
+      LOKI_LOG_LEVEL: info
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yml:/etc/loki/local-config.yaml:ro
+      - loki_data:/loki
+      - ${NFS_BACKUP_PATH:-/srv/nfs/backups}/loki-chunks:/loki/chunks  # NFS-backed for durability
+      - ${NFS_BACKUP_PATH:-/srv/nfs/backups}/loki-index:/loki/index
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3100/loki/api/v1/status/buildinfo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Promtail Agent - rylan-dc (Samba + FreeRADIUS)
+  promtail-dc:
+    image: grafana/promtail:latest
+    container_name: promtail-dc
+    restart: unless-stopped
+    volumes:
+      - /var/log:/var/log:ro
+      - /var/log/samba:/var/log/samba:ro
+      - /etc/freeradius:/etc/freeradius:ro
+      - ./promtail-dc-config.yaml:/etc/promtail/config.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: -config.file=/etc/promtail/config.yml
+    environment:
+      HOSTNAME: rylan-dc
+      LOKI_URL: http://loki:3100
+    networks:
+      - loki-net
+    depends_on:
+      - loki
+
+  # Promtail Agent - rylan-pi (osTicket + MariaDB)
+  promtail-pi:
+    image: grafana/promtail:latest
+    container_name: promtail-pi
+    restart: unless-stopped
+    volumes:
+      - /var/log:/var/log:ro
+      - /var/log/osticket:/var/log/osticket:ro
+      - ./promtail-pi-config.yaml:/etc/promtail/config.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: -config.file=/etc/promtail/config.yml
+    environment:
+      HOSTNAME: rylan-pi
+      LOKI_URL: http://loki:3100
+    networks:
+      - loki-net
+    depends_on:
+      - loki
+
+  # Promtail Agent - rylan-ai (Ollama + GPU)
+  promtail-ai:
+    image: grafana/promtail:latest
+    container_name: promtail-ai
+    restart: unless-stopped
+    volumes:
+      - /var/log:/var/log:ro
+      - /var/log/ollama:/var/log/ollama:ro
+      - /var/log/rocm:/var/log/rocm:ro
+      - ./promtail-ai-config.yaml:/etc/promtail/config.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: -config.file=/etc/promtail/config.yml
+    environment:
+      HOSTNAME: rylan-ai
+      LOKI_URL: http://loki:3100
+    networks:
+      - loki-net
+    depends_on:
+      - loki
+
+  # Grafana Visualization (Optional - connect to existing Grafana or deploy here)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_ADMIN_PASSWORD:-ChangeMe123!}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana-loki-datasource.yaml:/etc/grafana/provisioning/datasources/loki.yaml:ro
+      - ./grafana-dashboards-eternal.yaml:/etc/grafana/provisioning/dashboards/eternal.yaml:ro
+    networks:
+      - loki-net
+    depends_on:
+      - loki
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  loki_data:
+    driver: local
+
+networks:
+  loki-net:
+    driver: bridge

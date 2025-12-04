@@ -1,0 +1,55 @@
+# FreeRADIUS LDAP Group-Based Authorization Policy (Phase 3 Endgame)
+# Validates user membership in Samba AD groups for authorization
+# Include this in /etc/freeradius/sites-enabled/inner-tunnel or default virtual server
+
+authorize {
+	# LDAP user authentication
+	ldap
+
+	# Check group membership (Phase 3 Endgame)
+	if (LDAP-Group =~ /CN=unifi-admins/i) {
+		update reply {
+			Reply-Message := "UniFi administrator access granted"
+			Service-Type := Administrative-User
+		}
+	}
+	elsif (LDAP-Group =~ /CN=network-operators/i) {
+		update reply {
+			Reply-Message := "Network operator access granted"
+			Service-Type := NAS-Prompt-User
+		}
+	}
+	elsif (LDAP-Group =~ /CN=guests/i) {
+		update reply {
+			Reply-Message := "Guest access granted (limited VLAN)"
+			Service-Type := Framed-User
+		}
+		# Guest users get restricted VLAN assignment
+		update reply {
+			Tunnel-Type := VLAN
+			Tunnel-Medium-Type := IEEE-802
+			Tunnel-Private-Group-Id := "50"  # Guest VLAN
+		}
+	}
+	else {
+		# No matching group — deny access
+		update reply {
+			Reply-Message := "Access denied: user not in authorized group"
+		}
+		reject
+	}
+}
+
+authenticate {
+	# LDAP bind (already handled in authorize phase)
+	Auth-Type LDAP {
+		ldap
+	}
+}
+
+post-auth {
+	# Log successful authentication
+	update {
+		&reply:Reply-Message := "Authentication successful via LDAP (group: %{LDAP-Group})"
+	}
+}

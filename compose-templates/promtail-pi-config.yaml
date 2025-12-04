@@ -1,0 +1,59 @@
+# Promtail Configuration - rylan-pi (osTicket + MariaDB)
+# Forwards logs to Loki from osTicket, MariaDB, and system
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions-pi.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  # osTicket application logs
+  - job_name: osticket
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: osticket
+          hostname: rylan-pi
+          __path__: /var/log/osticket/*.log
+
+  # MariaDB logs
+  - job_name: mariadb
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: mariadb
+          hostname: rylan-pi
+          __path__: /var/log/mysql/*.err
+
+  # System logs
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: system
+          hostname: rylan-pi
+          __path__: /var/log/syslog
+
+  # Docker logs (osTicket containers)
+  - job_name: docker
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: docker
+          hostname: rylan-pi
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        target_label: 'container'
+      - source_labels: ['__meta_docker_container_log_stream']
+        target_label: 'stream'
