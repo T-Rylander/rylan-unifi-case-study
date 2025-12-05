@@ -1,7 +1,7 @@
 # Ministry of Whispers — Bauer Hardening (Phase 2)
 
 **Status**: Production-ready  
-**Estimated Deployment Time**: 10-15 minutes  
+**Estimated Deployment Time**: <30 seconds (atomic one-shot)  
 **Depends On**: Phase 1 (Ministry of Secrets) ✓  
 **Rollback**: Restore SSH config and firewall rules from backups
 
@@ -23,8 +23,8 @@ This phase hardens the fortress against unauthorized access and brute-force atta
 # 1. Prerequisites: Phase 1 complete
 sudo systemctl status samba-ad-dc  # Should be active
 
-# 2. Run Phase 2 (Whispers/Hardening)
-sudo bash ./runbooks/ministry-whispers/harden.sh
+# 2. Run Phase 2 (Whispers/Hardening) — Atomic One-Shot
+sudo bash ./runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
 ```
 
 **Expected output:**

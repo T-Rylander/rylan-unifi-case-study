@@ -1,7 +1,7 @@
 # Ministry of Perimeter — Suehring Policy Enforcement (Phase 3)
 
 **Status**: Production-ready  
-**Estimated Deployment Time**: 10-15 minutes  
+**Estimated Deployment Time**: <45 seconds (atomic one-shot)  
 **Depends On**: Phase 1 (Secrets) + Phase 2 (Whispers) ✓  
 **Rollback**: Restore policy table and VLAN configs from backups
 
@@ -24,8 +24,8 @@ This phase seals the network perimeter and ensures no unauthorized traffic flows
 sudo systemctl status samba-ad-dc  # Should be active
 sudo systemctl status nftables     # Should be active
 
-# 2. Run Phase 3 (Perimeter/Policy)
-sudo bash ./runbooks/ministry-perimeter/apply.sh
+# 2. Run Phase 3 (Perimeter/Policy) — Atomic One-Shot
+sudo bash ./runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh
 ```
 
 **Expected output:**

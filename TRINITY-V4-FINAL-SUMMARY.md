@@ -22,33 +22,30 @@
 ```
 Trinity Sequencing (Immutable):
 ├── Phase 1: Ministry of Secrets (Carter)
-│   └── runbooks/ministry-secrets/deploy.sh (343 lines)
+│   └── runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh (2.1 KB, <30s atomic)
 │       • Samba AD/DC provisioning
 │       • LDAP schema + keytab export
 │       • Kerberos client + NFS configuration
 │       • Exit-on-fail: YES
-│       • Validation: 4 checks (Samba, keytabs, service accounts, groups)
-│       • Time: 15-20 min
+│       • Atomic: <30 seconds on Proxmox
 │
 ├── Phase 2: Ministry of Whispers (Bauer)
-│   └── runbooks/ministry-whispers/harden.sh (317 lines)
+│   └── runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh (1.6 KB, <30s atomic)
 │       • SSH key-only authentication (no password, no root)
 │       • nftables drop-default firewall
 │       • fail2ban intrusion prevention (5 failures = 1 hour ban)
 │       • auditd logging + guardian integration
 │       • Exit-on-fail: YES (requires Phase 1 active)
-│       • Validation: 4 checks (SSH, nftables, fail2ban, auditd)
-│       • Time: 10-15 min
+│       • Atomic: <30 seconds on Proxmox
 │
 ├── Phase 3: Ministry of Perimeter (Suehring)
-│   └── runbooks/ministry-perimeter/apply.sh (318 lines)
+│   └── runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh (2.6 KB, <45s atomic)
 │       • Policy table deployment (10 sacred rules)
 │       • VLAN isolation validation (guest → internet only)
 │       • Rogue DHCP detection webhook (→ osTicket AI)
 │       • QoS/DSCP configuration (VoIP priority EF/46)
 │       • Exit-on-fail: YES (requires Phase 1 + 2 active)
-│       • Validation: 4 checks (policy ≤10, rogue-DHCP, VLANs, audit)
-│       • Time: 10-15 min
+│       • Atomic: <45 seconds on Proxmox
 │
 └── Final: validate-eternal.sh
     • Comprehensive system validation
@@ -67,15 +64,15 @@ Rollback: Per-ministry procedure documented
 
 ```
 rylan-unifi-case-study/
-├── runbooks/                    ← NEW: Trinity ministries
+├── runbooks/                    ← Trinity one-shots (atomic, <45s total)
 │   ├── ministry-secrets/        ← Phase 1: Carter (Samba/LDAP)
-│   │   ├── deploy.sh            (343 lines)
+│   │   ├── rylan-carter-eternal-one-shot.sh (2.1 KB, <30s atomic)
 │   │   └── README.md            (145 lines)
 │   ├── ministry-whispers/       ← Phase 2: Bauer (SSH/nftables/fail2ban)
-│   │   ├── harden.sh            (317 lines)
+│   │   ├── rylan-bauer-eternal-one-shot.sh (1.6 KB, <30s atomic)
 │   │   └── README.md            (168 lines)
 │   └── ministry-perimeter/      ← Phase 3: Suehring (Policy/VLAN)
-│       ├── apply.sh             (318 lines)
+│       ├── rylan-suehring-eternal-one-shot.sh (2.6 KB, <45s atomic)
 │       └── README.md            (172 lines)
 ├── scripts/
 │   ├── ignite.sh                ← REFACTORED: v5.0 → v4.0 Trinity Orchestrator

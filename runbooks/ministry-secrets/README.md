@@ -1,7 +1,7 @@
 # Ministry of Secrets — Carter Capstone (Phase 1)
 
 **Status**: Production-ready  
-**Estimated Deployment Time**: 15-20 minutes  
+**Estimated Deployment Time**: <30 seconds (atomic one-shot)  
 **Rollback**: Restore from backup or re-image with clean Ubuntu 24.04
 
 ## Overview
@@ -29,8 +29,8 @@ git pull origin feat/iot-production-ready
 # 3. Load environment
 source .env
 
-# 4. Run Phase 1 (Secrets)
-sudo bash ./runbooks/ministry-secrets/deploy.sh
+# 4. Run Phase 1 (Secrets) — Atomic One-Shot
+sudo bash ./runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
 ```
 
 **Expected output:**
