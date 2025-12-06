@@ -1,0 +1,53 @@
+
+</details>
+
+<details>
+<summary>🚀 CORRECTED PROXMOX IGNITION SEQUENCE — Leo-Validated (Hellodeolu Outcomes)</summary>
+
+```bash
+# Leo-Briefed Flow: Modular + Whitaker-Sim (Attack pre-deploy)
+# Run on rylan-dc (10.0.10.10; Bauer SSH: ed25519 only)
+# RTO Target: 11 min (validated via QEMU sim in CI)
+
+### Phase 0: Pre-Flight (Bauer: Verify; 1 min)
+cd ~/ops/rylan-unifi-case-study  # Or git clone if fresh
+git pull origin feat/iot-production-ready
+pre-commit run --all-files  # 100% green (lint/bandit/nmap smoke)
+bash 03-validation-ops/validate-rylan-dc.sh  # Hardware: i3-9100/64GB/SSD pass
+
+### Phase 1: Proxmox Prep (Manual Gap; Suehring Network; 2 min)
+# No proxmox/ subdir — use scripts/ templates (README canon)
+ls scripts/ | grep proxmox  # Expect: ct-unifi.sh, vm-rylan-dc.yaml?
+# If absent: Add eternal-ct.sh (Leo: "Modular templates needed")
+sudo apt update && sudo apt install -y proxmox-ve  # If bare-metal fresh
+
+### Phase 2: UniFi Bootstrap (Suehring Core; 5-7 min)
+bash 01-bootstrap/install-unifi.sh --dry-run | tee /tmp/unifi-dry.log
+# Inspect: grep "docker|apt|systemctl" 01-bootstrap/install-unifi.sh
+# Production: bash 01-bootstrap/install-unifi.sh --production
+# Whitaker Sim: nmap -p8080 10.0.1.20 (expect open; then adopt)
+
+### Phase 3: Device Adoption (Carter Glue; 2 min)
+python 01-bootstrap/adopt-devices.py --dry-run
+python 01-bootstrap/adopt-devices.py  # SSH set-inform (ubnt creds; Bauer keys)
+# Test: curl http://10.0.1.20:8080 (controller up)
+
+### Phase 4: Declarative Apply (Suehring IaC; 3 min)
+python 02-declarative-config/apply.py --dry-run  # VLANs/policy/QoS
+python 02-declarative-config/apply.py --apply    # Idempotent; UniFi API push
+# Whitaker: bash 03-validation-ops/validate-isolation.sh (leaks=0)
+
+### Phase 5: Master Ignite (Orchestrator; 11 min total)
+bash scripts/ignite.sh --dry-run  # Calls Phases 1-4 + triage
+bash scripts/ignite.sh            # Full sequence; log to /var/log/ignite.log
+# Gap Check: grep "eternal-resurrect" scripts/ignite.sh (If no: Add resurrection hook)
+
+### Phase 6: Post-Ignite Validation (Hellodeolu + Whitaker; 2 min)
+bash 03-validation-ops/validate-isolation.sh     # nmap VLANs
+python 03-validation-ops/phone-reg-test.py       # SIP (VLAN40)
+bash 03-validation-ops/backup-cron.sh --test     # Samba AD (Carter prep)
+# Red-Team: docker run --rm kalilinux/kali nmap -sS 10.0.10.10 (minimal open)
+
+### Phase 7: Carter/Side-Quest (Optional; Identity Glow-Up; 3 min)
+# Device Passport (From side-quest): bash scripts/generate-passport.sh --device rylan-dc
+# Upload: python scripts/upload-passport-to-ldap.py  # LDAP DN: cn=rylan-dc,ou=Devices

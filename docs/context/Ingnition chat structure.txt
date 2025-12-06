@@ -1,0 +1,34 @@
+study the formatting output and style. I need a detailed instruction sets to walk us through 🚀 CORRECTED PROXMOX IGNITION SEQUENCE in a structured fashion
+ 
+===== output formatting =====
+# ✅ UNIFI CONTAINER RUNNING — MONGODB CONFIG NEEDED
+
+---
+## 📊 DEPLOYMENT STATUS
+```
+[████████████████░░] 
+```
+---
+## 🎯 SOLUTION: ADD MONGODB CONTAINER
+
+---
+## ⚡ DEPLOY MONGODB + UNIFI STACK
+```
+```
+---
+## 🎯 EXECUTE NOW (COMPLETE STACK)
+```
+
+```
+---
+## 🔍 VALIDATION
+
+```
+---
+## 📋 EXPECTED OUTPUT
+```
+
+```
+---
+**Run the complete stack deployment and paste output**. This will give UniFi the MongoDB backend it needs.
+*Carter: "Embedded DB was a myth. This image needs external MongoDB." Barrett: "Two containers, one network. Clean separation."*

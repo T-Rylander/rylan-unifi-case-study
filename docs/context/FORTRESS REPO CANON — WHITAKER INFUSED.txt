@@ -1,0 +1,54 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                        LEO: FORTRESS REPO CANON — WHITAKER INFUSED           ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Leo — Consciousness 2.3: Whitaker's red-team lens applied. This infusion closes your context gap. Repo is v1.1.2 gold (feat/iot-production-ready branch): Modular bootstrap, no monolithic ignite.sh (Barrett: Small is beautiful). Eternal-resurrect.sh absent — gap confirmed. Ignition = scripts/ignite.sh (orchestrator proxy). Carter prep: Samba stubs ready. Bauer: Presidio + backups. Suehring: 8-rule table. 
+
+Full structure (from tree scan + README canon):
+├── 01-bootstrap/                  # Modular bootstrap (Suehring focus)
+│   ├── install-unifi.sh           # UniFi controller deploy (Bash; Linux primary)
+│   ├── install-unifi.ps1          # Windows PS counterpart
+│   └── adopt-devices.py           # Device adoption (Python; set-inform)
+├── 02-declarative-config/         # GitOps IaC (Suehring perimeter)
+│   ├── vlans.yaml                 # 5 VLAN defs (/27-/24)
+│   ├── policy-table-rylan-v5.json # 8 rules (offload-safe; WAN-only for VLAN90)
+│   ├── config.gateway.json        # QoS EF (VoIP DSCP 46)
+│   └── apply.py                   # Idempotent applicator (--dry-run safe)
+├── 03-ai-helpdesk/                # Carter/Bauer fusion (Triage + redaction)
+│   └── triage-engine/
+│       ├── main.py                # FastAPI + Ollama (93% auto-close threshold)
+│       ├── Dockerfile             # Air-gapped build
+│       └── requirements.txt       # Presidio, mypy hints (E402 safe)
+├── 03-validation-ops/             # Hellodeolu outcomes (Tests + RTO)
+│   ├── validate-isolation.sh      # nmap VLAN leaks (Whitaker recon)
+│   ├── backup-cron.sh             # Samba AD nightly (RTO glue)
+│   └── phone-reg-test.py          # SIP validation (Grandstream)
+├── shared/                        # Eternal glue
+│   └── inventory.yaml             # IPs/MACs/keys (rylan-dc:10.0.10.10/VLAN10)
+├── scripts/                       # Orchestrators (Barrett small)
+│   └── ignite.sh                  # Master sequence: bootstrap → apply → validate
+├── docs/                          # Stripe docs
+│   └── architecture-v5.mmd        # Mermaid VLAN diagram
+├── .github/workflows/             # CI/CD
+│   └── ci-validate.yaml           # 7 stages: lint, bandit, nmap smoke
+└── README.md                      # Quick-start + T3 mapping
+
+Key Gaps (Whitaker Attack): 
+- No eternal-resurrect.sh (RTO partial: 11 min ignite vs 15 min full)
+- Proxmox/ absent (templates in scripts/?; manual VM/CT)
+- Samba-provision.sh stub (237B; Carter needs expansion)
+- No device-passport.sh (Side-quest: Add for eternal ID)
+
+Deployment Canon (README Quick-Start):
+1. Clone + venv: git clone ...; pip install -e .
+2. Bootstrap: bash 01-bootstrap/install-unifi.sh
+3. Adopt: python 01-bootstrap/adopt-devices.py
+4. Apply: python 02-declarative-config/apply.py --apply
+5. Ignite: bash scripts/ignite.sh (orchestrates 1-4 + validation)
+6. PXE sub-if: netplan + dnsmasq (one-time on rylan-dc)
+7. Triage: docker build/run (VLAN10, 10.0.10.60)
+8. Validate: bash 03-validation-ops/validate-isolation.sh
+
+RTO Flow (Hellodeolu): ignite.sh → apply.py → validate-isolation.sh (11 min measured; Whitaker: Post-RTO nmap).
+
+You're briefed. Attack the ignition: Simulate mid-sequence kill (rollback test). The fortress modularizes. Consciousness rises.
