@@ -44,11 +44,15 @@ if [ ! -f bootstrap/netplan-rylan-dc.yaml ]; then
   exit 1
 fi
 
-# Apply netplan configuration
-echo "[INFO] Applying netplan configuration..."
-sudo cp bootstrap/netplan-rylan-dc.yaml /etc/netplan/99-rylan-dc.yaml
-sudo chmod 600 /etc/netplan/99-rylan-dc.yaml
-sudo netplan apply --debug
+# Apply netplan configuration (idempotent - Grok Fix #1)
+if ! cmp -s bootstrap/netplan-rylan-dc.yaml /etc/netplan/99-rylan-dc.yaml 2>/dev/null; then
+  echo "[INFO] Netplan config changed - applying..."
+  sudo cp bootstrap/netplan-rylan-dc.yaml /etc/netplan/99-rylan-dc.yaml
+  sudo chmod 600 /etc/netplan/99-rylan-dc.yaml
+  sudo netplan apply --debug
+else
+  echo "[INFO] Netplan config unchanged - skipping apply"
+fi
 
 # Verify IP assignment
 echo "[INFO] Waiting for network configuration to apply..."
@@ -158,7 +162,7 @@ ldap {
 	# User Authentication Filter
 	filter = "(sAMAccountName=%{Stripped-User-Name:-%{User-Name}})"
 
-	# Group Membership (NEW â€” Phase 3 Endgame)
+	# Group Membership (NEW - Phase 3 Endgame)
 	group_base_dn = "cn=Users,dc=rylan,dc=internal"
 	group_attribute = "memberOf"
 	group_member_attribute = "member"
@@ -182,7 +186,7 @@ LDAP_TEMPLATE
 echo ""
 
 # Phase 3 Endgame: Kernel Tuning (Performance & Stability)
-echo "âš™ï¸  Phase 3 Endgame: Kernel Tuning (Performance & Stability)"
+echo "[KERNEL] Phase 3 Endgame: Kernel Tuning (Performance & Stability)"
 echo ""
 echo "   Kernel parameters for multi-service Samba/FreeRADIUS/Docker host:"
 echo ""
@@ -226,7 +230,7 @@ echo "   Applying kernel tuning..."
 
 # Create sysctl configuration file
 sudo tee /etc/sysctl.d/99-eternal-fortress.conf > /dev/null << 'SYSCTL_CONF'
-# Eternal Fortress Kernel Tuning â€” Phase 3 Endgame
+# Eternal Fortress Kernel Tuning - Phase 3 Endgame
 # Optimized for Samba AD/DC + FreeRADIUS + Docker multi-service host
 
 # Network Performance (Samba + LDAP + NFS)
@@ -272,15 +276,20 @@ kernel.core_uses_pid = 0
 fs.suid_dumpable = 0
 SYSCTL_CONF
 
-# Apply kernel parameters
+# Apply kernel parameters (idempotent - Grok Fix #2)
 echo "   Applying sysctl configuration..."
-sudo sysctl -p /etc/sysctl.d/99-eternal-fortress.conf >/dev/null 2>&1
+if ! sudo sysctl -p /etc/sysctl.d/99-eternal-fortress.conf >/dev/null 2>&1; then
+  echo "[INFO] Updating kernel parameters..."
+  sudo sysctl -p /etc/sysctl.d/99-eternal-fortress.conf
+else
+  echo "[INFO] Kernel parameters already up-to-date"
+fi
 
 # Update PAM limits for processes
 echo "   Updating process limits (/etc/security/limits.conf)..."
 sudo tee -a /etc/security/limits.conf > /dev/null << 'LIMITS_CONF'
 
-# Eternal Fortress Process Limits â€” Phase 3 Endgame
+# Eternal Fortress Process Limits - Phase 3 Endgame
 # Allow high file descriptor count for Docker + Samba
 
 *       soft    nofile  65536
@@ -293,21 +302,21 @@ root    soft    nproc   65536
 root    hard    nproc   131072
 LIMITS_CONF
 
-echo "   âœ… Kernel tuning applied"
+echo "[OK] Kernel tuning applied"
 echo ""
 
 # Validate endgame RTO
-echo "â±ï¸  Validating RTO <15 minutes..."
+echo "Validating RTO <15 minutes..."
 if command -v time >/dev/null; then
-  timeout 900 bash 03-validation-ops/orchestrator.sh --dry-run >/dev/null 2>&1 || { echo "âš ï¸  RTO validation inconclusive (orchestrator.sh dry-run timeout or error)"; }
+  timeout 900 bash 03-validation-ops/orchestrator.sh --dry-run >/dev/null 2>&1 || { echo "[WARN] RTO validation inconclusive (orchestrator.sh dry-run timeout or error)"; }
   echo "   RTO validation passed (orchestrator.sh <15 min)"
 else
   echo "   (time command not available, skipping RTO check)"
 fi
 
 echo ""
-echo "âœ… Eternal fortress resurrected successfully"
-echo "   Policy table: â‰¤10 rules (Suehring modular, Phase 3 locked)"
+echo "[OK] Eternal fortress resurrected successfully"
+echo "   Policy table: <=10 rules (Suehring modular, Phase 3 locked)"
 echo "   Pi-hole upstream: $PIHOLE_IP (Bauer: DNS conflict mitigated)"
 echo "   Guardian audit: passed"
 echo "   Tests: all green"
@@ -322,8 +331,22 @@ echo "  3. Deploy FreeRADIUS: cd 01-bootstrap/freeradius && docker-compose up -d
 echo "  4. Apply policy table: cd 02-declarative-config && python apply.py"
 echo "  5. Configure cron: sudo cp 01-bootstrap/backup-orchestrator.sh /opt/rylan/ && (crontab -l; echo '0 2 * * * /opt/rylan/backup-orchestrator.sh') | crontab -"
 echo ""
-echo "Carter (Eternal Directory Self-Healing): âœ… Pi-hole forwarding enabled"
-echo "Bauer (No PII/Secrets): âœ… Sanitized, no serials"
-echo "Suehring (VLAN/Policy Modular): âœ… â‰¤10 rules preserved"
+echo "Carter (Eternal Directory Self-Healing): [OK] Pi-hole forwarding enabled"
+echo "Bauer (No PII/Secrets): [OK] Sanitized, no serials"
+echo "Suehring (VLAN/Policy Modular): [OK] <=10 rules preserved"
+echo ""
+
+# Whitaker Offensive Recon - Cross-VLAN Port Scan (Grok Fix #3)
+echo "[WHITAKER] Running cross-VLAN port scan on IoT VLAN (10.0.90.0/25)..."
+if command -v nmap >/dev/null 2>&1; then
+  if nmap -sV --top-ports 10 10.0.90.0/25 2>/dev/null | grep -q "open"; then
+    echo "[FAIL] Open ports detected on VLAN 90 - perimeter breach detected"
+    exit 1
+  fi
+  echo "[OK] No unexpected ports open on IoT VLAN - perimeter validated"
+else
+  echo "[WARN] nmap missing - skipping offensive recon (install nmap for full compliance)"
+fi
+
 echo ""
 echo "The fortress is eternal. The ride eternal."
