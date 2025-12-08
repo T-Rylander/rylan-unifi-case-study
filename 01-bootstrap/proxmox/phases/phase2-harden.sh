@@ -23,6 +23,7 @@ harden_ssh() {
   record_phase_start "security_hardening"
   
   local ssh_config="/etc/ssh/sshd_config"
+  # shellcheck disable=SC2153  # SSH_KEY_SOURCE exported by orchestrator
   local ssh_key_source="${SSH_KEY_SOURCE}"
   
   # Backup SSH config

@@ -23,7 +23,9 @@ configure_network() {
   record_phase_start "network_configuration"
   
   # Parse parameters from environment (set by orchestrator)
+  # shellcheck disable=SC2153  # TARGET_IP exported by orchestrator
   local target_ip="${TARGET_IP}"
+  # shellcheck disable=SC2153  # GATEWAY_IP exported by orchestrator
   local gateway_ip="${GATEWAY_IP}"
   local primary_dns="${PRIMARY_DNS:-10.0.10.10}"
   local fallback_dns="${FALLBACK_DNS:-1.1.1.1}"
