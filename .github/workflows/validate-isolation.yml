@@ -1,0 +1,65 @@
+name: Validate Isolation (small)
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - '03-validation-ops/**'
+  pull_request:
+    paths:
+      - '03-validation-ops/**'
+
+jobs:
+  deps-check:
+    name: Dependency Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show runner info
+        run: |
+          uname -a || true
+          lsb_release -a || true
+
+      - name: Check for Docker, nmap, curl
+        run: |
+          set -eux
+          # docker should be available on ubuntu-latest; fail fast if missing
+          if ! command -v docker >/dev/null 2>&1; then
+            echo "ERROR: docker not found on runner";
+            docker --version || true;
+            exit 1;
+          fi
+          docker --version
+
+          # ensure nmap and curl exist (install if missing)
+          if ! command -v nmap >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y nmap
+          fi
+          nmap --version
+          if ! command -v curl >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y curl
+          fi
+          curl --version
+
+  run-isolation:
+    name: Run isolation validation (with Docker)
+    runs-on: ubuntu-latest
+    needs: deps-check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make validation script executable
+        run: |
+          chmod +x 03-validation-ops/validate-isolation.sh || true
+
+      - name: Run isolation validation
+        env:
+          OSTICKET_KEY: ${{ secrets.OSTICKET_KEY }}
+        run: |
+          set -eux
+          bash 03-validation-ops/validate-isolation.sh
