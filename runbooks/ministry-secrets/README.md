@@ -14,5 +14,5 @@ chmod 400 /root/rylan-unifi-case-study/.secrets/samba-admin-pass
 ## Deploy
 
 ```bash
-sudo bash ./runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh
+sudo bash ./runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
 ```

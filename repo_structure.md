@@ -1,4 +1,4 @@
-﻿# Rylan UniFi Case Study - Repository Structure
+# Rylan UniFi Case Study - Repository Structure
 
 ## Generated: 2025-11-30 19:05:59
 

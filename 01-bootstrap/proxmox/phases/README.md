@@ -162,6 +162,6 @@ phases/
 ## The Fortress Attacks Its Flatnet
 
 Phase 0 is Whitaker-pure: **know your enemy before you build defenses**.  
-The ride is eternal. The recon is sacred.
+The fortress never sleeps. The recon is sacred.
 
 🛡️ **Eternal. Offensive. Rising.** 🔥

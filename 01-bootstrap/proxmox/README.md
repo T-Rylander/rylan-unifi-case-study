@@ -40,7 +40,7 @@ This script adheres to the sacred trinity:
 
 | Framework | Principle | Implementation |
 |-----------|-----------|-----------------|
-| **Barrett** | Unix Zen: Small, verifiable, fail-loud | <500 lines bash, `set -euo pipefail`, atomic functions |
+| **Unix Philosophy** | Unix Zen: Small, verifiable, fail-loud | <500 lines bash, `set -euo pipefail`, atomic functions |
 | **Hellodeolu** | Outcomes: 15-min RTO, junior-deployable | Single command execution, detailed logging, no decisions |
 | **Whitaker** | Offensive: Security-first, pentest-hardened | nmap scans, SSH key-only, no password auth |
 | **Carter** | Identity: AD/DNS-ready domain infrastructure | SSH ed25519 key injection, hostname resolution |

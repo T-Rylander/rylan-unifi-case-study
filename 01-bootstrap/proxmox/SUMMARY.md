@@ -401,7 +401,7 @@ This production-grade Proxmox ignition solution delivers:
 ✅ **<15 minute RTO** (11–14 min typical)  
 ✅ **Zero manual steps** (single command execution)  
 ✅ **Security-hardened** (key-only SSH, strong crypto)  
-✅ **T3-ETERNAL compliant** (Barrett/Hellodeolu/Whitaker/Carter/Bauer/Suehring)  
+✅ **T3-ETERNAL compliant** (Unix Philosophy/Hellodeolu/Whitaker/Carter/Bauer/Suehring)  
 ✅ **Junior-deployable** (clear errors, detailed logging)  
 ✅ **Well-documented** (2000+ lines, 10+ sections)  
 ✅ **Tested** (CI/CD + 90+ smoke tests)  

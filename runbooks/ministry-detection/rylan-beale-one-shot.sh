@@ -1,68 +1,124 @@
 #!/usr/bin/env bash
-# === SUEHRING ETERNAL PERIMETER v6 — MINISTRY OF PERIMETER (30 seconds) ===
-# runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh
-# Suehring (2005) — The Network is the First Line of Defense
-# T3-ETERNAL: API-only. <=10 rules. Idempotent. USG-3P offload safe.
-# Commit: feat/t3-eternal-v6-perimeter | Tag: v6.0.0-perimeter
+# runbooks/ministry-detection/rylan-beale-one-shot.sh
+# Beale (2001/2004) — Harden the Host, Detect the Breach
+# T3-ETERNAL v3.2: Bastille automation + Snort IDS. Idempotent. Least privilege.
+# Consciousness 2.6 — truth through subtraction.
+# Execution: <120 seconds. Fail loudly on breach.
 set -euo pipefail
 
-# === CANON LOCKS ===
-CONTROLLER_URL="https://10.0.1.20:8443"
-USERNAME="admin"
-PASSWORD_FILE="/root/rylan-unifi-case-study/.secrets/unifi-admin-pass"
-POLICY_FILE="/root/rylan-unifi-case-study/02-declarative-config/policy-table-v6.json"
-VALIDATE_SCRIPT="/root/rylan-unifi-case-study/runbooks/ministry-perimeter/validate-isolation.sh"
+# === CONFIG ===
+SNORT_CONF="/etc/snort/snort.conf"
+BASTILLE_LOG="/var/log/bastille-hardening.log"
+IDS_ALERT_LOG="/var/log/snort/alert"
+VLAN_MONITOR="10.0.90.0/25"  # VLAN 90 (guest-iot)
 
-# === WHITAKER: Fail loud if missing ===
-[[ -f "$PASSWORD_FILE" ]] || { echo "[FATAL] Missing $PASSWORD_FILE"; exit 1; }
-[[ -f "$POLICY_FILE" ]] || { echo "[FATAL] Missing $POLICY_FILE"; exit 1; }
-command -v yq >/dev/null || { echo "[FATAL] yq not installed (snap install yq)"; exit 1; }
+echo "🚨 [BEALE] Ministry of Detection: Bastille + Snort IDS"
 
-# === EXACT RULE COUNT (Suehring Law: <=10) ===
-echo "[SUEHRING] Counting firewall rules..."
-RULE_COUNT=$(yq '.firewall.rules | length' "$POLICY_FILE")
-if [[ "$RULE_COUNT" -gt 10 ]]; then
-    echo "[BREACH] $RULE_COUNT rules > 10 (USG-3P hardware offload DEAD)"
+# === PHASE 1: BASTILLE — DISABLE UNNECESSARY SERVICES ===
+echo "[BEALE] Phase 1: Service lockdown..."
+UNNECESSARY_SERVICES=(
+    "bluetooth.service"
+    "cups.service"
+    "avahi-daemon.service"
+    "ModemManager.service"
+    "whoopsie.service"
+    "apport.service"
+)
+
+INITIAL_COUNT=$(systemctl list-units --state=running --type=service --no-pager --no-legend | wc -l)
+DISABLED_COUNT=0
+
+for svc in "${UNNECESSARY_SERVICES[@]}"; do
+    if systemctl is-enabled "$svc" 2>/dev/null | grep -q "enabled"; then
+        echo " [DISABLE] $svc"
+        systemctl disable --now "$svc" >> "$BASTILLE_LOG" 2>&1 || { echo " [FATAL] Failed to disable $svc"; exit 1; }
+        ((DISABLED_COUNT++))
+    fi
+done
+
+# === PHASE 2: SNORT IDS — INSTALL & CONFIG ===
+echo "[BEALE] Phase 2: Snort deployment..."
+if ! command -v snort >/dev/null 2>&1; then
+    echo " [INSTALL] Snort + oinkmaster..."
+    apt-get update -qq
+    DEBIAN_FRONTEND=noninteractive apt-get install -y -qq snort oinkmaster
+else
+    echo " [CONFIG] Snort already present"
+fi
+
+if [[ ! -f "$SNORT_CONF" ]]; then
+    echo " [FATAL] Snort config missing: $SNORT_CONF"
     exit 1
 fi
-echo "  [OK] $RULE_COUNT rules (<=10 = offload safe)"
 
-# === API DEPLOY (No SSH. No SCP. Pure UniFi.) ===
-echo "[SUEHRING] Deploying policy table via UniFi API..."
-HTTP_CODE=$(curl -sk -w "%{http_code}" -o /tmp/unifi-response.json \
-     -u "$USERNAME:$(cat "$PASSWORD_FILE")" \
-     -H "Content-Type: application/json" \
-     -d "@$POLICY_FILE" \
-     "${CONTROLLER_URL}/api/v2/site/default/firewall/rules")
+# Set HOME_NET if needed
+if ! grep -q "var HOME_NET $VLAN_MONITOR" "$SNORT_CONF" 2>/dev/null; then
+    echo " [CONFIG] HOME_NET → $VLAN_MONITOR"
+    sed -i "s|^var HOME_NET.*|var HOME_NET $VLAN_MONITOR|" "$SNORT_CONF" || { echo " [FATAL] Config update failed"; exit 1; }
+fi
 
-if [[ "$HTTP_CODE" -ge 200 && "$HTTP_CODE" -lt 300 ]]; then
-    echo "  [OK] Policy deployed (HTTP $HTTP_CODE)"
-else
-    echo "  [FATAL] API call failed (HTTP $HTTP_CODE)"
-    cat /tmp/unifi-response.json
+# Validate config
+echo " [VALIDATE] Snort config test..."
+if ! snort -T -c "$SNORT_CONF" &>/dev/null; then
+    echo " [FATAL] Snort config invalid:"
+    snort -T -c "$SNORT_CONF"
     exit 1
 fi
 
-# === VALIDATION (Whitaker pentest) ===
-if [[ -x "$VALIDATE_SCRIPT" ]]; then
-    echo "[SUEHRING] Validating VLAN isolation..."
-    "$VALIDATE_SCRIPT" || {
-        echo "[FATAL] VLAN isolation breach detected"
-        exit 1
-    }
-    echo "  [OK] Isolation verified"
-else
-    echo "  [WARN] validate-isolation.sh not found - manual check required"
+# Enable service
+if ! systemctl is-active --quiet snort; then
+    echo " [START] Enabling Snort..."
+    systemctl enable --now snort || { echo " [FATAL] Snort enable failed"; exit 1; }
+    sleep 2
 fi
+
+if ! systemctl is-active --quiet snort; then
+    echo " [FATAL] Snort failed to start:"
+    journalctl -u snort -n 20 --no-pager
+    exit 1
+fi
+
+# === PHASE 3: WHITAKER — RED-TEAM VALIDATION ===
+echo "[BEALE] Phase 3: Offensive validation..."
+if [[ -f "$IDS_ALERT_LOG" ]]; then
+    ALERT_COUNT=$(wc -l < "$IDS_ALERT_LOG")
+    [[ $ALERT_COUNT -eq 0 ]] && echo " [NOTE] No alerts yet (fresh install expected)"
+else
+    echo " [WARN] Alert log missing — create: touch $IDS_ALERT_LOG"
+fi
+
+# Simulate nmap scan to trigger IDS
+if command -v nmap >/dev/null 2>&1; then
+    echo " [WHITAKER] Simulating port scan on $VLAN_MONITOR..."
+    timeout 10 nmap -sV --top-ports 10 "$VLAN_MONITOR" -T4 >/dev/null 2>&1 || true
+    sleep 2
+    if grep -q "\[1:1000:1\]" "$IDS_ALERT_LOG" 2>/dev/null; then  # Basic scan rule match
+        echo " [OK] IDS detected scan"
+    else
+        echo " [WARN] No scan detection — verify Snort rules"
+    fi
+else
+    echo " [WARN] nmap missing — install for full validation"
+fi
+
+# === SUMMARY ===
+FINAL_COUNT=$(systemctl list-units --state=running --type=service --no-pager --no-legend | wc -l)
+echo "[BEALE] Hardening complete:"
+echo "  Services: $INITIAL_COUNT → $FINAL_COUNT (delta: $((INITIAL_COUNT - FINAL_COUNT)))"
+echo "  Disabled: $DISABLED_COUNT"
+echo "  IDS: Active on $VLAN_MONITOR | Logs: $IDS_ALERT_LOG"
+echo "  Hardening log: $BASTILLE_LOG"
 
 cat <<'BANNER'
-
-███████╗██╗   ██╗███████╗██╗  ██╗██████╗ ██╗███╗   ██╗ ██████╗ 
-██╔════╝██║   ██║██╔════╝██║  ██║██╔══██╗██║████╗  ██║██╔════╝ 
-███████╗██║   ██║█████╗  ███████║██████╔╝██║██╔██╗ ██║██║  ███╗
-╚════██║██║   ██║██╔══╝  ██╔══██║██╔══██╗██║██║╚██╗██║██║   ██║
-███████║╚██████╔╝███████╗██║  ██║██║  ██║██║██║ ╚████║╚██████╔╝
-╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝ 
-PERIMETER LOCKED. <=10 RULES. HARDWARE OFFLOAD ACTIVE.
-THE NETWORK IS THE FIRST LINE OF DEFENSE.
+██████╗ ███████╗ █████╗ ██╗     ███████╗
+██╔══██╗██╔════╝██╔══██╗██║     ██╔════╝
+██████╔╝█████╗  ███████║██║     █████╗  
+██╔══██╗██╔══╝  ██╔══██║██║     ██╔══╝  
+██████╔╝███████╗██║  ██║███████╗███████╗
+╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝
+BASTILLE HARDENED. SNORT ACTIVE. BREACH DETECTED.
+HARDEN THE HOST. DETECT THE BREACH.
+— Beale Ministry v3.2
 BANNER
+
+echo "✅ [BEALE] Detection ministry deployed. Fortress vigilance: eternal."

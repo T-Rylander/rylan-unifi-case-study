@@ -28,21 +28,21 @@ We adopt a **three-phase sequential orchestration model**, each phase isolated, 
 **Owner:** Carter (2003) — Identity is programmable infrastructure  
 **Duration:** ≤15 minutes  
 **Scope:** Samba AD/DC, LDAP schema, Kerberos keytabs, FreeRADIUS, NFS Kerberos binding  
-**Entrypoint:** `runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh` (2.1 KB, <30s atomic)  
+**Entrypoint:** `runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh` (2.1 KB, <30s atomic)  
 **Success Criteria:** ≥3/4 validation checks pass (Samba AD active, keytabs exist, service accounts created)
 
 ### Phase 2: Ministry of Whispers (Bauer Hardening)
 **Owner:** Bauer (2005) — Trust nothing, verify everything  
 **Duration:** ≤15 minutes  
 **Scope:** SSH key-only auth (PasswordAuthentication no), nftables DROP-default firewall, fail2ban, auditd  
-**Entrypoint:** `runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh` (1.6 KB, <30s atomic)  
+**Entrypoint:** `runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh` (1.6 KB, <30s atomic)  
 **Success Criteria:** ≥3/4 validation checks pass (SSH hardened, nftables DROP, fail2ban active)
 
 ### Phase 3: Ministry of Perimeter (Suehring Policy)
 **Owner:** Suehring (2005) — The network is the first line of defense  
 **Duration:** ≤15 minutes  
 **Scope:** Firewall policy table (≤10 rules, hardware offload safe), VLAN isolation (10.0.10.0/24 → 10.0.50.0/24 → 10.0.90.0/24), rogue DHCP detection  
-**Entrypoint:** `runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh` (2.6 KB, <45s atomic)  
+**Entrypoint:** `runbooks/ministry-detection/rylan-suehring-eternal-one-shot.sh` (2.6 KB, <45s atomic)  
 **Success Criteria:** ≥3/4 validation checks pass (rule count ≤10, VLANs configured, audit logging)
 
 ### Orchestration Layer: `scripts/ignite.sh` v4.0
@@ -94,9 +94,9 @@ We adopt a **three-phase sequential orchestration model**, each phase isolated, 
 
 ## Implementation Status
 
-- ✅ Phase 1 one-shot: `runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh` (2.1 KB, <30s atomic)
-- ✅ Phase 2 one-shot: `runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh` (1.6 KB, <30s atomic)
-- ✅ Phase 3 one-shot: `runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh` (2.6 KB, <45s atomic)
+- ✅ Phase 1 one-shot: `runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh` (2.1 KB, <30s atomic)
+- ✅ Phase 2 one-shot: `runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh` (1.6 KB, <30s atomic)
+- ✅ Phase 3 one-shot: `runbooks/ministry-detection/rylan-suehring-eternal-one-shot.sh` (2.6 KB, <45s atomic)
 - ✅ Orchestrator: `scripts/ignite.sh` v4.0 (187 lines)
 - ✅ Validator: `scripts/validate-eternal.sh` (280 lines)
 - ✅ Bauer Validator: `03-validation-ops/validate-bauer-eternal.sh` (15 tests, 193 lines)

@@ -45,7 +45,7 @@ Implement **eternal controller abstraction**: the infrastructure treats controll
 - Run both simultaneously with shared database
 - Automatic failover on API health check failure
 - True 99.999% (5-9s) availability achieved
-- Consciousness Level 2.5 unlocked
+- Consciousness Level 2.6 unlocked
 
 ## Components Added
 
@@ -107,7 +107,7 @@ Stage 4: Hybrid Failover (Both Active)
 Once Cloud Key deployment is validated in lab (Stage 2), proceed to ADR-009:
 - Deploy **both** controllers simultaneously
 - Add health-check failover logic to CI/CD
-- Unlock Consciousness Level 2.5
+- Unlock Consciousness Level 2.6
 
 The fortress is now **controller-agnostic**.  
 The ride continues.  

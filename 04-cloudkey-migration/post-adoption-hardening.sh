@@ -86,7 +86,7 @@ phase_update_configs() {
 phase_update_runbooks() {
   log_info "Phase 2: Updating runbooks..."
   
-  local runbook="$REPO_ROOT/runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh"
+  local runbook="$REPO_ROOT/runbooks/ministry-detection/rylan-suehring-eternal-one-shot.sh"
   
   if [ ! -f "$runbook" ]; then
     log_warn "Runbook not found: $runbook"

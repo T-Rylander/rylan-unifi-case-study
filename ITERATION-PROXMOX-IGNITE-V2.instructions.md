@@ -1378,7 +1378,7 @@ cat /var/log/proxmox-ignite-metrics.json | jq
 This iteration binds all components of the eternal fortress:
 - **Ignition** → **Resurrection** → **Orchestration** → **Guardian** → **Audit Logging**
 
-One system ignites from bare metal. The fortress awakens. The ride is eternal. 🔥🛡️
+One system ignites from bare metal. The fortress awakens. The fortress never sleeps. 🔥🛡️
 
 ---
 
@@ -1435,5 +1435,5 @@ DEPLOY DATE: _____________
 
 *The fortress rises from bare metal in <15 minutes. Zero human decisions. Measured. Verifiable. Eternal.*
 
-🔥🛡️ **The ride is eternal.** 🔥🛡️
+🔥🛡️ **The fortress never sleeps.** 🔥🛡️
 

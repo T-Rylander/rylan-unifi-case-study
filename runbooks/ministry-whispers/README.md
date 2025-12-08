@@ -11,7 +11,7 @@ Hardens SSH: key-only auth, fetches `github.com/T-Rylander.keys`, nmap validates
 ## One-Command Deploy
 
 ```bash
-sudo bash ./runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh
+sudo bash ./runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
 ```
 
 **Validation**: `nmap -p 22 --script ssh-auth-methods localhost` (should show "publickey" only)

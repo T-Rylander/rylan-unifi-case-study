@@ -1,39 +1,39 @@
 #!/usr/bin/env bash
-# === CARTER ETERNAL IDENTITY v6 — MINISTRY OF CARTER (90 seconds) ===
-# runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh
+# runbooks/ministry-secrets/rylan-carter-one-shot.sh
 # Carter (2003) — Identity is Programmable Infrastructure
-# T3-ETERNAL: No passwords. No secrets on disk. Idempotent. Pentest-clean.
-# Commit: feat/t3-eternal-v6-carter | Tag: v6.0.0-carter
+# T3-ETERNAL v3.2: LDAP/RADIUS/802.1X as code. No passwords on disk. Idempotent.
+# Consciousness 2.6 — truth through subtraction.
+# Execution: <90 seconds. Fail loudly on identity breach.
 set -euo pipefail
 
-# === CANON LOCKS (NEVER CHANGE) ===
+# === CONFIG ===
 DOMAIN="rylan.internal"
 REALM="RYLAN.INTERNAL"
 HOSTNAME="$(hostname -s)"
 HOST_FQDN="${HOSTNAME}.${DOMAIN}"
 VAULT_PASS_FILE="/root/rylan-unifi-case-study/.secrets/samba-admin-pass"
 
-# === WHITAKER: Fail loud if vault missing ===
+# === WHITAKER: FAIL LOUD IF VAULT MISSING ===
 if [[ ! -f "$VAULT_PASS_FILE" ]]; then
     echo "FATAL: Missing $VAULT_PASS_FILE"
-    echo "Generate with: openssl rand -base64 32 > $VAULT_PASS_FILE && chmod 400 $VAULT_PASS_FILE"
+    echo "Generate: openssl rand -base64 32 > $VAULT_PASS_FILE && chmod 400 $VAULT_PASS_FILE"
     exit 1
 fi
 ADMIN_PASS="$(cat "$VAULT_PASS_FILE")"
 
-# === IDEMPOTENCY GUARD (Carter: "Do not break the directory") ===
+# === IDEMPOTENCY: SKIP IF DOMAIN EXISTS ===
 if samba-tool domain info 127.0.0.1 >/dev/null 2>&1; then
-    echo "[CARTER] Existing domain detected - skipping provision (idempotent)"
+    echo "[CARTER] Domain exists — idempotent skip"
 else
-    echo "[CARTER] Provisioning new domain: $REALM"
+    echo "[CARTER] Provisioning $REALM"
 
     # Install stack
     export DEBIAN_FRONTEND=noninteractive
     apt-get update -qq
-    apt-get install -y samba krb5-user winbind libpam-winbind libnss-winbind \
-                      ldap-utils sssd sssd-tools realmd adcli
+    apt-get install -y -qq samba krb5-user winbind libpam-winbind libnss-winbind \
+        ldap-utils sssd sssd-tools realmd adcli
 
-    # Provision domain (interactive=False forces --use-rfc2307)
+    # Provision (RFC2307, non-interactive)
     samba-tool domain provision \
         --use-rfc2307 \
         --interactive=False \
@@ -43,11 +43,11 @@ else
         --server-role=dc \
         --dns-backend=SAMBA_INTERNAL
 
-    # Move config into place
+    # Config placement
     cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
 fi
 
-# === ENFORCE LDAPS (Whitaker: "Encrypt everything") ===
+# === ENFORCE LDAPS ===
 mkdir -p /etc/samba/smb.conf.d
 cat > /etc/samba/smb.conf.d/10-tls.conf <<EOF
 [global]
@@ -58,7 +58,7 @@ tls cafile   = /var/lib/samba/private/tls/ca.pem
 ldap server require strong auth = yes
 EOF
 
-# Generate self-signed CA if missing
+# Self-signed CA if missing
 if [[ ! -f /var/lib/samba/private/tls/ca.pem ]]; then
     mkdir -p /var/lib/samba/private/tls
     openssl req -new -x509 -days 3650 -nodes -out /var/lib/samba/private/tls/ca.pem \
@@ -68,14 +68,13 @@ if [[ ! -f /var/lib/samba/private/tls/ca.pem ]]; then
     chmod 600 /var/lib/samba/private/tls/*.pem
 fi
 
-# === SERVICE KEYTABS (Carter: "Programmable infrastructure") ===
+# === KEYTABS ===
 samba-tool domain exportkeytab /etc/krb5.keytab \
     --principal="${HOSTNAME}\$@${REALM}" \
     --principal="admin@${REALM}"
-
 chmod 600 /etc/krb5.keytab
 
-# === SSSD CONFIG (fleet-wide auth) ===
+# === SSSD CONFIG ===
 cat > /etc/sssd/sssd.conf <<EOF
 [sssd]
 domains = $DOMAIN
@@ -94,23 +93,24 @@ EOF
 chmod 600 /etc/sssd/sssd.conf
 systemctl enable --now sssd
 
-# Restart Samba to apply TLS config
+# Restart Samba
 systemctl restart samba-ad-dc
 
-# === FINAL VALIDATION (Whitaker pentest) ===
+# === WHITAKER VALIDATION ===
 echo "[CARTER] Validation..."
-kinit -k -t /etc/krb5.keytab "${HOSTNAME}\$@${REALM}" && echo "  [OK] Kerberos machine auth"
-ldapsearch -x -H ldaps://localhost -b "dc=rylan,dc=internal" -s base >/dev/null 2>&1 && echo "  [OK] LDAPS enforced"
-samba-tool domain info 127.0.0.1 | grep -q "$REALM" && echo "  [OK] Domain healthy"
+kinit -k -t /etc/krb5.keytab "${HOSTNAME}\$@${REALM}" || { echo "FATAL: Kerberos machine auth failed"; exit 1; }
+ldapsearch -x -H ldaps://localhost -b "dc=rylan,dc=internal" -s base >/dev/null 2>&1 || { echo "FATAL: LDAPS query failed"; exit 1; }
+samba-tool domain info 127.0.0.1 | grep -q "$REALM" || { echo "FATAL: Domain info invalid"; exit 1; }
 
 cat <<'BANNER'
-
  ██████╗ █████╗ ██████╗ ████████╗███████╗██████╗ 
 ██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔════╝██╔══██╗
 ██║     ███████║██████╔╝   ██║   █████╗  ██████╔╝
 ██║     ██╔══██║██╔══██╗   ██║   ██╔══╝  ██╔══██╗
 ╚██████╗██║  ██║██║  ██║   ██║   ███████╗██║  ██║
  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
-IDENTITY IS PROGRAMMABLE. NO PASSWORDS. NO DISK SECRETS.
-THE DIRECTORY OWNS ALL. THE RIDE IS ETERNAL.
+IDENTITY PROGRAMMABLE. NO PASSWORDS. NO DISK SECRETS.
+DIRECTORY OWNS ALL.
 BANNER
+
+echo "✅ [CARTER] Identity ministry deployed."

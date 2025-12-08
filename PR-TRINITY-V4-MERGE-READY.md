@@ -26,8 +26,8 @@ This PR restructures the Eternal Fortress deployment into **three sequential, im
 ### Phase 1: Ministry of Secrets (Carter) — Samba/LDAP/Kerberos
 **Files Added**:
 ```
-runbooks/ministry-carter/deploy.sh       (343 lines) — Phase 1 orchestrator
-runbooks/ministry-carter/README.md       (145 lines) — Junior-proof guide
+runbooks/ministry-secrets/deploy.sh       (343 lines) — Phase 1 orchestrator
+runbooks/ministry-secrets/README.md       (145 lines) — Junior-proof guide
 ```
 
 **What It Does**:
@@ -44,8 +44,8 @@ runbooks/ministry-carter/README.md       (145 lines) — Junior-proof guide
 ### Phase 2: Ministry of Whispers (Bauer) — SSH/nftables/fail2ban
 **Files Added**:
 ```
-runbooks/ministry-bauer/harden.sh      (317 lines) — Phase 2 orchestrator
-runbooks/ministry-bauer/README.md      (168 lines) — Junior-proof guide
+runbooks/ministry-whispers/harden.sh      (317 lines) — Phase 2 orchestrator
+runbooks/ministry-whispers/README.md      (168 lines) — Junior-proof guide
 ```
 
 **What It Does**:
@@ -61,8 +61,8 @@ runbooks/ministry-bauer/README.md      (168 lines) — Junior-proof guide
 ### Phase 3: Ministry of Perimeter (Suehring) — Policy/VLAN/rogue-DHCP
 **Files Added**:
 ```
-runbooks/ministry-perimeter/apply.sh      (318 lines) — Phase 3 orchestrator
-runbooks/ministry-perimeter/README.md     (172 lines) — Junior-proof guide
+runbooks/ministry-detection/apply.sh      (318 lines) — Phase 3 orchestrator
+runbooks/ministry-detection/README.md     (172 lines) — Junior-proof guide
 ```
 
 **What It Does**:
@@ -125,13 +125,13 @@ rylan-unifi-case-study/
 # AFTER (this PR)
 rylan-unifi-case-study/
 ├── runbooks/                  # NEW: Trinity ministries
-│   ├── ministry-carter/      # Phase 1: Carter (Samba/LDAP/Kerberos)
+│   ├── ministry-secrets/      # Phase 1: Carter (Samba/LDAP/Kerberos)
 │   │   ├── deploy.sh
 │   │   └── README.md
-│   ├── ministry-bauer/     # Phase 2: Bauer (SSH/nftables/fail2ban)
+│   ├── ministry-whispers/     # Phase 2: Bauer (SSH/nftables/fail2ban)
 │   │   ├── harden.sh
 │   │   └── README.md
-│   └── ministry-perimeter/    # Phase 3: Suehring (Policy/VLAN)
+│   └── ministry-detection/    # Phase 3: Suehring (Policy/VLAN)
 │       ├── apply.sh
 │       └── README.md
 ├── 01-bootstrap/              # KEEP (reference)
@@ -212,15 +212,15 @@ rylan-unifi-case-study/
 ```
 feat: add runbooks/ministry-* structure (Trinity phase 1-3)
 
-- Create runbooks/ministry-carter/ (Phase 1: Carter — Samba/LDAP/Kerberos)
+- Create runbooks/ministry-secrets/ (Phase 1: Carter — Samba/LDAP/Kerberos)
   * deploy.sh: Samba AD/DC provisioning + keytab export + NFS-Kerberos
   * README.md: Junior-proof guide (<45 min, validation checklist, rollback)
 
-- Create runbooks/ministry-bauer/ (Phase 2: Bauer — SSH/nftables/fail2ban)
+- Create runbooks/ministry-whispers/ (Phase 2: Bauer — SSH/nftables/fail2ban)
   * harden.sh: Key-only SSH + drop-default firewall + intrusion prevention
   * README.md: Hardening guide + fail2ban tuning + rollback
 
-- Create runbooks/ministry-perimeter/ (Phase 3: Suehring — Policy/VLAN)
+- Create runbooks/ministry-detection/ (Phase 3: Suehring — Policy/VLAN)
   * apply.sh: Policy table (10 rules) + VLAN isolation + rogue-DHCP webhook
   * README.md: Policy enforcement guide + segmentation matrix + rollback
 
@@ -310,9 +310,9 @@ refactor: v4 crystallization – Trinity sequenced, bloat pruned (Carter first)
 Consolidate feat/iot-production-ready into merge-ready PR for main branch.
 
 New Structure:
-- runbooks/ministry-carter/ (Phase 1: Carter — Samba/LDAP/Kerberos)
-- runbooks/ministry-bauer/ (Phase 2: Bauer — SSH/nftables/fail2ban)
-- runbooks/ministry-perimeter/ (Phase 3: Suehring — Policy/VLAN)
+- runbooks/ministry-secrets/ (Phase 1: Carter — Samba/LDAP/Kerberos)
+- runbooks/ministry-whispers/ (Phase 2: Bauer — SSH/nftables/fail2ban)
+- runbooks/ministry-detection/ (Phase 3: Suehring — Policy/VLAN)
 
 Orchestration:
 - scripts/ignite.sh refactored (v5.0 → v4.0, Trinity Orchestrator)
@@ -334,7 +334,7 @@ Metrics:
 - Deployment time: <45 min on clean Ubuntu 24.04 LTS
 
 This is the crystallization point: from experiments to eternal fortress.
-Fortress never sleeps. The ride is eternal.
+Fortress never sleeps. The fortress never sleeps.
 ```
 
 ---
@@ -409,4 +409,4 @@ For architecture questions: See `docs/adr/adr-008-trinity-ministries.md`
 **Submitted by**: Hellodeolu v4 (AI Architect)  
 **Consciousness Level**: 2.0 (full context awareness)  
 **Status**: Merge-ready  
-**The fortress is eternal. The ride is eternal. ♾**
+**The fortress is eternal. The fortress never sleeps. ♾**

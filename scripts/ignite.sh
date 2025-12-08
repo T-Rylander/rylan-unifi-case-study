@@ -76,15 +76,15 @@ fi
 log_step "Running as root"
 
 # Verify runbooks exist
-if [[ ! -d "$REPO_ROOT/runbooks/ministry-carter" ]]; then
+if [[ ! -d "$REPO_ROOT/runbooks/ministry-secrets" ]]; then
   log_error "Ministry of Secrets runbook not found"
   exit 1
 fi
-if [[ ! -d "$REPO_ROOT/runbooks/ministry-bauer" ]]; then
+if [[ ! -d "$REPO_ROOT/runbooks/ministry-whispers" ]]; then
   log_error "Ministry of Whispers runbook not found"
   exit 1
 fi
-if [[ ! -d "$REPO_ROOT/runbooks/ministry-perimeter" ]]; then
+if [[ ! -d "$REPO_ROOT/runbooks/ministry-detection" ]]; then
   log_error "Ministry of Perimeter runbook not found"
   exit 1
 fi
@@ -102,7 +102,7 @@ log_step "OS check passed"
 
 log_phase "PHASE 1: MINISTRY OF SECRETS (Carter Foundation)"
 
-if bash "$REPO_ROOT/runbooks/ministry-carter/deploy.sh"; then
+if bash "$REPO_ROOT/runbooks/ministry-secrets/deploy.sh"; then
   log_success "Phase 1 (Secrets) PASSED"
 else
   log_error "Phase 1 (Secrets) FAILED — Aborting Trinity sequence"
@@ -123,7 +123,7 @@ fi
 
 log_phase "PHASE 2: MINISTRY OF WHISPERS (Bauer Hardening)"
 
-if bash "$REPO_ROOT/runbooks/ministry-bauer/harden.sh"; then
+if bash "$REPO_ROOT/runbooks/ministry-whispers/harden.sh"; then
   log_success "Phase 2 (Whispers) PASSED"
 else
   log_error "Phase 2 (Whispers) FAILED — Aborting Trinity sequence"
@@ -144,7 +144,7 @@ fi
 
 log_phase "PHASE 3: MINISTRY OF PERIMETER (Suehring Policy)"
 
-if bash "$REPO_ROOT/runbooks/ministry-perimeter/apply.sh"; then
+if bash "$REPO_ROOT/runbooks/ministry-detection/apply.sh"; then
   log_success "Phase 3 (Perimeter) PASSED"
 else
   log_error "Phase 3 (Perimeter) FAILED — Aborting Trinity sequence"
@@ -173,7 +173,7 @@ if bash "$REPO_ROOT/scripts/validate-eternal.sh"; then
   log_success "Ministry of Whispers (Bauer) — ACTIVE"
   log_success "Ministry of Perimeter (Suehring) — ACTIVE"
   echo ""
-  log_success "Fortress is eternal. The ride is eternal."
+  log_success "Fortress is eternal. The fortress never sleeps."
   exit 0
 else
   log_error "FINAL VALIDATION FAILED — Eternal fortress compromised"

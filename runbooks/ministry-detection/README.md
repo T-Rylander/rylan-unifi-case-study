@@ -15,5 +15,5 @@ snap install yq
 ## Deploy
 
 ```bash
-sudo bash ./runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh
+sudo bash ./runbooks/ministry-detection/rylan-suehring-eternal-one-shot.sh
 ```
