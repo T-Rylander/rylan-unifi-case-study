@@ -83,7 +83,7 @@ Traeger pellet grills with WiFire technology provide:
 vlan: 95
 name: iot-isolated
 subnet: 10.0.95.0/24
-isolation: true  # Cannot access VLANs 10, 30, 40, 90, 96
+isolation: true  # Cannot access VLANs 10, 30, 40, 90
 internet_access: whitelist_only
 ```
 

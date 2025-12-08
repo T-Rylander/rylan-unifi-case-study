@@ -186,8 +186,8 @@ action: accept
 **Configuration Steps:**
 1. Run Cat6 cable from US-8 Port 2 to ET center
 2. Configure US-8 Port 2: Native VLAN 90, storm control enabled
-3. Power on Denon soundbar (will DHCP on 10.0.96.X)
-4. HEOS app discovers via mDNS reflector
+3. Power on Denon soundbar (will DHCP on 10.0.90.X)
+4. HEOS app discovers via mDNS reflector (if enabled)
 5. Verify streaming services work (Spotify, Pandora)
 
 ---

@@ -45,7 +45,7 @@ ssh admin@$USG_IP "show firewall statistics"
 
 ```bash
 # In HEOS app → Settings → Advanced → Manual IP Entry
-# Enter soundbar IP: 10.0.96.XXX (from DHCP leases)
+# Enter soundbar IP: 10.0.90.XXX (from DHCP leases)
 ```
 
 ---
@@ -145,7 +145,7 @@ echo "Test page $(date)" | lp -d printer01
 ```bash
 # Capture traffic during update attempt
 ssh admin@$USG_IP
-sudo tcpdump -i eth0.96 -n port not 22 -w /tmp/denon-update.pcap
+sudo tcpdump -i eth0.90 -n port not 22 -w /tmp/denon-update.pcap
 
 # Transfer pcap to workstation
 scp admin@$USG_IP:/tmp/denon-update.pcap .
@@ -257,7 +257,7 @@ ssh admin@$USG_IP "show dhcp leases"
 ssh admin@$USG_IP "show firewall statistics"
 
 # Monitor real-time traffic
-ssh admin@$USG_IP "sudo tcpdump -i eth0.96 -n"
+ssh admin@$USG_IP "sudo tcpdump -i eth0.90 -n"
 
 # Check mDNS across VLANs
 avahi-browse -a -t  # From trusted-devices VLAN 30

@@ -47,7 +47,7 @@ The fortress requires integration of four IoT devices with varying trust levels:
 - **Carter compliance**: Device identity tracked in shared/inventory.yaml
 
 ### Negative
-- **VLAN sprawl**: 6 total VLANs (1, 10, 30, 40, 90, 95, 96)
+- **VLAN sprawl**: 6 total VLANs (1, 10, 30, 40, 90, 95)
 - **Firewall rules**: Adds 2 rules (total 9/10 — safe for USG-3P offload)
 - **Management overhead**: Separate DHCP pools, DNS configs, monitoring
 

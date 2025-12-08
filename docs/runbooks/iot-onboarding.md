@@ -200,7 +200,7 @@ python guardian/audit-eternal.py
 
 # 2. Network isolation test
 bash 03-validation-ops/validate-isolation.sh
-# Expected: VLAN 95/96 isolated from servers
+# Expected: VLAN 95/90 isolated from servers
 
 # 3. mDNS reflector test
 avahi-browse -a -t  # From VLAN 30
