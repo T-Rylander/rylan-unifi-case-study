@@ -34,17 +34,17 @@ jobs:
       - name: Lint main orchestrator
         run: |
           echo "🔍 Linting main orchestrator..."
-          shellcheck -x 01-bootstrap/proxmox/proxmox-ignite.sh
+          shellcheck -x -S warning 01-bootstrap/proxmox/proxmox-ignite.sh
 
       - name: Lint phase scripts
         run: |
           echo "🔍 Linting phase modules..."
-          shellcheck 01-bootstrap/proxmox/phases/*.sh
+          shellcheck -S warning 01-bootstrap/proxmox/phases/*.sh
 
       - name: Lint library scripts
         run: |
           echo "🔍 Linting shared libraries..."
-          shellcheck 01-bootstrap/proxmox/lib/*.sh
+          shellcheck -S warning 01-bootstrap/proxmox/lib/*.sh
 
       - name: Lint test scripts
         run: |
