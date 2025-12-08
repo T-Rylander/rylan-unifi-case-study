@@ -162,8 +162,8 @@ secrets/
 .credentials
 
 # BUT allow Trinity Ministry directories
-!runbooks/ministry-secrets/
-!runbooks/ministry-whispers/
+!runbooks/ministry-carter/
+!runbooks/ministry-bauer/
 !runbooks/ministry-perimeter/
 
 # UniFi backups

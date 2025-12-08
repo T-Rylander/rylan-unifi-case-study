@@ -151,7 +151,7 @@ sudo bash tests/proxmox/test-proxmox-ignite.sh
 
 ## 🏆 T3-ETERNAL Framework Compliance
 
-### ✅ Barrett Unix Zen
+### ✅ Unix Philosophy
 - **Pure Bash**: No exotic dependencies
 - **<500 LOC**: 520 lines total (including comments)
 - **Fail Loudly**: `set -euo pipefail`, clear error messages

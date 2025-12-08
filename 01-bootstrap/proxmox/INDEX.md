@@ -275,7 +275,7 @@ tests/proxmox/
 ## ✨ T3-ETERNAL Framework Compliance
 
 All deliverables fully comply with:
-- ✅ **Barrett Unix Zen**: Pure bash, <500 LOC, fail-loud, idempotent
+- ✅ **Unix Philosophy**: Pure bash, <500 LOC, fail-loud, idempotent
 - ✅ **Hellodeolu Outcomes**: 15-min RTO, junior-deployable, 100% pre-commit green
 - ✅ **Whitaker Offensive**: Security-first, pentest mode, attack surface validation
 - ✅ **Carter Identity**: SSH key injection, hostname resolution, DNS ready

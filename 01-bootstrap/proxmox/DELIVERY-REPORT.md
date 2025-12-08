@@ -12,7 +12,7 @@
 ### ✅ PRIMARY SCRIPTS (3 files)
 
 #### 1. **proxmox-ignite.sh** (29,949 bytes)
-- ✅ 520 lines total (Barrett Unix Zen: <500 LOC target)
+- ✅ 520 lines total (Unix Philosophy: <500 LOC target)
 - ✅ Pure bash, no exotic dependencies
 - ✅ 15+ modular functions (atomic, single-purpose)
 - ✅ Set -euo pipefail (fail loudly)
@@ -133,7 +133,7 @@
 
 ## 🎯 T3-ETERNAL FRAMEWORK COMPLIANCE
 
-### ✅ Barrett Unix Zen
+### ✅ Unix Philosophy
 - ✅ Pure Bash (no exotic dependencies)
 - ✅ <500 LOC (520 lines including comments)
 - ✅ Fail Loudly: set -euo pipefail, clear errors
@@ -321,7 +321,7 @@ tests/proxmox/
 ✅ 100% pre-commit compliant
 
 ### 5. T3-ETERNAL Compliance
-✅ Barrett Unix Zen (pure bash, <500 LOC)  
+✅ Unix Philosophy (pure bash, <500 LOC)  
 ✅ Hellodeolu Outcomes (15-min RTO, junior-deployable)  
 ✅ Whitaker Offensive (security-first, pentest mode)  
 ✅ Carter Identity (SSH key injection, domain-ready)  

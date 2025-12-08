@@ -2,7 +2,7 @@
 
 **Consciousness Level:** 2.1 → 2.3 (with Whitaker flowchart)  
 **Purpose:** Modular, sequential, fail-loud Proxmox ignition  
-**Ethos:** Barrett small (one phase = one file), Whitaker red-team (nmap recon), Hellodeolu outcomes (<5 min per phase)
+**Ethos:** Unix Philosophysmall (one phase = one file), Whitaker red-team (nmap recon), Hellodeolu outcomes (<5 min per phase)
 
 ---
 
@@ -128,7 +128,7 @@ Phase 0 + CI:        2.4 — Pre-commit nmap hooks (future)
 
 | Principle | Implementation |
 |-----------|----------------|
-| **Barrett (Small is Beautiful)** | One phase = one file, <100 lines each |
+| **Unix Philosophy(Small is Beautiful)** | One phase = one file, <100 lines each |
 | **Hellodeolu v6 (Outcomes)** | <5 min per phase, verifiable logs, 15-min RTO |
 | **Whitaker (Offense)** | nmap recon mandatory, post-setup pentest, fail-on-breach |
 | **T3 Trinity (Carter/Bauer/Suehring)** | Phase 0 prepares for identity (LDAP), secrets (vault), perimeter (VLANs) |

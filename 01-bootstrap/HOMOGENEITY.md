@@ -306,7 +306,7 @@ All Bash scripts must pass before commit:
 ## References
 
 - **T3-ETERNAL v6:** see `.github/instructions/copilot-INSTRUCTION-SET-ETERNAL-v3.2.instructions.md`
-- **Barrett Unix Zen:** "Do one thing and do it well"
+- **Unix Philosophy:** "Do one thing and do it well"
 - **Hellodeolu v6:** Pre-commit 100% green, zero lint debt
 - **Whitaker Offensive:** Red-team audits in validation phases
 

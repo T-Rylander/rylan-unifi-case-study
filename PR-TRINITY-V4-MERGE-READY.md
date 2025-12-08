@@ -26,8 +26,8 @@ This PR restructures the Eternal Fortress deployment into **three sequential, im
 ### Phase 1: Ministry of Secrets (Carter) — Samba/LDAP/Kerberos
 **Files Added**:
 ```
-runbooks/ministry-secrets/deploy.sh       (343 lines) — Phase 1 orchestrator
-runbooks/ministry-secrets/README.md       (145 lines) — Junior-proof guide
+runbooks/ministry-carter/deploy.sh       (343 lines) — Phase 1 orchestrator
+runbooks/ministry-carter/README.md       (145 lines) — Junior-proof guide
 ```
 
 **What It Does**:
@@ -44,8 +44,8 @@ runbooks/ministry-secrets/README.md       (145 lines) — Junior-proof guide
 ### Phase 2: Ministry of Whispers (Bauer) — SSH/nftables/fail2ban
 **Files Added**:
 ```
-runbooks/ministry-whispers/harden.sh      (317 lines) — Phase 2 orchestrator
-runbooks/ministry-whispers/README.md      (168 lines) — Junior-proof guide
+runbooks/ministry-bauer/harden.sh      (317 lines) — Phase 2 orchestrator
+runbooks/ministry-bauer/README.md      (168 lines) — Junior-proof guide
 ```
 
 **What It Does**:
@@ -125,10 +125,10 @@ rylan-unifi-case-study/
 # AFTER (this PR)
 rylan-unifi-case-study/
 ├── runbooks/                  # NEW: Trinity ministries
-│   ├── ministry-secrets/      # Phase 1: Carter (Samba/LDAP/Kerberos)
+│   ├── ministry-carter/      # Phase 1: Carter (Samba/LDAP/Kerberos)
 │   │   ├── deploy.sh
 │   │   └── README.md
-│   ├── ministry-whispers/     # Phase 2: Bauer (SSH/nftables/fail2ban)
+│   ├── ministry-bauer/     # Phase 2: Bauer (SSH/nftables/fail2ban)
 │   │   ├── harden.sh
 │   │   └── README.md
 │   └── ministry-perimeter/    # Phase 3: Suehring (Policy/VLAN)
@@ -212,11 +212,11 @@ rylan-unifi-case-study/
 ```
 feat: add runbooks/ministry-* structure (Trinity phase 1-3)
 
-- Create runbooks/ministry-secrets/ (Phase 1: Carter — Samba/LDAP/Kerberos)
+- Create runbooks/ministry-carter/ (Phase 1: Carter — Samba/LDAP/Kerberos)
   * deploy.sh: Samba AD/DC provisioning + keytab export + NFS-Kerberos
   * README.md: Junior-proof guide (<45 min, validation checklist, rollback)
 
-- Create runbooks/ministry-whispers/ (Phase 2: Bauer — SSH/nftables/fail2ban)
+- Create runbooks/ministry-bauer/ (Phase 2: Bauer — SSH/nftables/fail2ban)
   * harden.sh: Key-only SSH + drop-default firewall + intrusion prevention
   * README.md: Hardening guide + fail2ban tuning + rollback
 
@@ -310,8 +310,8 @@ refactor: v4 crystallization – Trinity sequenced, bloat pruned (Carter first)
 Consolidate feat/iot-production-ready into merge-ready PR for main branch.
 
 New Structure:
-- runbooks/ministry-secrets/ (Phase 1: Carter — Samba/LDAP/Kerberos)
-- runbooks/ministry-whispers/ (Phase 2: Bauer — SSH/nftables/fail2ban)
+- runbooks/ministry-carter/ (Phase 1: Carter — Samba/LDAP/Kerberos)
+- runbooks/ministry-bauer/ (Phase 2: Bauer — SSH/nftables/fail2ban)
 - runbooks/ministry-perimeter/ (Phase 3: Suehring — Policy/VLAN)
 
 Orchestration:

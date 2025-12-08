@@ -2,7 +2,7 @@
 #
 # Proxmox VE 8.2 Bare-Metal Ignition - Main Orchestrator
 # Modular, <150 LOC orchestrator that sequences 5 phase modules
-# T3-ETERNAL compliant: Barrett atomic phases, Hellodeolu RTO, Whitaker offensive
+# T3-ETERNAL compliant: Unix Philosophyatomic phases, Hellodeolu RTO, Whitaker offensive
 #
 # Usage:
 #   sudo ./proxmox-ignite.sh \

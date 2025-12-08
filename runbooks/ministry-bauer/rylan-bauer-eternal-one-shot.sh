@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# === BAUER ETERNAL HARDENING v6 — MINISTRY OF WHISPERS (30 seconds) ===
-# runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
+# === BAUER ETERNAL HARDENING v6 — MINISTRY OF BAUER (30 seconds) ===
+# runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh
+# Bauer (2005) — Trust Nothing, Verify Everything
 # T3-ETERNAL: Key-only SSH. No passwords. Idempotent. nmap-verified.
-# Commit: feat/t3-eternal-v6-whispers | Tag: v6.0.0-whispers
+# Commit: feat/t3-eternal-v6-bauer | Tag: v6.0.0-bauer
 set -euo pipefail
 
 # === STEP 1: Fetch Carter's Keys (GitHub or local) ===
@@ -13,8 +14,8 @@ if curl -fsSL https://github.com/T-Rylander.keys -o /root/.ssh/authorized_keys 2
     echo "  [OK] Keys fetched from GitHub"
 else
     echo "  [WARN] GitHub fetch failed - checking local carter-banner-drop.sh"
-    if [[ -f "/root/rylan-unifi-case-study/runbooks/ministry-secrets/carter-banner-drop.sh" ]]; then
-        bash /root/rylan-unifi-case-study/runbooks/ministry-secrets/carter-banner-drop.sh
+    if [[ -f "/root/rylan-unifi-case-study/runbooks/ministry-carter/carter-banner-drop.sh" ]]; then
+        bash /root/rylan-unifi-case-study/runbooks/ministry-carter/carter-banner-drop.sh
     else
         echo "  [FATAL] No keys available - deployment unsafe"
         exit 1

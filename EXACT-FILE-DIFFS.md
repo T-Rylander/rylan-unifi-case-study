@@ -10,7 +10,7 @@
 
 ---
 
-## FILE 1: runbooks/ministry-secrets/deploy.sh (NEW)
+## FILE 1: runbooks/ministry-carter/deploy.sh (NEW)
 
 **Purpose**: Phase 1 orchestrator (Carter — Samba AD/DC + LDAP + Kerberos)
 
@@ -26,7 +26,7 @@
 
 ---
 
-## FILE 2: runbooks/ministry-secrets/README.md (NEW)
+## FILE 2: runbooks/ministry-carter/README.md (NEW)
 
 **Purpose**: Junior-proof Phase 1 deployment guide
 
@@ -41,7 +41,7 @@
 
 ---
 
-## FILE 3: runbooks/ministry-whispers/harden.sh (NEW)
+## FILE 3: runbooks/ministry-bauer/harden.sh (NEW)
 
 **Purpose**: Phase 2 orchestrator (Bauer — SSH hardening + nftables + fail2ban)
 
@@ -58,7 +58,7 @@
 
 ---
 
-## FILE 4: runbooks/ministry-whispers/README.md (NEW)
+## FILE 4: runbooks/ministry-bauer/README.md (NEW)
 
 **Purpose**: Junior-proof Phase 2 deployment guide
 
@@ -230,10 +230,10 @@ echo "[4/4] Deploy complete — https://$(hostname -I | awk '{print $1}'):8443"
 ## SUMMARY OF CHANGES
 
 ### Added Files (7):
-1. ✅ runbooks/ministry-secrets/deploy.sh (343 lines)
-2. ✅ runbooks/ministry-secrets/README.md (145 lines)
-3. ✅ runbooks/ministry-whispers/harden.sh (317 lines)
-4. ✅ runbooks/ministry-whispers/README.md (168 lines)
+1. ✅ runbooks/ministry-carter/deploy.sh (343 lines)
+2. ✅ runbooks/ministry-carter/README.md (145 lines)
+3. ✅ runbooks/ministry-bauer/harden.sh (317 lines)
+4. ✅ runbooks/ministry-bauer/README.md (168 lines)
 5. ✅ runbooks/ministry-perimeter/apply.sh (318 lines)
 6. ✅ runbooks/ministry-perimeter/README.md (172 lines)
 7. ✅ .github/workflows/ci-trinity.yaml (189 lines)

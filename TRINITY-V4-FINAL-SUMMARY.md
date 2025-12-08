@@ -22,7 +22,7 @@
 ```
 Trinity Sequencing (Immutable):
 ├── Phase 1: Ministry of Secrets (Carter)
-│   └── runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh (2.1 KB, <30s atomic)
+│   └── runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh (2.1 KB, <30s atomic)
 │       • Samba AD/DC provisioning
 │       • LDAP schema + keytab export
 │       • Kerberos client + NFS configuration
@@ -30,7 +30,7 @@ Trinity Sequencing (Immutable):
 │       • Atomic: <30 seconds on Proxmox
 │
 ├── Phase 2: Ministry of Whispers (Bauer)
-│   └── runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh (1.6 KB, <30s atomic)
+│   └── runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh (1.6 KB, <30s atomic)
 │       • SSH key-only authentication (no password, no root)
 │       • nftables drop-default firewall
 │       • fail2ban intrusion prevention (5 failures = 1 hour ban)
@@ -65,10 +65,10 @@ Rollback: Per-ministry procedure documented
 ```
 rylan-unifi-case-study/
 ├── runbooks/                    ← Trinity one-shots (atomic, <45s total)
-│   ├── ministry-secrets/        ← Phase 1: Carter (Samba/LDAP)
+│   ├── ministry-carter/        ← Phase 1: Carter (Samba/LDAP)
 │   │   ├── rylan-carter-eternal-one-shot.sh (2.1 KB, <30s atomic)
 │   │   └── README.md            (145 lines)
-│   ├── ministry-whispers/       ← Phase 2: Bauer (SSH/nftables/fail2ban)
+│   ├── ministry-bauer/       ← Phase 2: Bauer (SSH/nftables/fail2ban)
 │   │   ├── rylan-bauer-eternal-one-shot.sh (1.6 KB, <30s atomic)
 │   │   └── README.md            (168 lines)
 │   └── ministry-perimeter/      ← Phase 3: Suehring (Policy/VLAN)
@@ -175,16 +175,16 @@ Fortress is eternal. The ride is eternal.
 
 | File | Size | Purpose |
 |------|------|---------|
-| `runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh` | 2.1 KB | Phase 1: Samba AD/DC + LDAP + Kerberos (atomic) |
-| `runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh` | 1.6 KB | Phase 2: SSH + nftables + fail2ban (atomic) |
+| `runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh` | 2.1 KB | Phase 1: Samba AD/DC + LDAP + Kerberos (atomic) |
+| `runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh` | 1.6 KB | Phase 2: SSH + nftables + fail2ban (atomic) |
 | `runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh` | 2.6 KB | Phase 3: Policy table + VLAN (atomic) |
 
 ### NEW FILES (8)
 
 | File | Size | Purpose |
 |------|------|---------|
-| `runbooks/ministry-secrets/README.md` | 145 lines | Phase 1 junior-proof guide |
-| `runbooks/ministry-whispers/README.md` | 168 lines | Phase 2 junior-proof guide |
+| `runbooks/ministry-carter/README.md` | 145 lines | Phase 1 junior-proof guide |
+| `runbooks/ministry-bauer/README.md` | 168 lines | Phase 2 junior-proof guide |
 | `runbooks/ministry-perimeter/README.md` | 172 lines | Phase 3 junior-proof guide |
 | `.github/workflows/ci-trinity.yaml` | 351 lines | CI/CD phase validation (9 jobs) |
 | `docs/adr/adr-008-trinity-ministries.md` | 112 lines | Architecture decision record |
@@ -294,12 +294,12 @@ sudo bash ./scripts/ignite.sh
 ```
 feat: add T3-Eternal one-shot runbooks (atomic, <45s total)
 
-- Create runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh (Phase 1)
+- Create runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh (Phase 1)
   * Samba AD/DC provisioning + keytab export + NFS-Kerberos (atomic)
   * Execution time: <30 seconds on Proxmox
   * README.md: Junior-proof guide
 
-- Create runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh (Phase 2)
+- Create runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh (Phase 2)
   * Key-only SSH + drop-default firewall + intrusion prevention (atomic)
   * Execution time: <30 seconds on Proxmox
   * README.md: Hardening guide + fail2ban tuning + rollback
@@ -390,8 +390,8 @@ refactor: v4 crystallization – Trinity sequenced, bloat pruned (Carter first)
 Consolidate feat/iot-production-ready into merge-ready PR for main.
 
 New Structure:
-- runbooks/ministry-secrets/ (Phase 1: Carter — Samba/LDAP/Kerberos)
-- runbooks/ministry-whispers/ (Phase 2: Bauer — SSH/nftables/fail2ban)
+- runbooks/ministry-carter/ (Phase 1: Carter — Samba/LDAP/Kerberos)
+- runbooks/ministry-bauer/ (Phase 2: Bauer — SSH/nftables/fail2ban)
 - runbooks/ministry-perimeter/ (Phase 3: Suehring — Policy/VLAN)
 
 Orchestration:
@@ -426,8 +426,8 @@ Fortress never sleeps. The ride is eternal. ♾
 | **PR Summary** | `PR-TRINITY-V4-MERGE-READY.md` | Comprehensive merge documentation |
 | **File Diffs** | `EXACT-FILE-DIFFS.md` | Detailed file-by-file changes |
 | **Architecture** | `docs/adr/adr-008-trinity-ministries.md` | ADR-008: Trinity architecture |
-| **Phase 1 Guide** | `runbooks/ministry-secrets/README.md` | Carter (Samba/LDAP) deployment |
-| **Phase 2 Guide** | `runbooks/ministry-whispers/README.md` | Bauer (SSH/nftables) hardening |
+| **Phase 1 Guide** | `runbooks/ministry-carter/README.md` | Carter (Samba/LDAP) deployment |
+| **Phase 2 Guide** | `runbooks/ministry-bauer/README.md` | Bauer (SSH/nftables) hardening |
 | **Phase 3 Guide** | `runbooks/ministry-perimeter/README.md` | Suehring (Policy/VLAN) enforcement |
 | **CI/CD Workflow** | `.github/workflows/ci-trinity.yaml` | Phase validation automation |
 

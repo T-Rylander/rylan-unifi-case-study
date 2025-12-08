@@ -27,16 +27,16 @@ jobs:
           bash -n scripts/ignite.sh 2>&1 || echo "⚠️  ignite.sh syntax check failed"
           bash -n scripts/validate-eternal.sh 2>&1 || echo "⚠️  validate-eternal.sh syntax check failed"
           bash -n validate-eternal.sh 2>&1 || echo "⚠️  validate-eternal.sh (root) syntax check failed"
-          bash -n runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh 2>&1 || echo "⚠️  Carter one-shot syntax check failed"
-          bash -n runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh 2>&1 || echo "⚠️  Bauer one-shot syntax check failed"
+          bash -n runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh 2>&1 || echo "⚠️  Carter one-shot syntax check failed"
+          bash -n runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh 2>&1 || echo "⚠️  Bauer one-shot syntax check failed"
           bash -n runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh 2>&1 || echo "⚠️  Suehring one-shot syntax check failed"
           echo "✓ All bash scripts: syntax OK"
 
       - name: ShellCheck analysis
         run: |
           shellcheck -x scripts/ignite.sh 2>&1 || true
-          shellcheck -x runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh 2>&1 || true
-          shellcheck -x runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh 2>&1 || true
+          shellcheck -x runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh 2>&1 || true
+          shellcheck -x runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh 2>&1 || true
           shellcheck -x runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh 2>&1 || true
           echo "✓ ShellCheck analysis complete"
 
@@ -62,8 +62,8 @@ jobs:
         run: |
           echo "Checking ignite.sh phase order..."
           
-          SECRETS_LINE=$(grep -n "ministry-secrets" scripts/ignite.sh | head -1 | cut -d: -f1)
-          WHISPERS_LINE=$(grep -n "ministry-whispers" scripts/ignite.sh | head -1 | cut -d: -f1)
+          SECRETS_LINE=$(grep -n "ministry-carter" scripts/ignite.sh | head -1 | cut -d: -f1)
+          WHISPERS_LINE=$(grep -n "ministry-bauer" scripts/ignite.sh | head -1 | cut -d: -f1)
           PERIMETER_LINE=$(grep -n "ministry-perimeter" scripts/ignite.sh | head -1 | cut -d: -f1)
           
           if [[ -z "$SECRETS_LINE" || -z "$WHISPERS_LINE" || -z "$PERIMETER_LINE" ]]; then
@@ -80,8 +80,8 @@ jobs:
 
       - name: Verify runbook presence
         run: |
-          [[ -f runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh ]] || exit 1
-          [[ -f runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh ]] || exit 1
+          [[ -f runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh ]] || exit 1
+          [[ -f runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh ]] || exit 1
           [[ -f runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh ]] || exit 1
           echo "✓ All three one-shot runbooks present"
 
@@ -144,7 +144,7 @@ jobs:
 
       - name: Verify SSH password auth disabled
         run: |
-          if grep -q "PasswordAuthentication no" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "PasswordAuthentication no" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH password authentication disabled (Bauer one-shot)"
           else
             echo "❌ SSH password auth not disabled"
@@ -153,7 +153,7 @@ jobs:
 
       - name: Check for SSH key injection
         run: |
-          if grep -q "authorized_keys" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "authorized_keys" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH public key configuration found"
           else
             echo "⚠️  SSH key configuration not explicitly found"
@@ -167,12 +167,12 @@ jobs:
 
       - name: Syntax check — Phase 1 (Carter)
         run: |
-          bash -n runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
+          bash -n runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh
           echo "✓ Carter one-shot: syntax OK"
 
       - name: Verify identity foundation in Carter one-shot
         run: |
-          if grep -q "CARTER\|Kerberos\|LDAP" runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh; then
+          if grep -q "CARTER\|Kerberos\|LDAP" runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh; then
             echo "✓ Carter identity foundation configured"
           else
             echo "⚠️  Carter identity markers not found (check script)"
@@ -180,7 +180,7 @@ jobs:
 
       - name: Verify Carter banner presence
         run: |
-          if grep -q "BANNER" runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh; then
+          if grep -q "BANNER" runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh; then
             echo "✓ Carter victory banner configured"
           else
             echo "⚠️  Carter banner may be minimal"
@@ -188,7 +188,7 @@ jobs:
 
       - name: Verify Carter execution speed
         run: |
-          if grep -q "30.*second\|<.*45" runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh; then
+          if grep -q "30.*second\|<.*45" runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh; then
             echo "✓ Carter one-shot optimized for speed"
           else
             echo "⚠️  Execution time marker not found"
@@ -196,7 +196,7 @@ jobs:
 
       - name: Check Carter one-shot completeness
         run: |
-          if grep -q "ETERNAL\|eternal" runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh; then
+          if grep -q "ETERNAL\|eternal" runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh; then
             echo "✓ Carter one-shot marked eternal"
           else
             echo "⚠️  Eternal marker not found"
@@ -210,12 +210,12 @@ jobs:
 
       - name: Syntax check — Phase 2 (Bauer)
         run: |
-          bash -n runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
+          bash -n runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh
           echo "✓ Bauer one-shot: syntax OK"
 
       - name: Verify SSH hardening (Bauer principle)
         run: |
-          if grep -q "PasswordAuthentication no" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "PasswordAuthentication no" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH hardening enforced (key-only in Bauer one-shot)"
           else
             echo "❌ SSH hardening incomplete"
@@ -224,7 +224,7 @@ jobs:
 
       - name: Verify Bauer GitHub key pull
         run: |
-          if grep -q "github.com.*keys" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "github.com.*keys" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ Bauer pulls keys from GitHub"
           else
             echo "⚠️  GitHub key pull not found"
@@ -232,7 +232,7 @@ jobs:
 
       - name: Verify Bauer banner presence
         run: |
-          if grep -q "BAUER\|BANNER" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "BAUER\|BANNER" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ Bauer victory banner configured"
           else
             echo "⚠️  Bauer banner not found"
@@ -240,7 +240,7 @@ jobs:
 
       - name: Check Bauer eternal marker
         run: |
-          if grep -q "ETERNAL\|eternal" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "ETERNAL\|eternal" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ Bauer one-shot marked eternal"
           else
             echo "⚠️  Eternal marker not found"
@@ -330,8 +330,8 @@ jobs:
       - name: Verify one-shot executability
         run: |
           echo "Checking Trinity one-shot scripts..."
-          ls -la runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
-          ls -la runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
+          ls -la runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh
+          ls -la runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh
           ls -la runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh
           echo "✓ All three one-shots present and readable"
 

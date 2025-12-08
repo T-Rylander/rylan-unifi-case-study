@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # === SUEHRING ETERNAL PERIMETER v6 — MINISTRY OF PERIMETER (30 seconds) ===
 # runbooks/ministry-perimeter/rylan-suehring-eternal-one-shot.sh
+# Suehring (2005) — The Network is the First Line of Defense
 # T3-ETERNAL: API-only. <=10 rules. Idempotent. USG-3P offload safe.
 # Commit: feat/t3-eternal-v6-perimeter | Tag: v6.0.0-perimeter
 set -euo pipefail

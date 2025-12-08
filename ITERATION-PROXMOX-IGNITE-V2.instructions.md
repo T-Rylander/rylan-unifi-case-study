@@ -13,7 +13,7 @@
 - **CI Status**: RED (dependency issues, no offensive tests)
 - **Testing**: 90% coverage (passive only, missing security validation)
 - **Score**: 8.5/10 (Grok red-team assessment)
-- **Gap**: Strong foundation but violates Barrett's <400 LOC atomic principle
+- **Gap**: Strong foundation but violates Unix Philosophy (<400 LOC atomic principle)
 
 ### Target State (Iteration V2)
 - **Architecture**: Modular 5-phase system with <400 LOC total
@@ -26,7 +26,7 @@
 ### Problem Definition
 Leo's red-team analysis identified 15 refinement priorities:
 
-1. **Barrett LOC Reduction** (520 → <400 via modularization)
+1. **Unix Philosophy LOC Reduction** (520 → <400 via modularization)
 2. **Documentation Pruning** (78 KB → <30 KB)
 3. **Offensive Testing** (Whitaker validation gaps)
 4. **CI/CD Repair** (RED workflow → GREEN)
@@ -1337,7 +1337,7 @@ cat /var/log/proxmox-ignite-metrics.json | jq
 
 ### T3-ETERNAL Compliance Framework
 
-**Barrett (2003): Small is Beautiful**
+**Unix Philosophy (McIlroy  Thompson  Raymond  Gancarz): Small is Beautiful**
 - [ ] <400 LOC total (modular phases)
 - [ ] Single responsibility per function
 - [ ] Pure bash (no exotic dependencies)

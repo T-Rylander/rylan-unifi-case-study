@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# === CARTER ETERNAL IDENTITY v6 — MINISTRY OF SECRETS (90 seconds) ===
-# runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
+# === CARTER ETERNAL IDENTITY v6 — MINISTRY OF CARTER (90 seconds) ===
+# runbooks/ministry-carter/rylan-carter-eternal-one-shot.sh
+# Carter (2003) — Identity is Programmable Infrastructure
 # T3-ETERNAL: No passwords. No secrets on disk. Idempotent. Pentest-clean.
-# Commit: feat/t3-eternal-v6-secrets | Tag: v6.0.0-secrets
+# Commit: feat/t3-eternal-v6-carter | Tag: v6.0.0-carter
 set -euo pipefail
 
 # === CANON LOCKS (NEVER CHANGE) ===

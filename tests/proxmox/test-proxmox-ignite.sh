@@ -402,7 +402,7 @@ suite_code_metrics() {
   function_count=$(grep -c "^[a-z_][a-z_]*() {" "$SCRIPT_PATH" || echo 0)
   
   if [ "$code_lines" -le 500 ]; then
-    test_pass "Code complexity within limits (Barrett Unix Zen: $code_lines LOC ≤ 500)"
+    test_pass "Code complexity within limits (Unix Philosophy: $code_lines LOC ≤ 500)"
   else
     test_fail "Code complexity excessive ($code_lines LOC > 500)"
   fi

@@ -76,11 +76,11 @@ fi
 log_step "Running as root"
 
 # Verify runbooks exist
-if [[ ! -d "$REPO_ROOT/runbooks/ministry-secrets" ]]; then
+if [[ ! -d "$REPO_ROOT/runbooks/ministry-carter" ]]; then
   log_error "Ministry of Secrets runbook not found"
   exit 1
 fi
-if [[ ! -d "$REPO_ROOT/runbooks/ministry-whispers" ]]; then
+if [[ ! -d "$REPO_ROOT/runbooks/ministry-bauer" ]]; then
   log_error "Ministry of Whispers runbook not found"
   exit 1
 fi
@@ -102,7 +102,7 @@ log_step "OS check passed"
 
 log_phase "PHASE 1: MINISTRY OF SECRETS (Carter Foundation)"
 
-if bash "$REPO_ROOT/runbooks/ministry-secrets/deploy.sh"; then
+if bash "$REPO_ROOT/runbooks/ministry-carter/deploy.sh"; then
   log_success "Phase 1 (Secrets) PASSED"
 else
   log_error "Phase 1 (Secrets) FAILED — Aborting Trinity sequence"
@@ -123,7 +123,7 @@ fi
 
 log_phase "PHASE 2: MINISTRY OF WHISPERS (Bauer Hardening)"
 
-if bash "$REPO_ROOT/runbooks/ministry-whispers/harden.sh"; then
+if bash "$REPO_ROOT/runbooks/ministry-bauer/harden.sh"; then
   log_success "Phase 2 (Whispers) PASSED"
 else
   log_error "Phase 2 (Whispers) FAILED — Aborting Trinity sequence"
