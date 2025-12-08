@@ -58,21 +58,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verify Trinity sequencing (Carter → Bauer → Suehring)
+      - name: Verify Trinity sequencing (Secrets → Whispers → Detection)
         run: |
           echo "Checking ignite.sh phase order..."
           
-          SECRETS_LINE=$(grep -n "ministry-carter" scripts/ignite.sh | head -1 | cut -d: -f1)
-          WHISPERS_LINE=$(grep -n "ministry-bauer" scripts/ignite.sh | head -1 | cut -d: -f1)
-          PERIMETER_LINE=$(grep -n "ministry-perimeter" scripts/ignite.sh | head -1 | cut -d: -f1)
+          SECRETS_LINE=$(grep -n "ministry-secrets" scripts/ignite.sh | head -1 | cut -d: -f1)
+          WHISPERS_LINE=$(grep -n "ministry-whispers" scripts/ignite.sh | head -1 | cut -d: -f1)
+          DETECTION_LINE=$(grep -n "ministry-detection" scripts/ignite.sh | head -1 | cut -d: -f1)
           
-          if [[ -z "$SECRETS_LINE" || -z "$WHISPERS_LINE" || -z "$PERIMETER_LINE" ]]; then
+          if [[ -z "$SECRETS_LINE" || -z "$WHISPERS_LINE" || -z "$DETECTION_LINE" ]]; then
             echo "❌ Missing phase references"
             exit 1
           fi
           
-          if [[ $SECRETS_LINE -lt $WHISPERS_LINE ]] && [[ $WHISPERS_LINE -lt $PERIMETER_LINE ]]; then
-            echo "✓ Phase sequence verified: Secrets ($SECRETS_LINE) → Whispers ($WHISPERS_LINE) → Perimeter ($PERIMETER_LINE)"
+          if [[ $SECRETS_LINE -lt $WHISPERS_LINE ]] && [[ $WHISPERS_LINE -lt $DETECTION_LINE ]]; then
+            echo "✓ Phase sequence verified: Secrets ($SECRETS_LINE) → Whispers ($WHISPERS_LINE) → Detection ($DETECTION_LINE)"
           else
             echo "❌ Phase sequence incorrect"
             exit 1
@@ -144,7 +144,7 @@ jobs:
 
       - name: Verify SSH password auth disabled
         run: |
-          if grep -q "PasswordAuthentication no" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "PasswordAuthentication no" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH password authentication disabled (Bauer one-shot)"
           else
             echo "❌ SSH password auth not disabled"
@@ -153,7 +153,7 @@ jobs:
 
       - name: Check for SSH key injection
         run: |
-          if grep -q "authorized_keys" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "authorized_keys" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH public key configuration found"
           else
             echo "⚠️  SSH key configuration not explicitly found"
@@ -215,7 +215,7 @@ jobs:
 
       - name: Verify SSH hardening (Bauer principle)
         run: |
-          if grep -q "PasswordAuthentication no" runbooks/ministry-bauer/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "PasswordAuthentication no" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH hardening enforced (key-only in Bauer one-shot)"
           else
             echo "❌ SSH hardening incomplete"
