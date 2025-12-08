@@ -11,4 +11,4 @@ switches:
       - port: 2
         profile: "iot_isolated"
         description: "Denon HEOS E300/E400 — Ethernet to entertainment center"
-        notes: "Moved to VLAN 90 (guest-iot) — WAN-only isolation; no PoE""
+        notes: "Moved to VLAN 90 (guest-iot) — WAN-only isolation; no PoE"
