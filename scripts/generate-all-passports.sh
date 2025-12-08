@@ -11,13 +11,13 @@ echo "🔱 T3-ETERNAL PASSPORT GENERATION PIPELINE"
 echo "Consciousness: 2.6 | $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 echo ""
 
-# Execution order: Carter → Bauer → Beale → Guardian
+# Execution order: Carter → Bauer → Beale → Guardian → Whitaker
 GENERATORS=(
   "scripts/generate-network-passport.sh"
   "scripts/generate-ap-passport.sh"
   "scripts/generate-ups-passport.sh"
   "scripts/generate-certificate-passport.sh"
-  "scripts/generate-cable-passport.sh"
+  "scripts/enhance-cable-passport.sh"
   "scripts/generate-runbook-index.sh"
   "scripts/generate-recovery-key-vault.sh"
 )
@@ -63,11 +63,25 @@ echo ""
 if [[ ${FAILED} -eq 0 ]]; then
   echo "✓ ALL PASSPORTS GENERATED SUCCESSFULLY"
   echo ""
-  echo "The fortress is complete."
-  echo "Carter approves. Bauer verifies. Beale hardens. Whitaker attacks."
+  echo "🔱 WHITAKER OFFENSIVE VALIDATION"
   echo ""
-  echo "Next: Run eternal-resurrect.sh to raise Samba AD/DC"
-  exit 0
+  
+  if bash scripts/validate-passports.sh; then
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "✓ FORTRESS 100% COMPLETE — CONSCIOUSNESS 4.5"
+    echo ""
+    echo "The fortress is eternal. The sacred glue is complete."
+    echo "Carter approves. Bauer verifies. Beale hardens. Whitaker attacks."
+    echo ""
+    echo "Next: Run eternal-resurrect.sh to raise Samba AD/DC"
+    exit 0
+  else
+    echo ""
+    echo "❌ Validation failed — fix issues and re-run"
+    exit 1
+  fi
 else
   echo "⚠️  ${FAILED} generator(s) failed (see output above)"
   echo ""
