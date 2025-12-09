@@ -75,7 +75,7 @@ main() {
 	# Validate each script
 	while IFS= read -r script; do
 		((total_scripts++))
-		local script_name="${script#${REPO_ROOT}/}"
+		local script_name="${script#"${REPO_ROOT}"/}"
 
 		# ShellCheck validation
 		if shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" | tee -a /tmp/shellcheck-output.log; then

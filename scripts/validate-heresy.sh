@@ -10,7 +10,8 @@ readonly TARGET="${1:-}"
 echo "Validating heresy wrapper: ${TARGET}"
 
 # Check 1: Line count ≤19 (excluding Python payload)
-readonly LINE_COUNT=$(grep -v '^PYTHON_PAYLOAD$' "${TARGET}" | grep -v '^PY$' | wc -l)
+LINE_COUNT="$(grep -cvE '^(PYTHON_PAYLOAD|PY)$' "${TARGET}")"
+readonly LINE_COUNT
 if [[ ${LINE_COUNT} -gt 19 ]]; then
   echo "❌ FAIL: Wrapper exceeds 19 lines (found: ${LINE_COUNT})"
   exit 1
@@ -23,7 +24,8 @@ if ! grep -q "Canonical Heresy Wrapper" "${TARGET}"; then
 fi
 
 # Check 3: Magic comments ≤4
-readonly MAGIC_COUNT=$(grep -c "shellcheck disable=" "${TARGET}" || true)
+MAGIC_COUNT="$(grep -c "shellcheck disable=" "${TARGET}" || true)"
+readonly MAGIC_COUNT
 if [[ ${MAGIC_COUNT} -gt 4 ]]; then
   echo "❌ FAIL: Too many magic comments (found: ${MAGIC_COUNT}, max: 4)"
   exit 1

@@ -5,19 +5,21 @@
 # Canon: Hellodeolu v6 — Junior-at-3-AM deployable, idempotent, self-validating
 set -euo pipefail
 IFS=$'\n\t'
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+readonly SCRIPT_DIR SCRIPT_NAME
 
 log() { printf '%b\n' "[$(date +'%Y-%m-%dT%H:%M:%S%z')] ${SCRIPT_NAME}: $*"; }
 die() { log "ERROR: $*" >&2; exit 1; }
 
 # ────── CONFIGURATION ──────
-readonly DRY_RUN="${DRY_RUN:-false}"
-readonly PROXMOX_HOST="${PROXMOX_HOST:-10.0.10.5}"
-readonly RYLAN_DC_IP="10.0.10.10"
-readonly UNIFI_CONTROLLER_IP="${RYLAN_DC_IP}"
-readonly START_TIME=$(date +%s)
-readonly RTO_THRESHOLD=900  # 15 minutes
+DRY_RUN="${DRY_RUN:-false}"
+PROXMOX_HOST="${PROXMOX_HOST:-10.0.10.5}"
+RYLAN_DC_IP="10.0.10.10"
+UNIFI_CONTROLLER_IP="${RYLAN_DC_IP}"
+START_TIME=$(date +%s)
+RTO_THRESHOLD=900  # 15 minutes
+readonly DRY_RUN PROXMOX_HOST RYLAN_DC_IP UNIFI_CONTROLLER_IP START_TIME RTO_THRESHOLD
 
 # Phase tracking
 PHASE_CURRENT=0

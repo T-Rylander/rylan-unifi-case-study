@@ -39,6 +39,7 @@ log_warn() { echo -e "${YELLOW}[TRINITY-WARN]${NC} $1"; }
 log_success() { echo -e "${GREEN}[TRINITY-SUCCESS]${NC} $1"; }
 
 # Exit handler with duration
+# shellcheck disable=SC2317
 exit_handler() {
   local exit_code=$?
   ELAPSED=$(($(date +%s) - START_TIME))
@@ -49,7 +50,7 @@ exit_handler() {
     log_error "Trinity orchestration FAILED at $(date) (exit code: $exit_code)"
   fi
 
-  exit $exit_code
+  exit "$exit_code"
 }
 
 trap 'exit_handler' EXIT
@@ -65,6 +66,7 @@ if [[ ! -f "$REPO_ROOT/.env" ]]; then
   log_error ".env not found. Copy .env.example and configure for your environment."
   exit 1
 fi
+# shellcheck disable=SC1091
 source "$REPO_ROOT/.env"
 log_step ".env loaded"
 

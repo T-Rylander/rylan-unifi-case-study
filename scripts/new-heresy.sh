@@ -22,7 +22,8 @@ cp "${TEMPLATE}" "${TARGET}"
 chmod +x "${TARGET}"
 
 # Generate commit message
-readonly TOOL_NAME="$(basename "${TARGET}" .sh)"
+TOOL_NAME="$(basename "${TARGET}" .sh)"
+readonly TOOL_NAME
 cat <<EOF
 
 ✓ Created: ${TARGET}
