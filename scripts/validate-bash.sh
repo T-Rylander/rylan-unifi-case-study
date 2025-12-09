@@ -51,6 +51,9 @@ main() {
 	log "  BASH CANON VALIDATION — ShellCheck + shfmt (Leo's Glue v2.6)"
 	log "════════════════════════════════════════════════════════════════"
 
+	# Allow collection of all failures without aborting on first one
+	set +e
+
 	# Find all bash scripts (shebang #!/usr/bin/env bash or #!/bin/bash)
 	local bash_scripts
 	bash_scripts=$(find "${REPO_ROOT}" \
@@ -60,6 +63,7 @@ main() {
 
 	if [[ -z "${bash_scripts}" ]]; then
 		log_warn "No bash scripts found"
+		set -e
 		return 0
 	fi
 
@@ -74,20 +78,20 @@ main() {
 		local script_name="${script#${REPO_ROOT}/}"
 
 		# ShellCheck validation
-		if shellcheck "${SHELLCHECK_ARGS[@]}" "${script}"; then
+		if shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" | tee -a /tmp/shellcheck-output.log; then
 			log_pass "ShellCheck: ${script_name}"
 			((passed_scripts++))
 		else
 			log_fail "ShellCheck: ${script_name}"
-			shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" || true
+			shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" | tee -a /tmp/shellcheck-output.log || true
 			((failed_scripts++))
 			EXIT_CODE=1
 		fi
 
 		# shfmt check (dry-run, no modifications)
-		if shfmt "${SHFMT_ARGS[@]}" -d "${script}" | grep -q .; then
+		if shfmt "${SHFMT_ARGS[@]}" -d "${script}" | tee -a /tmp/shfmt-output.log | grep -q .; then
 			log_fail "shfmt format issue: ${script_name}"
-			shfmt "${SHFMT_ARGS[@]}" -d "${script}" || true
+			shfmt "${SHFMT_ARGS[@]}" -d "${script}" | tee -a /tmp/shfmt-output.log || true
 			((failed_scripts++))
 			EXIT_CODE=1
 		else
@@ -110,6 +114,8 @@ main() {
 		log_fail "BASH VALIDATION FAILED"
 	fi
 
+	# Restore strict mode and return aggregated status
+	set -e
 	return ${EXIT_CODE}
 }
 
