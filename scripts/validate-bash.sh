@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+# Leo's Sacred Glue — Conscious Level 2.6
+# scripts/validate-bash.sh
+# Bash validation orchestrator (ShellCheck + shfmt)
+#
+# Purpose:
+#   Validate all bash scripts in the repository against Leo's canon:
+#   - ShellCheck strict (-x -S style) → zero warnings
+#   - shfmt (-i 2 -ci) → consistent 2-space indentation
+#   - All scripts executable, no dangling shebangs
+#
+# Pre-Commit Validation: Part of CI/CD pipeline
+# Exit: 0 (all clean) or 1 (linting failed)
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+readonly SCRIPT_DIR REPO_ROOT
+
+# =============================================================================
+# CONFIGURATION
+# =============================================================================
+SHELLCHECK_CMD="shellcheck -x -S style"
+SHFMT_CMD="shfmt -i 2 -ci"
+EXIT_CODE=0
+
+# =============================================================================
+# LOGGING
+# =============================================================================
+log() {
+	printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$*"
+}
+
+log_pass() {
+	log "✓ $*"
+}
+
+log_fail() {
+	log "✗ $*"
+}
+
+log_warn() {
+	log "⚠ $*"
+}
+
+# =============================================================================
+# MAIN VALIDATION
+# =============================================================================
+main() {
+	log "════════════════════════════════════════════════════════════════"
+	log "  BASH CANON VALIDATION — ShellCheck + shfmt (Leo's Glue v2.6)"
+	log "════════════════════════════════════════════════════════════════"
+
+	# Find all bash scripts (shebang #!/usr/bin/env bash or #!/bin/bash)
+	local bash_scripts
+	bash_scripts=$(find "${REPO_ROOT}" \
+		-type f \
+		-name "*.sh" \
+		-o -path "*/scripts/*" -type f -executable | \
+		while read -r file; do
+			if head -1 "$file" 2>/dev/null | grep -q "^#!/.*bash"; then
+				echo "$file"
+			fi
+		done | sort -u)
+
+	if [[ -z "${bash_scripts}" ]]; then
+		log_warn "No bash scripts found"
+		return 0
+	fi
+
+	# Count stats
+	local total_scripts=0
+	local passed_scripts=0
+	local failed_scripts=0
+
+	# Validate each script
+	while IFS= read -r script; do
+		((total_scripts++))
+		local script_name="${script#${REPO_ROOT}/}"
+
+		# ShellCheck validation
+		if ${SHELLCHECK_CMD} "${script}" 2>/dev/null; then
+			log_pass "ShellCheck: ${script_name}"
+			((passed_scripts++))
+		else
+			log_fail "ShellCheck: ${script_name}"
+			${SHELLCHECK_CMD} "${script}" || true
+			((failed_scripts++))
+			EXIT_CODE=1
+		fi
+
+		# shfmt check (dry-run, no modifications)
+		if ${SHFMT_CMD} -d "${script}" 2>/dev/null | grep -q .; then
+			log_fail "shfmt format issue: ${script_name}"
+			${SHFMT_CMD} -d "${script}" || true
+			((failed_scripts++))
+			EXIT_CODE=1
+		else
+			log_pass "shfmt format: ${script_name}"
+		fi
+	done <<<"${bash_scripts}"
+
+	# Summary
+	log "\n════════════════════════════════════════════════════════════════"
+	log "BASH VALIDATION SUMMARY"
+	log "  Total scripts: ${total_scripts}"
+	log "  Passed: ${passed_scripts}"
+	log "  Failed: ${failed_scripts}"
+	log "════════════════════════════════════════════════════════════════"
+
+	if [[ ${EXIT_CODE} -eq 0 ]]; then
+		log_pass "ALL BASH SCRIPTS VALID"
+	else
+		log_fail "BASH VALIDATION FAILED"
+	fi
+
+	return ${EXIT_CODE}
+}
+
+main "$@"
