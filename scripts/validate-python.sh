@@ -22,11 +22,6 @@ readonly SCRIPT_DIR REPO_ROOT
 # =============================================================================
 # CONFIGURATION
 # =============================================================================
-RUFF_CMD="ruff check --select ALL"
-MYPY_CMD="mypy --strict"
-BANDIT_CMD="bandit -r"
-# Coverage threshold: 70% baseline, incrementally improving toward 93%
-PYTEST_CMD="pytest --cov=. --cov-fail-under=70"
 EXIT_CODE=0
 
 # =============================================================================
@@ -75,7 +70,7 @@ main() {
 	# Stage 1: ruff check
 	log ""
 	log "[STAGE 1] ruff check (code quality, style, security)"
-	if cd "${REPO_ROOT}" && ${RUFF_CMD} . 2>&1 | tee /tmp/ruff-output.txt; then
+	if cd "${REPO_ROOT}" && ruff check --select ALL . 2>&1 | tee /tmp/ruff-output.txt; then
 		log_pass "ruff: All violations fixed (score 10.00)"
 	else
 		log_fail "ruff: Violations detected"
@@ -86,7 +81,7 @@ main() {
 	# Stage 2: mypy --strict
 	log ""
 	log "[STAGE 2] mypy --strict (type checking)"
-	if cd "${REPO_ROOT}" && ${MYPY_CMD} . 2>&1 | tee /tmp/mypy-output.txt; then
+	if cd "${REPO_ROOT}" && mypy --strict . 2>&1 | tee /tmp/mypy-output.txt; then
 		log_pass "mypy: Type checking passed (zero errors)"
 	else
 		log_fail "mypy: Type errors detected"
@@ -97,7 +92,7 @@ main() {
 	# Stage 3: bandit (security audit)
 	log ""
 	log "[STAGE 3] bandit (security audit)"
-	if cd "${REPO_ROOT}" && ${BANDIT_CMD} . --json 2>&1 | tee /tmp/bandit-output.json; then
+	if cd "${REPO_ROOT}" && bandit -r . --json 2>&1 | tee /tmp/bandit-output.json; then
 		# Check for HIGH/MEDIUM issues
 		if grep -q '"severity": "HIGH"' /tmp/bandit-output.json 2>/dev/null; then
 			log_fail "bandit: HIGH severity issues detected"
@@ -119,7 +114,7 @@ main() {
 	# Stage 4: pytest with coverage
 	log ""
 	log "[STAGE 4] pytest (test suite, >=70% coverage)"
-	if cd "${REPO_ROOT}" && ${PYTEST_CMD} 2>&1 | tee /tmp/pytest-output.txt; then
+	if cd "${REPO_ROOT}" && pytest --cov=. --cov-fail-under=70 2>&1 | tee /tmp/pytest-output.txt; then
 		log_pass "pytest: All tests passed (>=70% coverage)"
 	else
 		# Don't fail on pytest for now (optional coverage check)

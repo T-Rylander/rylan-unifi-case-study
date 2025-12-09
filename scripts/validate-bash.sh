@@ -20,8 +20,8 @@ readonly SCRIPT_DIR REPO_ROOT
 # =============================================================================
 # CONFIGURATION
 # =============================================================================
-SHELLCHECK_CMD="shellcheck -x -S style"
-SHFMT_CMD="shfmt -i 2 -ci"
+readonly SHELLCHECK_ARGS=(-x -S style)
+readonly SHFMT_ARGS=(-i 2 -ci)
 EXIT_CODE=0
 
 # =============================================================================
@@ -74,20 +74,20 @@ main() {
 		local script_name="${script#${REPO_ROOT}/}"
 
 		# ShellCheck validation
-		if ${SHELLCHECK_CMD} "${script}" 2>/dev/null; then
+		if shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" 2>/dev/null; then
 			log_pass "ShellCheck: ${script_name}"
 			((passed_scripts++))
 		else
 			log_fail "ShellCheck: ${script_name}"
-			${SHELLCHECK_CMD} "${script}" || true
+			shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" || true
 			((failed_scripts++))
 			EXIT_CODE=1
 		fi
 
 		# shfmt check (dry-run, no modifications)
-		if ${SHFMT_CMD} -d "${script}" 2>/dev/null | grep -q .; then
+		if shfmt "${SHFMT_ARGS[@]}" -d "${script}" 2>/dev/null | grep -q .; then
 			log_fail "shfmt format issue: ${script_name}"
-			${SHFMT_CMD} -d "${script}" || true
+			shfmt "${SHFMT_ARGS[@]}" -d "${script}" || true
 			((failed_scripts++))
 			EXIT_CODE=1
 		else
