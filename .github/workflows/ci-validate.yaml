@@ -41,6 +41,10 @@ jobs:
       - name: Run validate-bash.sh
         run: bash ./scripts/validate-bash.sh
         shell: bash
+      
+      - name: Validate heresy containment
+        run: bash ./scripts/validate-heresy.sh
+        shell: bash
 
   lint-python:
     name: "🔍 Python Canon (ruff + mypy + bandit)"
