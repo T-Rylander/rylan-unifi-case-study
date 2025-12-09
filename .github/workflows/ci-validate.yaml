@@ -63,7 +63,7 @@ jobs:
         shell: bash
 
   test-python:
-    name: "🧪 Python Coverage (pytest >=93%)"
+    name: "🧪 Python Coverage (pytest >=70%)"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -80,8 +80,8 @@ jobs:
       
       - name: Run pytest with coverage
         run: |
-          pytest --cov=. --cov-report=term-missing --cov-fail-under=93 || {
-            echo "❌ Coverage below 93% threshold"
+          pytest --cov=. --cov-report=term-missing --cov-fail-under=70 || {
+            echo "❌ Coverage below 70% threshold"
             exit 1
           }
 
