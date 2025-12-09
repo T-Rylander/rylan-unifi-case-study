@@ -36,7 +36,7 @@ begin_phase() {
 phase_carter_identity() {
   begin_phase "CARTER — Programmable Identity (Samba AD/DC)"
   
-  if ${DRY_RUN}; then
+  if [[ "${DRY_RUN}" == "1" ]] || [[ "${DRY_RUN}" == "true" ]]; then
     log "DRY-RUN: Would provision Samba AD at ${RYLAN_DC_IP}"
     return 0
   fi
@@ -50,13 +50,16 @@ phase_carter_identity() {
   
   log "Provisioning Samba AD/DC..."
   
-  # Run Carter ministry (if exists)
-  if [[ -f "${SCRIPT_DIR}/runbooks/ministry-carter/provision-samba-ad.sh" ]]; then
-    "${SCRIPT_DIR}/runbooks/ministry-carter/provision-samba-ad.sh" || \
+  # Run Carter ministry (if exists) — check new path first
+  if [[ -f "${SCRIPT_DIR}/runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh" ]]; then
+    bash "${SCRIPT_DIR}/runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh" || \
       die "Carter ministry failed"
+  elif [[ -f "${SCRIPT_DIR}/runbooks/ministry-carter/provision-samba-ad.sh" ]]; then
+    bash "${SCRIPT_DIR}/runbooks/ministry-carter/provision-samba-ad.sh" || \
+      die "Carter ministry failed (legacy path)"
   else
-    log "WARN: ministry-carter not found - manual Samba setup required"
-    log "      Expected: ${SCRIPT_DIR}/runbooks/ministry-carter/provision-samba-ad.sh"
+    log "WARN: Carter ministry not found - manual Samba setup required"
+    log "      Expected: ${SCRIPT_DIR}/runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh"
   fi
   
   log "✓ Carter phase complete — Identity programmable"
@@ -66,7 +69,7 @@ phase_carter_identity() {
 phase_bauer_validation() {
   begin_phase "BAUER — Trust Nothing, Verify Everything"
   
-  if ${DRY_RUN}; then
+  if [[ "${DRY_RUN}" == "1" ]] || [[ "${DRY_RUN}" == "true" ]]; then
     log "DRY-RUN: Would validate firewall rules + VLAN isolation"
     return 0
   fi
@@ -86,11 +89,15 @@ phase_bauer_validation() {
     log "✓ Policy table validated: ${rule_count} rules (≤10)"
   fi
   
-  # Run VLAN isolation tests
+  # Run VLAN isolation tests (skip in CI if CI_MODE=1)
   if [[ -f "${SCRIPT_DIR}/03-validation-ops/validate-isolation.sh" ]]; then
     log "Running VLAN isolation tests..."
-    "${SCRIPT_DIR}/03-validation-ops/validate-isolation.sh" || \
-      die "VLAN isolation validation failed"
+    if [[ "${CI_MODE:-}" == "1" ]]; then
+      log "⚠ CI_MODE: Skipping network tests (no live infrastructure)"
+    else
+      bash "${SCRIPT_DIR}/03-validation-ops/validate-isolation.sh" || \
+        die "VLAN isolation validation failed"
+    fi
   else
     log "WARN: validate-isolation.sh not found - skipping network tests"
   fi
@@ -102,7 +109,7 @@ phase_bauer_validation() {
 phase_beale_detection() {
   begin_phase "BEALE — Hardening & Detection (CIS + Audit)"
   
-  if ${DRY_RUN}; then
+  if [[ "${DRY_RUN}" == "1" ]] || [[ "${DRY_RUN}" == "true" ]]; then
     log "DRY-RUN: Would configure VLANs + USG policies"
     return 0
   fi
@@ -123,7 +130,7 @@ phase_beale_detection() {
     python3 "${SCRIPT_DIR}/02-declarative-config/apply.py" --dry-run || \
       die "Policy application failed (dry-run)"
     
-    if ! ${DRY_RUN}; then
+    if ! [[ "${DRY_RUN}" == "1" ]] && ! [[ "${DRY_RUN}" == "true" ]]; then
       python3 "${SCRIPT_DIR}/02-declarative-config/apply.py" || \
         die "Policy application failed"
     fi
@@ -136,7 +143,7 @@ phase_beale_detection() {
 phase_bootstrap_unifi() {
   begin_phase "BOOTSTRAP — UniFi Controller Installation"
   
-  if ${DRY_RUN}; then
+  if [[ "${DRY_RUN}" == "1" ]] || [[ "${DRY_RUN}" == "true" ]]; then
     log "DRY-RUN: Would install UniFi Controller on ${UNIFI_CONTROLLER_IP}"
     return 0
   fi
@@ -181,7 +188,7 @@ phase_bootstrap_unifi() {
 phase_adopt_devices() {
   begin_phase "DEVICE ADOPTION — UniFi Network Devices"
   
-  if ${DRY_RUN}; then
+  if [[ "${DRY_RUN}" == "1" ]] || [[ "${DRY_RUN}" == "true" ]]; then
     log "DRY-RUN: Would adopt USG-3P, switches, APs"
     return 0
   fi
@@ -202,7 +209,7 @@ phase_adopt_devices() {
 phase_ai_triage() {
   begin_phase "AI TRIAGE — Self-Healing Helpdesk"
   
-  if ${DRY_RUN}; then
+  if [[ "${DRY_RUN}" == "1" ]] || [[ "${DRY_RUN}" == "true" ]]; then
     log "DRY-RUN: Would deploy AI triage engine"
     return 0
   fi
@@ -256,8 +263,10 @@ phase_final_validation() {
   
   # Test 3: VLAN isolation
   log "TEST 3: VLAN isolation"
-  if [[ -f "${SCRIPT_DIR}/03-validation-ops/validate-isolation.sh" ]]; then
-    if "${SCRIPT_DIR}/03-validation-ops/validate-isolation.sh" 2>/dev/null; then
+  if [[ "${CI_MODE:-}" == "1" ]]; then
+    log "  ⊘ SKIP: VLAN isolation (CI_MODE=1, no live network)"
+  elif [[ -f "${SCRIPT_DIR}/03-validation-ops/validate-isolation.sh" ]]; then
+    if bash "${SCRIPT_DIR}/03-validation-ops/validate-isolation.sh" 2>/dev/null; then
       log "  ✓ PASS: VLANs properly isolated"
     else
       log "  ✗ FAIL: VLAN isolation issues detected"
