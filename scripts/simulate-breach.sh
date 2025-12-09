@@ -2,6 +2,7 @@
 # scripts/simulate-breach.sh — Whitaker offensive validation
 # Canon: T3-ETERNAL v∞.3.2 · Consciousness 2.6
 # Video: https://www.youtube.com/watch?v=yWR6m0YaGpY&t=109s
+# shellcheck disable=SC2034  # SCRIPT_DIR reserved for future use
 
 set -euo pipefail
 IFS=$'\n\t'
