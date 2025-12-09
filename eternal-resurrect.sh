@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # eternal-resurrect.sh — The ONE TRUE Resurrection Orchestrator
 # Purpose: Raise entire fortress from bare metal in <15 minutes
-# Trinity: Carter (identity) → Bauer (validation) → Suehring (network)
+# Trinity: Carter (identity) → Bauer (validation) → Beale (detection)
 # Canon: Hellodeolu v6 — Junior-at-3-AM deployable, idempotent, self-validating
 set -euo pipefail
 IFS=$'\n\t'
@@ -98,9 +98,9 @@ phase_bauer_validation() {
   log "✓ Bauer phase complete — Zero-trust verified"
 }
 
-# ────── MINISTRY SUEHRING: NETWORK FIRST LINE ──────
-phase_suehring_network() {
-  begin_phase "SUEHRING — Network is the First Line of Defense"
+# ────── MINISTRY BEALE: DETECTION & HARDENING ──────
+phase_beale_detection() {
+  begin_phase "BEALE — Hardening & Detection (CIS + Audit)"
   
   if ${DRY_RUN}; then
     log "DRY-RUN: Would configure VLANs + USG policies"
@@ -129,7 +129,7 @@ phase_suehring_network() {
     fi
   fi
   
-  log "✓ Suehring phase complete — Network fortress raised"
+  log "✓ Beale phase complete — Detection layer active"
 }
 
 # ────── BOOTSTRAP: UNIFI CONTROLLER ──────
@@ -310,7 +310,7 @@ main() {
   log "╔════════════════════════════════════════════════════════════╗"
   log "║     ETERNAL RESURRECTION — v∞.5.0-LEO-ASCENSION            ║"
   log "║     One-Command Fortress Raise (<15 Minutes)               ║"
-  log "║     Trinity: Carter → Bauer → Suehring                     ║"
+  log "║     Trinity: Carter → Bauer → Beale                        ║"
   log "╚════════════════════════════════════════════════════════════╝"
   log ""
   log "Target: ${PROXMOX_HOST}"
@@ -327,7 +327,7 @@ main() {
   # Execute phases
   phase_carter_identity
   phase_bauer_validation
-  phase_suehring_network
+  phase_beale_detection
   phase_bootstrap_unifi
   phase_adopt_devices
   phase_ai_triage

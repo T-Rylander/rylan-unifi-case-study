@@ -2,7 +2,7 @@
 """
 03-validation-ops/phone-reg-test.py — VoIP SIP Registration Validator
 Purpose: Verify FreePBX extensions register + DSCP EF marking applied
-Trinity: Suehring (network QoS) + Bauer (verify everything)
+Trinity: Beale (detection + QoS monitoring) + Bauer (verify everything)
 Canon: mypy --strict, pytest ≥93% coverage
 """
 import subprocess

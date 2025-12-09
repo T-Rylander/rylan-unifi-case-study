@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Trinity Orchestrator — Sequential Phase Enforcement (v4.0)
-# Carter (Secrets) -> Bauer (Whispers) -> Suehring (Perimeter) -> Validate
+# Carter (Secrets) -> Bauer (Whispers) -> Beale (Detection) -> Validate
 # Zero concurrency. Exit-on-fail. Junior-at-3-AM deployable (<45 min).
 
 set -euo pipefail
@@ -12,7 +12,7 @@ cat <<'BANNER'
 
   Phase 1: Ministry of Secrets (Carter)  -> Samba / LDAP / Kerberos
   Phase 2: Ministry of Whispers (Bauer)  -> SSH / nftables / audit
-  Phase 3: Ministry of Perimeter (Suehring) -> Policy / VLAN
+  Phase 3: Ministry of Detection (Beale) -> Policy / VLAN / Audit
   Final:   Validation (eternal green or die trying)
 ================================================================================
 BANNER
@@ -171,7 +171,7 @@ if bash "$REPO_ROOT/scripts/validate-eternal.sh"; then
   log_success "TRINITY ORCHESTRATION COMPLETE — ETERNAL GREEN"
   log_success "Ministry of Secrets (Carter) — ACTIVE"
   log_success "Ministry of Whispers (Bauer) — ACTIVE"
-  log_success "Ministry of Perimeter (Suehring) — ACTIVE"
+  log_success "Ministry of Detection (Beale) — ACTIVE"
   echo ""
   log_success "Fortress is eternal. The fortress never sleeps."
   exit 0

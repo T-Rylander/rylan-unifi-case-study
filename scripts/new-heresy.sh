@@ -37,7 +37,7 @@ Next steps:
    git commit -m "feat(heresy): add ${TOOL_NAME} wrapper
 
    - Whitaker justification: <offensive/defensive reason>
-   - Trinity alignment: <Carter|Bauer|Suehring>
+   - Trinity alignment: <Carter|Bauer|Beale>
    - Heresy #<1-4>: <brief description>
    
    Refs: INSTRUCTION-SET-ETERNAL-v3.2"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# 03-validation-ops/validate-isolation.sh — Suehring: Network is First Line
+# 03-validation-ops/validate-isolation.sh — Beale: Detection & Hardening
 # Purpose: Validate VLAN isolation via nmap probes (fail on leaks)
-# Trinity: Suehring (defense in depth) + Whitaker (offensive validation)
+# Trinity: Beale (detection layer) + Whitaker (offensive validation)
 # Canon: Hellodeolu v6 — zero-trust proven, not promised
 set -euo pipefail
 IFS=$'\n\t'
