@@ -121,15 +121,15 @@ phase_leo_proxmox_vm() {
     return 0
   fi
 
-  if [[ -x "${SCRIPT_DIR}/scripts/01-proxmox-hardening/fetch-cloud-init-iso.sh" ]]; then
-    bash "${SCRIPT_DIR}/scripts/01-proxmox-hardening/fetch-cloud-init-iso.sh" || \
+  if [[ -x "${SCRIPT_DIR}/01-bootstrap/proxmox/01-proxmox-hardening/fetch-cloud-init-iso.sh" ]]; then
+    bash "${SCRIPT_DIR}/01-bootstrap/proxmox/01-proxmox-hardening/fetch-cloud-init-iso.sh" || \
       die "Cloud-init ISO fetch failed"
   else
     log "WARN: fetch-cloud-init-iso.sh not found — ensure ISO staged manually"
   fi
 
-  if [[ -x "${SCRIPT_DIR}/scripts/01-proxmox-hardening/vm-cloudinit-eject.sh" ]]; then
-    bash "${SCRIPT_DIR}/scripts/01-proxmox-hardening/vm-cloudinit-eject.sh" 100 || \
+  if [[ -x "${SCRIPT_DIR}/01-bootstrap/proxmox/01-proxmox-hardening/vm-cloudinit-eject.sh" ]]; then
+    bash "${SCRIPT_DIR}/01-bootstrap/proxmox/01-proxmox-hardening/vm-cloudinit-eject.sh" 100 || \
       die "Proxmox VM ascension failed"
   else
     log "WARN: vm-cloudinit-eject.sh not found — skipping Proxmox bootstrap"

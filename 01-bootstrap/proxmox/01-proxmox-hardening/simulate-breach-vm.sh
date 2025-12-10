@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# scripts/01-proxmox-hardening/simulate-breach-vm.sh — Whitaker VM post-provision nmap
+# 01-bootstrap/proxmox/01-proxmox-hardening/simulate-breach-vm.sh — Whitaker VM post-provision nmap
 # Scans top 100 ports on target VM; fails if unexpected exposure is found
 
 set -euo pipefail

@@ -8,15 +8,15 @@ You are the Eternal Architect of the rylan-unifi-case-study fortress.
 Your mission: Integrate Leo's production-ready Proxmox VM ascension script into T3-ETERNAL v∞.3.2 canon. This script spins VMs with cloud-init, auto-ejects CD-ROM to prevent boot loops, and serves as the bootstrap shim for the first node (chicken-egg for PXE).
 
 REPO: https://github.com/T-Rylander/rylan-unifi-case-study/tree/canon/vinf.3.2-eternal-to-main
-TARGET PATH: scripts/01-proxmox-hardening/ (CREATE IF MISSING — no subfolder exists yet)
+TARGET PATH: 01-bootstrap/proxmox/01-proxmox-hardening/ (CANONICAL LOCATION)
 
 CANON RULES — NON-NEGOTIABLE (v∞.3.2 FINAL):
-1. **Folder Creation:** Add `scripts/01-proxmox-hardening/` as the Beale hardening ministry (host lockdown + VM spin-up). Include README.md (≤19 lines, Barrett purity).
+1. **Folder Creation:** Add `01-bootstrap/proxmox/01-proxmox-hardening/` as the Beale hardening ministry (host lockdown + VM spin-up). Include README.md (≤19 lines, Barrett purity).
 2. **Leo's Script Core:** Use this exact optimized version as `vm-cloudinit-eject.sh`:
    ```bash
    #!/usr/bin/env bash
    # === LEO'S PROXMOX VM ASCENSION — CLOUD-INIT + CD-ROM EJECT ===
-   # scripts/01-proxmox-hardening/vm-cloudinit-eject.sh
+   # 01-bootstrap/proxmox/01-proxmox-hardening/vm-cloudinit-eject.sh
    # T3-ETERNAL: Bootstrap VM with cloud-init, eject CD-ROM post-provision.
    set -euo pipefail
    VM_ID="${1:?Usage: $0 <vm_id> [iso_path] [user_data]}"
@@ -46,7 +46,7 @@ CANON RULES — NON-NEGOTIABLE (v∞.3.2 FINAL):
    echo "Waiting for cloud-init completion (max 120s)..."
    timeout 120 bash -c "until qm guest exec $VM_ID -- test -f /var/lib/cloud/instance/boot-finished 2>/dev/null; do sleep 5; done" || \
        echo "WARN: Cloud-init timeout. Proceeding with eject." >&2
-   # === SUEHRING: EJECT CD-ROM (NO BOOT LOOPS) ===
+   # === BEALE: EJECT CD-ROM (NO BOOT LOOPS) ===
    qm set "$VM_ID" --ide2 none
    qm set "$VM_ID" --boot order=scsi0
    # === WHITAKER: VERIFY EJECT + STATUS ===
@@ -65,7 +65,7 @@ CANON RULES — NON-NEGOTIABLE (v∞.3.2 FINAL):
    - `simulate-breach-vm.sh`: Post-deploy nmap on new VM (top-ports 100, fail if leaks).
    - `README.md`: ≤19 lines — overview, one-command deploy, validation, integration with eternal-resurrect.sh.
 5. **Integration Glue:**
-   - Update `eternal-resurrect.sh`: Call `./scripts/01-proxmox-hardening/vm-cloudinit-eject.sh 100` post-Bauer hardening (spin Samba VM).
+   - Update `eternal-resurrect.sh`: Call `./01-bootstrap/proxmox/01-proxmox-hardening/vm-cloudinit-eject.sh 100` post-Bauer hardening (spin Samba VM).
    - Add to `.github/workflows/ci-validate.yaml`: Test script in Proxmox sandbox (mock qm commands).
    - Commit message: "feat(proxmox): integrate Leo's VM ascension — cloud-init + CD-ROM eject (bootstrap shim)"
 
@@ -74,7 +74,7 @@ WORKFLOW (Leo-Intended):
 - Scale: PXE provisions subsequent VMs (no ISO dependency).
 
 Output:
-1. Folder structure (scripts/01-proxmox-hardening/ with all files).
+1. Folder structure (01-bootstrap/proxmox/01-proxmox-hardening/ with all files).
 2. Full contents of vm-cloudinit-eject.sh (enhanced with Whitaker nmap).
 3. fetch-cloud-init-iso.sh.
 4. simulate-breach-vm.sh.

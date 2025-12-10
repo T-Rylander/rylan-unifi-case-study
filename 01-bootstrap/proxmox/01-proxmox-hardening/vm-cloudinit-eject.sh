@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# scripts/01-proxmox-hardening/vm-cloudinit-eject.sh — Leo's Proxmox VM ascension
+# 01-bootstrap/proxmox/01-proxmox-hardening/vm-cloudinit-eject.sh — Leo's Proxmox VM ascension
 # T3-ETERNAL v∞.3.2 · Cloud-init bootstrap + post-provision CD-ROM eject
 
 set -euo pipefail

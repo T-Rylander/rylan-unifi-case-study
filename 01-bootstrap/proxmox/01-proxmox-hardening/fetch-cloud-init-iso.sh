@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# scripts/01-proxmox-hardening/fetch-cloud-init-iso.sh — Stage Ubuntu 24.04 cloud-init ISO
+# 01-bootstrap/proxmox/01-proxmox-hardening/fetch-cloud-init-iso.sh — Stage Ubuntu 24.04 cloud-init ISO
 # Downloads ISO if missing, optional SHA256 verification (ISO_SHA256 env)
 
 set -euo pipefail

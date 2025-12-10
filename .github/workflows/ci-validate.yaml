@@ -108,8 +108,8 @@ jobs:
 
       - name: Dry-run Proxmox VM ascension (CI mode)
         run: |
-          CI_MODE=1 bash ./scripts/01-proxmox-hardening/vm-cloudinit-eject.sh 100
-          CI_MODE=1 bash ./scripts/01-proxmox-hardening/simulate-breach-vm.sh 10.0.10.100
+          CI_MODE=1 bash ./01-bootstrap/proxmox/01-proxmox-hardening/vm-cloudinit-eject.sh 100
+          CI_MODE=1 bash ./01-bootstrap/proxmox/01-proxmox-hardening/simulate-breach-vm.sh 10.0.10.100
         shell: bash
       
       - name: Validate firewall policy (<=10 rules)
