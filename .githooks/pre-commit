@@ -28,18 +28,18 @@ for f in "${FILES[@]}"; do
   first3=$(dd if="$f" bs=1 count=3 2>/dev/null | od -An -t u1 | tr -s ' ' | sed 's/^ //') || true
   if [[ "$first3" == "239 187 191" ]]; then
     echo "Removing UTF-8 BOM from: $f"
-    tail -c +4 "$f" > "$f.tmp" && mv "$f.tmp" "$f"
+    tail -c +4 "$f" >"$f.tmp" && mv "$f.tmp" "$f"
     git add -- "$f"
-    FIXED=$((FIXED+1))
+    FIXED=$((FIXED + 1))
   fi
 
   # Detect CRLF or bare CR and normalize to LF
   if grep -U $'\r' -q "$f" 2>/dev/null || true; then
     echo "Converting CRLF -> LF in: $f"
     # Use awk to strip CR
-    awk '{ sub("\r$", ""); print }' "$f" > "$f.tmp" && mv "$f.tmp" "$f"
+    awk '{ sub("\r$", ""); print }' "$f" >"$f.tmp" && mv "$f.tmp" "$f"
     git add -- "$f"
-    FIXED=$((FIXED+1))
+    FIXED=$((FIXED + 1))
   fi
 done
 

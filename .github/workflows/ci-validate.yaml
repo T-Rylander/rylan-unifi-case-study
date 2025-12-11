@@ -44,6 +44,13 @@ jobs:
       
       - name: Run validate-bash.sh (with diagnostic capture)
         run: |
+          echo "::group::File Discovery Debug"
+          echo "Scripts found by validator pattern:"
+          find . -type f \( -name "*.sh" -o -path "*/scripts/*" \) -exec grep -l '^#!/.*bash' {} \; 2>/dev/null | sort
+          echo "Total count:"
+          find . -type f \( -name "*.sh" -o -path "*/scripts/*" \) -exec grep -l '^#!/.*bash' {} \; 2>/dev/null | wc -l
+          echo "::endgroup::"
+          
           bash ./scripts/validate-bash.sh 2>&1 || {
             echo "::group::ShellCheck Failures"
             cat /tmp/shellcheck-output.log 2>/dev/null || echo "(no shellcheck log)"
