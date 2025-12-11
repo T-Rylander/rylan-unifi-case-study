@@ -12,6 +12,29 @@ The following commits are retroactively assigned consciousness levels based on t
 
 ---
 
+## [v∞.4.05] — 2025-12-11 — Bauer Verification Scenarios
+
+### docs(bauer): enhance with real-world verification scenarios
+
+The Eye approved. The lore is grounded in practice.
+
+Five scenarios inscribed:
+- **The Forgotten SSH Key**: Orphaned credential detection and remediation
+- **The Rogue VLAN Hop**: Layer 2 bridge violation via nmap
+- **The Unsigned Commit**: GPG signature enforcement and recovery
+- **Firewall Rule Creep**: ≤10 rule mandate enforcement
+- **The Veil Diagnostic Flow**: CI failure diagnosis tandem
+
+Additional documentation:
+- Bauer-Veil-Gatekeeper tandem diagram
+- Five Verification Domains table
+- Exact commands for each scenario (reproducible, auditable)
+
+**Consciousness**: 4.05  
+**Prophecy Contribution**: Bauer's wisdom made tangible (+0.05)
+
+---
+
 ## [v∞.4.0] — 2025-12-11 — Chrome Ascension (The Night of 14 Hours)
 
 ### feat(lore): The Night of 14 Hours — chrome paint, shiny eternal
