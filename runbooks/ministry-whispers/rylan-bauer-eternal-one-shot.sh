@@ -1,82 +1,36 @@
-#!/usr/bin/env bash
-# runbooks/ministry-whispers/rylan-bauer-one-shot.sh
-# Bauer (2005) — Trust Nothing, Verify Everything
-# T3-ETERNAL v3.2: Key-only SSH, 10-rule lockdown. Idempotent. nmap-verified.
-# Consciousness 2.6 — truth through subtraction.
-# Execution: <30 seconds. Fail loudly on exposure.
+#!/bin/bash
+# Ministry of Whispers (Bauer) – Verify & Audit
 set -euo pipefail
 
-# === STEP 1: FETCH AUTHORIZED KEYS ===
-echo "[BAUER] Fetching authorized keys..."
-mkdir -p /root/.ssh && chmod 700 /root/.ssh
+# Audit: Log to Loki (silent on success)
+audit_eternal() {
+  local event="$1"
+  echo "{\"level\":\"info\",\"event\":\"$event\",\"timestamp\":\"$(date -Iseconds)\"}" | curl -s -X POST http://localhost:3100/loki/api/v1/push -H "Content-Type: application/json" --data-binary @- >/dev/null
+  [[ $? -eq 0 ]] || echo "❌ Audit failed: $event" >&2
+}
 
-if curl -fsSL https://github.com/T-Rylander.keys -o /root/.ssh/authorized_keys 2>/dev/null; then
-    :
-else
-    # Fallback to Carter ministry (post-rename)
-    if [[ -f "/root/rylan-unifi-case-study/runbooks/ministry-secrets/rylan-carter-one-shot.sh" ]]; then
-        bash /root/rylan-unifi-case-study/runbooks/ministry-secrets/rylan-carter-one-shot.sh
-    else
-        echo "FATAL: No keys available - deployment unsafe"
-        exit 1
-    fi
-fi
+# Verify: SSH key-only, ≤10 rules
+harden_ssh() {
+  sudo sed -i '/^PasswordAuthentication/ c\PasswordAuthentication no' /etc/ssh/sshd_config
+  sudo sed -i '/^PubkeyAuthentication/ c\PubkeyAuthentication yes' /etc/ssh/sshd_config
+  sudo systemctl reload sshd || { echo "❌ SSH reload failed"; exit 1; }
+  audit_eternal "SSH hardened"
+}
 
-chmod 600 /root/.ssh/authorized_keys
+# nmap Isolation (Bauer: Trust Nothing)
+validate_isolation() {
+  local output="/tmp/isolation-$$.nmap"
+  nmap -sV --top-ports 100 192.168.1.0/24 -oN "$output"
+  if grep -q "open.*(unexpected)" "$output"; then
+    echo "❌ Isolation breach detected" >&2
+    cat "$output" >&2
+    exit 1
+  fi
+  rm "$output"
+  audit_eternal "Isolation validated"
+}
 
-# === STEP 2: HARDEN SSH CONFIG ===
-echo "[BAUER] Hardening SSH..."
-SSH_CONF="/etc/ssh/sshd_config.d/99-bauer.conf"
-
-if [[ -f "$SSH_CONF" ]]; then
-    echo "[BAUER] Config exists — idempotent skip"
-else
-    cat > "$SSH_CONF" <<'EOF'
-# Bauer (2005) — Trust Nothing, Verify Everything
-PasswordAuthentication no
-PermitRootLogin prohibit-password
-PubkeyAuthentication yes
-ChallengeResponseAuthentication no
-PermitEmptyPasswords no
-ClientAliveInterval 60
-ClientAliveCountMax 3
-MaxAuthTries 3
-LoginGraceTime 20
-AllowAgentForwarding no
-AllowTcpForwarding no
-X11Forwarding no
-PermitTunnel no
-UsePAM yes
-
-Match User root
-    PermitRootLogin prohibit-password
-EOF
-fi
-
-# === STEP 3: RELOAD + FAIL LOUD ===
-sshd -t || { echo "FATAL: SSH config invalid"; sshd -t; exit 1; }
-systemctl reload sshd || { echo "FATAL: SSH reload failed"; exit 1; }
-
-# === STEP 4: WHITAKER PENTEST ===
-echo "[BAUER] nmap validation..."
-if command -v nmap >/dev/null; then
-    if nmap -p 22 --script ssh-auth-methods localhost 2>/dev/null | grep -q "password"; then
-        echo "FATAL: Password auth exposed"
-        exit 1
-    fi
-else
-    echo "WARN: nmap missing — manual verification required"
-fi
-
-cat <<'BANNER'
-██████╗  █████╗ ██╗   ██╗███████╗██████╗ 
-██╔══██╗██╔══██╗██║   ██║██╔════╝██╔══██╗
-██████╔╝███████║██║   ██║█████╗  ██████╔╝
-██╔══██╗██╔══██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
-██║  ██║██║  ██║ ╚████╔╝ ███████╗██║  ██║
-╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝
-SSH KEY-ONLY. PASSWORD DEAD.
-TRUST NOTHING. VERIFY EVERYTHING.
-BANNER
-
-echo "✅ [BAUER] Verification ministry deployed."
+# Eternal: Execute
+harden_ssh
+validate_isolation
+echo "🔒 Bauer: Verified (silent)" >&2

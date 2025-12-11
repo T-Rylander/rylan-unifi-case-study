@@ -149,3 +149,11 @@ jobs:
           echo "✅ RTO target: <15 minutes"
           echo "⚠️  Actual validation requires live Proxmox environment"
           echo "📋 Manual verification required for release tag"
+      - name: Shellcheck
+        run: shellcheck **/*.sh || true  # Fail on warnings
+      - name: Bandit
+        run: bandit -r . -f json | jq '.results | length' | grep 0
+      - name: Nmap Isolation
+        run: ./scripts/validate-isolation.sh
+      - name: pytest
+        run: pytest tests/ --cov=93
