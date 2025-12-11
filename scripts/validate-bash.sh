@@ -76,26 +76,39 @@ main() {
   while IFS= read -r script; do
     ((total_scripts++))
     local script_name="${script#"${REPO_ROOT}"/}"
+    local script_failed=0
 
-    # ShellCheck validation
-    if shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" | tee -a /tmp/shellcheck-output.log; then
+    # ShellCheck validation (exit 0 = pass, exit 1+ = fail)
+    local shellcheck_out
+    shellcheck_out=$(shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" 2>&1) || true
+
+    if [[ -z "${shellcheck_out}" ]]; then
       log_pass "ShellCheck: ${script_name}"
-      ((passed_scripts++))
     else
       log_fail "ShellCheck: ${script_name}"
-      shellcheck "${SHELLCHECK_ARGS[@]}" "${script}" | tee -a /tmp/shellcheck-output.log || true
-      ((failed_scripts++))
+      echo "${shellcheck_out}" | tee -a /tmp/shellcheck-output.log
+      script_failed=1
       EXIT_CODE=1
     fi
 
-    # shfmt check (dry-run, no modifications)
-    if shfmt "${SHFMT_ARGS[@]}" -d "${script}" | tee -a /tmp/shfmt-output.log | grep -q .; then
-      log_fail "shfmt format issue: ${script_name}"
-      shfmt "${SHFMT_ARGS[@]}" -d "${script}" | tee -a /tmp/shfmt-output.log || true
-      ((failed_scripts++))
-      EXIT_CODE=1
-    else
+    # shfmt check (exit 0 = no changes, exit 1 = changes needed)
+    local shfmt_out
+    shfmt_out=$(shfmt "${SHFMT_ARGS[@]}" -d "${script}" 2>&1) || true
+
+    if [[ -z "${shfmt_out}" ]]; then
       log_pass "shfmt format: ${script_name}"
+    else
+      log_fail "shfmt format issue: ${script_name}"
+      echo "${shfmt_out}" | tee -a /tmp/shfmt-output.log
+      script_failed=1
+      EXIT_CODE=1
+    fi
+
+    # Count script pass/fail once
+    if [[ ${script_failed} -eq 0 ]]; then
+      ((passed_scripts++))
+    else
+      ((failed_scripts++))
     fi
   done <<<"${bash_scripts}"
 
