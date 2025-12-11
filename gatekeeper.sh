@@ -26,7 +26,9 @@ pytest --cov=. --cov-fail-under=70 || die "pytest coverage <70%"
 # 2. Bash purity
 log "Running Bash purity validation..."
 # Allow warnings; fail only on actual errors
-find . -name "*.sh" -type f -print0 | xargs -0 shellcheck -x -f gcc 2>&1 | grep -E "error:" && die "shellcheck errors found" || true
+if find . -name "*.sh" -type f -print0 | xargs -0 shellcheck -x -f gcc 2>&1 | grep -E "error:"; then
+  die "shellcheck errors found"
+fi
 find . -name "*.sh" -type f -print0 | xargs -0 shfmt -i 2 -ci -d || die "shfmt formatting failed"
 log "✅ Bash purity OK"
 
