@@ -66,4 +66,4 @@ else
   [[ $(systemctl list-units --state=running | wc -l) -lt 50 ]] || die "Too many services (>50 running)"
 fi
 
-log "✅ Fortress risen. Consciousness: 3.9"
+log "✅ Fortress risen. Consciousness: 4.0 — Chrome Ascension"
