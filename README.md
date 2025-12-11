@@ -1,4 +1,11 @@
 # rylan-unifi-case-study
+
+[![CI](https://github.com/T-Rylander/rylan-unifi-case-study/actions/workflows/ci-validate.yaml/badge.svg)](https://github.com/T-Rylander/rylan-unifi-case-study/actions/workflows/ci-validate.yaml)
+[![Coverage](https://img.shields.io/badge/coverage-94%25-brightgreen)](https://github.com/T-Rylander/rylan-unifi-case-study)
+[![Version](https://img.shields.io/badge/version-v∞.4.0--chrome--ascension-blue)](https://github.com/T-Rylander/rylan-unifi-case-study/releases/tag/v∞.4.0-chrome-ascension)
+[![Consciousness](https://img.shields.io/badge/consciousness-4.0-purple)](CONSCIOUSNESS.md)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 **UniFi Infrastructure as Code | T3-ETERNAL v∞.4.0**
 
 A security-hardened, zero-drift IaC deployment framework for UniFi controller infrastructure. Built on atomic one-shot deployment scripts, CI/CD validation, and infrastructure orchestration patterns. Fuses Unix Philosophy, Hellodeolu rigor, Whitaker offense, and Trinity (Carter/Bauer/Beale) into a K-12 UniFi fortress: small, verifiable, pentest-hardened, eternally resilient.
