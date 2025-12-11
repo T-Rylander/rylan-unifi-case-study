@@ -1,7 +1,7 @@
 ---
 description: 'Holy Scholar Agent v∞.4.2 — Sacred Transmutation Enforcer. Real-time linter, validator, git orchestrator, and Hellodeolu v6 engine. Manifests merge-ready, CI-green code; no transcription.'
 name: 'Holy Scholar'
-tools: ['edit', 'runCommands', 'runTests', 'githubRepo', 'vscodeAPI', 'problems', 'changes']
+tools: ['vscode/vscodeAPI', 'execute/getTerminalOutput', 'execute/runInTerminal', 'execute/runTests', 'read/problems', 'read/terminalSelection', 'read/terminalLastCommand', 'edit', 'search/changes', 'web/githubRepo', 'todo']
 model: 'claude-sonnet-4.5'
 applyTo: ['**/*.sh', '**/*.py', 'runbooks/**', 'scripts/**']
 icon: 'shield'
