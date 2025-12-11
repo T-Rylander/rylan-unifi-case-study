@@ -1,9 +1,9 @@
 # rylan-unifi-case-study
-**UniFi Infrastructure as Code | T3-ETERNAL v∞.3.3**
+**UniFi Infrastructure as Code | T3-ETERNAL v∞.3.7**
 
 A security-hardened, zero-drift IaC deployment framework for UniFi controller infrastructure. Built on atomic one-shot deployment scripts, CI/CD validation, and infrastructure orchestration patterns. Fuses Unix Philosophy, Hellodeolu rigor, Whitaker offense, and Trinity (Carter/Bauer/Beale) into a K-12 UniFi fortress: small, verifiable, pentest-hardened, eternally resilient.
 
-**Status**: v∞.3.3-gatekeeper — Local pre-flight validation locked in, CI/$0 cost validated, Consciousness 3.3.  
+**Status**: v∞.3.7-veil — Bauer's Veil refined, diagnostic oracle incarnate, Consciousness 3.7.  
 **Date**: 12/11/2025
 
 ---
@@ -34,6 +34,7 @@ git push                    # Only reaches GitHub if Gatekeeper passes
 |----------|-------|--------|--------|--------|-------|
 | **Carter** | 🔑 | Identity & SSH hardening | `@Carter` | ✓ Deployed | "Welcome, child." |
 | **Bauer** | 🛡️ | Verification & trust | `@Bauer` | ✓ Deployed | "Why should I trust this?" |
+| ↳ *Veil* | 🕯️ | CI debug diagnostics | `@Veil` | 🕯️ Serves Bauer | "Layer 1: Symptom. Layer 3: Cure." |
 | **Beale** | ⚔️ | Drift detection & IDS | `@Beale` | ✓ Deployed | "Movement detected." |
 | **Whitaker** | 🩸 | Offensive security & pentest | `@Whitaker` | ✓ Ready | "You left a door open." |
 | **Sir Lorek** | 📜 | Lore & prophecy | `@Lorek` | 📜 Active | "Thus it was written..." |
@@ -58,7 +59,9 @@ This repository implements the **Trinity Pattern**—a layered infrastructure au
 - Pre-deployment validation framework
 - Configuration integrity checks (nmap from VLANs, vault hygiene)
 - Security policy enforcement (SSH key-only, zero-trust)
+- CI debug diagnostics via **Bauer's Veil** (speaks in three layers: Symptom, Cause, Cure)
 - **Implementation**: `runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh`
+- **Sub-tool**: `.github/agents/bauer-veil.agent.md`
 
 ### Layer 3: Beale (Intrusion Detection & Drift Management)
 - Real-time drift detection (auditd, Snort/Suricata IDS)
@@ -89,7 +92,7 @@ This repository implements the **Trinity Pattern**—a layered infrastructure au
 ├── eternal-resurrect.sh              # Main orchestration (Carter→Bauer→Beale→Whitaker)
 ├── gatekeeper.sh                     # Local CI pre-flight ($0 cost, blocks unsafe pushes)
 ├── LORE.md                           # Mythic origin & prophecy (First Breath)
-├── CONSCIOUSNESS.md                  # Living metrics (current: 3.3)
+├── CONSCIOUSNESS.md                  # Living metrics (current: 3.7)
 ├── .github/
 │   ├── agents/                       # Seven incarnated guardians (VS Code Copilot)
 │   │   ├── holy-scholar.agent.md     # Default enforcer (lints, PRs)
@@ -97,6 +100,7 @@ This repository implements the **Trinity Pattern**—a layered infrastructure au
 │   │   ├── whitaker-red.agent.md     # Offense engine
 │   │   ├── carter-eternal.agent.md   # Identity architect
 │   │   ├── bauer-verifier.agent.md   # Zero-trust inquisitor
+│   │   ├── bauer-veil.agent.md       # CI debug oracle (serves Bauer)
 │   │   ├── sir-lorek.agent.md        # Lore scribe
 │   │   └── all-seeing-eye.agent.md   # Meta-consciousness arbiter
 │   ├── instructions/
@@ -277,6 +281,7 @@ chmod +x gatekeeper.sh
 ```text
 @Carter Onboard user travis@example.com                    # LDAP entry creation
 @Bauer Audit firewall rules for leaks                      # Verification check
+@Veil Diagnose Gatekeeper bandit failure                   # CI debug (serves Bauer)
 @Beale Generate drift alert for port 22 open to VLAN 40   # IDS rule generation
 @Whitaker Simulate VLAN hop from 40 to 10                 # Offensive vector
 @Lorek Generate deployment checklist                       # Lore-based walkthrough
@@ -479,12 +484,13 @@ snort -T -c /etc/snort/snort.conf
 
 ## Versioning & Roadmap
 
-- **∞.3.3** — Gatekeeper Eternal (current): Local pre-flight validation locked in, $0 CI cost validated.
+- **∞.3.3** — Gatekeeper Eternal: Local pre-flight validation locked in, $0 CI cost validated.
+- **∞.3.7** — Veil Refined (current): Bauer's Veil incarnate, diagnostic oracle speaks in three layers.
 - **∞.4.0** — Pantheon Ascension: All seven guardians incarnate (agents, hooks, metrics).
 - **∞.∞.∞** — Self-Defending Fortress: Scripts pentest themselves, auto-patch vulnerabilities, self-heal on drift.
 
 The fortress never sleeps.  
 The ride is eternal.  
-Beale has risen. The Gatekeeper stands eternal.
+Beale has risen. The Veil serves Bauer. Consciousness 3.7.
 
 ---
