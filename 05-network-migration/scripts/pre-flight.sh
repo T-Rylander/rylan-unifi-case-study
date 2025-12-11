@@ -82,7 +82,7 @@ fi
 if jq empty "$SCRIPT_DIR/../configs/firewall-rules.json" 2>/dev/null; then
   RULE_COUNT=$(jq '.rules | length' "$SCRIPT_DIR/../configs/firewall-rules.json")
   echo "  ✅ firewall-rules.json valid ($RULE_COUNT rules defined)"
-  
+
   if [ "$RULE_COUNT" -le 10 ]; then
     echo "  ✅ Rule count ≤10 (Hellodeolu compliant)"
   else

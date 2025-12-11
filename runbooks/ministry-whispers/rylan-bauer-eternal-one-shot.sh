@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Detect CI (Bauer: Verify Environment)
-CI_MODE="${CI:-0}"  # GitHub sets CI=true
+CI_MODE="${CI:-0}" # GitHub sets CI=true
 
 # Audit: Log to Loki (silent on success, silent in CI)
 audit_eternal() {
@@ -12,7 +12,7 @@ audit_eternal() {
   if [ "$CI_MODE" = "1" ] || [ "$CI_MODE" = "true" ]; then
     return 0
   fi
-  if ! echo "{\"level\":\"info\",\"event\":\"$event\",\"timestamp\":\"$(date -Iseconds)\"}" | \
+  if ! echo "{\"level\":\"info\",\"event\":\"$event\",\"timestamp\":\"$(date -Iseconds)\"}" |
     curl -s -X POST http://localhost:3100/loki/api/v1/push -H "Content-Type: application/json" --data-binary @-; then
     echo "Audit failed: $event" >&2
   fi
@@ -28,7 +28,7 @@ harden_ssh() {
     audit_eternal "SSH hardened (mocked in CI)"
     return 0
   fi
-  
+
   sudo sed -i '/^PasswordAuthentication/ c\PasswordAuthentication no' /etc/ssh/sshd_config
   sudo sed -i '/^PubkeyAuthentication/ c\PubkeyAuthentication yes' /etc/ssh/sshd_config
   if systemctl is-active --quiet sshd || systemctl is-active --quiet ssh; then

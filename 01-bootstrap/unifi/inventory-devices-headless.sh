@@ -18,21 +18,21 @@ OUTPUT_FILE="$REPO_ROOT/device-inventory-$(date +%Y%m%d_%H%M%S).txt"
   echo "UniFi Device Inventory - $(date)"
   echo "════════════════════════════════════════════════════════════"
   echo ""
-  
+
   unifi_login
-  
+
   DEVICES_FILE=$(unifi_get_devices)
-  
+
   echo "Devices:"
   jq -r '.data[] | [.state, .mac, .model, .name, .ip] | @tsv' "$DEVICES_FILE" | column -t
-  
+
   echo ""
   echo "Summary:"
   echo "  Total: $(jq '.data | length' "$DEVICES_FILE")"
-  
+
   rm -f "$DEVICES_FILE"
-  
-} > "$OUTPUT_FILE"
+
+} >"$OUTPUT_FILE"
 
 echo "✅ Inventory saved to: $OUTPUT_FILE"
 cat "$OUTPUT_FILE"

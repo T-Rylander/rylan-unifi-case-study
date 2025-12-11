@@ -31,23 +31,23 @@ EXISTING_FILE=$(unifi_get_networks)
 jq -c '.networks[]' "$CONFIG_FILE" | while read -r vlan_config; do
   VLAN_NAME=$(echo "$vlan_config" | jq -r '.name')
   VLAN_ID=$(echo "$vlan_config" | jq -r '.vlan')
-  
+
   echo ""
   echo "Processing: $VLAN_NAME (VLAN $VLAN_ID)"
-  
+
   # Check if VLAN exists
   EXISTING_ID=$(jq -r --arg name "$VLAN_NAME" '.data[] | select(.name == $name) | ._id' "$EXISTING_FILE")
-  
+
   if [ -n "$EXISTING_ID" ]; then
     echo "  ⚠️  VLAN exists (ID: $EXISTING_ID)"
     echo "  Updating configuration..."
-    
+
     # Add _id to config for update
     UPDATED_CONFIG=$(echo "$vlan_config" | jq --arg id "$EXISTING_ID" '. + {_id: $id}')
-    
+
     # Update via API
     RESULT_FILE=$(unifi_api_call "rest/networkconf/$EXISTING_ID" PUT "$UPDATED_CONFIG")
-    
+
     if jq -e '.meta.rc == "ok"' "$RESULT_FILE" >/dev/null 2>&1; then
       echo "  ✅ Updated successfully"
     else
@@ -55,13 +55,13 @@ jq -c '.networks[]' "$CONFIG_FILE" | while read -r vlan_config; do
       jq -r '.meta.msg // "Unknown error"' "$RESULT_FILE"
     fi
     rm -f "$RESULT_FILE"
-    
+
   else
     echo "  Creating new VLAN..."
-    
+
     # Create via API
     RESULT_FILE=$(unifi_api_call "rest/networkconf" POST "$vlan_config")
-    
+
     if jq -e '.meta.rc == "ok"' "$RESULT_FILE" >/dev/null 2>&1; then
       echo "  ✅ Created successfully"
     else

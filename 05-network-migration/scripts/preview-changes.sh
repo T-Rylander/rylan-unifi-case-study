@@ -14,7 +14,7 @@ python ../02-declarative-config/apply.py --render-only
 echo "📊 Diff: Desired vs Live..."
 # Render live (via API – silent on match)# shellcheck disable=SC1091source ../runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
 LIVE_VLANS=$(unifi_get_networks | jq '.[] | select(.vlan != 1) | {vlan: .vlan, name: .name, subnet: .subnet}' | jq -s '{vlans: .}')
-echo "$LIVE_VLANS" > /tmp/live-vlans.json
+echo "$LIVE_VLANS" >/tmp/live-vlans.json
 
 # Diff (jq sort for stability)
 diff -u \
