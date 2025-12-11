@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+# shellcheck disable=SC1091  # lib/ in .gitignore, external vault
 source lib/unifi-api/client.sh
 
 echo "Testing authentication..."

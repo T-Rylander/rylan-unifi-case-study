@@ -5,8 +5,9 @@
 # Date: 2025-12-11
 set -euo pipefail
 IFS=$'\n\t'
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+readonly SCRIPT_DIR SCRIPT_NAME
 readonly STATE_FILE="${SCRIPT_DIR}/state/users.yaml"
 
 log() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] INFO: $*" >&2; }
@@ -46,22 +47,24 @@ case "$ROLE" in
 esac
 
 # Role → VLAN + Groups mapping
+VLAN=""
+USER_GROUPS=""
 case "$ROLE" in
   engineer)
     VLAN=30
-    GROUPS="ssh-admins,users"
+    USER_GROUPS="ssh-admins,users"
     ;;
   vip)
     VLAN=25
-    GROUPS="vip-access,audit-log"
+    USER_GROUPS="vip-access,audit-log"
     ;;
   exec)
     VLAN=20
-    GROUPS="exec-access,2fa-required"
+    USER_GROUPS="exec-access,2fa-required"
     ;;
   contractor)
     VLAN=40
-    GROUPS="contractors,time-limited"
+    USER_GROUPS="contractors,time-limited"
     ;;
 esac
 
@@ -142,7 +145,7 @@ $USERNAME:
   email: $EMAIL
   role: $ROLE
   vlan: $VLAN
-  groups: [$GROUPS]
+  groups: [$USER_GROUPS]
   ssh_fingerprint: $SSH_FINGERPRINT
   onboarded: $TIMESTAMP
   expiry: ${EXPIRY_DATE:-null}
@@ -158,7 +161,7 @@ cat <<EOF
 ✓ SSH key forged: $SSH_KEY_FILE
 ✓ SSH fingerprint: $SSH_FINGERPRINT
 ✓ VLAN $VLAN assigned via RADIUS
-✓ Groups: $GROUPS
+✓ Groups: $USER_GROUPS
 ✓ State committed: $STATE_FILE
 
 Welcome, $USERNAME. The fortress has been expecting you.
