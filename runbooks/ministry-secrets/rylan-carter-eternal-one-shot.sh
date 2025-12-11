@@ -9,7 +9,7 @@ UNIFI_API_BASE="https://${UNIFI_IP}/proxy/network/api/s/default"
 unifi_login() {
   local temp_file="/tmp/unifi-login-$$.json"
   curl -sk -X POST "${UNIFI_IP}/api/auth/login" \
-    -d '{"username":"admin","password":"$(cat .secrets/unifi-admin-pass)"}' \
+    -d "{\"username\":\"admin\",\"password\":\"$(cat .secrets/unifi-admin-pass)\"}" \
     -c /tmp/unifi-cookies-$$.txt -o "$temp_file"
   JWT_TOKEN=$(grep "TOKEN" /tmp/unifi-cookies-$$.txt | awk '{print $7}')
   JWT_PAYLOAD=$(echo "$JWT_TOKEN" | cut -d'.' -f2)

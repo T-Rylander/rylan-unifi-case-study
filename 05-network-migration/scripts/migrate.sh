@@ -4,13 +4,15 @@
 # Date: 2025-12-10
 set -euo pipefail
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+# shellcheck disable=SC2034
 readonly SCRIPT_NAME
 cd "$(dirname "$0")/.."
 
 # Pre-flight: Backup (Hellodeolu: RTO <15 min)
 mkdir -p backups
+# shellcheck disable=SC1091
 source ../runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
-unifi_get_networks > backups/pre-migration-$(date +%Y%m%d-%H%M%S).json
+unifi_get_networks >"backups/pre-migration-$(date +%Y%m%d-%H%M%S).json"
 echo "💾 Backup saved to backups/"
 
 # Render + Push

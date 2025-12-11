@@ -12,10 +12,10 @@ curl -sk -c "$COOKIES" \
   -X POST "https://${UNIFI_IP}/api/auth/login" \
   -H "Content-Type: application/json" \
   -d "{\"username\":\"$UNIFI_USER\",\"password\":\"$UNIFI_PASS\"}" \
-  > /tmp/auth-response.json
+  >/tmp/auth-response.json
 
 echo "Auth response:"
-cat /tmp/auth-response.json | jq '.'
+jq '.' </tmp/auth-response.json
 
 echo ""
 echo "Testing different API paths..."

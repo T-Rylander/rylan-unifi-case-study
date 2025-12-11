@@ -8,6 +8,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly SCRIPT_DIR
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+# shellcheck disable=SC2034
 readonly SCRIPT_NAME
 
 echo "════════════════════════════════════════════════════════════"

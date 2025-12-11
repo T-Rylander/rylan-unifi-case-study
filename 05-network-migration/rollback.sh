@@ -9,6 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 readonly SCRIPT_DIR REPO_ROOT
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+# shellcheck disable=SC2034
 readonly SCRIPT_NAME
 
 source "$REPO_ROOT/lib/unifi-api/client.sh"
