@@ -91,6 +91,47 @@ This repository implements the **Trinity Pattern**—a layered infrastructure au
 
 **Execution Order**: Carter → Bauer → Beale → Whitaker (each defensive layer); Gatekeeper (local prelude).
 
+### Trinity Deployment Flowchart
+
+```mermaid
+flowchart TD
+    subgraph LOCAL["🚪 Local Pre-Flight (Free)"]
+        Start([Developer Ready]) --> GK{./gatekeeper.sh}
+        GK -->|Exit 0| Push[git push]
+        GK -->|Exit 1| Fix[Fix Issues Locally]
+        Fix --> GK
+    end
+    
+    subgraph CI["☁️ GitHub Actions"]
+        Push --> CI_Gate{CI Pipeline}
+        CI_Gate -->|Pass| Merge[Merge to Main]
+        CI_Gate -->|Fail| Reject[PR Blocked]
+    end
+    
+    subgraph DEPLOY["🏰 Production Deployment"]
+        Merge --> Resurrect[./eternal-resurrect.sh]
+        Resurrect --> Carter[🔑 Carter<br>Identity + SSH Keys]
+        Carter --> Bauer[🛡️ Bauer<br>Verification + nmap]
+        Bauer --> Beale[⚔️ Beale<br>IDS + Drift Detection]
+        Beale --> Whitaker[🩸 Whitaker<br>21 Attack Vectors]
+        Whitaker --> Done([✅ Fortress Secured])
+    end
+    
+    subgraph RECOVERY["🔄 Emergency Recovery"]
+        Breach([Breach Detected]) --> Rollback[./rollback.sh]
+        Rollback --> Resurrect
+    end
+    
+    style Start fill:#030,stroke:#0f0,color:#fff
+    style GK fill:#036,stroke:#0af,color:#fff
+    style Done fill:#030,stroke:#0f0,color:#fff
+    style Breach fill:#600,stroke:#f00,color:#fff
+    style Carter fill:#360,stroke:#af0,color:#fff
+    style Bauer fill:#063,stroke:#0fa,color:#fff
+    style Beale fill:#306,stroke:#a0f,color:#fff
+    style Whitaker fill:#603,stroke:#f0a,color:#fff
+```
+
 ---
 
 ## Repository Structure
