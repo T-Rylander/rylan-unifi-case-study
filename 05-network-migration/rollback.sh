@@ -8,7 +8,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 readonly SCRIPT_DIR REPO_ROOT
-readonly SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+readonly SCRIPT_NAME
 
 source "$REPO_ROOT/lib/unifi-api/client.sh"
 
@@ -28,7 +29,7 @@ fi
 echo "Latest backup: $LATEST_BACKUP"
 echo "Backup date: $(basename "$LATEST_BACKUP")"
 echo ""
-read -p "Restore from this backup? (yes/no): " CONFIRM
+read -r -p "Restore from this backup? (yes/no): " CONFIRM
 
 if [[ "$CONFIRM" != "yes" ]]; then
   echo "Rollback aborted"

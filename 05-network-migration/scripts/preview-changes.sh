@@ -3,7 +3,8 @@
 # Author: DT/Luke canonical
 # Date: 2025-12-10
 set -euo pipefail
-readonly SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+readonly SCRIPT_NAME
 cd "$(dirname "$0")/.."
 
 echo "🔍 Rendering desired state..."

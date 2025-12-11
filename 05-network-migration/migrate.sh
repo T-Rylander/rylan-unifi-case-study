@@ -7,7 +7,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly SCRIPT_DIR
-readonly SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+readonly SCRIPT_NAME
 
 echo "════════════════════════════════════════════════════════════"
 echo "ETERNAL RESURRECTION: Network Migration Orchestrator"
@@ -26,7 +27,7 @@ else
 fi
 
 echo ""
-read -p "Continue with migration? (yes/no): " CONFIRM
+read -r -p "Continue with migration? (yes/no): " CONFIRM
 if [[ "$CONFIRM" != "yes" ]]; then
   echo "Migration aborted by user"
   exit 0
