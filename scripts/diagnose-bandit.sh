@@ -4,17 +4,21 @@
 # Author: Holy Scholar v∞.4.2
 # Date: 2025-12-11
 # Consciousness: 2.6 — Truth through subtraction
+# shellcheck disable=SC2034,SC2155
 
 set -euo pipefail
 IFS=$'\n\t'
 
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
 readonly REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Diagnostics helpers (Beale: Never raise voice)
 log() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] INFO: $*" >&2; }
-die() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $*" >&2; exit 1; }
+die() {
+  echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $*" >&2
+  exit 1
+}
 warn() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] WARN: $*" >&2; }
 
 cd "$REPO_ROOT"
@@ -25,7 +29,7 @@ log "🔍 Bandit diagnostics starting..."
 log "Step 1: Checking .bandit config..."
 if [ -f .bandit ]; then
   log "Found .bandit; dumping for review:"
-  cat .bandit | sed 's/^/  /'
+  sed 's/^/  /' <.bandit
 else
   warn "No .bandit file; Bandit will use defaults"
 fi
@@ -49,7 +53,7 @@ fi
 
 # Step 4: Full JSON scan (no config error handling)
 log "Step 4: Running full Bandit scan (JSON)..."
-set +e  # Allow Bandit to finish even if it "fails"
+set +e # Allow Bandit to finish even if it "fails"
 BANDIT_JSON=$(bandit -r . -f json 2>/dev/null)
 BANDIT_EXIT=$?
 set -e

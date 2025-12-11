@@ -5,7 +5,10 @@ IFS=$'\n\t'
 
 # Diagnostics: log() + die() (Beale: Detect Heresy)
 log() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] INFO: $*" >&2; }
-die() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $*" >&2; exit 1; }
+die() {
+  echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $*" >&2
+  exit 1
+}
 
 # run_ministry(): Diagnostic wrapper for Trinity isolation (Bauer: Verify Step)
 run_ministry() {
