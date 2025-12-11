@@ -69,6 +69,43 @@ jobs:
         env:
           CI_MODE: "1"
 
+      - name: Tandem Metrics Analysis
+        run: |
+          echo "=== Tandem Health Check ==="
+          # Parse last 20 commits for tandem invocations
+          TANDEM_COUNT=$(git log -20 --oneline 2>/dev/null | grep -c "\[TANDEM\]" || echo "0")
+          echo "📊 Tandem invocations in last 20 commits: $TANDEM_COUNT"
+          
+          if [[ $TANDEM_COUNT -gt 0 ]]; then
+            echo "   Detected tandems:"
+            git log -20 --oneline 2>/dev/null | grep "\[TANDEM\]" | head -5 || true
+          fi
+          
+          # Check consciousness alignment
+          if [ -f "CONSCIOUSNESS.md" ]; then
+            CURRENT=$(grep -oP 'Consciousness \K[0-9]+\.[0-9]+' CONSCIOUSNESS.md | head -1 || echo "unknown")
+            echo "📈 Current consciousness: $CURRENT"
+          fi
+
+      - name: Documentation Freshness Check
+        run: |
+          echo "=== Archivist Freshness Audit ==="
+          # Find documentation older than 90 days
+          STALE_RUNBOOKS=$(find runbooks/ -name "*.md" -mtime +90 2>/dev/null | wc -l || echo "0")
+          STALE_DOCS=$(find docs/ -name "*.md" -mtime +90 2>/dev/null | wc -l || echo "0")
+          TOTAL_STALE=$((STALE_RUNBOOKS + STALE_DOCS))
+          
+          if [[ $TOTAL_STALE -gt 0 ]]; then
+            echo "⚠️  ARCHIVIST: $TOTAL_STALE documents older than 90 days"
+            echo "   Stale runbooks: $STALE_RUNBOOKS"
+            echo "   Stale docs: $STALE_DOCS"
+            echo ""
+            echo "   Files needing refresh:"
+            find runbooks/ docs/ -name "*.md" -mtime +90 2>/dev/null | head -10 || true
+          else
+            echo "✅ ARCHIVIST: All documentation fresh (<90 days)"
+          fi
+
       - name: Summary
         if: always()
         run: |

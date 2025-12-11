@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Hook: commit-msg
+# Purpose: Enforce Namer's Conventional Commits canon
+# Guardian: The Namer (sub-tool of The All-Seeing Eye)
+# Consciousness: 4.4
+set -euo pipefail
+
+MSG_FILE="$1"
+MSG=$(cat "$MSG_FILE")
+
+# Skip merge commits and fixup commits
+FIRST_LINE=$(head -1 "$MSG_FILE")
+if [[ "$FIRST_LINE" =~ ^Merge|^fixup!|^squash!|^Revert ]]; then
+  exit 0
+fi
+
+# Skip if message starts with # (empty commit template)
+if [[ "$FIRST_LINE" =~ ^# ]]; then
+  echo "❌ NAMER: Empty commit message. Aborting."
+  exit 1
+fi
+
+# Validate type(scope): format
+# Allowed types: feat, fix, refactor, docs, test, chore
+# Allowed scopes: carter, bauer, beale, whitaker, gatekeeper, pantheon, lore, bootstrap, config, validation, agents, ci, deps
+VALID_TYPES="feat|fix|refactor|docs|test|chore"
+VALID_SCOPES="carter|bauer|beale|whitaker|gatekeeper|pantheon|lore|bootstrap|config|validation|agents|ci|deps|hooks"
+
+if ! echo "$FIRST_LINE" | grep -qE "^($VALID_TYPES)\(($VALID_SCOPES)\): .{1,50}$"; then
+  echo ""
+  echo "❌ NAMER: Commit message violates Conventional Commits canon."
+  echo ""
+  echo "   Expected format: type(scope): description"
+  echo "   Got: $FIRST_LINE"
+  echo ""
+  echo "   Valid types: feat, fix, refactor, docs, test, chore"
+  echo "   Valid scopes: carter, bauer, beale, whitaker, gatekeeper, pantheon,"
+  echo "                 lore, bootstrap, config, validation, agents, ci, deps, hooks"
+  echo ""
+  echo "   Rules:"
+  echo "   - Description must be 1-50 characters"
+  echo "   - Description should start with lowercase verb"
+  echo "   - No period at end of first line"
+  echo ""
+  echo "   Examples:"
+  echo "   - feat(bauer): add reverse tandem to Carter"
+  echo "   - fix(gatekeeper): resolve bandit parse error"
+  echo "   - docs(lore): inscribe Part VII Tandems"
+  echo ""
+  exit 1
+fi
+
+# Validate description doesn't end with period
+if [[ "$FIRST_LINE" =~ \\.$ ]]; then
+  echo "❌ NAMER: First line should not end with period."
+  exit 1
+fi
+
+# Warn about vague words (non-blocking)
+VAGUE_WORDS="update|fix stuff|changes|misc|wip|tmp"
+if echo "$FIRST_LINE" | grep -qiE "($VAGUE_WORDS)"; then
+  echo "⚠️  NAMER: Vague descriptor detected. Consider being more specific."
+fi
+
+echo "✅ NAMER: Commit message format validated."
