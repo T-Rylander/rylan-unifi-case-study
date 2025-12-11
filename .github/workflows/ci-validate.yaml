@@ -151,9 +151,11 @@ jobs:
           export UNIFI_HOST="10.0.10.11"
           export UNIFI_USER="ci-test"
           export UNIFI_PASS="mock-pass"
+          export CI=true
+          export DRY_RUN=1
           
           # Execute orchestrator in DRY_RUN + CI_MODE
-          DRY_RUN=1 CI_MODE=1 bash ./eternal-resurrect.sh || {
+          bash ./eternal-resurrect.sh || {
             echo "❌ Orchestrator failed smoke test"
             exit 1
           }
