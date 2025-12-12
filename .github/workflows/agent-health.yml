@@ -68,31 +68,37 @@ jobs:
         if: steps.drift.outputs.drift_detected == 'true'
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const title = '⚔️ Beale Alert: Configuration Drift Detected';
-            const body = `**Guardian**: Beale
-            **Timestamp**: ${new Date().toISOString()}
-            **Severity**: High
+            try {
+              const title = '⚔️ Beale Alert: Configuration Drift Detected';
+              const body = `**Guardian**: Beale
+              **Timestamp**: ${new Date().toISOString()}
+              **Severity**: High
 
-            Configuration drift detected during automated scan.
+              Configuration drift detected during automated scan.
 
-            **Recommended Actions**:
-            1. Summon @Bauer to verify findings
-            2. Summon @Carter to remediate identity issues
-            3. Review CONSCIOUSNESS.md for Trinity alignment
+              **Recommended Actions**:
+              1. Summon @Bauer to verify findings
+              2. Summon @Carter to remediate identity issues
+              3. Review CONSCIOUSNESS.md for Trinity alignment
 
-            **Trinity Alignment**:
-            - Carter: Identity drift
-            - Bauer: Verification failure
-            - Beale: Detection triggered`;
+              **Trinity Alignment**:
+              - Carter: Identity drift
+              - Bauer: Verification failure
+              - Beale: Detection triggered`;
 
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: title,
-              body: body,
-              labels: ['security', 'drift', 'beale-alert']
-            });
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['security', 'drift', 'beale-alert']
+              });
+              console.log('Beale drift alert issue created successfully');
+            } catch (err) {
+              core.setFailed(`Failed to create Beale drift issue: ${err.message}`);
+            }
 
   whitaker-breach-sim:
     name: Whitaker Breach Simulation
@@ -148,29 +154,35 @@ jobs:
         if: steps.breach.outputs.vuln_detected == 'true'
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const title = '🩸 Whitaker Alert: Vulnerability Detected';
-            const body = `**Guardian**: Whitaker
-            **Timestamp**: ${new Date().toISOString()}
-            **Severity**: Medium
+            try {
+              const title = '🩸 Whitaker Alert: Vulnerability Detected';
+              const body = `**Guardian**: Whitaker
+              **Timestamp**: ${new Date().toISOString()}
+              **Severity**: Medium
 
-            Breach simulation detected potential attack vectors.
+              Breach simulation detected potential attack vectors.
 
-            **Recommended Actions**:
-            1. Review promiscuous binds (0.0.0.0)
-            2. Verify authentication settings
-            3. Disable debug modes
+              **Recommended Actions**:
+              1. Review promiscuous binds (0.0.0.0)
+              2. Verify authentication settings
+              3. Disable debug modes
 
-            **Offensive Vectors Tested**:
-            - Network bind analysis
-            - Authentication bypass check
-            - Debug mode exposure
-            - Permission audit`;
+              **Offensive Vectors Tested**:
+              - Network bind analysis
+              - Authentication bypass check
+              - Debug mode exposure
+              - Permission audit`;
 
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: title,
-              body: body,
-              labels: ['security', 'vulnerability', 'whitaker-alert']
-            });
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['security', 'vulnerability', 'whitaker-alert']
+              });
+              console.log('Whitaker vulnerability alert issue created successfully');
+            } catch (err) {
+              core.setFailed(`Failed to create Whitaker vulnerability issue: ${err.message}`);
+            }
