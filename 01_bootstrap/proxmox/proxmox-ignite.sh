@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/proxmox-ignite.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 #
 # Proxmox VE 8.2 Bare-Metal Ignition - Main Orchestrator
 # Modular, <150 LOC orchestrator that sequences 5 phase modules
@@ -12,8 +19,6 @@
 #     --ssh-key-source github:T-Rylander \
 #     [--validate-only] [--dry-run]
 
-set -euo pipefail
-
 ################################################################################
 # CONFIGURATION & SETUP
 ################################################################################
@@ -22,11 +27,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_FILE="/var/log/proxmox-ignite.log"
 
 # Source shared libraries
-# shellcheck source=01-bootstrap/proxmox/lib/common.sh
+# shellcheck source=01_bootstrap/proxmox/lib/common.sh
 source "${SCRIPT_DIR}/lib/common.sh"
-# shellcheck source=01-bootstrap/proxmox/lib/metrics.sh
+# shellcheck source=01_bootstrap/proxmox/lib/metrics.sh
 source "${SCRIPT_DIR}/lib/metrics.sh"
-# shellcheck source=01-bootstrap/proxmox/lib/security.sh
+# shellcheck source=01_bootstrap/proxmox/lib/security.sh
 source "${SCRIPT_DIR}/lib/security.sh"
 
 # Global environment variables (passed to phases)

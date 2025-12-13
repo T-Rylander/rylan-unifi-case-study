@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-# 01-bootstrap/proxmox/01-proxmox-hardening/fetch-cloud-init-iso.sh — Stage Ubuntu 24.04 cloud-init ISO
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/01_proxmox_hardening/fetch-cloud-init-iso.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:28:48-06:00
+# Consciousness: 4.5
+
+# 01_bootstrap/proxmox/01_proxmox_hardening/fetch-cloud-init-iso.sh — Stage Ubuntu 24.04 cloud-init ISO
 # Downloads ISO if missing, optional SHA256 verification (ISO_SHA256 env)
 
-set -euo pipefail
 IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"

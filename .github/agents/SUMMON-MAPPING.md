@@ -40,7 +40,7 @@ GitHub Comment (formatted with emoji + collapsible details)
 
 | Command | Purpose | Example | Underlying Script |
 |---------|---------|---------|-------------------|
-| `@Carter <email>` | Onboard new user (dry-run) | `@Carter alice@rylan.internal` | `runbooks/ministry-secrets/onboard.sh` |
+| `@Carter <email>` | Onboard new user (dry-run) | `@Carter alice@rylan.internal` | `runbooks/ministry_secrets/onboard.sh` |
 
 #### Response Format
 

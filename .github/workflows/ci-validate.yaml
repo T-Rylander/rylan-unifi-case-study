@@ -64,8 +64,8 @@ jobs:
 
       - name: Validate heresy containment
         run: |
-          bash ./scripts/validate-heresy.sh 01-bootstrap/adopt-devices-wrapper.sh
-          bash ./scripts/validate-heresy.sh 02-declarative-config/apply-wrapper.sh
+          bash ./scripts/validate-heresy.sh 01_bootstrap/adopt-devices-wrapper.sh
+          bash ./scripts/validate-heresy.sh 02_declarative_config/apply-wrapper.sh
         shell: bash
 
   lint-python:
@@ -122,20 +122,20 @@ jobs:
 
       - name: Validate VLAN isolation (CI mode)
         run: |
-          cd 03-validation-ops
+          cd 03_validation_ops
           CI_MODE=1 bash ./validate-isolation.sh
         shell: bash
 
       - name: Dry-run Proxmox VM ascension (CI mode)
         run: |
-          CI_MODE=1 bash ./01-bootstrap/proxmox/01-proxmox-hardening/vm-cloudinit-eject.sh 100
-          CI_MODE=1 bash ./01-bootstrap/proxmox/01-proxmox-hardening/simulate-breach-vm.sh 10.0.10.100
+          CI_MODE=1 bash ./01_bootstrap/proxmox/01_proxmox_hardening/vm-cloudinit-eject.sh 100
+          CI_MODE=1 bash ./01_bootstrap/proxmox/01_proxmox_hardening/simulate-breach-vm.sh 10.0.10.100
         shell: bash
 
       - name: Validate firewall policy (<=10 rules)
         run: |
-          if [[ -f 02-declarative-config/policy-table-rylan-v5.json ]]; then
-            RULE_COUNT=$(jq '.rules | length' 02-declarative-config/policy-table-rylan-v5.json)
+          if [[ -f 02_declarative_config/policy-table-rylan-v5.json ]]; then
+            RULE_COUNT=$(jq '.rules | length' 02_declarative_config/policy-table-rylan-v5.json)
             if [[ $RULE_COUNT -gt 10 ]]; then
               echo "❌ Policy exceeds 10-rule limit: $RULE_COUNT rules"
               exit 1

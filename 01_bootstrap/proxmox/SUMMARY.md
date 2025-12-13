@@ -9,7 +9,7 @@ Production-grade bare-metal ignition script for Proxmox VE 8.2 that transforms f
 ## 📦 Deliverables
 
 ### 1. Main Script: `proxmox-ignite.sh`
-**Location**: `01-bootstrap/proxmox/proxmox-ignite.sh`
+**Location**: `01_bootstrap/proxmox/proxmox-ignite.sh`
 **Size**: ~520 lines (inline comments, modular functions)
 **Format**: Pure bash, `set -euo pipefail`, production-ready
 
@@ -28,7 +28,7 @@ Production-grade bare-metal ignition script for Proxmox VE 8.2 that transforms f
 **Usage**:
 
 ```bash
-sudo ./01-bootstrap/proxmox/proxmox-ignite.sh \
+sudo ./01_bootstrap/proxmox/proxmox-ignite.sh \
   --hostname rylan-dc \
   --ip 10.0.10.10/26 \
   --gateway 10.0.10.1 \
@@ -39,7 +39,7 @@ sudo ./01-bootstrap/proxmox/proxmox-ignite.sh \
 ---
 
 ### 2. Preseed Configuration: `proxmox-answer.cfg`
-**Location**: `01-bootstrap/proxmox/proxmox-answer.cfg`
+**Location**: `01_bootstrap/proxmox/proxmox-answer.cfg`
 **Purpose**: Automates Proxmox installer (optional, reduces manual steps)
 
 **Features**:
@@ -54,7 +54,7 @@ sudo ./01-bootstrap/proxmox/proxmox-ignite.sh \
 ---
 
 ### 3. Quick Start Script: `proxmox-ignite-quickstart.sh`
-**Location**: `01-bootstrap/proxmox/proxmox-ignite-quickstart.sh`
+**Location**: `01_bootstrap/proxmox/proxmox-ignite-quickstart.sh`
 **Purpose**: Interactive deployment with sensible defaults
 
 **Interactive Features**:
@@ -67,14 +67,14 @@ sudo ./01-bootstrap/proxmox/proxmox-ignite.sh \
 **Usage**:
 
 ```bash
-sudo bash ./01-bootstrap/proxmox/proxmox-ignite-quickstart.sh
+sudo bash ./01_bootstrap/proxmox/proxmox-ignite-quickstart.sh
 
 ```text
 
 ---
 
 ### 4. Comprehensive Documentation: `README.md`
-**Location**: `01-bootstrap/proxmox/README.md`
+**Location**: `01_bootstrap/proxmox/README.md`
 **Size**: ~2,000 lines (production-grade documentation)
 
 **Sections**:
@@ -139,7 +139,7 @@ sudo bash tests/proxmox/test-proxmox-ignite.sh
 ---
 
 ### 7. Deployment Checklist: `DEPLOYMENT-CHECKLIST.md`
-**Location**: `01-bootstrap/proxmox/DEPLOYMENT-CHECKLIST.md`
+**Location**: `01_bootstrap/proxmox/DEPLOYMENT-CHECKLIST.md`
 **Purpose**: Quick reference checklist for deployment execution
 
 **Sections**:
@@ -314,7 +314,7 @@ KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org
 ## 📚 File Structure
 
 ```text
-01-bootstrap/proxmox/
+01_bootstrap/proxmox/
 ├── proxmox-ignite.sh              # Main ignition script (~520 LOC)
 ├── proxmox-ignite-quickstart.sh   # Interactive deployment helper
 ├── proxmox-answer.cfg             # Preseed configuration (optional)
@@ -388,7 +388,7 @@ tests/proxmox/
 
 1. **Test Script**
    - Run test suite: `bash tests/proxmox/test-proxmox-ignite.sh`
-   - Verify ShellCheck: `shellcheck 01-bootstrap/proxmox/proxmox-ignite.sh`
+   - Verify ShellCheck: `shellcheck 01_bootstrap/proxmox/proxmox-ignite.sh`
 
 1. **Lab Deployment**
    - Boot fresh Proxmox VE 8.2

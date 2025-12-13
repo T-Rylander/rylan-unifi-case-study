@@ -201,7 +201,7 @@ sudo bash tests/proxmox/test-proxmox-ignite.sh
 ## 🗂️ File Organization
 
 ```text
-01-bootstrap/proxmox/
+01_bootstrap/proxmox/
 ├── proxmox-ignite.sh              # Main script (30 KB)
 ├── proxmox-ignite-quickstart.sh   # Interactive wrapper (5 KB)
 ├── proxmox-answer.cfg             # Preseed config (2 KB)
@@ -362,7 +362,7 @@ See `SUMMARY.md` for detailed compliance mapping.
 
 2. **Validate Script Quality**
    - [ ] Run test suite: `bash tests/proxmox/test-proxmox-ignite.sh`
-   - [ ] Check ShellCheck: `shellcheck 01-bootstrap/proxmox/proxmox-ignite.sh`
+   - [ ] Check ShellCheck: `shellcheck 01_bootstrap/proxmox/proxmox-ignite.sh`
    - [ ] Review CI/CD: `.github/workflows/ci-proxmox-ignite.yaml`
 
 3. **Prepare Lab Deployment**

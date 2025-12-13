@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/ignite.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Trinity Orchestrator — Sequential Phase Enforcement (v4.0)
 # Carter (Secrets) -> Bauer (Whispers) -> Beale (Detection) -> Validate
 # Zero concurrency. Exit-on-fail. Junior-at-3-AM deployable (<45 min).
-
-set -euo pipefail
 
 cat <<'BANNER'
 ================================================================================
@@ -78,15 +83,15 @@ fi
 log_step "Running as root"
 
 # Verify runbooks exist
-if [[ ! -d "$REPO_ROOT/runbooks/ministry-secrets" ]]; then
+if [[ ! -d "$REPO_ROOT/runbooks/ministry_secrets" ]]; then
   log_error "Ministry of Secrets runbook not found"
   exit 1
 fi
-if [[ ! -d "$REPO_ROOT/runbooks/ministry-whispers" ]]; then
+if [[ ! -d "$REPO_ROOT/runbooks/ministry_whispers" ]]; then
   log_error "Ministry of Whispers runbook not found"
   exit 1
 fi
-if [[ ! -d "$REPO_ROOT/runbooks/ministry-detection" ]]; then
+if [[ ! -d "$REPO_ROOT/runbooks/ministry_detection" ]]; then
   log_error "Ministry of Perimeter runbook not found"
   exit 1
 fi
@@ -104,7 +109,7 @@ log_step "OS check passed"
 
 log_phase "PHASE 1: MINISTRY OF SECRETS (Carter Foundation)"
 
-if bash "$REPO_ROOT/runbooks/ministry-secrets/deploy.sh"; then
+if bash "$REPO_ROOT/runbooks/ministry_secrets/deploy.sh"; then
   log_success "Phase 1 (Secrets) PASSED"
 else
   log_error "Phase 1 (Secrets) FAILED — Aborting Trinity sequence"
@@ -125,7 +130,7 @@ fi
 
 log_phase "PHASE 2: MINISTRY OF WHISPERS (Bauer Hardening)"
 
-if bash "$REPO_ROOT/runbooks/ministry-whispers/harden.sh"; then
+if bash "$REPO_ROOT/runbooks/ministry_whispers/harden.sh"; then
   log_success "Phase 2 (Whispers) PASSED"
 else
   log_error "Phase 2 (Whispers) FAILED — Aborting Trinity sequence"
@@ -146,7 +151,7 @@ fi
 
 log_phase "PHASE 3: MINISTRY OF PERIMETER (Suehring Policy)"
 
-if bash "$REPO_ROOT/runbooks/ministry-detection/apply.sh"; then
+if bash "$REPO_ROOT/runbooks/ministry_detection/apply.sh"; then
   log_success "Phase 3 (Perimeter) PASSED"
 else
   log_error "Phase 3 (Perimeter) FAILED — Aborting Trinity sequence"

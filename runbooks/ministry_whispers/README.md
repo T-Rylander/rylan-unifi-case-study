@@ -20,7 +20,7 @@ Bauer is the **Zero-Trust Inquisitor**. This ministry:
 
 ```bash
 # Full Bauer verification
-sudo bash ./runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
+sudo bash ./runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh
 
 # Phase 1.1: Repo-bound keys
 sudo bash ./scripts/bauer-glow-up.sh
@@ -126,16 +126,16 @@ systemctl restart sshd
 # Identify leak
 ./scripts/validate-isolation.sh
 # Review firewall rules
-cat 02-declarative-config/firewall-rules.yaml
+cat 02_declarative_config/firewall-rules.yaml
 # Re-apply
-./02-declarative-config/apply-wrapper.sh
+./02_declarative_config/apply-wrapper.sh
 ```text
 
 **Issue**: "Drift detected"
 
 ```bash
 # Check what changed
-git diff 02-declarative-config/
+git diff 02_declarative_config/
 # Reconcile
 ./eternal-resurrect.sh --force
 ```text
@@ -156,7 +156,7 @@ The Veil speaks in three layers:
 
 ## Related
 
-- [runbooks/ministry-secrets/](../ministry-secrets/) — Carter (previous)
-- [runbooks/ministry-detection/](../ministry-detection/) — Beale (next)
+- [runbooks/ministry_secrets/](../ministry-secrets/) — Carter (previous)
+- [runbooks/ministry_detection/](../ministry-detection/) — Beale (next)
 - [scripts/validate-isolation.sh](../../scripts/validate-isolation.sh) — Standalone isolation test
 - [.github/agents/bauer-veil.agent.md](../../.github/agents/bauer-veil.agent.md) — Veil agent

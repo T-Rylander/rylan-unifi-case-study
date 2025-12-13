@@ -75,7 +75,7 @@ WHAT CHANGED:
   • Removed: NET_RAW, SYS_RAW, cap_add workarounds (never worked)
   • Removed: References to jacobalberty/unifi:stable (use :latest)
   • Removed: Old unifi-docker-compose.yml (TODO placeholder)
-  • Removed: Broken macvlan attempts from 01-bootstrap/
+  • Removed: Broken macvlan attempts from 01_bootstrap/
   • Cleaned: All UniFi references to point to new truth
 
 ═══════════════════════════════════════════════════════════════════════════════

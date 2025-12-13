@@ -21,7 +21,7 @@ Carter is the **Identity Architect**. This ministry provisions:
 ./eternal-resurrect.sh
 
 # Carter only
-sudo bash ./runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
+sudo bash ./runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh
 ```text
 
 ## Carter Identity Flow
@@ -127,6 +127,6 @@ kinit administrator@RYLAN.LOCAL
 
 ## Related
 
-- [runbooks/ministry-whispers/](../ministry-whispers/) — Bauer (next in sequence)
+- [runbooks/ministry_whispers/](../ministry-whispers/) — Bauer (next in sequence)
 - [scripts/refresh-keys.sh](../../scripts/refresh-keys.sh) — Key rotation
-- [01-bootstrap/samba-provision.sh](../../01-bootstrap/samba-provision.sh) — AD provisioning
+- [01_bootstrap/samba-provision.sh](../../01_bootstrap/samba-provision.sh) — AD provisioning

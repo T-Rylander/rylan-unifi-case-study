@@ -26,7 +26,7 @@ jobs:
           DRIFT_FOUND=false
 
           # Check for default SSH port references
-          if grep -rI "Port 22$" scripts/ 02-declarative-config/ 2>/dev/null | head -3; then
+          if grep -rI "Port 22$" scripts/ 02_declarative_config/ 2>/dev/null | head -3; then
             echo "WARNING: Default SSH port (22) reference detected"
             DRIFT_FOUND=true
           fi
@@ -38,8 +38,8 @@ jobs:
           fi
 
           # Verify firewall rule count
-          if [[ -f "02-declarative-config/policy-table.yaml" ]]; then
-            RULE_COUNT=$(grep -c "^  - " 02-declarative-config/policy-table.yaml 2>/dev/null || echo "0")
+          if [[ -f "02_declarative_config/policy-table.yaml" ]]; then
+            RULE_COUNT=$(grep -c "^  - " 02_declarative_config/policy-table.yaml 2>/dev/null || echo "0")
             if [[ "$RULE_COUNT" -gt 10 ]]; then
               echo "WARNING: Firewall rules exceed Hellodeolu limit (${RULE_COUNT} > 10)"
               DRIFT_FOUND=true
@@ -122,7 +122,7 @@ jobs:
           # Check for weak authentication patterns
           if grep -riE "auth.*=.*false|verify.*=.*false" \
              --include="*.py" --include="*.yaml" \
-             app/ 02-declarative-config/ 2>/dev/null | head -3; then
+             app/ 02_declarative_config/ 2>/dev/null | head -3; then
             echo "WARNING: Disabled authentication detected"
             VULN_FOUND=true
           fi

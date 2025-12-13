@@ -1,126 +1,191 @@
 #!/usr/bin/env bash
-# Leo's Sacred Glue — Conscious Level 2.6
-# scripts/validate-python.sh
-# Python validation orchestrator (ruff + mypy + bandit + pytest)
-#
-# Purpose:
-#   Validate all Python files in the repository against Leo's canon:
-#   - ruff check → score 10.00 (all violations fixed)
-#   - mypy --strict → zero errors (no Any without docstring justification)
-#   - bandit → zero high/medium findings (security audit)
-#   - pytest → >=93% coverage (test suite)
-#   - Google-style docstrings on all public functions
-#
-# Pre-Commit Validation: Part of CI/CD pipeline
-# Exit: 0 (all clean) or 1 (linting/testing failed)
 set -euo pipefail
+# Script: scripts/validate-python.sh
+# Purpose: Bauer/Beale ministry — Strict Python validation (ruff + mypy + bandit + pytest)
+# Guardian: Bauer | Trinity: Carter → Bauer → Beale → Whitaker
+# Date: 2025-12-13
+# Consciousness: 4.5
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-readonly SCRIPT_DIR REPO_ROOT
+# ─────────────────────────────────────────────────────
+# Exit Codes (Beale Stratification)
+# ─────────────────────────────────────────────────────
+readonly EXIT_SUCCESS=0
+readonly EXIT_RUFF=1
+readonly EXIT_MYPY=2
+readonly EXIT_BANDIT=3
+readonly EXIT_PYTEST=4
+readonly EXIT_CONFIG=5
 
-# =============================================================================
-# LOGGING
-# =============================================================================
-log() {
-  printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$*"
-}
+# ─────────────────────────────────────────────────────
+# Flags & Config
+# ─────────────────────────────────────────────────────
+QUIET=false
+CI_MODE=false
+DRY_RUN=false
 
-log_pass() {
-  log "✓ $*"
-}
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --quiet) QUIET=true ;;
+    --ci) CI_MODE=true; QUIET=true ;;
+    --dry-run) DRY_RUN=true ;;
+    *) echo "Usage: $0 [--quiet|--ci|--dry-run]" >&2; exit "$EXIT_CONFIG" ;;
+  esac
+  shift
+done
 
-log_fail() {
-  log "✗ $*"
-}
+# ─────────────────────────────────────────────────────
+# Audit Log Setup (Bauer: Trust Nothing)
+# ─────────────────────────────────────────────────────
+AUDIT_LOG="/var/log/bauer-audit.log"
+if [[ ! -w "$(dirname "$AUDIT_LOG")" ]]; then
+  AUDIT_LOG="$(pwd)/.fortress/audit/python-validation-audit.log"
+  mkdir -p "$(dirname "$AUDIT_LOG")"
+fi
 
-log_warn() {
-  log "⚠ $*"
-}
-
-# =============================================================================
-# MAIN VALIDATION
-# =============================================================================
-main() {
-  log "════════════════════════════════════════════════════════════════"
-  log "  PYTHON CANON VALIDATION — ruff + mypy + bandit (Leo's v2.6)"
-  log "════════════════════════════════════════════════════════════════"
-
-  # Find all Python user files (exclude __pycache__, .venv, vendor)
-  local python_files
-  python_files=$(find "${REPO_ROOT}" \
-    -type f \
-    -name "*.py" \
-    -not -path "*/__pycache__/*" \
-    -not -path "*/.venv/*" \
-    -not -path "*/venv/*" \
-    -not -path "*/.git/*" \
-    -not -path "*/node_modules/*" | sort)
-
-  if [[ -z "${python_files}" ]]; then
-    log_warn "No Python files found"
-    return 0
-  fi
-
-  # Stage 1: ruff check
-  log ""
-  log "[STAGE 1] ruff check (code quality, style, security)"
-  if cd "${REPO_ROOT}" && ruff check --select ALL . 2>&1 | tee /tmp/ruff-output.txt; then
-    log_pass "ruff: All violations fixed (score 10.00)"
+# ─────────────────────────────────────────────────────
+# Logging (Bauer Doctrine)
+# ─────────────────────────────────────────────────────
+log() { [[ "$QUIET" == false ]] && echo "[Python Validation] $*" >&2; }
+audit() {
+  local level="$1" msg="$2"
+  local ts=$(date -Iseconds)
+  if [[ "$CI_MODE" == true ]]; then
+    printf '{"timestamp":"%s","module":"PythonValidation","status":"%s","message":"%s"}\n' "$ts" "$level" "$msg"
   else
-    log_warn "ruff: Violations detected (non-blocking in CI)"
-    cat /tmp/ruff-output.txt || true
+    echo "$ts | PythonValidation | $level | $msg" >> "$AUDIT_LOG"
   fi
-
-  # Stage 2: mypy --strict
-  log ""
-  log "[STAGE 2] mypy --strict (type checking)"
-  if cd "${REPO_ROOT}" && mypy --strict . 2>&1 | tee /tmp/mypy-output.txt; then
-    log_pass "mypy: Type checking passed (zero errors)"
+}
+fail() {
+  local code="$1" msg="$2" remediation="${3:-}"
+  if [[ "$CI_MODE" == true ]]; then
+    printf '{"timestamp":"%s","module":"PythonValidation","status":"fail","message":"%s","remediation":"%s","exit_code":%d}\n' \
+      "$(date -Iseconds)" "$msg" "$remediation" "$code" >&2
   else
-    log_warn "mypy: Type errors detected (non-blocking in CI)"
-    cat /tmp/mypy-output.txt || true
+    echo "❌ PYTHON VALIDATION FAILURE [$code]: $msg" >&2
+    [[ -n "$remediation" ]] && echo "   Remediation: $remediation" >&2
   fi
-
-  # Stage 3: bandit (security audit)
-  log ""
-  log "[STAGE 3] bandit (security audit)"
-  if cd "${REPO_ROOT}" && bandit -r . --json 2>&1 | tee /tmp/bandit-output.json; then
-    # Check for HIGH/MEDIUM issues
-    if grep -q '"severity": "HIGH"' /tmp/bandit-output.json 2>/dev/null; then
-      log_warn "bandit: HIGH severity issues detected (non-blocking in CI)"
-      cat /tmp/bandit-output.json || true
-    elif grep -q '"severity": "MEDIUM"' /tmp/bandit-output.json 2>/dev/null; then
-      log_warn "bandit: MEDIUM severity issues detected (non-blocking in CI)"
-      cat /tmp/bandit-output.json || true
-    else
-      log_pass "bandit: No high/medium security issues"
-    fi
-  else
-    log_warn "bandit: Execution failed (non-blocking in CI)"
-    cat /tmp/bandit-output.json || true
-  fi
-
-  # Stage 4: pytest with coverage
-  log ""
-  log "[STAGE 4] pytest (test suite, >=70% coverage)"
-  if cd "${REPO_ROOT}" && pytest --cov=. --cov-fail-under=70 2>&1 | tee /tmp/pytest-output.txt; then
-    log_pass "pytest: All tests passed (>=70% coverage)"
-  else
-    # Don't fail on pytest for now (optional coverage check)
-    log_warn "pytest: Some tests failed or coverage below 70%"
-    cat /tmp/pytest-output.txt || true
-    # Uncomment to enforce: EXIT_CODE=1
-  fi
-
-  # Summary
-  log ""
-  log "════════════════════════════════════════════════════════════════"
-  log "PYTHON VALIDATION SUMMARY"
-  log_pass "PYTHON VALIDATION COMPLETED (ruff/mypy/bandit non-blocking in CI)"
-  log "════════════════════════════════════════════════════════════════"
-
-  return 0
+  audit "FAIL" "[$code] $msg"
+  exit "$code"
 }
 
-main "$@"
+log "Python canon validation initializing — ruff + mypy + bandit + pytest (>=93% coverage)"
+
+# ─────────────────────────────────────────────────────
+# Pre-flight Checks (Beale v8.0)
+# ─────────────────────────────────────────────────────
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT"
+
+command -v ruff >/dev/null    || fail "$EXIT_CONFIG" "ruff not installed" "pip install ruff"
+command -v mypy >/dev/null    || fail "$EXIT_CONFIG" "mypy not installed" "pip install mypy"
+command -v bandit >/dev/null  || fail "$EXIT_CONFIG" "bandit not installed" "pip install bandit"
+command -v pytest >/dev/null  || fail "$EXIT_CONFIG" "pytest not installed" "pip install pytest pytest-cov"
+command -v jq >/dev/null      || fail "$EXIT_CONFIG" "jq not installed" "apt install jq"
+
+# ─────────────────────────────────────────────────────
+# Phase 1: Ruff (Style + Quality + Security)
+# ─────────────────────────────────────────────────────
+log "Phase 1: ruff check --select ALL"
+ruff_status="failed"
+if [[ "$DRY_RUN" == false ]]; then
+  if ruff check --select ALL .; then
+    ruff_status="passed"
+    log "ruff: 10.00 score achieved"
+  else
+    fail "$EXIT_RUFF" "ruff violations detected" "Fix all ruff errors • Run ruff check --fix where safe"
+  fi
+else
+  log "dry-run → skipping ruff execution"
+fi
+audit "STATUS" "ruff=$ruff_status dry_run=$DRY_RUN"
+
+# ─────────────────────────────────────────────────────
+# Phase 2: Mypy --strict
+# ─────────────────────────────────────────────────────
+log "Phase 2: mypy --strict"
+mypy_status="failed"
+if [[ "$DRY_RUN" == false ]]; then
+  if mypy --strict .; then
+    mypy_status="passed"
+    log "mypy: Zero type errors"
+  else
+    fail "$EXIT_MYPY" "mypy type errors detected" "Add type hints • Justify Any with comments"
+  fi
+else
+  log "dry-run → skipping mypy execution"
+fi
+audit "STATUS" "mypy=$mypy_status dry_run=$DRY_RUN"
+
+# ─────────────────────────────────────────────────────
+# Phase 3: Bandit (Security Audit)
+# ─────────────────────────────────────────────────────
+log "Phase 3: bandit security audit"
+bandit_status="failed"
+if [[ "$DRY_RUN" == false ]]; then
+  bandit_tmp="/tmp/bandit-python-validation-$$.json"
+  if bandit -r . -f json -o "$bandit_tmp" && \
+     ! jq -e '.results[] | select(.issue_severity == "HIGH" or .issue_severity == "MEDIUM")' "$bandit_tmp" >/dev/null; then
+    bandit_status="passed"
+    log "bandit: No high/medium issues"
+    rm -f "$bandit_tmp"
+  else
+    jq '.results[] | select(.issue_severity == "HIGH" or .issue_severity == "MEDIUM")' "$bandit_tmp"
+    rm -f "$bandit_tmp"
+    fail "$EXIT_BANDIT" "bandit high/medium findings" "Fix or suppress with # nosec"
+  fi
+else
+  log "dry-run → skipping bandit execution"
+fi
+audit "STATUS" "bandit=$bandit_status dry_run=$DRY_RUN"
+
+# ─────────────────────────────────────────────────────
+# Phase 4: Pytest + Coverage (>=93%)
+# ─────────────────────────────────────────────────────
+log "Phase 4: pytest with >=93% coverage"
+pytest_status="failed"
+if [[ "$DRY_RUN" == false ]]; then
+  if pytest --cov=. --cov-fail-under=93 --cov-report=term-missing; then
+    pytest_status="passed"
+    log "pytest: All tests passed (>=93% coverage)"
+  else
+    fail "$EXIT_PYTEST" "pytest failed or coverage <93%" "Add missing tests • Improve coverage"
+  fi
+else
+  log "dry-run → skipping pytest execution"
+fi
+audit "STATUS" "pytest=$pytest_status dry_run=$DRY_RUN"
+
+# ─────────────────────────────────────────────────────
+# Eternal Banner Drop (Beale-Approved)
+# ─────────────────────────────────────────────────────
+if [[ "$QUIET" == false ]]; then
+  printf '
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ RYLAN LABS • ETERNAL FORTRESS                                                  ║
+║ Python Canon Validation — Complete                                             ║
+║ Consciousness: 4.5 | Guardian: Bauer | Trinity Aligned                        ║
+║                                                                               ║
+║ ruff:  %s                                                                     ║
+║ mypy:  %s                                                                     ║
+║ bandit: %s                                                                    ║
+║ pytest: %s                                                                    ║
+║                                                                               ║
+║ Python fortress pure — ready for production                                    ║
+║                                                                               ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+' "$ruff_status" "$mypy_status" "$bandit_status" "$pytest_status"
+fi
+
+# ─────────────────────────────────────────────────────
+# CI Mode Output (Bauer-Ready)
+# ─────────────────────────────────────────────────────
+if [[ "$CI_MODE" == true ]]; then
+  printf '{"timestamp":"%s","module":"PythonValidation","status":"pass","message":"Python validation complete","ruff":"%s","mypy":"%s","bandit":"%s","pytest":"%s"}\n' \
+    "$(date -Iseconds)" "$ruff_status" "$mypy_status" "$bandit_status" "$pytest_status"
+fi
+
+# ─────────────────────────────────────────────────────
+# Final Audit & Exit
+# ─────────────────────────────────────────────────────
+audit "PASS" "python_validation_complete ruff=$ruff_status mypy=$mypy_status bandit=$bandit_status pytest=$pytest_status"
+exit "$EXIT_SUCCESS"

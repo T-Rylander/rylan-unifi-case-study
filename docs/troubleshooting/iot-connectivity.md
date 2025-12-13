@@ -22,7 +22,7 @@ ssh admin@$USG_IP "show configuration service mdns reflector"
 # Expected output: reflector enable
 
 # If missing, apply config
-cd 02-declarative-config
+cd 02_declarative_config
 python apply.py  # Re-applies config.gateway.json with mDNS
 
 # Restart USG to ensure mDNS active
@@ -63,11 +63,11 @@ ssh admin@$USG_IP "show firewall statistics"
 
 ```bash
 # Check policy table has IoT-Isolated rule
-python guardian/audit-eternal.py
+python guardian/audit_eternal.py
 # Expected: 9/10 rules, including "IoT-Isolated → Internet (Whitelist)"
 
 # Verify ports 443 + 8883 allowed
-grep -A5 "iot-isolated" 02-declarative-config/policy-table.yaml
+grep -A5 "iot-isolated" 02_declarative_config/policy-table.yaml
 # Expected: ports: ["443", "8883"]
 
 # Check USG firewall logs
@@ -191,7 +191,7 @@ ip link show | grep '@' | wc -l
 # Expected: 7 VLANs (within ADR-015 limit)
 
 # Check firewall rule count
-python -c "import yaml; print(len(yaml.safe_load(open('02-declarative-config/policy-table.yaml'))['rules']))"
+python -c "import yaml; print(len(yaml.safe_load(open('02_declarative_config/policy-table.yaml'))['rules']))"
 # Expected: 9 rules (within ≤10 limit)
 ```text
 
@@ -263,7 +263,7 @@ ssh admin@$USG_IP "sudo tcpdump -i eth0.90 -n"
 avahi-browse -a -t  # From trusted-devices VLAN 30
 
 # Validate policy table
-python guardian/audit-eternal.py
+python guardian/audit_eternal.py
 
 # Check USG hardware offload
 ssh admin@$USG_IP "show system offload"
@@ -277,7 +277,7 @@ If issue persists after troubleshooting:
 
 1. **Check ADRs**: Review ADR-013 (segmentation), ADR-015 (VLAN limits)
 2. **Review logs**: `docs/validation/VALIDATION-REPORT.md` for baseline
-3. **Run orchestrator**: `bash 03-validation-ops/orchestrator.sh --verbose`
+3. **Run orchestrator**: `bash 03_validation_ops/orchestrator.sh --verbose`
 4. **GitHub issue**: File with logs, tcpdumps, exact error messages
 5. **Nuke/resurrect**: Last resort — `docs/runbooks/nuke-resurrect-v∞.1.md`
 

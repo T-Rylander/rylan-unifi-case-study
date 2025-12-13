@@ -168,8 +168,8 @@ Previous deployment (v4.x) used 200+ firewall rules with performance degradation
 
 #### Implementation
 
-- `02-declarative-config/policy-table.yaml`: 10 rules (Phase 2 locked)
-- `02-declarative-config/apply.py`: Idempotent applicator with ≤15 rule validation
+- `02_declarative_config/policy-table.yaml`: 10 rules (Phase 2 locked)
+- `02_declarative_config/apply.py`: Idempotent applicator with ≤15 rule validation
 - `.github/workflows/ci-validate.yaml`: CI enforces exactly 10 rules
 
 #### Consequences
@@ -233,7 +233,7 @@ At 0.93:
 #### Implementation
 
 ```python
-# 03-ai-helpdesk/triage-engine/main.py
+# 03_ai_helpdesk/triage-engine/main.py
 AUTO_CLOSE_THRESHOLD = 0.93
 
 if prediction.confidence >= AUTO_CLOSE_THRESHOLD:
@@ -385,10 +385,10 @@ Previous architecture used Proxmox for VM orchestration. Introduced:
 Theme: Phase 2 — Security Hardening (FreeRADIUS + PEAP-MSCHAPv2 + Self-Signed CA)
 
 Changes:
-- FreeRADIUS config (PEAP-MSCHAPv2 + LDAP backend) under `01-bootstrap/freeradius`
+- FreeRADIUS config (PEAP-MSCHAPv2 + LDAP backend) under `01_bootstrap/freeradius`
 - UniFi RADIUS profile at `unifi/radius-profile.json`
-- Rogue DHCP webhook (FastAPI + slowapi rate limit) at `03-ai-helpdesk/webhooks/unifi-rogue-handler.py`
-- CRLDistributionPoints finalized in internal CA script `01-bootstrap/certbot-cron/generate-internal-ca.sh`
+- Rogue DHCP webhook (FastAPI + slowapi rate limit) at `03_ai_helpdesk/webhooks/unifi_rogue_handler.py`
+- CRLDistributionPoints finalized in internal CA script `01_bootstrap/certbot_cron/generate-internal-ca.sh`
 - ADRs added: `004-peap-mschapv2-over-eap-tls.md`, `005-self-signed-ca-for-internal.md`
 - CI hardened: yamllint pre-check + stable FreeRADIUS validation (`freeradius/freeradius-server:3-alpine`)
 

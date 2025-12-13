@@ -53,7 +53,7 @@ def fix_fences(content: str) -> str:
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: fix-fences.py <file1.md> [file2.md ...]")
+        print("Usage: fix_fences.py <file1.md> [file2.md ...]")
         sys.exit(1)
 
     for filepath in sys.argv[1:]:

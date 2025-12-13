@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 03_validation_ops/validate-isolation.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Leo's Sacred Glue — Conscious Level 2.6
-# 03-validation-ops/validate-isolation.sh
+# 03_validation_ops/validate-isolation.sh
 # Whitaker Offensive VLAN Isolation Validation (nmap probes)
 # shellcheck disable=SC2034  # Unused variables are config futures
 # shellcheck disable=SC2015  # && || pattern is intentional counter
-set -euo pipefail
 IFS=$'\n\t'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

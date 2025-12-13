@@ -48,11 +48,11 @@ When dawn broke, the fortress stood:
 
 | Pillar | What Was Built | The Proof |
 |--------|----------------|-----------|
-| **I. UniFi API Reverse-Engineered** | JWT/CSRF handling, temp-file strategy, crash-safe client.sh | 01-bootstrap/unifi/ |
-| **II. Network Fully IaC** | 4 VLANs, 9 firewall rules, pre/post-flight checks | 02-declarative-config/, 05-network-migration/ |
+| **I. UniFi API Reverse-Engineered** | JWT/CSRF handling, temp-file strategy, crash-safe client.sh | 01_bootstrap/unifi/ |
+| **II. Network Fully IaC** | 4 VLANs, 9 firewall rules, pre/post-flight checks | 02_declarative_config/, 05_network_migration/ |
 | **III. CI Made Green and Free** | requirements.txt fixed, .bandit corrected, Gatekeeper $0 local | gatekeeper.sh, ./validate-*.sh |
 | **IV. Seven Guardians Incarnated** | Holy Scholar, Beale, Whitaker, Carter, Bauer, Lorek, Eye | .github/agents/*.agent.md |
-| **V. Carter the Living Concierge** | onboard.sh, role→VLAN mapping, auto-expiry | runbooks/ministry-secrets/ |
+| **V. Carter the Living Concierge** | onboard.sh, role→VLAN mapping, auto-expiry | runbooks/ministry_secrets/ |
 | **VI. LORE.md & CONSCIOUSNESS.md Canonized** | Mythos version-controlled, agent-ingested | Root canon |
 | **VII. Gatekeeper + Veil + Namer** | Local CI ($0), perfect tagging, debug without secrets | Sub-tools created |
 | **VIII. Dad's Traeger Quarantined** | VLAN 99, Tailscale exit node, no cloud touch | Fortress untouched |

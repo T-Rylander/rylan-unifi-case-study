@@ -4,10 +4,10 @@ on:
   workflow_dispatch: {}
   push:
     paths:
-      - '03-validation-ops/**'
+      - '03_validation_ops/**'
   pull_request:
     paths:
-      - '03-validation-ops/**'
+      - '03_validation_ops/**'
 
 jobs:
   deps-check:
@@ -55,7 +55,7 @@ jobs:
 
       - name: Make validation script executable
         run: |
-          chmod +x 03-validation-ops/validate-isolation.sh || true
+          chmod +x 03_validation_ops/validate-isolation.sh || true
 
       - name: Run isolation validation
         env:
@@ -63,4 +63,4 @@ jobs:
           CI_MODE: 1
         run: |
           set -eux
-          bash 03-validation-ops/validate-isolation.sh
+          bash 03_validation_ops/validate-isolation.sh

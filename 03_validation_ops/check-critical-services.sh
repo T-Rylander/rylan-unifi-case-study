@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Script: 03_validation_ops/check-critical-services.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
 
 echo "=== Critical Service Health Check ==="
 

@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: bootstrap/samba-dc-provision.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # bootstrap/samba-dc-provision.sh
 # Canonical Samba AD/DC Provisioning (Ubuntu 24.04, Bash)
 # Aligns with INSTRUCTION-SET-ETERNAL-v1.md: RFC2307, SAMBA_INTERNAL DNS
@@ -6,8 +13,6 @@
 # Usage: bash bootstrap/samba-dc-provision.sh [--dry-run]
 # Prerequisites: Ubuntu 24.04+ (native or WSL2)
 # Refs: wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
-
-set -euo pipefail
 
 # Hellodeolu v4 guard: enforce Ubuntu/WSL2
 if ! grep -qi ubuntu /etc/os-release 2>/dev/null; then

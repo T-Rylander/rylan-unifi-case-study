@@ -71,10 +71,10 @@ sudo ./validate-eternal.sh
 
 ```bash
 # Multi-host backup with RTO validation
-sudo ./03-validation-ops/orchestrator.sh
+sudo ./03_validation_ops/orchestrator.sh
 
 # Dry-run mode (CI testing)
-sudo ./03-validation-ops/orchestrator.sh --dry-run
+sudo ./03_validation_ops/orchestrator.sh --dry-run
 
 ```text
 
@@ -110,25 +110,25 @@ validate-eternal.sh         # Comprehensive validation suite
 PHASE-1-COMPLETION.md       # Phase 1 audit remediation summary
 policy-table-current.md     # Live policy table state (10 rules)
 
-01-bootstrap/               # Initial provisioning scripts
+01_bootstrap/               # Initial provisioning scripts
   install-unifi-controller.sh
   setup-nfs-kerberos.sh
   freeradius/               # LDAPS + group auth configs
 
-02-declarative-config/      # GitOps source of truth
+02_declarative_config/      # GitOps source of truth
   policy-table.yaml         # 10 rules (hardware offload safe)
   vlans.yaml
   qos-smartqueue.yaml
 
-03-validation-ops/          # Backup + validation
+03_validation_ops/          # Backup + validation
   orchestrator.sh           # Multi-host backup (RTO <15 min)
   validate-isolation.sh
-  phone-reg-test.py
+  phone_reg_test.py
 
 app/                        # PII redaction
   redactor.py               # Presidio + regex fallback
 
-compose-templates/          # Docker stacks
+compose_templates/          # Docker stacks
   osticket-compose.yml      # Helpdesk + MariaDB
   loki-compose.yml          # Logging aggregation
   freepbx-compose.yml       # VoIP (macvlan VLAN 40)
@@ -200,7 +200,7 @@ cd rylan-unifi-case-study
 sudo ./eternal-resurrect.sh
 
 # 4. Restore from backup
-sudo ./03-validation-ops/orchestrator.sh --restore
+sudo ./03_validation_ops/orchestrator.sh --restore
 
 # 5. Validate
 sudo ./validate-eternal.sh

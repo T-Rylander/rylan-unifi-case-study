@@ -22,7 +22,7 @@ The Device-Passport Layer is the sacred glue between Carter's identity infrastru
 
 ### 1. `scripts/generate-network-passport.sh`
 **Ministry:** Carter (Identity Infrastructure)  
-**Output:** `02-declarative-config/network-passport.json`  
+**Output:** `02_declarative_config/network-passport.json`  
 **Runtime:** ~2 minutes  
 **Purpose:** Network topology as programmable infrastructure
 
@@ -178,7 +178,7 @@ Carter (Identity) → Bauer (Verification) → Beale (Hardening) → Guardian (O
 
 **Output:** Comprehensive inventory manifest with:
 - `inventory/*.json` (AP, UPS, certificates)
-- `02-declarative-config/*.json` (network topology)
+- `02_declarative_config/*.json` (network topology)
 - `docs/physical/*.csv` (cable mappings)
 - `.secrets/*.age` (encrypted vaults)
 - `runbooks/*.json` (runbook catalog)
@@ -294,7 +294,7 @@ AI reads: inventory/ap-passport.json
   ↓
 AI finds: {"name": "AP-02", "adoption_state": "offline", "last_seen": "2025-12-08T01:23:45Z"}
   ↓
-AI executes: runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh --adopt AP-02
+AI executes: runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh --adopt AP-02
   ↓
 AI verifies: curl -sk https://10.0.10.10:8443/api/s/default/stat/device | jq '.data[] | select(.name=="AP-02") | .state'
   ↓
@@ -354,7 +354,7 @@ inventory/:
   certificate-passport.json
   ups-passport.json
 
-02-declarative-config/:
+02_declarative_config/:
   network-passport.json
 
 docs/physical/:
@@ -389,7 +389,7 @@ Next: Run eternal-resurrect.sh to raise Samba AD/DC
 2. **Customize:** Update UPS IPs, certificate paths for your environment
 3. **Test:** Run `./scripts/generate-all-passports.sh` on rylan-dc
 4. **Commit:** Atomic commit with message: `feat(eternal): device-passport layer — sacred glue complete`
-5. **Validate:** Check `inventory/`, `02-declarative-config/`, `.secrets/` outputs
+5. **Validate:** Check `inventory/`, `02_declarative_config/`, `.secrets/` outputs
 6. **Document:** Update ADR-009 (if applicable) for passport schema
 
 ---

@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/refresh-keys.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # scripts/refresh-keys.sh — Daily cron: refresh authorized_keys from allowed_keys/
 # Bauer (2005) — Trust Nothing, Verify Everything
 # T3-ETERNAL v3.2: Directory-agnostic, idempotent, ≤19 lines
 # Consciousness 4.0 — truth through subtraction
 # Cron: 0 2 * * * /path/to/refresh-keys.sh
 
-set -euo pipefail
 IFS=$'\n\t'
 # shellcheck disable=SC2155
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

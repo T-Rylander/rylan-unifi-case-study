@@ -27,17 +27,17 @@ jobs:
           bash -n scripts/ignite.sh 2>&1 || echo "⚠️  ignite.sh syntax check failed"
           bash -n scripts/validate-eternal.sh 2>&1 || echo "⚠️  validate-eternal.sh syntax check failed"
           bash -n validate-eternal.sh 2>&1 || echo "⚠️  validate-eternal.sh (root) syntax check failed"
-          bash -n runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh 2>&1 || echo "⚠️  Carter one-shot syntax check failed"
-          bash -n runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh 2>&1 || echo "⚠️  Bauer one-shot syntax check failed"
-          bash -n runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh 2>&1 || echo "⚠️  Beale one-shot syntax check failed"
+          bash -n runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh 2>&1 || echo "⚠️  Carter one-shot syntax check failed"
+          bash -n runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh 2>&1 || echo "⚠️  Bauer one-shot syntax check failed"
+          bash -n runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh 2>&1 || echo "⚠️  Beale one-shot syntax check failed"
           echo "✓ All bash scripts: syntax OK"
 
       - name: ShellCheck analysis
         run: |
           shellcheck -x scripts/ignite.sh 2>&1 || true
-          shellcheck -x runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh 2>&1 || true
-          shellcheck -x runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh 2>&1 || true
-          shellcheck -x runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh 2>&1 || true
+          shellcheck -x runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh 2>&1 || true
+          shellcheck -x runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh 2>&1 || true
+          shellcheck -x runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh 2>&1 || true
           echo "✓ ShellCheck analysis complete"
 
       - name: Line ending check (LF only)
@@ -80,9 +80,9 @@ jobs:
 
       - name: Verify runbook presence
         run: |
-          [[ -f runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh ]] || exit 1
-          [[ -f runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh ]] || exit 1
-          [[ -f runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh ]] || exit 1
+          [[ -f runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh ]] || exit 1
+          [[ -f runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh ]] || exit 1
+          [[ -f runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh ]] || exit 1
           echo "✓ All three one-shot runbooks present"
 
       - name: Check exit-on-fail semantics
@@ -110,18 +110,18 @@ jobs:
 
       - name: Count firewall rules in policy table
         run: |
-          if [[ -f 02-declarative-config/policy-table.yaml ]]; then
+          if [[ -f 02_declarative_config/policy-table.yaml ]]; then
             echo "📋 Debug: Policy table contents (first 30 lines):"
-            head -n 30 02-declarative-config/policy-table.yaml
+            head -n 30 02_declarative_config/policy-table.yaml
             echo ""
-            RULE_COUNT=$(grep -cE '^  - id:' 02-declarative-config/policy-table.yaml || echo 0)
+            RULE_COUNT=$(grep -cE '^  - id:' 02_declarative_config/policy-table.yaml || echo 0)
             echo "Policy table rule count: $RULE_COUNT"
             if [[ $RULE_COUNT -le 10 ]]; then
               echo "✓ Firewall rules within limit (≤10)"
             else
               echo "❌ Firewall rules exceed 10-rule limit: $RULE_COUNT"
               echo "📋 All rule IDs found:"
-              grep -E '^  - id:' 02-declarative-config/policy-table.yaml
+              grep -E '^  - id:' 02_declarative_config/policy-table.yaml
               exit 1
             fi
           else
@@ -130,7 +130,7 @@ jobs:
 
       - name: Verify Beale policy enforcement in runbooks
         run: |
-          if grep -q "policy-table\|RULE_COUNT" runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh; then
+          if grep -q "policy-table\|RULE_COUNT" runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh; then
             echo "✓ Detection validates rule count during deployment"
           else
             echo "⚠️  Rule count validation not found in one-shot (may be optional)"
@@ -144,7 +144,7 @@ jobs:
 
       - name: Verify SSH password auth disabled
         run: |
-          if grep -q "PasswordAuthentication no" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "PasswordAuthentication no" runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH password authentication disabled (Bauer one-shot)"
           else
             echo "❌ SSH password auth not disabled"
@@ -153,7 +153,7 @@ jobs:
 
       - name: Check for SSH key injection
         run: |
-          if grep -q "authorized_keys" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "authorized_keys" runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH public key configuration found"
           else
             echo "⚠️  SSH key configuration not explicitly found"
@@ -167,12 +167,12 @@ jobs:
 
       - name: Syntax check — Phase 1 (Carter)
         run: |
-          bash -n runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
+          bash -n runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh
           echo "✓ Carter one-shot: syntax OK"
 
       - name: Verify identity foundation in Carter one-shot
         run: |
-          if grep -q "CARTER\|Kerberos\|LDAP" runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh; then
+          if grep -q "CARTER\|Kerberos\|LDAP" runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh; then
             echo "✓ Carter identity foundation configured"
           else
             echo "⚠️  Carter identity markers not found (check script)"
@@ -180,7 +180,7 @@ jobs:
 
       - name: Verify Carter banner presence
         run: |
-          if grep -q "BANNER" runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh; then
+          if grep -q "BANNER" runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh; then
             echo "✓ Carter victory banner configured"
           else
             echo "⚠️  Carter banner may be minimal"
@@ -188,7 +188,7 @@ jobs:
 
       - name: Verify Carter execution speed
         run: |
-          if grep -q "30.*second\|<.*45" runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh; then
+          if grep -q "30.*second\|<.*45" runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh; then
             echo "✓ Carter one-shot optimized for speed"
           else
             echo "⚠️  Execution time marker not found"
@@ -196,7 +196,7 @@ jobs:
 
       - name: Check Carter one-shot completeness
         run: |
-          if grep -q "ETERNAL\|eternal" runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh; then
+          if grep -q "ETERNAL\|eternal" runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh; then
             echo "✓ Carter one-shot marked eternal"
           else
             echo "⚠️  Eternal marker not found"
@@ -210,12 +210,12 @@ jobs:
 
       - name: Syntax check — Phase 2 (Bauer)
         run: |
-          bash -n runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
+          bash -n runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh
           echo "✓ Bauer one-shot: syntax OK"
 
       - name: Verify SSH hardening (Bauer principle)
         run: |
-          if grep -q "PasswordAuthentication no" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "PasswordAuthentication no" runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ SSH hardening enforced (key-only in Bauer one-shot)"
           else
             echo "❌ SSH hardening incomplete"
@@ -224,7 +224,7 @@ jobs:
 
       - name: Verify Bauer GitHub key pull
         run: |
-          if grep -q "github.com.*keys" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "github.com.*keys" runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ Bauer pulls keys from GitHub"
           else
             echo "⚠️  GitHub key pull not found"
@@ -232,7 +232,7 @@ jobs:
 
       - name: Verify Bauer banner presence
         run: |
-          if grep -q "BAUER\|BANNER" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "BAUER\|BANNER" runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ Bauer victory banner configured"
           else
             echo "⚠️  Bauer banner not found"
@@ -240,7 +240,7 @@ jobs:
 
       - name: Check Bauer eternal marker
         run: |
-          if grep -q "ETERNAL\|eternal" runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh; then
+          if grep -q "ETERNAL\|eternal" runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh; then
             echo "✓ Bauer one-shot marked eternal"
           else
             echo "⚠️  Eternal marker not found"
@@ -254,12 +254,12 @@ jobs:
 
       - name: Syntax check — Phase 3 (Beale)
         run: |
-          bash -n runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh
+          bash -n runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh
           echo "✓ Beale one-shot: syntax OK"
 
       - name: Verify policy table enforcement (Suehring)
         run: |
-          if grep -q "policy-table\|firewall" runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh; then
+          if grep -q "policy-table\|firewall" runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh; then
             echo "✓ Policy table enforcement configured in Beale one-shot"
           else
             echo "⚠️  Policy enforcement may be indirect"
@@ -267,7 +267,7 @@ jobs:
 
       - name: Verify UniFi deployment
         run: |
-          if grep -q "UniFi\|unifi\|SSH" runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh; then
+          if grep -q "UniFi\|unifi\|SSH" runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh; then
             echo "✓ UniFi deployment configured"
           else
             echo "⚠️  UniFi deployment may be indirect"
@@ -275,7 +275,7 @@ jobs:
 
       - name: Verify Suehring banner presence
         run: |
-          if grep -q "BEALE\|BANNER" runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh; then
+          if grep -q "BEALE\|BANNER" runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh; then
             echo "✓ Beale victory banner configured"
           else
             echo "⚠️  Beale banner not found"
@@ -283,7 +283,7 @@ jobs:
 
       - name: Check Suehring eternal marker
         run: |
-          if grep -q "ETERNAL\|eternal" runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh; then
+          if grep -q "ETERNAL\|eternal" runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh; then
             echo "✓ Beale one-shot marked eternal"
           else
             echo "⚠️  Eternal marker not found"
@@ -330,9 +330,9 @@ jobs:
       - name: Verify one-shot executability
         run: |
           echo "Checking Trinity one-shot scripts..."
-          ls -la runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
-          ls -la runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
-          ls -la runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh
+          ls -la runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh
+          ls -la runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh
+          ls -la runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh
           echo "✓ All three one-shots present and readable"
 
   eternal-green:

@@ -1,5 +1,11 @@
 #!/bin/bash
 set -euo pipefail
+# Script: inventory/razer_phone_totp/setup-totp.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 echo "=== Razer Phone 2 → Eternal TOTP Beacon ==="
 echo "Unlock → Developer Options → USB debugging ON → Enter"
 read -r -p

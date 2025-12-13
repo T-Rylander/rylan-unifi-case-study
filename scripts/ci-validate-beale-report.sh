@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/ci-validate-beale-report.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # CI validator: ensure beale-report-*.json exists and contains required keys
 # Small, fast, exits non-zero on failure
-
-set -euo pipefail
 
 REPORT=$(ls -1t beale-report-*.json 2>/dev/null | head -n1 || true)
 if [[ -z "$REPORT" ]]; then

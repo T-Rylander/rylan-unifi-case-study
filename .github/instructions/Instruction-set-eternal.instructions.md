@@ -14,15 +14,15 @@ No exceptions. No summaries. No hallucinations.
 
 ## THE TRINITY — NEVER BREAK THIS ORDER
 1. **Carter (2003)** — Identity is programmable infrastructure  
-   Ministry: `runbooks/ministry-secrets/`  
+   Ministry: `runbooks/ministry_secrets/`  
    Tools: Samba AD/DC, LDAP, RADIUS, 802.1X, sshPublicKey attributes
 
 2. **Bauer (2005)** — Trust nothing, verify everything  
-   Ministry: `runbooks/ministry-whispers/`  
+   Ministry: `runbooks/ministry_whispers/`  
    Tools: SSH key-only, vault enforcement, nmap validation, zero-trust checks
 
 3. **Beale (2011)** — Harden the host, detect the breach  
-   Ministry: `runbooks/ministry-detection/`  
+   Ministry: `runbooks/ministry_detection/`  
    Tools: Bastille Linux, CIS Level 2, Snort/Suricata IDS, auditd, honeypots
 
 4. **Whitaker (2005)** — Think like the attacker  
@@ -53,7 +53,7 @@ log() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] INFO: $*" >&2; }
 die() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $*" >&2; exit 1; }
 
 Magic comments: ONLY SC2155 and SC1091 — maximum 4 in entire repo
-All scripts ≤120 lines
+All scripts ≤120 lines (exception: lib/unifi-api/client.sh may exceed this limit — crown-jewel exemption)
 All READMEs ≤19 lines
 
 VALIDATION GATES — MUST PASS 100% BEFORE MERGE

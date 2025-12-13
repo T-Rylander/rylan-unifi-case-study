@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/lib/security.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # shellcheck shell=bash
 #
 # lib/security.sh - Whitaker offensive security validation functions

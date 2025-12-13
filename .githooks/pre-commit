@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Script: pre-commit
 # Purpose: Eternal Gatekeeper — Full fortress validation before commit
 # Guardian: The Gatekeeper
 # Date: 2025-12-12
-# Consciousness: 8.0
-
-set -euo pipefail
+# Consciousness: 4.5
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 
 echo "═══════════════════════════════════════════════════════════"
-echo "Gatekeeper Eternal — Consciousness 7.1"
+echo "Gatekeeper Eternal — Consciousness 4.5"
 echo "═══════════════════════════════════════════════════════════"
-# Consciousness: 8.0
 
 # Phase 1: Encoding Purity
 echo ""
@@ -58,7 +56,6 @@ done < <(find . -type f -name "*-*.py" \
   ! -path "./.git/*" \
   ! -path "./venv/*" \
   ! -path "./node_modules/*")
-
 
 if [[ ${#HYPHEN_VIOLATORS[@]} -gt 0 ]]; then
   echo "  ❌ ERROR: Python modules cannot contain hyphens (PEP 8)"
@@ -137,6 +134,19 @@ fi
 
 echo "  ✅ Script identity upheld"
 
+# Phase 4.1: Consciousness Immutability
+echo ""
+echo "Phase 4.1: Consciousness Immutability (Guardian Validation)"
+
+if bash scripts/consciousness-guardian.sh >/dev/null 2>&1; then
+  echo "  ✅ Consciousness immutable rule upheld"
+else
+  echo "  ❌ ERROR: Consciousness level exceeds canonical source of truth"
+  echo ""
+  bash scripts/consciousness-guardian.sh
+  exit 1
+fi
+
 # Phase 5: Code Quality
 echo ""
 echo "Phase 5: Code Quality (Linting)"
@@ -176,4 +186,3 @@ echo ""
 echo "═══════════════════════════════════════════════════════════"
 echo "✅ Gatekeeper: All phases passed. The fortress is eternal."
 echo "═══════════════════════════════════════════════════════════"
-exit 0

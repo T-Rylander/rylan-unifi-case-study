@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from datetime import datetime, timezone
 
-POLICY_TABLE = Path("02-declarative-config/policy-table.yaml")
+POLICY_TABLE = Path("02_declarative_config/policy-table.yaml")
 MAX_RULES = 10  # USG-3P hardware offload limit (Suehring constraint)
 AUDIT_LOG = Path("guardian/audit.log")
 

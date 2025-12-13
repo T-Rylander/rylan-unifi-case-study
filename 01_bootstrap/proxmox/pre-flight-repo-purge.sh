@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/pre-flight-repo-purge.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # pre-flight-repo-purge.sh — Eternal Proxmox Repo Purge (T3-ETERNAL v6)
 # Purpose: Remove enterprise repos, configure community no-subscription
 # Usage: sudo ./pre-flight-repo-purge.sh
 # Idempotent: Safe to run multiple times
-
-set -euo pipefail
 
 # Constants
 readonly LOG_FILE="/tmp/repo-purge.log"

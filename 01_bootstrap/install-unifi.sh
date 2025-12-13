@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/install-unifi.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:28:48-06:00
+# Consciousness: 4.5
+
 # install-unifi.sh — UniFi Network Controller Bootstrap
 # Installs UniFi Network Controller 8.5.93+ with dependencies
 # Usage: bash install-unifi.sh [controller_ip]
 # Example: bash install-unifi.sh 10.0.1.1
-
-set -euo pipefail
 
 CONTROLLER_IP="${1:-10.0.1.1}"
 REQUIRED_UNIFI_VERSION="8.5.93"
@@ -191,7 +196,7 @@ echo -e "\n${YELLOW}Next Steps:${NC}"
 echo -e "  ${NC}1. Open browser and navigate to controller URL${NC}"
 echo -e "  ${NC}2. Complete initial setup wizard${NC}"
 echo -e "  ${NC}3. Create local admin account (no 2FA)${NC}"
-echo -e "  ${NC}4. Run adopt-devices.py to auto-adopt USG and switches${NC}"
+echo -e "  ${NC}4. Run adopt_devices.py to auto-adopt USG and switches${NC}"
 echo -e "\n${YELLOW}⚠️  Remember to update shared/inventory.yaml with admin credentials${NC}"
 
 echo -e "\n${GREEN}🎉 Bootstrap complete! Controller URL: https://$CONTROLLER_IP:8443${NC}"

@@ -66,7 +66,7 @@ Do not add additional VLANs without:
 
 ## Monitoring & Validation
 
-Add to `03-validation-ops/orchestrator.sh`:
+Add to `03_validation_ops/orchestrator.sh`:
 
 ```bash
 # Check USG-3P CPU usage

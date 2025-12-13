@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: templates/tests/proxmox/test-proxmox-ignite.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 #
 # Proxmox Ignite Validation Test Suite
 # Smoke tests for proxmox-ignite.sh deployment
@@ -17,15 +24,13 @@
 #   0: All tests passed
 #   1: One or more tests failed
 
-set -euo pipefail
-
 ################################################################################
 # TEST FRAMEWORK SETUP
 ################################################################################
 
 TEST_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_DIR="$(cd "$(dirname "${TEST_DIR}")/.." && pwd)"
-SCRIPT_PATH="${SCRIPT_DIR}/01-bootstrap/proxmox/proxmox-ignite.sh"
+SCRIPT_PATH="${SCRIPT_DIR}/01_bootstrap/proxmox/proxmox-ignite.sh"
 
 # Colors
 RED='\033[0;31m'
@@ -125,10 +130,10 @@ suite_script_integrity() {
   assert_file_contains "$SCRIPT_PATH" "^set -euo pipefail"
 
   test_case "README documentation exists"
-  assert_file_exists "${SCRIPT_DIR}/01-bootstrap/proxmox/README.md"
+  assert_file_exists "${SCRIPT_DIR}/01_bootstrap/proxmox/README.md"
 
   test_case "Preseed configuration exists"
-  assert_file_exists "${SCRIPT_DIR}/01-bootstrap/proxmox/proxmox-answer.cfg"
+  assert_file_exists "${SCRIPT_DIR}/01_bootstrap/proxmox/proxmox-answer.cfg"
 }
 
 ################################################################################
@@ -331,7 +336,7 @@ suite_documentation() {
   echo -e "\n${BLUE}TEST SUITE 8: Documentation Quality${NC}"
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  local readme="${SCRIPT_DIR}/01-bootstrap/proxmox/README.md"
+  local readme="${SCRIPT_DIR}/01_bootstrap/proxmox/README.md"
 
   test_case "README has main heading"
   assert_file_contains "$readme" "^# Proxmox VE 8.2"

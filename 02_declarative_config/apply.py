@@ -216,7 +216,7 @@ def reconcile(  # noqa: C901, PLR0912
 
 def apply_policy_table(client: UniFiClient | None, *, dry_run: bool) -> int:  # noqa: ARG001
     """Apply firewall policy table."""
-    path = BASE_DIR / "02-declarative-config" / "policy-table.yaml"
+    path = BASE_DIR / "02_declarative_config" / "policy-table.yaml"
     if not path.exists():
         logger.warning("Policy table not found: %s", path)
         return 0
@@ -292,9 +292,7 @@ def render_desired_to_runtime(yaml_file: str, json_out: str) -> None:
     # Convert YAML list to JSON dict (e.g., vlans: [items] → {"1": item})
     if isinstance(data, dict) and data:
         first_key = next(iter(data.keys()))
-        json_data = {
-            str(i + 1): item for i, item in enumerate(data[first_key])
-        }
+        json_data = {str(i + 1): item for i, item in enumerate(data[first_key])}
     else:
         json_data = {}
 
@@ -307,5 +305,3 @@ def render_desired_to_runtime(yaml_file: str, json_out: str) -> None:
 
 if __name__ == "__main__":
     main()
-
-

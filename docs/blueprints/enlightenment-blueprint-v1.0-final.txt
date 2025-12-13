@@ -18,10 +18,10 @@ CORE CONSTRAINTS — NON-NEGOTIABLE
 • Must be deployable by a junior sysadmin at 3 AM with only `git` + `adb`
 
 PHASE I — SHIPS TO MAIN TODAY (PR #42)
-inventory/razer-phone-totp/
+inventory/razer_phone_totp/
 ├── setup-totp.sh          # One-time ADB bootstrap (Aegis + QR enroll)
 ├── termux-boot.sh         # Wake-lock + launch Aegis on boot
-├── p1-buzzer.py           # 5-minute poll → vibrate on open P1 tickets
+├── p1_buzzer.py           # 5-minute poll → vibrate on open P1 tickets
 ├── README.md              # Exact deploy steps + rollback
 └── tests/                 # pytest + mock osTicket responses (100 % coverage)
 
@@ -35,13 +35,13 @@ PHASE II — FUTURE EXPANSIONS (GATED BY ADR #005)
 Only merged if they meet the CORE CONSTRAINTS above.
 
 1. Bodhisattva Mount (Physical immortality)
-   inventory/razer-phone-totp/bodhisattva-mount/
+   inventory/razer_phone_totp/bodhisattva-mount/
    ├── bodhisattva-mount.stl      # 3D-printable cradle (FreeCAD source included)
    ├── poe-splitter-bom.md      # Exact Amazon part numbers
    └── README.md                  # 30-minute assembly guide
 
 2. QR Beacon Mode (Zero-typing token clone)
-   inventory/razer-phone-totp/qr-beacon.py
+   inventory/razer_phone_totp/qr-beacon.py
    # Generates giant on-screen QR of current TOTP every 30 s
    → admins scan to clone
 

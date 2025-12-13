@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Script: 01_bootstrap/validate-rylan-dc.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 echo "Validating rylan-dc foundations..."
 ip addr show eno1 | grep -E "(10\.0\.10\.10|10\.0\.30\.10)" || {
   echo "FAIL: netplan not applied"

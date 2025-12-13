@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
-# Install project pre-commit hooks for developers
 set -euo pipefail
+# Script: scripts/install-pre-commit.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
+# Install project pre-commit hooks for developers
 
 if ! command -v pre-commit &>/dev/null; then
   echo "pre-commit not installed. Install via pip: pip install pre-commit"

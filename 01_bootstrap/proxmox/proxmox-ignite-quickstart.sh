@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/proxmox-ignite-quickstart.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 #
 # Quick Start Script: Proxmox Ignite Deployment
 #
@@ -13,8 +20,6 @@
 # 2. Validate prerequisites
 # 3. Execute proxmox-ignite.sh with your settings
 # 4. Display results and next steps
-
-set -euo pipefail
 
 # Script configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

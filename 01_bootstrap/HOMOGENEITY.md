@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document establishes the canonical style guide for all Bash scripts in the `01-bootstrap/` directory tree. All scripts must conform to **T3-ETERNAL v6 canon** principles.
+This document establishes the canonical style guide for all Bash scripts in the `01_bootstrap/` directory tree. All scripts must conform to **T3-ETERNAL v6 canon** principles.
 
 ---
 
@@ -123,7 +123,7 @@ fail_with_context() {
 
 **Verification Command:**
 ```bash
-git ls-files --eol 01-bootstrap/**/*.sh
+git ls-files --eol 01_bootstrap/**/*.sh
 ```text
 
 ### 6. Indentation & Formatting

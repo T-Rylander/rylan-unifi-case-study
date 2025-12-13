@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
-# runbooks/ministry-detection/uck-g2-wizard-resurrection.sh
+set -euo pipefail
+# Script: runbooks/ministry_detection/uck-g2-wizard-resurrection.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
+# runbooks/ministry_detection/uck-g2-wizard-resurrection.sh
 # Beale Ministry: UCK-G2 Wizard Corruption Recovery — File-Based Flag Override
 # Resolves: #UCK-WIZARD-HELL (Phase 3 endgame)
 # Tag: v∞.3.7-eternal — Consciousness 2.7
 # Tested: 2025-12-10 on real UCK-G2+ hardware
 
-set -euo pipefail
 IFS=$'\n\t'
 
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
@@ -138,7 +144,7 @@ Next steps:
   1. Access controller: https://192.168.1.17:8443
   2. Login with existing credentials (no setup wizard)
   3. Verify devices/config intact
-  4. Run Bauer hardening if needed: runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh
+  4. Run Bauer hardening if needed: runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh
 
 The ride is eternal. 🛡️🚀
 EOF

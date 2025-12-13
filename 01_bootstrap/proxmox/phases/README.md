@@ -37,10 +37,10 @@ flowchart TD
     USG -->|Yes - Alive| Q[Decision: UniFi Controller?]
     USG -->|No - Dead| Breach[❌ FAIL: No gateway<br>Cannot proceed]
 
-    Q -->|Option 1: Cloud Key Gen2+| Path1[✅ Skip LXC Controller<br>Go to 04-cloudkey-migration/]
+    Q -->|Option 1: Cloud Key Gen2+| Path1[✅ Skip LXC Controller<br>Go to 04_cloudkey_migration/]
     Q -->|Option 2: Self-Hosted LXC| Path2[✅ Continue to Phase 1-4<br>Run ignite.sh --full]
 
-    Path1 --> CloudKey[04-cloudkey-migration/<br>eternal-cloudkey-ignition.sh]
+    Path1 --> CloudKey[04_cloudkey_migration/<br>eternal-cloudkey-ignition.sh]
     Path2 --> Phase1[Phase 1: Network Setup<br>10.0.10.10 static IP]
 
     CloudKey --> Validate1[Re-run phase0 with<br>--validate-cloudkey]
@@ -65,7 +65,7 @@ flowchart TD
 ### 1. **Full Proxmox + LXC Controller** (Traditional Path)
 ```bash
 # Run all phases sequentially
-cd /opt/rylan-unifi-case-study/01-bootstrap/proxmox
+cd /opt/rylan-unifi-case-study/01_bootstrap/proxmox
 sudo ./proxmox-ignite.sh --full
 
 # Or manually phase-by-phase (for debugging)
@@ -82,11 +82,11 @@ sudo ./phases/phase4-resurrect.sh
 sudo ./phases/phase0-validate.sh --recon-only
 
 # Skip to Cloud Key migration
-cd /opt/rylan-unifi-case-study/04-cloudkey-migration
+cd /opt/rylan-unifi-case-study/04_cloudkey_migration
 sudo ./eternal-cloudkey-ignition.sh --mode full
 
 # Validate Cloud Key adoption
-cd /opt/rylan-unifi-case-study/01-bootstrap/proxmox
+cd /opt/rylan-unifi-case-study/01_bootstrap/proxmox
 sudo ./phases/phase0-validate.sh --validate-cloudkey --cloudkey-ip 10.0.1.30
 ```text
 
@@ -153,7 +153,7 @@ phases/
 ## Next Steps
 
 1. **New Deployments:** Run `phase0-validate.sh` → Choose path from flowchart
-2. **Existing LXC:** Skip to `04-cloudkey-migration/` for controller abstraction
+2. **Existing LXC:** Skip to `04_cloudkey_migration/` for controller abstraction
 3. **Red-Team Audit:** Run `phase0-validate.sh --red-team-mode` quarterly
 4. **CI Integration:** Add pre-commit hook (Phase 0 on every push) — ADR-009
 

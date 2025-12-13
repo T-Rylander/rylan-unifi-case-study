@@ -1,9 +1,15 @@
 #!/bin/bash
-# 05-network-migration/rollback.sh
+set -euo pipefail
+# Script: 05_network_migration/rollback.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
+# 05_network_migration/rollback.sh
 # Purpose: Emergency rollback (Hellodeolu: <15 min RTO)
 # Author: DT/Luke canonical
 # Date: 2025-12-10
-set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"

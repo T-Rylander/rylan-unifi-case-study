@@ -18,7 +18,7 @@ applyTo: ["**/*whitaker*.sh", "**/*breach*.sh", "**/*offense*.sh", "**/*pentest*
 1. Verify VLAN 99 isolation: ip addr | grep "inet.*99"
 2. Run simulation: simulate-breach.sh --target <system>
 3. Redact output: python app/redactor.py --aggressive
-4. Log to: .github/breach-reports/$(date +%Y%m%d).json
+4. Log to: .github/breach_reports/$(date +%Y%m%d).json
 5. Clean up: Remove all artifacts from target
 
 ## Prohibited Actions (NEVER DO THESE)

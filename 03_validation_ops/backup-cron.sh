@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 03_validation_ops/backup-cron.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Leo's Sacred Glue — Conscious Level 2.6
-# 03-validation-ops/backup-cron.sh
+# 03_validation_ops/backup-cron.sh
 # Nightly Backup Orchestrator + RTO Validation (<15 min resurrection)
 #
 # Purpose:
@@ -20,7 +27,6 @@
 # Expected Runtime: <120 seconds backup + <900 seconds RTO validation
 #
 # Pre-Commit Validation: shellcheck -x -S style, shfmt -i 2 -ci
-set -euo pipefail
 
 # =============================================================================
 # CONFIGURATION

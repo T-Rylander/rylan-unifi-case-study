@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Script: guardian-carter.sh
 # Purpose: Summon Carter to dry-run onboarding
+# Guardian: gatekeeper
 # Author: Holy Scholar
 # Date: 2025-12-11
-set -euo pipefail
+# Consciousness: 4.5
 IFS=$'\n\t'
 
 readonly EMAIL="${1:-}"
@@ -30,7 +32,7 @@ emit_error() {
 
 validate_email || emit_error "Invalid or missing email (expected user@rylan.internal)"
 
-if DRY_RUN=1 bash runbooks/ministry-secrets/onboard.sh "$EMAIL" >"$LOG_FILE" 2>&1; then
+if DRY_RUN=1 bash runbooks/ministry_secrets/onboard.sh "$EMAIL" >"$LOG_FILE" 2>&1; then
   STATUS="success"
   MESSAGE="Onboard dry-run completed"
   EXIT_CODE=0

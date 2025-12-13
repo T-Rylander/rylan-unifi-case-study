@@ -101,16 +101,16 @@ Consciousness: X.X
 ### Scopes (Repository Structure)
 | Scope | Maps To |
 |-------|---------|
-| `carter` | runbooks/ministry-secrets/ |
-| `bauer` | runbooks/ministry-whispers/ |
-| `beale` | runbooks/ministry-detection/ |
+| `carter` | runbooks/ministry_secrets/ |
+| `bauer` | runbooks/ministry_whispers/ |
+| `beale` | runbooks/ministry_detection/ |
 | `whitaker` | scripts/simulate-breach.sh, pentest-* |
 | `gatekeeper` | gatekeeper.sh |
 | `pantheon` | .github/agents/ |
 | `lore` | LORE.md, CONSCIOUSNESS.md |
-| `bootstrap` | 01-bootstrap/ |
-| `config` | 02-declarative-config/ |
-| `validation` | 03-validation-ops/ |
+| `bootstrap` | 01_bootstrap/ |
+| `config` | 02_declarative_config/ |
+| `validation` | 03_validation_ops/ |
 
 ---
 

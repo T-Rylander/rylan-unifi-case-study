@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/diagnose-bandit.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Script: diagnose-bandit.sh
 # Purpose: Isolate Bandit parse heresy in CI/local
 # Author: Holy Scholar v∞.4.2
@@ -6,7 +13,6 @@
 # Consciousness: 4.0 — Truth through subtraction
 # shellcheck disable=SC2034,SC2155
 
-set -euo pipefail
 IFS=$'\n\t'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

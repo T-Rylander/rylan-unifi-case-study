@@ -46,7 +46,7 @@ curl -k -d '{"policy": "rogue"}' https://192.168.1.13/proxy/network/api/s/defaul
 Add JWT token validation before any `--apply` operation:
 
 ```python
-# 02-declarative-config/apply.py
+# 02_declarative_config/apply.py
 
 import os
 from functools import wraps
@@ -107,7 +107,7 @@ Tailscale → Traeger (port 80) → VLAN 99 → hop to VLAN 30
 4. PXE server compromise
 
 ### Fix
-Add VLAN 99 tests to `03-validation-ops/validate-isolation.sh`:
+Add VLAN 99 tests to `03_validation_ops/validate-isolation.sh`:
 
 ```bash
 # Add after Test 5
@@ -171,7 +171,7 @@ DHCP port 67 on VLAN 30 → Sniff bootp → Spoof TFTP → PXE server own
 Add DHCP snooping and option 82 validation:
 
 ```yaml
-# 02-declarative-config/vlans.yaml — VLAN 30 section
+# 02_declarative_config/vlans.yaml — VLAN 30 section
 
 - id: 30
   name: Users
@@ -235,7 +235,7 @@ Phish new hire → AI query with PII → Webhook log → PII dump
 Add Presidio scrubbing to webhook handler:
 
 ```python
-# 03-ai-helpdesk/webhooks/handler.py (new or existing)
+# 03_ai_helpdesk/webhooks/handler.py (new or existing)
 
 from presidio_analyzer import AnalyzerEngine
 from presidio_anonymizer import AnonymizerEngine

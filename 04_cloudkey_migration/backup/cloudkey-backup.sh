@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 04_cloudkey_migration/backup/cloudkey-backup.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Cloud Key Daily Backup — Cron Job for Eternal Resilience
 # Scheduled: 0 3 * * * /usr/local/bin/cloudkey-backup.sh
-
-set -euo pipefail
 
 # Configuration
 CLOUDKEY_IP="${CLOUDKEY_IP:---10.0.1.30}"

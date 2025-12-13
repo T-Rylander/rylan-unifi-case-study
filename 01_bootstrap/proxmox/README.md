@@ -622,7 +622,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: ShellCheck
-        run: shellcheck 01-bootstrap/proxmox/proxmox-ignite.sh
+        run: shellcheck 01_bootstrap/proxmox/proxmox-ignite.sh
       - name: Bandit (Python security scan)
         run: bandit -r . -ll
 
@@ -640,10 +640,10 @@ To test the script locally:
 
 ```bash
 # 1. Lint check
-shellcheck 01-bootstrap/proxmox/proxmox-ignite.sh
+shellcheck 01_bootstrap/proxmox/proxmox-ignite.sh
 
 # 2. Dry-run (validation only, no changes)
-sudo ./01-bootstrap/proxmox/proxmox-ignite.sh \
+sudo ./01_bootstrap/proxmox/proxmox-ignite.sh \
   --hostname test-host \
   --ip 10.0.10.20/26 \
   --gateway 10.0.10.1 \
@@ -736,7 +736,7 @@ tail -50 /var/log/proxmox-ignite.log
 ### 5. Continue with Carter (Samba AD/DC)
 ```bash
 cd /opt/fortress
-sudo ./01-bootstrap/samba-provision.sh
+sudo ./01_bootstrap/samba-provision.sh
 ```text
 
 ---

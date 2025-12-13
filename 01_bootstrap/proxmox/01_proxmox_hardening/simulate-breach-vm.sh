@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-# 01-bootstrap/proxmox/01-proxmox-hardening/simulate-breach-vm.sh — Whitaker VM post-provision nmap
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/01_proxmox_hardening/simulate-breach-vm.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:28:48-06:00
+# Consciousness: 4.5
+
+# 01_bootstrap/proxmox/01_proxmox_hardening/simulate-breach-vm.sh — Whitaker VM post-provision nmap
 # Scans top 100 ports on target VM; fails if unexpected exposure is found
 
-set -euo pipefail
 IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"

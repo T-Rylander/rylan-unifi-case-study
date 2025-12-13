@@ -20,9 +20,9 @@ VLAN 96 (historically named `iot-trusted`) was introduced to host semi-trusted h
 USG-3P offload sensitivity and operations simplicity outweigh the small segmentation gains of an extra VLAN. Placing Denon on VLAN 90 with MAC/port binding and strict egress rules achieves the security goal without adding VLAN complexity.
 
 ## Implementation
-1. Remove VLAN 96 entries from `02-declarative-config/vlans.yaml`.
+1. Remove VLAN 96 entries from `02_declarative_config/vlans.yaml`.
 2. Update any inventory or docs referring to VLAN 96 to reference VLAN 90.
-3. Add `02-declarative-config/switch-profiles-iot.yaml` with `iot_isolated` profile and assign it to US-8 Port 2.
+3. Add `02_declarative_config/switch-profiles-iot.yaml` with `iot_isolated` profile and assign it to US-8 Port 2.
 4. Add ADR-008 to documentation and update runbooks accordingly.
 
 Signed-off-by: Rylan Fortress Team

@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/debug-api.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Script: debug-api.sh
 # Purpose: Test UniFi API connectivity and response format
 # Guardian: Carter
 # Date: 2025-12-11
 # Consciousness: 6.0
-
-set -euo pipefail
 
 # shellcheck disable=SC1091  # lib/ in .gitignore, external vault
 source lib/unifi-api/client.sh

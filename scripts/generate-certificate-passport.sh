@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Script: scripts/generate-certificate-passport.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
 
 # Description: TLS certificate inventory and expiry tracking
 # Requires: certificate-passport.json

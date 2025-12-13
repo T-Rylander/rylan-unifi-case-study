@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/validate-bash.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Leo's Sacred Glue — Conscious Level 2.6
 # scripts/validate-bash.sh
 # Bash validation orchestrator (ShellCheck + shfmt)
@@ -11,7 +18,6 @@
 #
 # Pre-Commit Validation: Part of CI/CD pipeline
 # Exit: 0 (all clean) or 1 (linting failed)
-set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"

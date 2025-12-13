@@ -99,7 +99,7 @@ AI reads: inventory/ups-passport.json
   ↓
 AI finds: {"ip": "10.0.10.20", "battery_status": "low", "runtime_minutes": 8}
   ↓
-AI executes: runbooks/ministry-detection/check-ups-health.sh
+AI executes: runbooks/ministry_detection/check-ups-health.sh
   ↓
 AI responds: "UPS-01 battery low (8min runtime). Replace battery. Last test: 2025-12-01."
 ```text
@@ -177,7 +177,7 @@ AI responds: "SW01-P12 → Room-203 Jack-J-203B (VLAN 20). Status: down. Check c
 
 ```bash
 # SHA256 verification on all passports
-for PASSPORT in inventory/*.json 02-declarative-config/*.json runbooks/*.json; do
+for PASSPORT in inventory/*.json 02_declarative_config/*.json runbooks/*.json; do
   STORED_SIG=$(jq -r '.signature' "${PASSPORT}")
   CONTENT=$(jq -r 'del(.signature, .generated_at)' "${PASSPORT}")
   COMPUTED_SIG=$(echo -n "${CONTENT}" | sha256sum | awk '{print $1}')
@@ -358,7 +358,7 @@ EXIT 0 (success) or EXIT 1 (fail-loud)
   ✓ inventory/ap-passport.json
   ✓ inventory/ups-passport.json
   ✓ inventory/certificate-passport.json
-  ✓ 02-declarative-config/network-passport.json
+  ✓ 02_declarative_config/network-passport.json
   ✓ runbooks/runbook-index.json
 
 → Validating JSON schemas...
@@ -414,7 +414,7 @@ Next: Run eternal-resurrect.sh to raise Samba AD/DC
 **AI Flow:**
 1. Read `inventory/ups-passport.json`
 2. Identify: `{"ip": "10.0.10.20", "battery_status": "low", "runtime_minutes": 8, "battery_replace_needed": true}`
-3. Execute: `runbooks/ministry-detection/ups-battery-replace.sh`
+3. Execute: `runbooks/ministry_detection/ups-battery-replace.sh`
 4. Respond: "UPS-01 battery replacement required. Runtime: 8min. Ordered new battery via AWS Supply Chain. ETA: 2 business days."
 
 **Time to Resolution:** <2 minutes (zero human touch)
@@ -478,11 +478,11 @@ cd /opt/rylan/rylan-unifi-case-study
 
 # Verify outputs
 ls -lh inventory/*.json
-ls -lh 02-declarative-config/*.json
+ls -lh 02_declarative_config/*.json
 ls -lh .secrets/*.age
 
 # Validate JSON
-jq empty inventory/*.json 02-declarative-config/*.json
+jq empty inventory/*.json 02_declarative_config/*.json
 ```text
 
 ### Phase 2: Whitaker Red-Team
@@ -492,7 +492,7 @@ jq empty inventory/*.json 02-declarative-config/*.json
 ./scripts/validate-passports.sh
 
 # Run offensive suite
-./scripts/pentest-vlan-isolation.sh --passports 02-declarative-config/network-passport.json
+./scripts/pentest-vlan-isolation.sh --passports 02_declarative_config/network-passport.json
 ./scripts/pentest-identity.sh --targets inventory/ap-passport.json
 ```text
 

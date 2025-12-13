@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 04_cloudkey_migration/validation/comprehensive-suite.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Cloud Key Comprehensive Validation Suite
 # Verifies all aspects of Cloud Key deployment
-
-set -euo pipefail
 
 # Colors
 RED='\033[0;31m'

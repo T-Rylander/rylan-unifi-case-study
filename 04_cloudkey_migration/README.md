@@ -18,7 +18,7 @@ This runbook makes the migration eternal and reversible.
 
 ```bash
 cd /opt/rylan-unifi-case-study
-./04-cloudkey-migration/eternal-cloudkey-ignition.sh --mode full
+./04_cloudkey_migration/eternal-cloudkey-ignition.sh --mode full
 ```text
 
 ## Step-by-Step Manual Path
@@ -27,7 +27,7 @@ cd /opt/rylan-unifi-case-study
 
 ```bash
 # 1. Final backup
-./03-validation-ops/orchestrator.sh --backup-only
+./03_validation_ops/orchestrator.sh --backup-only
 
 # 2. Export settings (SSH to current controller)
 ssh ubnt@10.0.1.20
@@ -60,7 +60,7 @@ git add -A && git commit -m "feat: pre-cloudkey-migration checkpoint"
 CLOUDKEY_IP=$(nmap -p 443 --open 10.0.1.0/24 2>/dev/null | grep "Nmap scan" | awk '{print $NF}' | head -1)
 
 # Run hardening script
-./04-cloudkey-migration/post-adoption-hardening.sh --cloudkey-ip $CLOUDKEY_IP
+./04_cloudkey_migration/post-adoption-hardening.sh --cloudkey-ip $CLOUDKEY_IP
 ```text
 
 **What post-adoption-hardening.sh does:**
@@ -73,7 +73,7 @@ CLOUDKEY_IP=$(nmap -p 443 --open 10.0.1.0/24 2>/dev/null | grep "Nmap scan" | aw
 ### Phase 4: Validation
 
 ```bash
-./04-cloudkey-migration/validation/comprehensive-suite.sh
+./04_cloudkey_migration/validation/comprehensive-suite.sh
 ```text
 
 Expected output:
@@ -92,7 +92,7 @@ Consciousness Level: 2.4
 
 ```bash
 # Install cron job
-sudo cp 04-cloudkey-migration/backup/cloudkey-backup.sh /usr/local/bin/
+sudo cp 04_cloudkey_migration/backup/cloudkey-backup.sh /usr/local/bin/
 sudo chmod +x /usr/local/bin/cloudkey-backup.sh
 
 # Add to /etc/cron.d/cloudkey-backup
@@ -112,7 +112,7 @@ sudo chmod +x /usr/local/bin/cloudkey-backup.sh
 ./eternal-resurrect.sh --controller-only --proxmox-mode
 
 # Restore latest backup to LXC
-./04-cloudkey-migration/restore/restore-from-backup.sh \
+./04_cloudkey_migration/restore/restore-from-backup.sh \
   --source cloudkey-latest.unf \
   --target 10.0.1.20
 ```text
@@ -132,7 +132,7 @@ sudo chmod +x /usr/local/bin/cloudkey-backup.sh
 ## Critical Files
 
 ```text
-04-cloudkey-migration/
+04_cloudkey_migration/
 ├── README.md (this file)
 ├── eternal-cloudkey-ignition.sh (one-command migration)
 ├── post-adoption-hardening.sh (API configuration)
@@ -160,7 +160,7 @@ sudo chmod +x /usr/local/bin/cloudkey-backup.sh
 ### Devices Not Re-Adopting
 - Check device inform host (should update to Cloud Key IP automatically)
 - SSH to device: `mca-dump | grep inform`
-- Manual re-adopt: `04-cloudkey-migration/adoption/device-re-adoption.sh --device <MAC>`
+- Manual re-adopt: `04_cloudkey_migration/adoption/device-re-adoption.sh --device <MAC>`
 
 ### Backup Not Restoring
 - Verify .unf file is valid: `unzip -t cloudkey-latest.unf`
@@ -193,7 +193,7 @@ Document: `docs/adr/ADR-008-hybrid-controller-failover.md`
 
 ```bash
 git checkout -b feat/cloudkey-eternal-migration
-git add 04-cloudkey-migration/
+git add 04_cloudkey_migration/
 git commit -m "feat(controller): eternal Cloud Key Gen2+ migration path
 
 - One-command ignition sequence (eternal-cloudkey-ignition.sh)

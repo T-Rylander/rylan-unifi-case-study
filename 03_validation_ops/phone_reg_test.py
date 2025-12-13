@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Leo's Sacred Glue — Conscious Level 2.6
-03-validation-ops/phone-reg-test.py
+03_validation_ops/phone_reg_test.py
 VoIP SIP Registration + QoS DSCP Validation (Bauer → Whitaker offensive trinity)
 
 Purpose:

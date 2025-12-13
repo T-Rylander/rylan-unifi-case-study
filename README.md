@@ -61,21 +61,21 @@ This repository implements the **Trinity Pattern**—a layered infrastructure au
 - SSH key management and hardening
 - Identity provisioning automation (Samba AD/DC, LDAP, RADIUS, 802.1X)
 - Access control policy enforcement
-- **Implementation**: `runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh`
+- **Implementation**: `runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh`
 
 ### Layer 2: Bauer (Verification & Trust)
 - Pre-deployment validation framework
 - Configuration integrity checks (nmap from VLANs, vault hygiene)
 - Security policy enforcement (SSH key-only, zero-trust)
 - CI debug diagnostics via **Bauer's Veil** (speaks in three layers: Symptom, Cause, Cure)
-- **Implementation**: `runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh`
+- **Implementation**: `runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh`
 - **Sub-tool**: `.github/agents/bauer-veil.agent.md`
 
 ### Layer 3: Beale (Intrusion Detection & Drift Management)
 - Real-time drift detection (auditd, Snort/Suricata IDS)
 - Unauthorized change alerting (honeypots on VLAN 30)
 - Infrastructure state reconciliation (Bastille lockdown, CIS Level 2)
-- **Implementation**: `runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh`
+- **Implementation**: `runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh`
 
 ### Layer 4: Whitaker (Offensive Security)
 - Penetration testing integration (21+ vectors: sqlmap, port scans, lateral movement)
@@ -173,12 +173,12 @@ flowchart TD
 │   ├── simulate-breach.sh            # Whitaker 21+ vectors
 │   ├── diagnose-bandit.sh            # CI debug (parse isolation)
 │   └── pentest-*.sh                  # Red-team offensive scripts
-├── 01-bootstrap/                     # Initial setup (API discovery, crash-safe)
+├── 01_bootstrap/                     # Initial setup (API discovery, crash-safe)
 │   └── unifi/inventory-devices.sh    # Device enumeration
-├── 02-declarative-config/            # Desired state (YAML → JSON)
+├── 02_declarative_config/            # Desired state (YAML → JSON)
 │   ├── vlans.yaml                    # Network segmentation (5 VLANs)
 │   └── firewall-rules.yaml           # Hardened rules (≤10 total)
-├── 05-network-migration/             # IaC migration (API push)
+├── 05_network_migration/             # IaC migration (API push)
 │   └── scripts/
 │       ├── migrate.sh                # Orchestrator (pre-flight → push → post-flight)
 │       ├── preview-changes.sh        # Dry-run delta
@@ -186,7 +186,7 @@ flowchart TD
 ├── app/                              # Python logic (lazy imports)
 │   └── redactor.py                   # Presidio PII scrubbing
 ├── guardian/                         # Beale observation (logging/audit)
-│   └── audit-eternal.py              # Loki + pytest ≥93%
+│   └── audit_eternal.py              # Loki + pytest ≥93%
 ├── tests/                            # Coverage enforced (≥93%)
 │   └── test_*.py                     # Mock breaches, unit tests
 ├── .secrets/                         # Vault (chmod 600, gitignored)
@@ -249,15 +249,15 @@ chmod +x gatekeeper.sh
 ### Full Deployment Stages
 
 1. **Carter** (Identity): SSH keys, identity provisioning, access control
-   - `runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh`
+   - `runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh`
    - LDAP entry creation, RADIUS setup, 802.1X enrollment
 
 2. **Bauer** (Verification): Policy validation, pre-flight checks, trust verification
-   - `runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh`
+   - `runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh`
    - nmap isolation sweeps, vault hygiene, signature verification
 
 3. **Beale** (Detection): Drift detection initialization, monitoring setup
-   - `runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh`
+   - `runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh`
    - Bastille lockdown, auditd rules, Snort IDS mirror, honeypots
 
 4. **Whitaker** (Offense): Security testing, vulnerability scanning, hardening validation
@@ -271,9 +271,9 @@ chmod +x gatekeeper.sh
 ## Key Features
 
 ### Zero-Drift Infrastructure
-- Continuous state reconciliation (audit-eternal.py)
+- Continuous state reconciliation (audit_eternal.py)
 - Automated drift detection and alerting (Snort + honeypots)
-- Infrastructure state always matches desired configuration (02-declarative-config YAML)
+- Infrastructure state always matches desired configuration (02_declarative_config YAML)
 - Auto-remediation on deviation
 
 ### Atomic Deployments
@@ -321,9 +321,9 @@ chmod +x gatekeeper.sh
 ### Individual Guardian Deployment
 ```bash
 # Manual: Edit eternal-resurrect.sh to call specific ministry
-./runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh    # Carter only
-./runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh    # Bauer only
-./runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh   # Beale only
+./runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh    # Carter only
+./runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh    # Bauer only
+./runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh   # Beale only
 ./scripts/simulate-breach.sh                                     # Whitaker only
 ```text
 
@@ -437,7 +437,7 @@ Edit `gatekeeper.sh` to customize:
 | RTO (Recovery Time Objective) | <15 min | <15 min | rollback.sh |
 | RPO (Recovery Point Objective) | <1 min | <1 min | Nightly orchestrate |
 
-**Monitoring**: audit-eternal.py (Loki logs); Grafana dashboards (Q1 2026).
+**Monitoring**: audit_eternal.py (Loki logs); Grafana dashboards (Q1 2026).
 
 ---
 

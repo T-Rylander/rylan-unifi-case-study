@@ -88,7 +88,7 @@ sudo crontab -e
 
 ```bash
 # Verify backup freshness every 15 minutes
-*/15 * * * * /03-validation-ops/check-critical-services.sh
+*/15 * * * * /03_validation_ops/check-critical-services.sh
 ```text
 
 ### Cost Analysis (Path A)
@@ -401,9 +401,9 @@ ip addr show | grep 192.168.1.100
 ## References
 
 - [ROADMAP.md](../ROADMAP.md) — Phase 3 endgame timeline
-- [orchestrator.sh](../03-validation-ops/orchestrator.sh) — Automated backup runner
-- [check-critical-services.sh](../03-validation-ops/check-critical-services.sh) — Health monitoring
-- [backup-cron.sh](../03-validation-ops/backup-cron.sh) — Cron job wrapper
+- [orchestrator.sh](../03_validation_ops/orchestrator.sh) — Automated backup runner
+- [check-critical-services.sh](../03_validation_ops/check-critical-services.sh) — Health monitoring
+- [backup-cron.sh](../03_validation_ops/backup-cron.sh) — Cron job wrapper
 
 ---
 

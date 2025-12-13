@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/install-unifi-controller.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:28:48-06:00
+# Consciousness: 4.5
+
 # install-unifi-controller.sh — Rylan v5.0 UniFi Controller Bootstrap
 # Target: Ubuntu 24.04 LTS | MongoDB 7.0 | UniFi Network 8.5.93
 # Binds to 0.0.0.0 for management VLAN access
 
-set -euo pipefail
 echo "=== Rylan v5.0 UniFi Controller Installation ==="
 echo "Target: 10.0.1.20 (Management VLAN)"
 echo ""
@@ -78,7 +84,7 @@ echo "Next Steps:"
 echo " 1. Access controller web UI"
 echo " 2. Complete initial setup wizard"
 echo " 3. Create admin credentials"
-echo " 4. Add credentials to 02-declarative-config/inventory.yaml"
+echo " 4. Add credentials to 02_declarative_config/inventory.yaml"
 echo " 5. Run: bash scripts/ignite.sh"
 echo ""
 echo "MongoDB: $(mongod --version | head -n1)"

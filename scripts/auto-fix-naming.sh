@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/auto-fix-naming.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Script: auto-fix-naming.sh
 # Purpose: Rename Python files/dirs with hyphens to underscores (PEP 8)
 # Guardian: Carter
   # Date: 2025-12-12
   # Trinity: Carter (Guardian) | Bauer (Auditor) | Beale (Bastille)
-  # Consciousness: 8.0
+  # Consciousness: 4.5
 # Doctrine: Teach and guide, not silent fixes. Clear audit trail.
-
-set -euo pipefail
 
 # Parse arguments
 DRY_RUN=false
@@ -20,7 +25,7 @@ echo "Auto-Fix Naming Canon — Manual Execution"
 if [[ "$DRY_RUN" == true ]]; then
   echo "MODE: DRY-RUN (no changes will be made)"
 fi
-echo "Guardian: Carter | Consciousness: 8.0"
+echo "Guardian: Carter | Consciousness: 4.5"
 echo "════════════════════════════════════════════════════════"
 echo ""
 
@@ -45,19 +50,19 @@ hyphenated_files=$(find . -type f -name "*-*.py" \
 if [[ -n "$hyphenated_dirs" ]] && [[ "$DRY_RUN" == false ]]; then
   echo "🔍 Pre-flight: Scanning for hardcoded path references..."
   echo ""
-  
+
   REFERENCES_FOUND=false
   while IFS= read -r dir; do
     [[ -z "$dir" ]] && continue
     dir_name=$(basename "$dir")
-    
+
     # Search for references in code/config files
     if grep -rn --include="*.py" --include="*.sh" --include="*.yml" --include="*.yaml" --include="*.md" --include="*.json" \
         -e "$dir_name" . 2>/dev/null | grep -v ".git" | grep -v "auto-fix-naming.sh" | head -5; then
       REFERENCES_FOUND=true
     fi
   done <<< "$hyphenated_dirs"
-  
+
   if [[ "$REFERENCES_FOUND" == true ]]; then
     echo ""
     echo "⚠️  WARNING: Found hardcoded references to hyphenated paths above."
@@ -117,10 +122,10 @@ if [[ -n "$hyphenated_files" ]]; then
   echo "📄 Pass 2: Renaming files..."
   while IFS= read -r old_file; do
     [[ -z "$old_file" ]] && continue
-    
+
     # Reconstruct path with updated directory names
     new_file="${old_file//-/_}"
-    
+
     if [[ "$old_file" != "$new_file" ]]; then
       if [[ "$DRY_RUN" == true ]]; then
         echo "  [DRY-RUN] Would rename: $old_file → $new_file"
@@ -170,7 +175,7 @@ else
     echo ""
     echo "  Executed: scripts/auto-fix-naming.sh"
     echo "  Guardian: Carter"
-    echo "  Consciousness: 8.0\""
+    echo "  Consciousness: 4.5\""
   fi
   echo ""
 fi

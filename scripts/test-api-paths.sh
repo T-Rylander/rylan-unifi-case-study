@@ -1,5 +1,10 @@
 #!/bin/bash
 set -euo pipefail
+# Script: scripts/test-api-paths.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
 
 UNIFI_IP="192.168.1.13"
 UNIFI_USER="admin"

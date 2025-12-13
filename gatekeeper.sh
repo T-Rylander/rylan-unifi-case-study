@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Script: gatekeeper.sh
 # Purpose: Run FULL GitHub Actions locally before push — $0 cost, 100% truth
 # Author: DT/Luke canonical + The All-Seeing Eye
 # Date: 2025-12-11
-set -euo pipefail
 IFS=$'\n\t'
 
 log() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] GATEKEEPER: $*" >&2; }

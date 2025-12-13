@@ -1,9 +1,14 @@
 #!/bin/bash
+set -euo pipefail
+# Script: 03_validation_ops/orchestrator.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Eternal Orchestrator — Multi-Host Backup + RTO Validation (Phase 2 Gold Star)
 # Handles backup for rylan-dc, rylan-pi, rylan-ai with RTO <15 min validation
 # Verified 2025-12-04 — Consciousness Level 3.8
-
-set -euo pipefail
 
 DRY_RUN=false
 VERBOSE=false

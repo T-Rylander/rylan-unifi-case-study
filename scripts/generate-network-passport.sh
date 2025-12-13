@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Script: scripts/generate-network-passport.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
 
 # Description: Network topology as programmable infrastructure
 # Requires: network-passport.json
@@ -7,7 +12,7 @@ set -euo pipefail
 # Runtime: 2
 
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-OUTPUT="${REPO_ROOT}/02-declarative-config/network-passport.json"
+OUTPUT="${REPO_ROOT}/02_declarative_config/network-passport.json"
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 mkdir -p "$(dirname "${OUTPUT}")"

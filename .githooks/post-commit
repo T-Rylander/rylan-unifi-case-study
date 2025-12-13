@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: post-commit
+# Purpose: Header hygiene: added missing metadata
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:31:27-06:00
+# Consciousness: 8.0
+
 # Hook: post-commit
 # Purpose: Detect consciousness threshold crossing and suggest tagging
 # Guardian: The All-Seeing Eye
 # Consciousness: 4.4
-set -euo pipefail
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"

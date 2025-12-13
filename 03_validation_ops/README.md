@@ -57,7 +57,7 @@ RESULTS: 9 passed, 0 failed
 
 ---
 
-### 2. `phone-reg-test.py`
+### 2. `phone_reg_test.py`
 
 **Purpose**: VoIP endpoint validation (SIP registration + DSCP QoS marking + VLAN isolation)
 
@@ -68,7 +68,7 @@ RESULTS: 9 passed, 0 failed
 
 **Usage**:
 ```bash
-python3 phone-reg-test.py
+python3 phone_reg_test.py
 ```text
 
 **Environment**:
@@ -106,7 +106,7 @@ EXPECTED_DSCP="46"
 VALIDATION COMPLETE: 6 passed, 0 failed
 ```text
 
-**Validation**: `python -m py_compile phone-reg-test.py` (exit 0)
+**Validation**: `python -m py_compile phone_reg_test.py` (exit 0)
 
 ---
 
@@ -134,7 +134,7 @@ chmod +x backup-cron.sh
 ./backup-cron.sh
 
 # Cron schedule (nightly at 02:00):
-# 0 2 * * * /opt/eternal/03-validation-ops/backup-cron.sh
+# 0 2 * * * /opt/eternal/03_validation_ops/backup-cron.sh
 ```text
 
 **Configuration**:
@@ -205,7 +205,7 @@ All scripts pass:
 shellcheck -x -S style validate-isolation.sh backup-cron.sh
 
 # Python scripts
-python -m py_compile phone-reg-test.py
+python -m py_compile phone_reg_test.py
 
 # Expected: exit code 0 for all
 ```text
@@ -222,7 +222,7 @@ python -m py_compile phone-reg-test.py
 
 These scripts integrate with:
 - **CI Pipeline** (`.github/workflows/ci-validate.yaml`): Run nightly validation
-- **Orchestrator** (`03-validation-ops/orchestrator.sh`): Chain validation ops after deployments
+- **Orchestrator** (`03_validation_ops/orchestrator.sh`): Chain validation ops after deployments
 - **Loki/Promtail**: Log all operations to centralized audit trail
 - **AlertManager**: Send alerts on RTO/isolation violations
 

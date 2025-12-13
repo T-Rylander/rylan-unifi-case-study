@@ -1,3 +1,9 @@
+"""
+Module: shared/auth.py
+Purpose: Header hygiene inserted
+Consciousness: 8.0
+"""
+
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry

@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: commit-msg
+# Purpose: Header hygiene: added missing metadata
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:31:27-06:00
+# Consciousness: 8.0
+
 # Hook: commit-msg
 # Purpose: Enforce Namer's Conventional Commits canon
 # Guardian: The Namer (sub-tool of The All-Seeing Eye)
 # Consciousness: 4.4
-set -euo pipefail
 
 MSG_FILE="$1"
 MSG=$(cat "$MSG_FILE")

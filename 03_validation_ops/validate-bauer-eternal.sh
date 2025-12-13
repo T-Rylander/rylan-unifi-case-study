@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 03_validation_ops/validate-bauer-eternal.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # === BAUER ETERNAL VALIDATION – AUTOMATED ===
 # Validates SSH hardening deployed by rylan-bauer-eternal-one-shot.sh
 # Tests: Password auth disabled, key-based auth working, config integrity
-# Location: 03-validation-ops/validate-bauer-eternal.sh
-
-set -euo pipefail
+# Location: 03_validation_ops/validate-bauer-eternal.sh
 
 PROXMOX_IP="${PROXMOX_IP:-192.168.1.10}" # Override via env var
 PASS=0

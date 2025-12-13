@@ -2,7 +2,7 @@
 
 This file documents verified UTF-8 + LF encodings for critical scripts.
 
-- `runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh` — Verified 2025-12-08 UTC
+- `runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh` — Verified 2025-12-08 UTC
   - Encoding: UTF-8 (no BOM)
   - Line endings: LF (Unix)
   - File size: 4310 bytes
@@ -12,7 +12,7 @@ If you need more files validated, add them to this document and request verifica
 
 ## Batch normalization: 2025-12-08 04:44:18Z
 
-- FIXED|D:\Repos\rylan-unifi-deploy\01-bootstrap\freeradius\clients.conf|BOM:False|CR:True|OrigBytes:108|NewBytes:103
+- FIXED|D:\Repos\rylan-unifi-deploy\01_bootstrap\freeradius\clients.conf|BOM:False|CR:True|OrigBytes:108|NewBytes:103
 - FIXED|D:\Repos\rylan-unifi-deploy\docs\blueprints\enlightenment-blueprint-v1.0-final.txt|BOM:False|CR:True|OrigBytes:3688|NewBytes:3602
 - FIXED|D:\Repos\rylan-unifi-deploy\docs\DEVICE-PASSPORT-IMPLEMENTATION.md|BOM:False|CR:True|OrigBytes:11718|NewBytes:11304
 - FIXED|D:\Repos\rylan-unifi-deploy\docs\ENCODING-VERIFICATIONS.md|BOM:False|CR:True|OrigBytes:535|NewBytes:524

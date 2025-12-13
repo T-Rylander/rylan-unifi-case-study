@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-# 01-bootstrap/00-host-first-login.sh
+set -euo pipefail
+# Script: 01_bootstrap/00-eternal-first-login.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:28:48-06:00
+# Consciousness: 4.5
+
+# 01_bootstrap/00-host-first-login.sh
 # One script to rule them all – works on every host in the fortress
 # Hellodeolu v6 + T3-ETERNAL canon compliant
-set -euo pipefail
 
 REPO="/opt/rylan-unifi-case-study"
 cd "$REPO"

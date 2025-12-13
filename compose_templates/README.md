@@ -17,7 +17,7 @@ Production-ready Docker Compose configurations for the Eternal Fortress deployme
 ```bash
 # On rylan-pi
 cd /opt/compose
-cp /path/to/compose-templates/osticket-compose.yml .
+cp /path/to/compose_templates/osticket-compose.yml .
 source ~/.env
 docker-compose -f osticket-compose.yml up -d
 ```text
@@ -60,9 +60,9 @@ docker network create -d macvlan \
   vlan40
 
 # Copy compose files
-cp /path/to/compose-templates/freepbx-compose.yml .
-cp /path/to/compose-templates/mariadb-freepbx.cnf .
-cp /path/to/compose-templates/promtail-freepbx.yaml .
+cp /path/to/compose_templates/freepbx-compose.yml .
+cp /path/to/compose_templates/mariadb-freepbx.cnf .
+cp /path/to/compose_templates/promtail-freepbx.yaml .
 
 source ~/.env
 docker-compose -f freepbx-compose.yml pull
@@ -107,9 +107,9 @@ docker-compose -f freepbx-compose.yml up -d
 ```bash
 # On rylan-ai
 cd /opt/compose
-cp /path/to/compose-templates/loki-compose.yml .
-cp /path/to/compose-templates/loki-config.yml .
-cp /path/to/compose-templates/promtail-*-config.yaml .
+cp /path/to/compose_templates/loki-compose.yml .
+cp /path/to/compose_templates/loki-config.yml .
+cp /path/to/compose_templates/promtail-*-config.yaml .
 source ~/.env
 docker-compose -f loki-compose.yml up -d
 ```text

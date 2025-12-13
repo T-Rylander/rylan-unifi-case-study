@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/eternal-resurrect-unifi.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Eternal Resurrect – UniFi Controller (One-Command, Idempotent, 15-min RTO)
 # USAGE: cd /opt/unifi && bash /path/to/eternal-resurrect-unifi.sh
 #
@@ -13,8 +20,6 @@
 # Exit codes:
 #   0 = Controller up and healthy
 #   1 = Configuration error or startup failure
-
-set -euo pipefail
 
 # Colors
 RED='\033[0;31m'

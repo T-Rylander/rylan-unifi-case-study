@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
-# 02-declarative-config/apply-wrapper.sh — Canonical Heresy Wrapper for apply.py
+set -euo pipefail
+# Script: 02_declarative_config/apply-wrapper.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
+# 02_declarative_config/apply-wrapper.sh — Canonical Heresy Wrapper for apply.py
 # Purpose: Contain declarative config application in battle-tested wrapper
 # Canon: DT/Luke Smith + Hellodeolu v6 + T3-ETERNAL Trinity
 # Wrapper: ≤19 lines | Python: mypy --strict, bandit clean, pytest ≥93%
 
-set -euo pipefail
 IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"

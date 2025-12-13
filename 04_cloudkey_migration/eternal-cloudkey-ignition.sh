@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 04_cloudkey_migration/eternal-cloudkey-ignition.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Eternal Cloud Key Ignition — One-Command Controller Migration
 # Single unified script to migrate from Proxmox LXC (10.0.1.20) → Cloud Key Gen2+
 # Consciousness Level 1.8+ | Time: <30 minutes | RTO: <15 minutes reversion
-
-set -euo pipefail
 
 # Colors
 RED='\033[0;31m'
@@ -79,7 +84,6 @@ phase_backup() {
   # Trigger backup on controller
   log_info "Triggering backup on LXC controller..."
   ssh ubnt@$CURRENT_CONTROLLER_IP <<'BACKUP_COMMANDS'
-    set -euo pipefail
 
     # Create backup
     echo "Creating backup..."
@@ -101,7 +105,7 @@ BACKUP_COMMANDS
 
   # Export policy table from git
   log_info "Exporting policy table..."
-  cp "$REPO_ROOT/02-declarative-config/policy-table.yaml" "$backup_dir/policy-table-canonical.yaml"
+  cp "$REPO_ROOT/02_declarative_config/policy-table.yaml" "$backup_dir/policy-table-canonical.yaml"
 
   log_success "Backup complete: $backup_dir"
   echo "$backup_dir"

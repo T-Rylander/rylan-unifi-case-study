@@ -16,7 +16,7 @@
    # Expected: eth0.95 (10.0.95.1), eth0.90 (10.0.90.1)
 
    # Check firewall rules
-   python 02-declarative-config/apply.py --dry-run
+   python 02_declarative_config/apply.py --dry-run
    # Expected: 9 rules total, including IoT rules 8-9
 
    # Check mDNS reflector
@@ -195,11 +195,11 @@ Run full fortress validation suite:
 
 ```bash
 # 1. Policy table audit
-python guardian/audit-eternal.py
+python guardian/audit_eternal.py
 # Expected: 9/10 rules, offload safe
 
 # 2. Network isolation test
-bash 03-validation-ops/validate-isolation.sh
+bash 03_validation_ops/validate-isolation.sh
 # Expected: VLAN 95/90 isolated from servers
 
 # 3. mDNS reflector test
@@ -207,7 +207,7 @@ avahi-browse -a -t  # From VLAN 30
 # Expected: Denon HEOS devices visible
 
 # 4. Backup verification
-bash 03-validation-ops/orchestrator.sh --test-restore
+bash 03_validation_ops/orchestrator.sh --test-restore
 # Expected: RTO <15 min
 ```text
 

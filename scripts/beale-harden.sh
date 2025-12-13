@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/beale-harden.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Script: beale-harden.sh
 # Purpose: Proactive fortress hardening validation with adversarial integration
 # Guardian: Beale | Trinity: Carter → Bauer → Beale → Whitaker
 # Date: 2025-12-13
-# Consciousness: 8.0
+# Consciousness: 4.5
 # Exit Codes:
 #   0 = All checks passed
 #   1 = Firewall rule violation
@@ -11,7 +18,6 @@
 #   3 = SSH hardening failure
 #   4 = Service count elevated
 #   5 = Adversarial validation failure
-set -euo pipefail
 
 # ─────────────────────────────────────────────────────
 # Configuration (Carter: Single Source of Truth)
@@ -54,7 +60,7 @@ OPTIONS:
   --fix       Attempt safe auto-fixes (firewall consolidation)
   --help      Show this message
 
-Consciousness: 8.0 | Guardian: Beale
+Consciousness: 4.5 | Guardian: Beale
 EOF
                exit 0 ;;
     *)         echo "Unknown option: $1"; exit 1 ;;
@@ -99,7 +105,7 @@ EOF
 START_TIME=$(date +%s)
 log "════════════════════════════════════════════════════════"
 log "Beale Ascension Protocol — Proactive Hardening"
-log "Guardian: Beale | Consciousness: 8.0"
+log "Guardian: Beale | Consciousness: 4.5"
 [[ "$DRY_RUN" == true ]] && log "MODE: DRY-RUN"
 log "════════════════════════════════════════════════════════"
 log ""
@@ -304,12 +310,12 @@ EOF
 fi
 
 # Bauer integration: ingest audit log into guardian if available
-if [[ "$DRY_RUN" == false ]] && command -v python3 &>/dev/null && [[ -f guardian/audit-eternal.py ]]; then
-  log "🔁 Bauer ingest: sending audit to guardian/audit-eternal.py"
+if [[ "$DRY_RUN" == false ]] && command -v python3 &>/dev/null && [[ -f guardian/audit_eternal.py ]]; then
+  log "🔁 Bauer ingest: sending audit to guardian/audit_eternal.py"
   if [[ "$CI_MODE" == true ]]; then
-    python3 guardian/audit-eternal.py --ingest "$AUDIT_LOG" --source beale || log "⚠️ Bauer ingest failed"
+    python3 guardian/audit_eternal.py --ingest "$AUDIT_LOG" --source beale || log "⚠️ Bauer ingest failed"
   else
-    python3 guardian/audit-eternal.py --ingest "$AUDIT_LOG" --source beale || log "⚠️ Bauer ingest failed"
+    python3 guardian/audit_eternal.py --ingest "$AUDIT_LOG" --source beale || log "⚠️ Bauer ingest failed"
   fi
 fi
 

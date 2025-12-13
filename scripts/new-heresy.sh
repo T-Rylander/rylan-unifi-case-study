@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/new-heresy.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # new-heresy.sh — One-command heresy wrapper creator
 # Usage: ./scripts/new-heresy.sh runbooks/ministry-ai/new-tool.sh
-set -euo pipefail
 IFS=$'\n\t'
 
 readonly TEMPLATE="templates/heresy-wrapper.sh"

@@ -9,8 +9,8 @@ Environment Variables:
   UNIFI_PASS  -> password
 
 Usage:
-  python adopt-devices.py --site default --dry-run
-  python adopt-devices.py --site default
+  python adopt_devices.py --site default --dry-run
+  python adopt_devices.py --site default
 """
 
 from __future__ import annotations

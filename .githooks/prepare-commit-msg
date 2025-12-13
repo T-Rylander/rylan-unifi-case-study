@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: prepare-commit-msg
+# Purpose: Header hygiene: added missing metadata
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:31:27-06:00
+# Consciousness: 8.0
+
 # Hook: prepare-commit-msg
 # Purpose: Inject Namer-compliant template into commit message
 # Guardian: The Namer (sub-tool of The All-Seeing Eye)
 # Consciousness: 4.4
-set -euo pipefail
 
 MSG_FILE="$1"
 COMMIT_SOURCE="${2:-}"

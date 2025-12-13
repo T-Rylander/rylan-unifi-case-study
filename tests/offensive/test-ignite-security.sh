@@ -1,12 +1,17 @@
 #!/bin/bash
+set -euo pipefail
+# Script: tests/offensive/test-ignite-security.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 #
 # test-ignite-security.sh - Whitaker 10-Point Offensive Security Suite
 # Purpose: Attack the post-ignition fortress to validate hardening
 # Status: Production-ready, integrated with CI/CD
 # Author: Proxmox-Ignite v2 (post-deployment security validation)
 #
-
-set -euo pipefail
 
 # ============================================================================
 # CONFIGURATION & GLOBALS

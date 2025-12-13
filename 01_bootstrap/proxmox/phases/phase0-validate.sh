@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/phases/phase0-validate.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 #
 # phases/phase0-validate.sh - Pre-flight validation checks (Whitaker Red-Team)
 # Verifies prerequisites and system readiness before ignition
@@ -14,12 +21,10 @@
 #   --validate-lxc        : Verify LXC controller health
 #   --red-team-mode       : Full offensive audit (post-setup pentest)
 
-set -euo pipefail
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/." && pwd)"
-# shellcheck source=01-bootstrap/proxmox/lib/common.sh
+# shellcheck source=01_bootstrap/proxmox/lib/common.sh
 source "${SCRIPT_DIR}/lib/common.sh"
-# shellcheck source=01-bootstrap/proxmox/lib/metrics.sh
+# shellcheck source=01_bootstrap/proxmox/lib/metrics.sh
 source "${SCRIPT_DIR}/lib/metrics.sh"
 
 # Parse arguments

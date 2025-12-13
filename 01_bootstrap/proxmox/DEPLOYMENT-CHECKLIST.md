@@ -26,7 +26,7 @@ Quick reference guide for executing proxmox-ignite.sh deployment.
 - [ ] Verify script exists:
 
   ```bash
-  ls -la 01-bootstrap/proxmox/proxmox-ignite.sh
+  ls -la 01_bootstrap/proxmox/proxmox-ignite.sh
   ```
 
 ## Hardware Preparation
@@ -69,7 +69,7 @@ Quick reference guide for executing proxmox-ignite.sh deployment.
 mkdir -p /mnt/usb
 # Mount USB drive
 cp ~/.ssh/id_ed25519.pub /mnt/usb/authorized_keys
-cp 01-bootstrap/proxmox/proxmox-ignite.sh /mnt/usb/
+cp 01_bootstrap/proxmox/proxmox-ignite.sh /mnt/usb/
 umount /mnt/usb
 
 # On Proxmox host (after booting)
@@ -85,7 +85,7 @@ umount /mnt/usb
 ```bash
 # On local machine
 scp ~/.ssh/id_ed25519.pub root@<proxmox-ip>:/root/.ssh/authorized_keys
-scp 01-bootstrap/proxmox/proxmox-ignite.sh root@<proxmox-ip>:/tmp/
+scp 01_bootstrap/proxmox/proxmox-ignite.sh root@<proxmox-ip>:/tmp/
 
 ```text
 ## Execute ignition script

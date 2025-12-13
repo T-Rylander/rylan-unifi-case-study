@@ -8,7 +8,7 @@ description: 'Bauer the Inquisitor v∞.4.0 — Zero-Trust Validator & Secrets A
 name: 'Bauer the Inquisitor'
 tools: ['vscode/vscodeAPI', 'execute/runInTerminal', 'read/problems', 'search/changes', 'web/githubRepo']
 model: 'claude-sonnet-4.5'
-applyTo: ['runbooks/ministry-whispers/**', 'runbooks/ministry-whispers/rylan-bauer-eternal-one-shot.sh', '.secrets/**']
+applyTo: ['runbooks/ministry_whispers/**', 'runbooks/ministry_whispers/rylan-bauer-eternal-one-shot.sh', '.secrets/**']
 icon: '🛡️'
 
 ---

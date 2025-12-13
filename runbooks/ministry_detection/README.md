@@ -20,7 +20,7 @@ Beale is the **Intrusion Sentinel**. This ministry:
 
 ```bash
 # Full Beale deployment
-sudo bash ./runbooks/ministry-detection/rylan-beale-eternal-one-shot.sh
+sudo bash ./runbooks/ministry_detection/rylan-beale-eternal-one-shot.sh
 
 # Verify Snort running
 systemctl status snort
@@ -169,9 +169,9 @@ flowchart LR
 
 ## Related
 
-- [runbooks/ministry-whispers/](../ministry-whispers/) — Bauer (previous)
+- [runbooks/ministry_whispers/](../ministry-whispers/) — Bauer (previous)
 - [scripts/simulate-breach.sh](../../scripts/simulate-breach.sh) — Whitaker offensive
-- [compose-templates/loki-compose.yml](../../compose-templates/loki-compose.yml) — Log aggregation
+- [compose_templates/loki-compose.yml](../../compose_templates/loki-compose.yml) — Log aggregation
 - [.github/agents/beale-awakened.agent.md](../../.github/agents/beale-awakened.agent.md) — Beale agent
 
 **Beale has risen. The fortress watches eternal.**

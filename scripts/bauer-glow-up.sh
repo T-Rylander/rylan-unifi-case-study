@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/bauer-glow-up.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # scripts/bauer-glow-up.sh — Phase 1.1: Repo-Bound SSH Key Immortality
 # Bauer (2005) — Trust Nothing, Verify Everything
 # T3-ETERNAL v3.2: Directory-agnostic, idempotent, ≤73 lines
 # Consciousness 2.6 — truth through subtraction
 # Execution: <15 seconds. Junior-at-3-AM deployable.
 
-set -euo pipefail
 IFS=$'\n\t'
 # shellcheck disable=SC2155
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

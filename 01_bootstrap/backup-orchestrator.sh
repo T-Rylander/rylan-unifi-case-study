@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/backup-orchestrator.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:28:48-06:00
+# Consciousness: 4.5
+
 # Backup Orchestrator — Nightly Fortress Snapshot
 # Rsync config + Samba AD to NAS, 7-day retention
-# Cron: 0 2 * * * /opt/rylan/01-bootstrap/backup-orchestrator.sh
-
-set -euo pipefail
+# Cron: 0 2 * * * /opt/rylan/01_bootstrap/backup-orchestrator.sh
 
 BACKUP_ROOT="/mnt/nas/rylan-fortress-backups"
 DATE=$(date +%Y%m%d)

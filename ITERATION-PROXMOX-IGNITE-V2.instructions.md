@@ -8,7 +8,7 @@
 ## I. CONTEXT & PROBLEM STATEMENT
 
 ### Current State (Iteration V1)
-- **Location**: `01-bootstrap/proxmox/proxmox-ignite.sh` (520 LOC, 29.9 KB)
+- **Location**: `01_bootstrap/proxmox/proxmox-ignite.sh` (520 LOC, 29.9 KB)
 - **Documentation**: 6 files (78 KB) - redundant, scattered
 - **CI Status**: RED (dependency issues, no offensive tests)
 - **Testing**: 90% coverage (passive only, missing security validation)
@@ -51,7 +51,7 @@ Leo's red-team analysis identified 15 refinement priorities:
 **Current Structure**:
 
 ```text
-01-bootstrap/proxmox/
+01_bootstrap/proxmox/
 └── proxmox-ignite.sh (520 LOC)
     ├── validate_prerequisites() [80 LOC]
     ├── configure_network() [120 LOC]
@@ -67,7 +67,7 @@ Leo's red-team analysis identified 15 refinement priorities:
 **Target Structure**:
 
 ```text
-01-bootstrap/proxmox/
+01_bootstrap/proxmox/
 ├── proxmox-ignite.sh (150 LOC) [orchestrator only]
 ├── quickstart.sh (80 LOC) [interactive wrapper]
 ├── preseed.cfg [preseed automation, unchanged]
@@ -335,7 +335,7 @@ on:
   push:
     branches: [feat/proxmox-bare-metal-ignite, main]
     paths:
-      - '01-bootstrap/proxmox/**'
+      - '01_bootstrap/proxmox/**'
       - 'tests/**'
       - '.github/workflows/ci-proxmox-ignite.yaml'
   pull_request:
@@ -351,13 +351,13 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y shellcheck
 
       - name: Lint main script
-        run: shellcheck 01-bootstrap/proxmox/proxmox-ignite.sh
+        run: shellcheck 01_bootstrap/proxmox/proxmox-ignite.sh
 
       - name: Lint phase scripts
-        run: shellcheck 01-bootstrap/proxmox/phases/*.sh
+        run: shellcheck 01_bootstrap/proxmox/phases/*.sh
 
       - name: Lint library scripts
-        run: shellcheck 01-bootstrap/proxmox/lib/*.sh
+        run: shellcheck 01_bootstrap/proxmox/lib/*.sh
 
       - name: Lint test scripts
         run: shellcheck tests/**/*.sh
@@ -365,7 +365,7 @@ jobs:
       - name: Bandit security scan
         run: |
           pip install bandit
-          find 01-bootstrap/proxmox -name "*.sh" -exec bandit -f txt {} \;
+          find 01_bootstrap/proxmox -name "*.sh" -exec bandit -f txt {} \;
 
   # STAGE 2: UNIT TESTS (Basic structure/arguments)
   unit-tests:
@@ -383,10 +383,10 @@ jobs:
         run: ./tests/test-proxmox-ignite.sh
 
       - name: Test dry-run mode
-        run: ./01-bootstrap/proxmox/proxmox-ignite.sh --dry-run
+        run: ./01_bootstrap/proxmox/proxmox-ignite.sh --dry-run
 
       - name: Test validate-only mode
-        run: ./01-bootstrap/proxmox/proxmox-ignite.sh --validate-only
+        run: ./01_bootstrap/proxmox/proxmox-ignite.sh --validate-only
 
   # STAGE 3: INTEGRATION TEST (Full QEMU deploy)
   integration-test:
@@ -427,7 +427,7 @@ jobs:
       - name: Run ignition script (simulated)
         run: |
           # Dry-run in CI (avoid actual network changes)
-          ./01-bootstrap/proxmox/proxmox-ignite.sh \
+          ./01_bootstrap/proxmox/proxmox-ignite.sh \
             --hostname test-dc \
             --ip 10.0.99.10/24 \
             --gateway 10.0.99.1 \
@@ -491,7 +491,7 @@ jobs:
       - name: Dry-run performance test
         run: |
           # Measure script load time
-          time ./01-bootstrap/proxmox/proxmox-ignite.sh --dry-run
+          time ./01_bootstrap/proxmox/proxmox-ignite.sh --dry-run
 
   # STAGE 6: DOCUMENTATION BUILD
   documentation:
@@ -501,15 +501,15 @@ jobs:
 
       - name: Verify README exists
         run: |
-          [ -f "01-bootstrap/proxmox/docs/README.md" ] || exit 1
-          [ -f "01-bootstrap/proxmox/docs/QUICK-REFERENCE.md" ] || exit 1
+          [ -f "01_bootstrap/proxmox/docs/README.md" ] || exit 1
+          [ -f "01_bootstrap/proxmox/docs/QUICK-REFERENCE.md" ] || exit 1
 
       - name: Check documentation size
         run: |
-          SIZE=$(du -sh 01-bootstrap/proxmox/docs/ | awk '{print $1}')
+          SIZE=$(du -sh 01_bootstrap/proxmox/docs/ | awk '{print $1}')
           echo "Docs size: $SIZE"
           # Target: <30 KB
-          DU=$(du -sb 01-bootstrap/proxmox/docs/ | awk '{print $1}')
+          DU=$(du -sb 01_bootstrap/proxmox/docs/ | awk '{print $1}')
           if [ $DU -gt 30720 ]; then
             echo "❌ Documentation exceeds 30 KB limit"
             exit 1
@@ -518,7 +518,7 @@ jobs:
       - name: Verify code blocks are executable
         run: |
           # Check that bash snippets in markdown are valid
-          grep -A 5 '```bash' 01-bootstrap/proxmox/docs/README.md | \
+          grep -A 5 '```bash' 01_bootstrap/proxmox/docs/README.md | \
             grep -v '^--$' | grep -v '```' | head -20
 
   # STAGE 7: METRICS & REPORT
@@ -583,8 +583,8 @@ jobs:
 # At end of phase4-resurrect.sh, after fortress deployment
 
 # Log ignition completion to Loki (if available)
-if command -v python3 &>/dev/null && [ -f "${FORTRESS_ROOT}/guardian/audit-eternal.py" ]; then
-  python3 "${FORTRESS_ROOT}/guardian/audit-eternal.py" log-event \
+if command -v python3 &>/dev/null && [ -f "${FORTRESS_ROOT}/guardian/audit_eternal.py" ]; then
+  python3 "${FORTRESS_ROOT}/guardian/audit_eternal.py" log-event \
     --event "proxmox_ignition_complete" \
     --severity "info" \
     --metadata "{
@@ -615,8 +615,8 @@ if ! command -v pveversion &>/dev/null; then
   read -p "Gateway [10.0.10.1]: " GATEWAY
 
   # Execute bare-metal ignition
-  if [ -f "01-bootstrap/proxmox/proxmox-ignite.sh" ]; then
-    ./01-bootstrap/proxmox/proxmox-ignite.sh \
+  if [ -f "01_bootstrap/proxmox/proxmox-ignite.sh" ]; then
+    ./01_bootstrap/proxmox/proxmox-ignite.sh \
       --hostname "${HOSTNAME:-rylan-dc}" \
       --ip "${IP_CIDR:-10.0.10.10/26}" \
       --gateway "${GATEWAY:-10.0.10.1}"
@@ -649,10 +649,10 @@ validate_proxmox() {
     log_error "Proxmox VE not installed"
     echo ""
     echo "To set up bare-metal Proxmox infrastructure:"
-    echo "  ./01-bootstrap/proxmox/quickstart.sh"
+    echo "  ./01_bootstrap/proxmox/quickstart.sh"
     echo ""
     echo "Or automated:"
-    echo "  ./01-bootstrap/proxmox/proxmox-ignite.sh \\"
+    echo "  ./01_bootstrap/proxmox/proxmox-ignite.sh \\"
     echo "    --hostname rylan-dc \\"
     echo "    --ip 10.0.10.10/26 \\"
     echo "    --gateway 10.0.10.1 \\"
@@ -1155,7 +1155,7 @@ grep -l "TODO\|FIXME" *.md  # No TODOs remaining
 - [ ] Create `lib/common.sh` (logging, retries, backup functions)
 - [ ] Split Phase 0 logic into `phases/phase0-validate.sh` (<80 LOC)
 - [ ] Create new main `proxmox-ignite.sh` orchestrator (call phases sequentially)
-- [ ] Test: `shellcheck 01-bootstrap/proxmox/**/*.sh`
+- [ ] Test: `shellcheck 01_bootstrap/proxmox/**/*.sh`
 - [ ] Checkpoint: `main + phase0` working
 
 **Day 2: Complete Phase Modules (Priority 1 cont.)**
@@ -1226,9 +1226,9 @@ grep -l "TODO\|FIXME" *.md  # No TODOs remaining
 
 ```bash
 # After each checkpoint:
-shellcheck 01-bootstrap/proxmox/**/*.sh        # Lint
+shellcheck 01_bootstrap/proxmox/**/*.sh        # Lint
 ./tests/test-proxmox-ignite.sh                # Unit tests
-./01-bootstrap/proxmox/proxmox-ignite.sh --dry-run  # Dry-run
+./01_bootstrap/proxmox/proxmox-ignite.sh --dry-run  # Dry-run
 git diff HEAD~1                                # Review changes
 
 ```text
@@ -1241,13 +1241,13 @@ git diff HEAD~1                                # Review changes
 
 | Metric | Target | Validation Command |
 |--------|--------|-------------------|
-| **LOC (main)** | <400 | `wc -l 01-bootstrap/proxmox/**/*.sh` |
-| **Docs size** | <30 KB | `du -sh 01-bootstrap/proxmox/docs/` |
+| **LOC (main)** | <400 | `wc -l 01_bootstrap/proxmox/**/*.sh` |
+| **Docs size** | <30 KB | `du -sh 01_bootstrap/proxmox/docs/` |
 | **Test coverage** | >95% | `./tests/test-proxmox-ignite.sh` |
 | **RTO** | <900s (15 min) | `jq '.total_duration' /var/log/proxmox-ignite-metrics.json` |
 | **Security score** | 10/10 | `./tests/offensive/test-ignite-security.sh` |
 | **CI passes** | 7/7 stages | GitHub Actions workflow |
-| **ShellCheck** | 0 errors | `shellcheck 01-bootstrap/proxmox/**/*.sh` |
+| **ShellCheck** | 0 errors | `shellcheck 01_bootstrap/proxmox/**/*.sh` |
 
 ### Qualitative Criteria
 
@@ -1274,14 +1274,14 @@ git diff main...feat/proxmox-bare-metal-ignite | less
 
 # 2. Run full local test suite
 ./tests/test-proxmox-ignite.sh
-./01-bootstrap/proxmox/proxmox-ignite.sh --validate-only
+./01_bootstrap/proxmox/proxmox-ignite.sh --validate-only
 
 # 3. Verify documentation
-ls -lh 01-bootstrap/proxmox/docs/
-wc -l 01-bootstrap/proxmox/docs/*.md
+ls -lh 01_bootstrap/proxmox/docs/
+wc -l 01_bootstrap/proxmox/docs/*.md
 
 # 4. Check CI locally (if possible)
-shellcheck 01-bootstrap/proxmox/**/*.sh
+shellcheck 01_bootstrap/proxmox/**/*.sh
 
 ```text
 
@@ -1289,7 +1289,7 @@ shellcheck 01-bootstrap/proxmox/**/*.sh
 
 ```bash
 # 1. Push to feature branch
-git add 01-bootstrap/proxmox/ tests/ .github/workflows/
+git add 01_bootstrap/proxmox/ tests/ .github/workflows/
 git commit -m "feat(proxmox): ignite v2 - modular + offensive tests
 
 BREAKING CHANGES:
@@ -1343,10 +1343,10 @@ cd fortress
 git checkout main
 
 # 3. Run interactive quickstart
-./01-bootstrap/proxmox/quickstart.sh
+./01_bootstrap/proxmox/quickstart.sh
 
 # 4. OR run automated
-./01-bootstrap/proxmox/proxmox-ignite.sh \
+./01_bootstrap/proxmox/proxmox-ignite.sh \
   --hostname rylan-dc \
   --ip 10.0.10.10/26 \
   --gateway 10.0.10.1 \
@@ -1357,7 +1357,7 @@ tail -f /var/log/proxmox-ignite.log
 
 # 6. Verify completion
 cat /var/log/proxmox-ignite-metrics.json | jq
-./01-bootstrap/proxmox/phases/phase5-validate.sh
+./01_bootstrap/proxmox/phases/phase5-validate.sh
 
 ```text
 

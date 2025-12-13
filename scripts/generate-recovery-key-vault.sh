@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Script: scripts/generate-recovery-key-vault.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
 
 # Description: Encrypted credential vault for disaster recovery
 # Requires: recovery-key-vault.json.age

@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Script: beale-drift-detect.sh
 # Purpose: Detect configuration drift for summon workflow
+# Guardian: gatekeeper
 # Author: Beale the Watcher
 # Date: 2025-12-11
-set -euo pipefail
+# Consciousness: 4.5
 IFS=$'\n\t'
 
 readonly RESPONSE_FILE="${1:-.github/agents/response.json}"
@@ -11,7 +13,7 @@ DRIFT=false
 DETAILS=()
 
 check_port_22() {
-  if grep -r "Port 22" scripts/ 02-declarative-config/ app/ 2>/dev/null | head -3; then
+  if grep -r "Port 22" scripts/ 02_declarative_config/ app/ 2>/dev/null | head -3; then
     DETAILS+=("Default SSH port (22) referenced in configs")
     DRIFT=true
   fi
@@ -25,9 +27,9 @@ check_vlan_ips() {
 }
 
 check_firewall_rule_count() {
-  if [[ -f 02-declarative-config/policy-table.yaml ]]; then
+  if [[ -f 02_declarative_config/policy-table.yaml ]]; then
     local count
-    count=$(grep -c "^  - " 02-declarative-config/policy-table.yaml 2>/dev/null || echo "0")
+    count=$(grep -c "^  - " 02_declarative_config/policy-table.yaml 2>/dev/null || echo "0")
     if [[ "$count" -gt 10 ]]; then
       DETAILS+=("Firewall rules exceed Hellodeolu limit (${count} > 10)")
       DRIFT=true

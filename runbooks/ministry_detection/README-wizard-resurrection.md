@@ -31,7 +31,7 @@ systemctl restart unifi
 ```bash
 # On Cloud Key (SSH as root)
 cd /root/rylan-unifi-case-study
-bash runbooks/ministry-detection/uck-g2-wizard-resurrection.sh
+bash runbooks/ministry_detection/uck-g2-wizard-resurrection.sh
 
 ```text
 
@@ -159,7 +159,7 @@ iptables -L -n | grep 8443
 
 - **UniFi Controller**: https://help.ui.com/hc/en-us/articles/360012282453
 - **Cloud Key Gen2**: https://help.ui.com/hc/en-us/categories/200320654
-- **Ministry Detection Runbooks**: `runbooks/ministry-detection/`
+- **Ministry Detection Runbooks**: `runbooks/ministry_detection/`
 - **Hellodeolu v6 RTO Standards**: `docs/dr-drill.md`
 
 ---

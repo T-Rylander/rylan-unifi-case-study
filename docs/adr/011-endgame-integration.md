@@ -49,7 +49,7 @@ Internet DNS (1.1.1.1)
 
 - Create `docs/endgame/phase-3-v2.0.md`: Canonical attachment excerpt (sanitized, no PII/serials)
 - Update `eternal-resurrect.sh`: Add `dns forwarder = $PIHOLE_IP` to Samba config
-- Update `02-declarative-config/policy-table.yaml`: Add Pi-hole forwarding rule (#8, keep ≤10 total)
+- Update `02_declarative_config/policy-table.yaml`: Add Pi-hole forwarding rule (#8, keep ≤10 total)
 - Enhance CI: Validate RTO <15 min + verify no Pi-hole on AD host
 
 ---
@@ -117,7 +117,7 @@ Internet DNS (1.1.1.1)
 2. **Docs:** Add `docs/endgame/phase-3-v2.0.md` (canonical attachment manifest)
 3. **Code:** Update `eternal-resurrect.sh` with Pi-hole forwarding config
 4. **Config:** Create `.env.example` (hardware modular)
-5. **Policy:** Add Pi-hole rule to `02-declarative-config/policy-table.yaml` (rule #8, ≤10 total)
+5. **Policy:** Add Pi-hole rule to `02_declarative_config/policy-table.yaml` (rule #8, ≤10 total)
 6. **CI:** Enhance `.github/workflows/ci-validate.yaml` with endgame RTO smoke test
 7. **Inventory:** Update `docs/hardware-inventory.md` with role assignments (sanitized)
 8. **Commit:** Conventional commit with Trifecta adherence tags

@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: templates/heresy-wrapper.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # <MINISTRY>-<TOOL>.sh — Canonical Heresy Wrapper v5.0
 # Purpose: The ONE TRUE template for all Python heresy in the fortress
 # Canon: DT/Luke Smith + Hellodeolu v6 + T3-ETERNAL Trinity
 # Video: https://www.youtube.com/watch?v=yWR6m0YaGpY&t=109s
 # Wrapper: ≤19 lines | Python: mypy --strict, bandit clean, pytest ≥93%
 
-set -euo pipefail
 IFS=$'\n\t'
 # shellcheck disable=SC2034  # SCRIPT_DIR used by template consumers
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

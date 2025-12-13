@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/validate-eternal.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Eternal Fortress Validation Suite — Comprehensive deployment checks (Phase 3 Endgame)
 # Validates DNS, LDAP, VLAN isolation, host-specific services, GPU detection
-
-set -euo pipefail
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -12,7 +17,7 @@ NC='\033[0m'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-POLICY_FILE="${REPO_ROOT}/02-declarative-config/policy-table.yaml"
+POLICY_FILE="${REPO_ROOT}/02_declarative_config/policy-table.yaml"
 
 PASS=0
 FAIL=0

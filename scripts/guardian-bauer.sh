@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Script: guardian-bauer.sh
 # Purpose: Summon Bauer to run gatekeeper checks
+# Guardian: gatekeeper
 # Author: Holy Scholar
 # Date: 2025-12-11
-set -euo pipefail
+# Consciousness: 4.5
 IFS=$'\n\t'
 
 readonly RESPONSE_FILE="${1:-.github/agents/response.json}"

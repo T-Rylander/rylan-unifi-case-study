@@ -2,4 +2,3 @@
 
 Provides shared fixtures and helpers for templated tests.
 """
-

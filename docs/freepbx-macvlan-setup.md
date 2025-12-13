@@ -357,7 +357,7 @@ docker exec freepbx netstat -uln | grep 10[0-9][0-9][0-9]
 # Should show ports 10000-20000 listening (UDP)
 
 # Check policy rule has RTP range
-cat 02-declarative-config/policy-table.yaml | grep "10000-20000"
+cat 02_declarative_config/policy-table.yaml | grep "10000-20000"
 # Should include TCP and UDP RTP range
 ```text
 

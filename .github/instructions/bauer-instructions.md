@@ -8,7 +8,7 @@ applyTo: ["**/*bauer*.sh", "**/*audit*.sh", "**/*verify*.sh"]
 
 ## Verification Protocol
 - Always run: bandit -r . && shellcheck -x *.sh && ruff check --fix
-- Audit outputs must go to audit-eternal.py
+- Audit outputs must go to audit_eternal.py
 - Firewall rules: ≤10 total, hardware-offload safe
 - Verify SSH: PasswordAuthentication no, PubkeyAuthentication yes
 - Vault hygiene: no plaintext secrets, .secrets/ mode 600

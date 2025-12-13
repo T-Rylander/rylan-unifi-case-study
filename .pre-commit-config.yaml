@@ -5,7 +5,7 @@ repos:
       - id: yamllint
         name: Eternal YAML Lint
         entry: yamllint -c .yamllint
-        files: ^(02-declarative-config|shared)/.*\.ya?ml$
+        files: ^(02_declarative_config|shared)/.*\.ya?ml$
         types: [yaml]
         stages: [commit, push]
 
@@ -17,7 +17,7 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
         args: ['--unsafe']
-        exclude: '^(\.github/|bootstrap/|02-declarative-config/)'
+        exclude: '^(\.github/|bootstrap/|02_declarative_config/)'
       - id: check-json
       - id: check-added-large-files
         args: ['--maxkb=1000']
@@ -30,8 +30,8 @@ repos:
     hooks:
       - id: eternal-rule-count
         name: Policy Rule Validator (≤10 rules)
-        entry: "python -c \"import sys, json; rules = json.load(open('02-declarative-config/policy-table-rylan-v5.json'))['rules']; print(f'Policy rules: {len(rules)}'); sys.exit(1 if len(rules) > 10 else 0)\""
-        files: ^02-declarative-config/policy-table-rylan-v5\.json$
+        entry: "python -c \"import sys, json; rules = json.load(open('02_declarative_config/policy-table-rylan-v5.json'))['rules']; print(f'Policy rules: {len(rules)}'); sys.exit(1 if len(rules) > 10 else 0)\""
+        files: ^02_declarative_config/policy-table-rylan-v5\.json$
         language: system
         stages: [push]
       - id: beale-harden
@@ -55,7 +55,7 @@ repos:
       - id: mypy
         additional_dependencies: [types-PyYAML, types-requests]
         args: ['--ignore-missing-imports']
-        exclude: '^(tests/|docs/|01-bootstrap/|02-declarative-config/)'
+        exclude: '^(tests/|docs/|01_bootstrap/|02_declarative_config/)'
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.46.0
@@ -67,7 +67,7 @@ repos:
     rev: v1.35.1
     hooks:
       - id: yamllint
-        exclude: '^(\.github/|bootstrap/|02-declarative-config/|shared/)'
+        exclude: '^(\.github/|bootstrap/|02_declarative_config/|shared/)'
         args: ['-d', 'extends: relaxed']
 
   - repo: https://github.com/PyCQA/bandit

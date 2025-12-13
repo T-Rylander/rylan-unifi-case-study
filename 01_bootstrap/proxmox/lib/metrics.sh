@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/lib/metrics.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # shellcheck shell=bash
 #
 # lib/metrics.sh - Real-time metrics and telemetry tracking

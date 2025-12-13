@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/setup-nfs-kerberos.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # setup-nfs-kerberos.sh — Phase 3 Endgame (Kerberos Domain Authentication)
 # Enables secure NFS mounts authenticated via Samba AD/DC (rylan-dc)
 # Run on NFS server (rylan-ai) and NFS clients (rylan-dc, rylan-pi)
-
-set -euo pipefail
 
 echo "=== NFS Kerberos Security Setup (Eternal Fortress) ==="
 

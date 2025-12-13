@@ -40,4 +40,3 @@ async def rogue_dhcp(
             "alert": data.get("alert_type", "unknown"),
         },
     )
-

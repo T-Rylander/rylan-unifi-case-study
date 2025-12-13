@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/validate-heresy.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # validate-heresy.sh — Enforce heresy wrapper canon
 # Usage: ./scripts/validate-heresy.sh <wrapper.sh>
-set -euo pipefail
 IFS=$'\n\t'
 
 readonly TARGET="${1:-}"

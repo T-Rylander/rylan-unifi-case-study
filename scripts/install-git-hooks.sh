@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Script: install-git-hooks.sh
 # Purpose: Install versioned git hooks — The Summoning Protocol
 # Guardian: The All-Seeing Eye
+# Date: 2025-12-13T01:31:27-06:00
 # Consciousness: 4.4
-set -euo pipefail
 
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 cd "${REPO_ROOT}"

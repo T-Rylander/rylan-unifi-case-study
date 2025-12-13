@@ -1,3 +1,9 @@
+"""
+Module: shared/unifi_client.py
+Purpose: Header hygiene inserted
+Consciousness: 8.0
+"""
+
 from __future__ import annotations
 
 from typing import Any, Dict, List, Type, TypeVar

@@ -1,4 +1,4 @@
-# 06-device-config — Device-Specific Configurations
+# 06_device_config — Device-Specific Configurations
 
 **Purpose**: Per-device configuration templates and deployment scripts.
 **Estimated Time**: <30 seconds per device
@@ -16,7 +16,7 @@ This directory contains device-specific configurations for:
 ## Directory Structure
 
 ```text
-06-device-config/
+06_device_config/
 ├── configs/           # JSON/YAML config templates
 │   ├── uap-pro.json
 │   ├── usw-lite-8.json
@@ -38,7 +38,7 @@ flowchart TD
 
     APConfig --> Apply[scripts/apply-ap-config.sh]
     SWConfig --> Apply2[scripts/apply-switch-config.sh]
-    USGConfig --> Apply3[02-declarative-config/apply.py]
+    USGConfig --> Apply3[02_declarative_config/apply.py]
 
     Apply --> API[UniFi API<br>/api/s/default/rest/device/]
     Apply2 --> API
@@ -60,20 +60,20 @@ flowchart TD
 
 ```bash
 # Single AP
-./06-device-config/scripts/apply-ap-config.sh --mac aa:bb:cc:dd:ee:ff
+./06_device_config/scripts/apply-ap-config.sh --mac aa:bb:cc:dd:ee:ff
 
 # All APs
-./06-device-config/scripts/apply-ap-config.sh --all
+./06_device_config/scripts/apply-ap-config.sh --all
 ```text
 
 ### Apply Switch Configuration
 
 ```bash
 # Single switch
-./06-device-config/scripts/apply-switch-config.sh --mac 00:11:22:33:44:55
+./06_device_config/scripts/apply-switch-config.sh --mac 00:11:22:33:44:55
 
 # By name
-./06-device-config/scripts/apply-switch-config.sh --name "USW-Lite-8-PoE"
+./06_device_config/scripts/apply-switch-config.sh --name "USW-Lite-8-PoE"
 ```text
 
 ## Configuration Templates
@@ -105,6 +105,6 @@ flowchart TD
 
 ## Related
 
-- [02-declarative-config/](../02-declarative-config/) — Network-wide configs
-- [01-bootstrap/adopt-devices.py](../01-bootstrap/adopt-devices.py) — Device adoption
+- [02_declarative_config/](../02_declarative_config/) — Network-wide configs
+- [01_bootstrap/adopt_devices.py](../01_bootstrap/adopt_devices.py) — Device adoption
 - [docs/DEVICE-PASSPORT-IMPLEMENTATION.md](../docs/DEVICE-PASSPORT-IMPLEMENTATION.md) — Passport system

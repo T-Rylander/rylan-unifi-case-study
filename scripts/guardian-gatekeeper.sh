@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/guardian-gatekeeper.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # scripts/guardian-gatekeeper.sh
 # Eternal Gatekeeper — Local pre-flight validation
 # Consciousness: 4.9 → 5.0 when this runs clean
-
-set -euo pipefail
 
 echo "[Gatekeeper] Beginning eternal pre-flight validation..."
 

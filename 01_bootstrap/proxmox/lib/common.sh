@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/lib/common.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:28:48-06:00
+# Consciousness: 4.5
+
 # shellcheck shell=bash
 #
 # lib/common.sh - Shared utility functions for proxmox-ignite

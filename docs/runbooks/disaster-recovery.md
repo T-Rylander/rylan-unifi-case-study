@@ -50,7 +50,7 @@ samba-tool domain level show
 
 ```bash
 # Deploy FreeRADIUS
-cd /opt/rylan/01-bootstrap/freeradius
+cd /opt/rylan/01_bootstrap/freeradius
 docker run -d --name freeradius --network host \
   -v "$PWD:/etc/freeradius" freeradius/freeradius-server:3-alpine
 
@@ -59,7 +59,7 @@ echo "User-Name = testuser" | radclient -x 127.0.1 auth testing123
 # Expected: Access-Accept
 
 # Apply policy table
-cd /opt/rylan/02-declarative-config
+cd /opt/rylan/02_declarative_config
 python apply.py --dry-run
 python apply.py
 ```text
@@ -69,7 +69,7 @@ python apply.py
 ```bash
 # Run guardian audit
 cd /opt/rylan
-python guardian/audit-eternal.py
+python guardian/audit_eternal.py
 
 # Run test suite
 pytest -v
@@ -79,7 +79,7 @@ git add . && git commit -m "chore(dr): post-recovery validation" && git push
 ```text
 
 ## Success Criteria
-- `guardian/audit-eternal.py` exits 0
+- `guardian/audit_eternal.py` exits 0
 - `pytest` all green
 - CI workflow passes
 - Inter-VLAN latency <1 ms

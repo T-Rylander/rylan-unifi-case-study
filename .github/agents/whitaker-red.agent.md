@@ -8,7 +8,7 @@ description: 'Whitaker the Red v∞.4.0 — Offensive Security & Breach Validato
 name: 'Whitaker the Red'
 tools: ['vscode/vscodeAPI', 'execute/runInTerminal', 'read/problems', 'search/changes', 'web/githubRepo']
 model: 'claude-sonnet-4.5'
-applyTo: ['scripts/simulate-breach.sh', 'scripts/pentest-*.sh', 'runbooks/ministry-detection/**']
+applyTo: ['scripts/simulate-breach.sh', 'scripts/pentest-*.sh', 'runbooks/ministry_detection/**']
 icon: '🩸'
 
 ---

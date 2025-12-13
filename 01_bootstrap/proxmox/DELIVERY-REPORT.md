@@ -242,7 +242,7 @@ T+12:00  Success banner + metrics
 ### Core Scripts
 
 ```text
-01-bootstrap/proxmox/
+01_bootstrap/proxmox/
 ├── proxmox-ignite.sh              (29,949 bytes) — ✅ PRODUCTION READY
 ├── proxmox-ignite-quickstart.sh   (5,353 bytes)  — ✅ INTERACTIVE WRAPPER
 ├── proxmox-answer.cfg             (2,106 bytes)  — ✅ PRESEED CONFIG
@@ -250,7 +250,7 @@ T+12:00  Success banner + metrics
 
 ### Documentation (89 KB total)
 ```text
-01-bootstrap/proxmox/
+01_bootstrap/proxmox/
 ├── INDEX.md                        (11,000 bytes) — ✅ NAVIGATION GUIDE
 ├── QUICK-REFERENCE.md             (7,096 bytes)  — ✅ ONE-PAGE CHEAT SHEET
 ├── README.md                       (22,728 bytes) — ✅ COMPREHENSIVE GUIDE

@@ -29,7 +29,7 @@ Implement **eternal controller abstraction**: the infrastructure treats controll
 
 ### Key Principle: **API-Driven, Not Hardware-Locked**
 
-- All policy/VLAN/device configuration lives in git (`02-declarative-config/`)
+- All policy/VLAN/device configuration lives in git (`02_declarative_config/`)
 - Controller IP is **runtime-configurable** (.env, environment variables)
 - Backup/restore format is **canonical** (.unf for Cloud Key, .tar.gz for LXC, both restorable)
 - No vendor lock-in: either hardware or software controller works
@@ -51,11 +51,11 @@ Implement **eternal controller abstraction**: the infrastructure treats controll
 
 | File                                    | Purpose                                              |
 |-----------------------------------------|------------------------------------------------------|
-| `04-cloudkey-migration/README.md`       | Canonical Cloud Key migration guide                 |
-| `04-cloudkey-migration/eternal-cloudkey-ignition.sh` | One-command migration orchestrator |
-| `04-cloudkey-migration/post-adoption-hardening.sh`   | Update all configs post-restore     |
-| `04-cloudkey-migration/backup/cloudkey-backup.sh`    | Daily backup cron job               |
-| `04-cloudkey-migration/validation/comprehensive-suite.sh` | Full health validation         |
+| `04_cloudkey_migration/README.md`       | Canonical Cloud Key migration guide                 |
+| `04_cloudkey_migration/eternal-cloudkey-ignition.sh` | One-command migration orchestrator |
+| `04_cloudkey_migration/post-adoption-hardening.sh`   | Update all configs post-restore     |
+| `04_cloudkey_migration/backup/cloudkey-backup.sh`    | Daily backup cron job               |
+| `04_cloudkey_migration/validation/comprehensive-suite.sh` | Full health validation         |
 | `docs/adr/ADR-008-*`                    | This decision record                 |
 
 ## Migration Path

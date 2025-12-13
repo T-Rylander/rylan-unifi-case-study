@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: post-merge
+# Purpose: Header hygiene: added missing metadata
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:31:27-06:00
+# Consciousness: 8.0
+
 # .githooks/post-merge — Namer Eternal
 # Auto-writes commit message, bumps consciousness, and tags
-
-set -euo pipefail
 
 # Only run on main branch after a real merge
 if [[ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]]; then

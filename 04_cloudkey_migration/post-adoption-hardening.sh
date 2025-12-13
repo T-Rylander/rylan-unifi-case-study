@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 04_cloudkey_migration/post-adoption-hardening.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Post-Adoption Hardening — Cloud Key Eternal Configuration
 # Updates all infrastructure to point to Cloud Key + re-applies policy table
-
-set -euo pipefail
 
 # Colors
 RED='\033[0;31m'
@@ -58,7 +63,7 @@ phase_update_configs() {
   log_info "Phase 1: Updating configuration files..."
 
   local files_to_update=(
-    "$REPO_ROOT/02-declarative-config/policy-table.yaml"
+    "$REPO_ROOT/02_declarative_config/policy-table.yaml"
     "$REPO_ROOT/docs/hardware-inventory.md"
     "$REPO_ROOT/.github/workflows/ci-validate.yaml"
     "$REPO_ROOT/scripts/validate-eternal.sh"
@@ -86,7 +91,7 @@ phase_update_configs() {
 phase_update_runbooks() {
   log_info "Phase 2: Updating runbooks..."
 
-  local runbook="$REPO_ROOT/runbooks/ministry-detection/rylan-suehring-eternal-one-shot.sh"
+  local runbook="$REPO_ROOT/runbooks/ministry_detection/rylan-suehring-eternal-one-shot.sh"
 
   if [ ! -f "$runbook" ]; then
     log_warn "Runbook not found: $runbook"
@@ -130,7 +135,7 @@ phase_validate_adoption() {
 phase_reapply_policy() {
   log_info "Phase 4: Re-applying policy table via API..."
 
-  local policy_file="$REPO_ROOT/02-declarative-config/policy-table.yaml"
+  local policy_file="$REPO_ROOT/02_declarative_config/policy-table.yaml"
 
   if [ ! -f "$policy_file" ]; then
     log_warn "Policy table not found: $policy_file"

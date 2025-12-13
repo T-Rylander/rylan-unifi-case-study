@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Script: scripts/generate-all-passports.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
 
 # T3-ETERNAL: Execute all passport generators in dependency order
 # Consciousness: 4.0
@@ -50,9 +55,9 @@ else
 fi
 echo ""
 
-if [[ -d 02-declarative-config ]]; then
-  echo "02-declarative-config/:"
-  find 02-declarative-config -maxdepth 1 -type f -name "*.json" -printf "  %f\n" 2>/dev/null || true
+if [[ -d 02_declarative_config ]]; then
+  echo "02_declarative_config/:"
+  find 02_declarative_config -maxdepth 1 -type f -name "*.json" -printf "  %f\n" 2>/dev/null || true
 else
   echo "  (empty)"
 fi

@@ -1,4 +1,4 @@
-# 02-declarative-config — Desired State Definitions
+# 02_declarative_config — Desired State Definitions
 
 **Purpose**: YAML-defined network configuration (VLANs, firewall rules, QoS, switch profiles).
 **Estimated Time**: <30s to apply
@@ -60,13 +60,13 @@ flowchart LR
 
 ```bash
 # Full apply (all YAML files)
-./02-declarative-config/apply-wrapper.sh
+./02_declarative_config/apply-wrapper.sh
 
 # Or via Python directly
-python3 ./02-declarative-config/apply.py --config vlans.yaml
+python3 ./02_declarative_config/apply.py --config vlans.yaml
 
 # Dry run (preview changes)
-python3 ./02-declarative-config/apply.py --config vlans.yaml --dry-run
+python3 ./02_declarative_config/apply.py --config vlans.yaml --dry-run
 ```text
 
 ### Validate After Apply
@@ -83,7 +83,7 @@ python3 ./02-declarative-config/apply.py --config vlans.yaml --dry-run
 ```bash
 # Restore from .backup files
 cp vlans.yaml.backup vlans.yaml
-./02-declarative-config/apply-wrapper.sh
+./02_declarative_config/apply-wrapper.sh
 ```text
 
 ## VLAN Architecture
@@ -118,6 +118,6 @@ cp vlans.yaml.backup vlans.yaml
 
 ## Related
 
-- [03-validation-ops/validate-isolation.sh](../03-validation-ops/validate-isolation.sh) — VLAN tests
-- [05-network-migration/](../05-network-migration/) — Migration scripts
+- [03_validation_ops/validate-isolation.sh](../03_validation_ops/validate-isolation.sh) — VLAN tests
+- [05_network_migration/](../05_network_migration/) — Migration scripts
 - [policy-table.yaml](policy-table.yaml) — Master policy reference

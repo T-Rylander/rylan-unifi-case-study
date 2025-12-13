@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Script: onboard.sh
 # Purpose: Onboard new soul to fortress (LDAP + SSH + VLAN + state)
 # Author: Carter the Keeper
 # Date: 2025-12-11
-set -euo pipefail
 IFS=$'\n\t'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"

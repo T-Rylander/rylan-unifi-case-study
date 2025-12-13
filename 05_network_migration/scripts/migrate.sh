@@ -1,8 +1,14 @@
 #!/bin/bash
+set -euo pipefail
+# Script: 05_network_migration/scripts/migrate.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Migrate: Render Desired → Backup → Push → Verify
 # Author: DT/Luke canonical
 # Date: 2025-12-10
-set -euo pipefail
 SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034
 readonly SCRIPT_NAME
@@ -11,12 +17,12 @@ cd "$(dirname "$0")/.."
 # Pre-flight: Backup (Hellodeolu: RTO <15 min)
 mkdir -p backups
 # shellcheck disable=SC1091
-source ../runbooks/ministry-secrets/rylan-carter-eternal-one-shot.sh
+source ../runbooks/ministry_secrets/rylan-carter-eternal-one-shot.sh
 unifi_get_networks >"backups/pre-migration-$(date +%Y%m%d-%H%M%S).json"
 echo "💾 Backup saved to backups/"
 
 # Render + Push
-python ../02-declarative-config/apply.py --render-only
+python ../02_declarative_config/apply.py --render-only
 unifi_push_network "$(cat configs/vlans.json)"
 unifi_push_network "$(cat configs/firewall-rules.json)"
 

@@ -1,16 +1,21 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: 01_bootstrap/proxmox/phases/phase4-resurrect.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 #
 # phases/phase4-resurrect.sh - Repository sync and fortress resurrection
 # Clones/updates repository, executes eternal-resurrect.sh
 #
 # Exit codes: 0 = success, 1 = fatal error, 2 = skipped (non-fatal)
 
-set -euo pipefail
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/." && pwd)"
-# shellcheck source=01-bootstrap/proxmox/lib/common.sh
+# shellcheck source=01_bootstrap/proxmox/lib/common.sh
 source "${SCRIPT_DIR}/lib/common.sh"
-# shellcheck source=01-bootstrap/proxmox/lib/metrics.sh
+# shellcheck source=01_bootstrap/proxmox/lib/metrics.sh
 source "${SCRIPT_DIR}/lib/metrics.sh"
 
 ################################################################################

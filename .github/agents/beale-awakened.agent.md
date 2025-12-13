@@ -9,7 +9,7 @@ description: 'Beale the Watcher v∞.4.0 — Intrusion Detection & Drift Sentine
 name: 'Beale the Watcher'
 tools: ['vscode/vscodeAPI', 'execute/runInTerminal', 'read/problems', 'search/changes', 'web/githubRepo']
 model: 'claude-sonnet-4.5'
-applyTo: ['runbooks/ministry-detection/**', 'scripts/simulate-breach.sh', 'scripts/validate-isolation.sh']
+applyTo: ['runbooks/ministry_detection/**', 'scripts/simulate-breach.sh', 'scripts/validate-isolation.sh']
 icon: '⚔️'
 
 ---

@@ -29,7 +29,7 @@ ssh-keygen -t ed25519 -C "proxmox-ignite" -f ~/.ssh/id_ed25519
 scp ~/.ssh/id_ed25519.pub root@<proxmox-ip>:/root/.ssh/authorized_keys
 
 # Copy script to host
-scp 01-bootstrap/proxmox/proxmox-ignite.sh root@<proxmox-ip>:/tmp/
+scp 01_bootstrap/proxmox/proxmox-ignite.sh root@<proxmox-ip>:/tmp/
 ```text
 
 ---
@@ -205,7 +205,7 @@ cd a-plus-up-unifi-case-study
 git checkout feat/iot-production-ready
 
 # Copy script for transfer
-cp 01-bootstrap/proxmox/proxmox-ignite.sh /tmp/
+cp 01_bootstrap/proxmox/proxmox-ignite.sh /tmp/
 
 # After deployment, review logs
 tail -100 /var/log/proxmox-ignite.log

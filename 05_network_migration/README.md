@@ -1,4 +1,4 @@
-# 05-network-migration — IaC Migration & Rollback
+# 05_network_migration — IaC Migration & Rollback
 
 **Purpose**: Migrate network configuration from legacy to IaC-managed state.
 **Estimated Time**: <5 minutes (full migration)
@@ -62,11 +62,11 @@ flowchart TD
 cd /opt/rylan-unifi-case-study
 
 # 1. Ensure configs are ready
-ls -la 02-declarative-config/vlans.yaml
-ls -la 02-declarative-config/firewall-rules.yaml
+ls -la 02_declarative_config/vlans.yaml
+ls -la 02_declarative_config/firewall-rules.yaml
 
 # 2. Run migration
-./05-network-migration/migrate.sh
+./05_network_migration/migrate.sh
 ```text
 
 **Expected output**:
@@ -102,17 +102,17 @@ MIGRATION COMPLETE — RTO: 3m 42s
 ### Preview Only (Dry Run)
 
 ```bash
-./05-network-migration/scripts/preview-changes.sh
+./05_network_migration/scripts/preview-changes.sh
 ```text
 
 ### Emergency Rollback
 
 ```bash
 # Automatic (uses latest backup)
-./05-network-migration/rollback.sh
+./05_network_migration/rollback.sh
 
 # Specific backup
-./05-network-migration/rollback.sh --backup backups/20251211-143022/
+./05_network_migration/rollback.sh --backup backups/20251211-143022/
 ```text
 
 **Rollback RTO**: <2 minutes
@@ -139,6 +139,6 @@ If migration fails and automatic rollback doesn't work:
 
 ## Related
 
-- [02-declarative-config/](../02-declarative-config/) — Source YAML configs
-- [03-validation-ops/validate-isolation.sh](../03-validation-ops/validate-isolation.sh) — Post-migration validation
-- [04-cloudkey-migration/](../04-cloudkey-migration/) — Controller migration (different from network migration)
+- [02_declarative_config/](../02_declarative_config/) — Source YAML configs
+- [03_validation_ops/validate-isolation.sh](../03_validation_ops/validate-isolation.sh) — Post-migration validation
+- [04_cloudkey_migration/](../04_cloudkey_migration/) — Controller migration (different from network migration)

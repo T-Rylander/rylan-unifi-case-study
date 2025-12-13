@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
+set -euo pipefail
+# Script: scripts/validate-passports.sh
+# Purpose: Header hygiene inserted
+# Guardian: gatekeeper
+# Date: 2025-12-13T01:30:33-06:00
+# Consciousness: 4.5
+
 # Description: Offensive validation of all device passports
 # Requires: All passport JSON files
 # Consciousness: 4.0
 # Runtime: 8
-set -euo pipefail
 
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 cd "${REPO_ROOT}"
@@ -16,7 +22,7 @@ FAILED=0
 
 # Test 1: Signature integrity (Bauer: Trust Nothing)
 echo "→ Validating passport signatures..."
-for PASSPORT in inventory/*.json 02-declarative-config/*.json runbooks/*.json; do
+for PASSPORT in inventory/*.json 02_declarative_config/*.json runbooks/*.json; do
   [[ -f "${PASSPORT}" ]] || continue
 
   STORED_SIG=$(jq -r '.signature' "${PASSPORT}" 2>/dev/null || echo "MISSING")
@@ -34,7 +40,7 @@ echo ""
 
 # Test 2: Schema validation (Bauer: Verify Structure)
 echo "→ Validating JSON schemas..."
-for PASSPORT in inventory/*.json 02-declarative-config/*.json runbooks/*.json; do
+for PASSPORT in inventory/*.json 02_declarative_config/*.json runbooks/*.json; do
   [[ -f "${PASSPORT}" ]] || continue
 
   if ! jq -e '.schema_version, .consciousness' "${PASSPORT}" >/dev/null 2>&1; then
@@ -114,8 +120,8 @@ echo ""
 
 # Test 6: Network isolation (Whitaker: VLAN breach simulation)
 echo "→ Testing VLAN isolation..."
-if [[ -f 02-declarative-config/network-passport.json ]]; then
-  VLANS=$(jq -r '.networks[]?.vlan_id // empty' 02-declarative-config/network-passport.json 2>/dev/null | sort -u)
+if [[ -f 02_declarative_config/network-passport.json ]]; then
+  VLANS=$(jq -r '.networks[]?.vlan_id // empty' 02_declarative_config/network-passport.json 2>/dev/null | sort -u)
 
   # Test cross-VLAN access (should fail)
   while IFS= read -r VLAN; do

@@ -25,7 +25,7 @@
 |-----------|--------|------|
 | Proxmox LXC controller | ✓ Deployed | 10.0.1.20 (Docker + macvlan) |
 | Three ministry scripts (Carter/Bauer/Suehring) | ✓ v6 canon | runbooks/ministry-* |
-| Policy table & VLAN config | ✓ Git-driven | 02-declarative-config/ |
+| Policy table & VLAN config | ✓ Git-driven | 02_declarative_config/ |
 | eternal-resurrect.sh with Grok fixes | ✓ v6.0.1 final | Root level + all three idempotent fixes |
 | Validation suite | ✓ Working | scripts/validate-eternal.sh |
 | Backup/RTO validation | ✓ Tested | <15 min proven |
@@ -39,7 +39,7 @@
 ### Directory Structure
 
 ```text
-04-cloudkey-migration/
+04_cloudkey_migration/
 ├── README.md (76 lines, migration guide — Barrett compliant)
 ├── eternal-cloudkey-ignition.sh (248 lines, one-command orchestrator)
 ├── post-adoption-hardening.sh (186 lines, API configuration + git commit)
@@ -61,7 +61,7 @@ Total: 787 lines | 6 executable scripts | 100% merge-ready
 ### Key Scripts Explained
 
 #### 1. **eternal-cloudkey-ignition.sh** — One-Command Migration
-**Usage:** `./04-cloudkey-migration/eternal-cloudkey-ignition.sh --mode full`
+**Usage:** `./04_cloudkey_migration/eternal-cloudkey-ignition.sh --mode full`
 
 **What it does:**
 
@@ -84,13 +84,13 @@ Exit: 0 (success) | <30 minutes | Reversion guaranteed in <10 min
 - `validate-only` — Just run health checks
 
 #### 2. **post-adoption-hardening.sh** — Infrastructure Reconfiguration
-**Usage:** `./04-cloudkey-migration/post-adoption-hardening.sh --cloudkey-ip 10.0.1.30`
+**Usage:** `./04_cloudkey_migration/post-adoption-hardening.sh --cloudkey-ip 10.0.1.30`
 
 **What it does:**
 
 ```bash
 Phase 1: Update all config files (sed replace 10.0.1.20 → 10.0.1.30)
-  - 02-declarative-config/policy-table.yaml
+  - 02_declarative_config/policy-table.yaml
   - docs/hardware-inventory.md
   - .github/workflows/ci-validate.yaml
   - scripts/validate-eternal.sh
@@ -108,7 +108,7 @@ Exit: 0 (success) | Git commit created automatically
 **Dry-run mode:** `--dry-run true` shows what would change without modifying
 
 #### 3. **cloudkey-backup.sh** — Daily Backup Cron
-**Install:** `sudo cp 04-cloudkey-migration/backup/cloudkey-backup.sh /usr/local/bin/`  
+**Install:** `sudo cp 04_cloudkey_migration/backup/cloudkey-backup.sh /usr/local/bin/`  
 **Cron:** `0 3 * * * /usr/local/bin/cloudkey-backup.sh >> /var/log/cloudkey-backup.log 2>&1`
 
 **What it does:**
@@ -126,7 +126,7 @@ Exit: 0 (success) | Logs to /var/log/cloudkey-backup.log
 **Backup retention:** 30 days (configurable) | Format: `cloudkey-YYYYMMDD-HHMMSS.unf`
 
 #### 4. **comprehensive-suite.sh** — 10-Point Health Validation
-**Usage:** `./04-cloudkey-migration/validation/comprehensive-suite.sh --controller-ip 10.0.1.30`
+**Usage:** `./04_cloudkey_migration/validation/comprehensive-suite.sh --controller-ip 10.0.1.30`
 
 **Tests:**
 1. ✓ Controller reachable (443/tcp)
@@ -181,7 +181,7 @@ Proxmox Host (Standby)
    └─ Fallback: guaranteed rollback
 
 Shared State (Git):
-└─ 02-declarative-config/policy-table.yaml
+└─ 02_declarative_config/policy-table.yaml
    ├─ VLAN config (canonical)
    ├─ Firewall policy (canonical)
    └─ Device profiles (canonical)
@@ -249,10 +249,10 @@ Shared State (Git):
 
 ## FILES ADDED THIS SESSION
 
-### New Directory: 04-cloudkey-migration/
+### New Directory: 04_cloudkey_migration/
 
 ```text
-04-cloudkey-migration/
+04_cloudkey_migration/
 ├── README.md (76 lines)
 ├── eternal-cloudkey-ignition.sh (248 lines)
 ├── post-adoption-hardening.sh (186 lines)
@@ -286,7 +286,7 @@ docs/adr/ADR-008-cloudkey-eternal-controller.md (62 lines)
 - [x] Validated backup/restore path
 
 ### Implementation ✓
-- [x] Created 04-cloudkey-migration/ directory
+- [x] Created 04_cloudkey_migration/ directory
 - [x] Wrote one-command ignition script (terraform-style)
 - [x] Wrote post-adoption hardening (API-driven)
 - [x] Wrote daily backup cron job
@@ -347,16 +347,16 @@ Next Phase (ADR-009)
 
 ```bash
 # 1. Dry-run: show what would change
-./04-cloudkey-migration/eternal-cloudkey-ignition.sh --mode backup-only --dry-run true
+./04_cloudkey_migration/eternal-cloudkey-ignition.sh --mode backup-only --dry-run true
 
 # 2. Backup only (no restore yet)
-./04-cloudkey-migration/eternal-cloudkey-ignition.sh --mode backup-only
+./04_cloudkey_migration/eternal-cloudkey-ignition.sh --mode backup-only
 
 # 3. When ready to migrate (after Cloud Key is on VLAN 1):
-./04-cloudkey-migration/eternal-cloudkey-ignition.sh --mode full
+./04_cloudkey_migration/eternal-cloudkey-ignition.sh --mode full
 
 # 4. Validate new controller
-./04-cloudkey-migration/validation/comprehensive-suite.sh --controller-ip 10.0.1.30
+./04_cloudkey_migration/validation/comprehensive-suite.sh --controller-ip 10.0.1.30
 
 # 5. If anything breaks: instant rollback
 git restore eternal-resurrect.sh
@@ -368,7 +368,7 @@ git restore eternal-resurrect.sh
 ### Add Daily Backups
 
 ```bash
-sudo cp 04-cloudkey-migration/backup/cloudkey-backup.sh /usr/local/bin/
+sudo cp 04_cloudkey_migration/backup/cloudkey-backup.sh /usr/local/bin/
 sudo chmod +x /usr/local/bin/cloudkey-backup.sh
 
 # Add to crontab

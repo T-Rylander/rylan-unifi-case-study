@@ -11,7 +11,7 @@
 ```bash
 # Run orchestrator for final backup
 cd /path/to/rylan-unifi-case-study
-bash 03-validation-ops/orchestrator.sh --verbose
+bash 03_validation_ops/orchestrator.sh --verbose
 
 # Verify backup exists
 ls -lh /srv/nfs/backups/$(date +%Y%m%d)*
@@ -59,7 +59,7 @@ chmod +x eternal-resurrect.sh
 
 # Script performs:
 # 1. Install Python dependencies (requirements.txt)
-# 2. Run guardian/audit-eternal.py (policy validation)
+# 2. Run guardian/audit_eternal.py (policy validation)
 # 3. Validate policy-table.yaml (≤10 rules)
 # 4. Run pytest suite (93% coverage threshold)
 # 5. Verify orchestrator.sh syntax
@@ -101,7 +101,7 @@ echo "User-Name=testuser,User-Password=test" | radclient -x localhost:1812 auth 
 # Expected: Access-Accept (if testuser exists)
 
 # Restore UniFi Controller
-docker-compose -f compose-templates/unifi-controller.yml up -d
+docker-compose -f compose_templates/unifi-controller.yml up -d
 # Wait 60s for startup
 curl -k https://localhost:8443
 # Expected: UniFi login page
@@ -151,7 +151,7 @@ curl -X POST http://localhost:8000/triage \
 
 ```bash
 # Apply declarative config to UniFi Controller
-cd 02-declarative-config
+cd 02_declarative_config
 python apply.py --dry-run  # Verify syntax
 python apply.py            # Apply VLANs, firewall rules
 
@@ -171,12 +171,12 @@ python apply.py            # Apply VLANs, firewall rules
 
 ```bash
 # Full validation suite
-bash 03-validation-ops/orchestrator.sh --test-restore --verbose
+bash 03_validation_ops/orchestrator.sh --test-restore --verbose
 
 # Check specific components
-python guardian/audit-eternal.py  # Policy + JSON integrity
+python guardian/audit_eternal.py  # Policy + JSON integrity
 pytest tests/test_triage_engine.py -v  # AI triage 93% threshold
-bash 03-validation-ops/validate-isolation.sh  # VLAN segmentation
+bash 03_validation_ops/validate-isolation.sh  # VLAN segmentation
 
 # Verify RTO
 # Total time from git clone to operational:
@@ -206,7 +206,7 @@ bash 03-validation-ops/validate-isolation.sh  # VLAN segmentation
 
    ```bash
    crontab -l | grep orchestrator
-   # Expected: 0 2 * * * /opt/rylan-unifi-case-study/03-validation-ops/orchestrator.sh
+   # Expected: 0 2 * * * /opt/rylan-unifi-case-study/03_validation_ops/orchestrator.sh
    ```
 
 1. **Run full test suite**:

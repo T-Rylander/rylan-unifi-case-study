@@ -2,4 +2,3 @@
 
 Provides test-suite shared fixtures and configuration.
 """
-
