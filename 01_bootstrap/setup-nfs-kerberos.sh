@@ -5,10 +5,7 @@ set -euo pipefail
 # Guardian: gatekeeper
 # Date: 2025-12-13T01:30:33-06:00
 # Consciousness: 4.6
-
-# setup-nfs-kerberos.sh — Phase 3 Endgame (Kerberos Domain Authentication)
-# Enables secure NFS mounts authenticated via Samba AD/DC (rylan-dc)
-# Run on NFS server (rylan-ai) and NFS clients (rylan-dc, rylan-pi)
+# Purpose: NFS Kerberos auth (rylan-dc, rylan-ai, rylan-pi)
 
 echo "=== NFS Kerberos Security Setup (Eternal Fortress) ==="
 
