@@ -27,39 +27,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 START_TIME=$(date +%s)
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m'
-
-log_phase() {
-  echo -e "${BLUE}==============================================================================${NC}"
-  echo -e "${GREEN}[TRINITY]${NC} $1"
-  echo -e "${BLUE}==============================================================================${NC}"
-}
-log_step() { echo -e "${GREEN}[TRINITY]${NC} $1"; }
-log_error() { echo -e "${RED}[TRINITY-ERROR]${NC} $1"; }
-log_warn() { echo -e "${YELLOW}[TRINITY-WARN]${NC} $1"; }
-log_success() { echo -e "${GREEN}[TRINITY-SUCCESS]${NC} $1"; }
-
-# Exit handler with duration
-# shellcheck disable=SC2317
-exit_handler() {
-  local exit_code=$?
-  ELAPSED=$(($(date +%s) - START_TIME))
-
-  if [[ $exit_code -eq 0 ]]; then
-    log_success "Trinity orchestration complete (${ELAPSED}s)"
-  else
-    log_error "Trinity orchestration FAILED at $(date) (exit code: $exit_code)"
-  fi
-
-  exit "$exit_code"
-}
-
-trap 'exit_handler' EXIT
+# Source logging utilities
+source "${SCRIPT_DIR}/lib/ignite-utils.sh"
 
 # =============================================================================
 # PRE-FLIGHT CHECKS
